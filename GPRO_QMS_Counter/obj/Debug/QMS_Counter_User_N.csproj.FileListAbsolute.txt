@@ -1,0 +1,69 @@
+F:\GPRO.1.4.17\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\bin\Debug\QMS_Counter_User_N.exe.config
+F:\GPRO.1.4.17\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmLogin.resources
+F:\GPRO.1.4.17\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmMain.resources
+F:\GPRO.1.4.17\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.Properties.Resources.resources
+F:\GPRO.1.4.17\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.csproj.GenerateResource.Cache
+F:\GPRO.1.4.17\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\bin\Debug\QMS_Counter_User_N.exe
+F:\GPRO.1.4.17\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\bin\Debug\QMS_Counter_User_N.pdb
+F:\GPRO.1.4.17\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\bin\Debug\EntityFramework.dll
+F:\GPRO.1.4.17\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\bin\Debug\EntityFramework.xml
+F:\GPRO.1.4.17\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.exe
+F:\GPRO.1.4.17\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.pdb
+F:\GPRO.1.4.17\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.csprojResolveAssemblyReference.cache
+F:\GPRO.1.4.17\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmViewWaitingList.resources
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\bin\Debug\QMS_Counter_User_N.exe
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\bin\Debug\EntityFramework.dll
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\bin\Debug\QMS_Counter_User_N.exe.config
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\bin\Debug\QMS_Counter_User_N.pdb
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\bin\Debug\AxInterop.WMPLib.DLL
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\bin\Debug\EntityFramework.xml
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmAbout.resources
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmBookService.resources
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmComSetting.resources
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmGuide.resources
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmLogin.resources
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmMain.resources
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmRegister.resources
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmReportEvaluate.resources
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmSoundSetting.resources
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmUser.resources
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmViewWaitingList.resources
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmViewWaitingList_N.resources
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.Properties.Resources.resources
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.csproj.GenerateResource.Cache
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.exe.licenses
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.exe
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.pdb
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.csprojResolveAssemblyReference.cache
+F:\GPRO.1.4.17\App\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmChange.resources
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\bin\Debug\QMS_Counter_User_N.exe.config
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\bin\Debug\QMS_Counter_User_N.exe
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\bin\Debug\QMS_Counter_User_N.pdb
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\bin\Debug\AxInterop.WMPLib.DLL
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\bin\Debug\EntityFramework.dll
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\bin\Debug\EntityFramework.xml
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmAbout.resources
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmBookService.resources
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmChange.resources
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmComSetting.resources
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmGuide.resources
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmLogin.resources
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmMain.resources
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmRegister.resources
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmReportEvaluate.resources
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmSoundSetting.resources
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmUser.resources
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmViewWaitingList.resources
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.FrmViewWaitingList_N.resources
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.Properties.Resources.resources
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.csproj.GenerateResource.Cache
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.exe.licenses
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.exe
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.pdb
+F:\GPRO_New_7.8.2017\Source Code\App\QMS\QMS_Counter_User_N\QMS_Counter_User_N\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.csprojResolveAssemblyReference.cache
+E:\GPRO_2018\Gọi số\CounterSoft\trunk\QMS_Counter_User_N\bin\Debug\QMS_Counter_User_N.exe.config
+E:\GPRO_2018\Gọi số\CounterSoft\trunk\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.exe
+E:\GPRO_2018\Gọi số\CounterSoft\trunk\QMS_Counter_User_N\obj\Debug\QMS_Counter_User_N.pdb
+E:\GPRO_2018\App\QMS\GPRO_QMS_Counter\GPRO_QMS_Counter\bin\Debug\QMS_Counter_User_N.exe.config
+E:\GPRO_2018\App\QMS\GPRO_QMS_Counter\GPRO_QMS_Counter\obj\Debug\QMS_Counter_User_N.exe
+E:\GPRO_2018\App\QMS\GPRO_QMS_Counter\GPRO_QMS_Counter\obj\Debug\QMS_Counter_User_N.pdb

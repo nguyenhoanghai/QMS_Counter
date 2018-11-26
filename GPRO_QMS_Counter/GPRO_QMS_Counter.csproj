@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6806EDFA-A81B-4D35-A92F-C98844997855}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GPRO_QMS_Counter</RootNamespace>
+    <AssemblyName>GPRO_QMS_Counter</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>1499069963_headphone.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="AxInterop.WMPLib">
+      <HintPath>..\Library\AxInterop.WMPLib.DLL</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v15.1.Core, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGrid.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.WMPLib">
+      <HintPath>..\Library\Interop.WMPLib.DLL</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\Library\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="QMS_System.Data">
+      <HintPath>..\Library\QMS_System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FrmConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmConfig.Designer.cs">
+      <DependentUpon>FrmConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Enums\eAction.cs" />
+    <Compile Include="Enums\eStatus.cs" />
+    <Compile Include="FrmAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAbout.Designer.cs">
+      <DependentUpon>FrmAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBookService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBookService.Designer.cs">
+      <DependentUpon>FrmBookService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmChange.Designer.cs">
+      <DependentUpon>FrmChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmComSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmComSetting.Designer.cs">
+      <DependentUpon>FrmComSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDeskNumber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDeskNumber.Designer.cs">
+      <DependentUpon>frmDeskNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmGuide.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmGuide.Designer.cs">
+      <DependentUpon>FrmGuide.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLogin.Designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRegister.Designer.cs">
+      <DependentUpon>FrmRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmReportEvaluate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReportEvaluate.Designer.cs">
+      <DependentUpon>FrmReportEvaluate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSoundSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSoundSetting.Designer.cs">
+      <DependentUpon>FrmSoundSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUser.Designer.cs">
+      <DependentUpon>FrmUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmViewWaitingList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmViewWaitingList.Designer.cs">
+      <DependentUpon>FrmViewWaitingList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmViewWaitingList_N.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmViewWaitingList_N.Designer.cs">
+      <DependentUpon>FrmViewWaitingList_N.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\SoundInfo.cs" />
+    <Compile Include="Models\WaitingModel.cs" />
+    <Compile Include="Models\WorkOfStaffModel.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmAbout.resx">
+      <DependentUpon>FrmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBookService.resx">
+      <DependentUpon>FrmBookService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmChange.resx">
+      <DependentUpon>FrmChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmComSetting.resx">
+      <DependentUpon>FrmComSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfig.resx">
+      <DependentUpon>FrmConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmGuide.resx">
+      <DependentUpon>FrmGuide.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRegister.resx">
+      <DependentUpon>FrmRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmReportEvaluate.resx">
+      <DependentUpon>FrmReportEvaluate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSoundSetting.resx">
+      <DependentUpon>FrmSoundSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUser.resx">
+      <DependentUpon>FrmUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmViewWaitingList.resx">
+      <DependentUpon>FrmViewWaitingList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmViewWaitingList_N.resx">
+      <DependentUpon>FrmViewWaitingList_N.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="1499069963_headphone.ico" />
+    <Content Include="Resources\1496758275_key_go.ico" />
+    <None Include="Resources\vspk-icon-256.png" />
+    <None Include="Resources\callAny.png" />
+    <Content Include="Resources\callticket.png" />
+    <Content Include="Resources\cancel.jpg" />
+    <None Include="Resources\checklist %281%29.png" />
+    <Content Include="Resources\deskSound.jpg" />
+    <Content Include="Resources\finish.jpg" />
+    <Content Include="Resources\help.jpg" />
+    <None Include="Resources\if_refresh_293697.png" />
+    <None Include="Resources\if_--03_1720778.png" />
+    <None Include="Resources\if_view-refresh_118801.png" />
+    <None Include="Resources\if_save_173091.png" />
+    <None Include="Resources\if_cancel_13487.png" />
+    <None Include="Resources\if_connect_no_5995.png" />
+    <None Include="Resources\if_Payment_3387295.png" />
+    <Content Include="Resources\login.png" />
+    <Content Include="Resources\login1.jpg" />
+    <Content Include="Resources\logout.gif" />
+    <Content Include="Resources\move.png" />
+    <Content Include="Resources\next.jpg" />
+    <Content Include="Resources\recall.png" />
+    <None Include="Resources\register_now_button_2.png" />
+    <None Include="Resources\Register-now-PNG-Overlay.png" />
+    <Content Include="Resources\save.png" />
+    <Content Include="Resources\ticketSound.jpg" />
+    <Content Include="Resources\trySound.png" />
+    <None Include="Resources\user guide.png" />
+    <Content Include="Resources\viewlist.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BLL\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
