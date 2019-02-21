@@ -159,3 +159,6 @@ E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\es\DevExpress.Office.
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\ja\DevExpress.Office.v15.1.Core.resources.dll
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\ru\DevExpress.Office.v15.1.Core.resources.dll
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.csproj.CopyComplete
+E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmEditTicketInfo.resources
+E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\Newtonsoft.Json.dll
+E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\Newtonsoft.Json.xml

@@ -1,28 +1,21 @@
-﻿using AxWMPLib;
+﻿using DevExpress.XtraEditors.Controls;
+using GPRO_QMS_Counter.Helper;
+using GPRO_QMS_Counter.Properties;
+using Microsoft.VisualBasic;
 using Microsoft.Win32;
+using Newtonsoft.Json;
+using QMS_System.Data.BLL;
+using QMS_System.Data.Enum;
+using QMS_System.Data.Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using WMPLib;
-using QMS_System.Data.Model;
-using QMS_System.Data.BLL;
 using System.Media;
-using GPRO_QMS_Counter.Helper;
-using QMS_System.Data.Enum;
-using System.Diagnostics;
-using QMS_System.Data;
-using Microsoft.VisualBasic;
-using DevExpress.XtraEditors.Controls;
-using GPRO_QMS_Counter.Properties;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace GPRO_QMS_Counter
 {
@@ -44,6 +37,8 @@ namespace GPRO_QMS_Counter
         public static StopBits fStopBits = StopBits.One;
         SerialPort serialPort1;
 
+        List<ConfigModel> configs;
+
         bool bCallNext = true,
             bRecall = true,
             bFinish = true,
@@ -57,7 +52,13 @@ namespace GPRO_QMS_Counter
             bPrintTicket = false,
         IsReadSound = false;
 
-        int xPos = 0, yPos = 0, xPos1 = 0, yPos1 = 0;
+        int xPos = 0, 
+            yPos = 0, 
+            xPos1 = 0, 
+            yPos1 = 0,
+            UseWithThirdPattern = 0;
+
+        List<ModelSelectItem> serviceObjs = null;
 
         public FrmMain()
         {
@@ -155,10 +156,10 @@ namespace GPRO_QMS_Counter
                     InitCOMPort();
 
                 chbkService.Items.Clear();
-                var objs = BLLService.Instance.GetLookUp();
-                if (objs.Count > 0)
-                    for (int i = 0; i < objs.Count; i++)
-                        chbkService.Items.Add(new CheckedListBoxItem(objs[i].Id, objs[i].Name));
+                serviceObjs = BLLService.Instance.GetLookUp();
+                if (serviceObjs.Count > 0)
+                    for (int i = 0; i < serviceObjs.Count; i++)
+                        chbkService.Items.Add(new CheckedListBoxItem(serviceObjs[i].Id, serviceObjs[i].Name));
 
             }
         }
@@ -320,7 +321,7 @@ namespace GPRO_QMS_Counter
         {
             try
             {
-                var tk = BLLDailyRequire.Instance.Next(loginObj.UserId, loginObj.EquipCode, today);
+                var tk = BLLDailyRequire.Instance.Next(loginObj.UserId, loginObj.EquipCode, today, UseWithThirdPattern);
                 if (tk == 0)
                     txtResult.Text = "Hết vé";
                 else
@@ -337,7 +338,7 @@ namespace GPRO_QMS_Counter
         }
         private void btRecall_Click(object sender, EventArgs e)
         {
-            int kq = BLLDailyRequire.Instance.CurrentTicket(loginObj.UserId, loginObj.EquipCode, today);
+            int kq = BLLDailyRequire.Instance.CurrentTicket(loginObj.UserId, loginObj.EquipCode, today,UseWithThirdPattern);
             if (kq == 0)
                 txtResult.Text = "Hết vé";
             else
@@ -477,9 +478,9 @@ namespace GPRO_QMS_Counter
         private void cấpPhiếuToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
             if (this.bPrintTicket)
-                this.Width = 1167;
+                this.Width = 1130;
             else
-                this.Width = 950;
+                this.Width = 912;
         }
         private void lưuToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -527,7 +528,7 @@ namespace GPRO_QMS_Counter
             }
         }
         private void gọiKháchTiếpTheoToolStripMenuItem_Click(object sender, EventArgs e)
-        { 
+        {
             if (!gọiKháchTiếpTheoToolStripMenuItem.Checked)
             {
                 this.bCallNext = true;
@@ -557,7 +558,7 @@ namespace GPRO_QMS_Counter
             }
         }
         private void hủyToolStripMenuItem_Click(object sender, EventArgs e)
-        { 
+        {
             if (!nhắcLạiToolStripMenuItem.Checked)
             {
                 this.bCancel = true;
@@ -587,7 +588,7 @@ namespace GPRO_QMS_Counter
             }
         }
         private void chuyểnToolStripMenuItem_Click(object sender, EventArgs e)
-        { 
+        {
             if (!chuyểnToolStripMenuItem.Checked)
             {
                 this.bTranfer = true;
@@ -617,7 +618,8 @@ namespace GPRO_QMS_Counter
         }
         private void giaoDiệnĐầyĐủToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            base.Size = new Size(this.MaximumSize.Width, this.MaximumSize.Height);
+            base.Size = new Size(913, 600);
+
             this.giaoDiệnĐầyĐủToolStripMenuItem.Visible = false;
             this.thuGọnGiaoDiệnToolStripMenuItem.Visible = true;
         }
@@ -821,6 +823,45 @@ namespace GPRO_QMS_Counter
             var f = new FrmBookService();
             f.ShowDialog();
         }
+
+        private void btnEditInfo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.txtResult.Text = "";
+                string text = this.txtParam.Text.ToString().Trim();
+                if (!string.IsNullOrEmpty(text) && !Information.IsNumeric(text))
+                {
+                    MessageBox.Show("Bạn phải nhập số vé bất kỳ muốn cập nhật thông tin.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.txtParam.Focus();
+                }
+                else
+                {
+                    var f = new FrmEditTicketInfo(int.Parse(txtParam.Text));
+                    f.ShowDialog();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void chbkService_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedService = (CheckedListBoxItem)chbkService.SelectedItem;
+            if (selectedService != null )
+            {
+                var found = serviceObjs.FirstOrDefault(x => x.Id == (int)selectedService.Value);
+                if(found!= null && !string.IsNullOrEmpty(found.Code))
+                { TimeSpan time = TimeSpan.Parse(found.Code);
+                    var date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, time.Hours, time.Minutes, time.Seconds);
+                    date.AddSeconds(time.TotalSeconds);
+                    timeServeAllow.Value = date;
+                }
+            }                
+        }
+         
+
         private void cậpNhậtThôngTinToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var f = new FrmUser();
@@ -834,7 +875,7 @@ namespace GPRO_QMS_Counter
                 BLLDailyRequire.Instance.DoneTicket(loginObj.UserId, loginObj.EquipCode, DateTime.Now);
         }
         private void kếtThúcToolStripMenuItem_Click(object sender, EventArgs e)
-        { 
+        {
             if (!kếtThúcToolStripMenuItem.Checked)
             {
                 this.bFinish = true;
@@ -869,7 +910,21 @@ namespace GPRO_QMS_Counter
             IsReadSound = Settings.Default.IsReadSound;
             printerId = Settings.Default.PrinterId;
             this.bPrintTicket = Settings.Default.actPrintTicket;
+
+            configs = BLLConfig.Instance.Gets();
+            int.TryParse(GetConfigByCode(eConfigCode.UseWithThirdPattern), out UseWithThirdPattern);
         }
+
+        public string GetConfigByCode(string code)
+        {
+            if (configs != null && configs.Count > 0)
+            {
+                var obj = configs.FirstOrDefault(x => x.Code.Trim().ToUpper().Equals(code.Trim().ToUpper()));
+                return obj != null ? obj.Value : string.Empty;
+            }
+            return string.Empty;
+        }
+
         private void SetButtonForAction()
         {
             this.btNext.Enabled = this.bCallNext;
@@ -1011,7 +1066,7 @@ namespace GPRO_QMS_Counter
 
         private void ShowResult()
         {
-            var obj = BLLLoginHistory.Instance.GetForHome(loginObj.UserId, loginObj.EquipCode, DateTime.Now);// BLLUser.Instance.ReadResult(FrmMain.loginObj.EquipCode);
+            var obj = BLLLoginHistory.Instance.GetForHome(loginObj.UserId, loginObj.EquipCode, DateTime.Now, UseWithThirdPattern);// BLLUser.Instance.ReadResult(FrmMain.loginObj.EquipCode);
             if (obj != null)
             {
                 this.lbWaiting.Text = obj.CounterWaitingTickets;
@@ -1071,8 +1126,16 @@ namespace GPRO_QMS_Counter
                 MessageBox.Show("Vui lòng chọn dịch vụ cần cấp phiếu.", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
-                string content = printerId + "|" + selectedService.Value + "|" + timeServeAllow.Value.TimeOfDay.ToString(@"hh\:mm\:ss");
-                if (BLLCounterSoftRequire.Instance.Insert(content, (int)eCounterSoftRequireType.PrintTicket))
+                var require = new PrinterRequireModel()
+                {
+                    PrinterId = printerId,
+                    Address = txtAdd.Text,
+                    DOB = (int)txtDOB.Value,
+                    Name = txtname.Text,
+                    ServeTime = timeServeAllow.Value,
+                    ServiceId = (int)selectedService.Value
+                }; 
+                if (BLLCounterSoftRequire.Instance.Insert(JsonConvert.SerializeObject(require), (int)eCounterSoftRequireType.PrintTicket))
                 {
                     lbPrintStatus.Text = "Gửi yêu cầu cấp phiếu thành công.";
                     lbPrintStatus.ForeColor = Color.Blue;
@@ -1085,7 +1148,7 @@ namespace GPRO_QMS_Counter
             }
         }
 
-        
+
         private void WriteSetting()
         {
             Settings.Default.actCallNext = this.bCallNext;

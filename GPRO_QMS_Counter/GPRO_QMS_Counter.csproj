@@ -63,6 +63,9 @@
       <HintPath>..\Library\Microsoft.Office.Interop.Excel.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="QMS_System.Data">
       <HintPath>..\Library\QMS_System.Data.dll</HintPath>
     </Reference>
@@ -121,6 +124,12 @@
     </Compile>
     <Compile Include="frmDeskNumber.Designer.cs">
       <DependentUpon>frmDeskNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmEditTicketInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEditTicketInfo.Designer.cs">
+      <DependentUpon>FrmEditTicketInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmGuide.cs">
       <SubType>Form</SubType>
@@ -196,6 +205,9 @@
     <EmbeddedResource Include="frmConfig.resx">
       <DependentUpon>FrmConfig.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmEditTicketInfo.resx">
+      <DependentUpon>FrmEditTicketInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmGuide.resx">
       <DependentUpon>FrmGuide.cs</DependentUpon>
     </EmbeddedResource>
@@ -262,6 +274,7 @@
     <Content Include="Resources\cancel.jpg" />
     <None Include="Resources\checklist %281%29.png" />
     <Content Include="Resources\deskSound.jpg" />
+    <None Include="Resources\edit_info.png" />
     <Content Include="Resources\finish.jpg" />
     <Content Include="Resources\help.jpg" />
     <None Include="Resources\if_refresh_293697.png" />
