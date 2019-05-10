@@ -38,6 +38,7 @@ namespace GPRO_QMS_Counter
             this.đăngNhậpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.đăngXuấtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thoátToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.thuGọnGiaoDiệnToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.hoạtĐộngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gọiKháchTiếpTheoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nhắcLạiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -110,14 +111,20 @@ namespace GPRO_QMS_Counter
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.timeServeAllow = new System.Windows.Forms.DateTimePicker();
-            this.btnDanhGia = new System.Windows.Forms.Button();
-            this.btnPrintTicket = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.txtname = new System.Windows.Forms.TextBox();
             this.txtDOB = new System.Windows.Forms.NumericUpDown();
             this.txtAdd = new System.Windows.Forms.TextBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.btnFullscreen = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.lbCurrentTicket_s = new System.Windows.Forms.Label();
+            this.btnRecall_small = new System.Windows.Forms.Button();
+            this.btnNext_small = new System.Windows.Forms.Button();
+            this.btnDanhGia = new System.Windows.Forms.Button();
+            this.btnPrintTicket = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -133,6 +140,8 @@ namespace GPRO_QMS_Counter
             this.gbGuide.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDOB)).BeginInit();
+            this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -141,6 +150,7 @@ namespace GPRO_QMS_Counter
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.hệThồngToolStripMenuItem,
+            this.thuGọnGiaoDiệnToolStripMenuItem1,
             this.hoạtĐộngToolStripMenuItem,
             this.càiĐặtToolStripMenuItem,
             this.thốngKêToolStripMenuItem,
@@ -148,7 +158,7 @@ namespace GPRO_QMS_Counter
             this.trợGiúpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1112, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1114, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -182,6 +192,13 @@ namespace GPRO_QMS_Counter
             this.thoátToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.thoátToolStripMenuItem.Text = "Thoát";
             this.thoátToolStripMenuItem.Click += new System.EventHandler(this.thoátToolStripMenuItem_Click);
+            // 
+            // thuGọnGiaoDiệnToolStripMenuItem1
+            // 
+            this.thuGọnGiaoDiệnToolStripMenuItem1.Name = "thuGọnGiaoDiệnToolStripMenuItem1";
+            this.thuGọnGiaoDiệnToolStripMenuItem1.Size = new System.Drawing.Size(116, 20);
+            this.thuGọnGiaoDiệnToolStripMenuItem1.Text = "Giao diện tối thiểu";
+            this.thuGọnGiaoDiệnToolStripMenuItem1.Click += new System.EventHandler(this.thuGọnGiaoDiệnToolStripMenuItem1_Click);
             // 
             // hoạtĐộngToolStripMenuItem
             // 
@@ -303,8 +320,9 @@ namespace GPRO_QMS_Counter
             // 
             // âmThanhToolStripMenuItem
             // 
+            this.âmThanhToolStripMenuItem.Enabled = false;
             this.âmThanhToolStripMenuItem.Name = "âmThanhToolStripMenuItem";
-            this.âmThanhToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.âmThanhToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.âmThanhToolStripMenuItem.Text = "Hệ thống";
             this.âmThanhToolStripMenuItem.Click += new System.EventHandler(this.âmThanhToolStripMenuItem_Click);
             // 
@@ -410,9 +428,9 @@ namespace GPRO_QMS_Counter
             this.statusTotalDone,
             this.lbPrintStatus,
             this.toolStripStatusLabel2});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 540);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 542);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1112, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(1114, 25);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -717,7 +735,7 @@ namespace GPRO_QMS_Counter
             this.splitContainer1.Panel2.Controls.Add(this.label5);
             this.splitContainer1.Panel2.Controls.Add(this.label4);
             this.splitContainer1.Size = new System.Drawing.Size(779, 408);
-            this.splitContainer1.SplitterDistance = 466;
+            this.splitContainer1.SplitterDistance = 461;
             this.splitContainer1.TabIndex = 6;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             this.splitContainer1.DoubleClick += new System.EventHandler(this.splitContainer1_DoubleClick);
@@ -741,8 +759,8 @@ namespace GPRO_QMS_Counter
             this.splitContainer2.Panel2.Controls.Add(this.lbWaiting);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
             this.splitContainer2.Panel2.Controls.Add(this.label2);
-            this.splitContainer2.Size = new System.Drawing.Size(466, 408);
-            this.splitContainer2.SplitterDistance = 208;
+            this.splitContainer2.Size = new System.Drawing.Size(461, 408);
+            this.splitContainer2.SplitterDistance = 204;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.DoubleClick += new System.EventHandler(this.splitContainer2_DoubleClick);
             // 
@@ -754,7 +772,7 @@ namespace GPRO_QMS_Counter
             this.lbCurrentTicket.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.lbCurrentTicket.Location = new System.Drawing.Point(6, 57);
             this.lbCurrentTicket.Name = "lbCurrentTicket";
-            this.lbCurrentTicket.Size = new System.Drawing.Size(452, 122);
+            this.lbCurrentTicket.Size = new System.Drawing.Size(452, 117);
             this.lbCurrentTicket.TabIndex = 1;
             this.lbCurrentTicket.Text = "0";
             this.lbCurrentTicket.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -835,7 +853,7 @@ namespace GPRO_QMS_Counter
             this.gbGuide.ForeColor = System.Drawing.Color.Navy;
             this.gbGuide.Location = new System.Drawing.Point(4, 209);
             this.gbGuide.Name = "gbGuide";
-            this.gbGuide.Size = new System.Drawing.Size(297, 190);
+            this.gbGuide.Size = new System.Drawing.Size(298, 190);
             this.gbGuide.TabIndex = 8;
             this.gbGuide.TabStop = false;
             this.gbGuide.Text = "Hướng dẫn";
@@ -986,39 +1004,6 @@ namespace GPRO_QMS_Counter
             this.timeServeAllow.TabIndex = 8;
             this.timeServeAllow.Value = new System.DateTime(2018, 9, 8, 0, 0, 0, 0);
             // 
-            // btnDanhGia
-            // 
-            this.btnDanhGia.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDanhGia.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDanhGia.Enabled = false;
-            this.btnDanhGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDanhGia.ForeColor = System.Drawing.Color.Navy;
-            this.btnDanhGia.Image = global::GPRO_QMS_Counter.Properties.Resources.if___03_1720778;
-            this.btnDanhGia.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnDanhGia.Location = new System.Drawing.Point(785, 230);
-            this.btnDanhGia.Name = "btnDanhGia";
-            this.btnDanhGia.Size = new System.Drawing.Size(106, 95);
-            this.btnDanhGia.TabIndex = 9;
-            this.btnDanhGia.Text = "Đánh giá";
-            this.btnDanhGia.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnDanhGia.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDanhGia.UseVisualStyleBackColor = true;
-            this.btnDanhGia.Click += new System.EventHandler(this.btnDanhGia_Click);
-            // 
-            // btnPrintTicket
-            // 
-            this.btnPrintTicket.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.btnPrintTicket.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrintTicket.Image = global::GPRO_QMS_Counter.Properties.Resources.if_Payment_3387295;
-            this.btnPrintTicket.Location = new System.Drawing.Point(906, 462);
-            this.btnPrintTicket.Name = "btnPrintTicket";
-            this.btnPrintTicket.Size = new System.Drawing.Size(200, 73);
-            this.btnPrintTicket.TabIndex = 9;
-            this.btnPrintTicket.Text = "In phiếu";
-            this.btnPrintTicket.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPrintTicket.UseVisualStyleBackColor = false;
-            this.btnPrintTicket.Click += new System.EventHandler(this.btnPrintTicket_Click);
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -1083,11 +1068,122 @@ namespace GPRO_QMS_Counter
             this.txtAdd.Size = new System.Drawing.Size(158, 52);
             this.txtAdd.TabIndex = 17;
             // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel4.Controls.Add(this.btnFullscreen);
+            this.panel4.Controls.Add(this.panel5);
+            this.panel4.Controls.Add(this.btnRecall_small);
+            this.panel4.Controls.Add(this.btnNext_small);
+            this.panel4.Location = new System.Drawing.Point(1, -1);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(190, 128);
+            this.panel4.TabIndex = 16;
+            this.panel4.Visible = false;
+            // 
+            // btnFullscreen
+            // 
+            this.btnFullscreen.BackColor = System.Drawing.Color.Transparent;
+            this.btnFullscreen.Image = global::GPRO_QMS_Counter.Properties.Resources.fullscreen;
+            this.btnFullscreen.Location = new System.Drawing.Point(125, 64);
+            this.btnFullscreen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnFullscreen.Name = "btnFullscreen";
+            this.btnFullscreen.Size = new System.Drawing.Size(60, 60);
+            this.btnFullscreen.TabIndex = 3;
+            this.btnFullscreen.UseVisualStyleBackColor = false;
+            this.btnFullscreen.Click += new System.EventHandler(this.btnFullscreen_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.Navy;
+            this.panel5.Controls.Add(this.lbCurrentTicket_s);
+            this.panel5.Location = new System.Drawing.Point(1, 0);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(189, 60);
+            this.panel5.TabIndex = 2;
+            // 
+            // lbCurrentTicket_s
+            // 
+            this.lbCurrentTicket_s.BackColor = System.Drawing.Color.Transparent;
+            this.lbCurrentTicket_s.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, System.Drawing.FontStyle.Bold);
+            this.lbCurrentTicket_s.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lbCurrentTicket_s.Location = new System.Drawing.Point(-3, 0);
+            this.lbCurrentTicket_s.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbCurrentTicket_s.Name = "lbCurrentTicket_s";
+            this.lbCurrentTicket_s.Size = new System.Drawing.Size(192, 62);
+            this.lbCurrentTicket_s.TabIndex = 0;
+            this.lbCurrentTicket_s.Text = "1001";
+            this.lbCurrentTicket_s.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnRecall_small
+            // 
+            this.btnRecall_small.BackColor = System.Drawing.Color.Transparent;
+            this.btnRecall_small.Image = global::GPRO_QMS_Counter.Properties.Resources.iconfinder_Razer_Comms_670418;
+            this.btnRecall_small.Location = new System.Drawing.Point(64, 64);
+            this.btnRecall_small.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRecall_small.Name = "btnRecall_small";
+            this.btnRecall_small.Size = new System.Drawing.Size(60, 60);
+            this.btnRecall_small.TabIndex = 1;
+            this.btnRecall_small.UseVisualStyleBackColor = false;
+            this.btnRecall_small.Click += new System.EventHandler(this.btnRecall_small_Click);
+            // 
+            // btnNext_small
+            // 
+            this.btnNext_small.BackColor = System.Drawing.Color.Transparent;
+            this.btnNext_small.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNext_small.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnNext_small.Image = global::GPRO_QMS_Counter.Properties.Resources.iconfinder_Call_mobile_device_electronic_phone_telephone_1886515__1_;
+            this.btnNext_small.Location = new System.Drawing.Point(3, 64);
+            this.btnNext_small.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNext_small.Name = "btnNext_small";
+            this.btnNext_small.Size = new System.Drawing.Size(60, 60);
+            this.btnNext_small.TabIndex = 0;
+            this.btnNext_small.Text = "33";
+            this.btnNext_small.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnNext_small.UseVisualStyleBackColor = false;
+            this.btnNext_small.Click += new System.EventHandler(this.btnNext_small_Click);
+            // 
+            // btnDanhGia
+            // 
+            this.btnDanhGia.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDanhGia.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDanhGia.Enabled = false;
+            this.btnDanhGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDanhGia.ForeColor = System.Drawing.Color.Navy;
+            this.btnDanhGia.Image = global::GPRO_QMS_Counter.Properties.Resources.if___03_1720778;
+            this.btnDanhGia.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnDanhGia.Location = new System.Drawing.Point(785, 230);
+            this.btnDanhGia.Name = "btnDanhGia";
+            this.btnDanhGia.Size = new System.Drawing.Size(106, 95);
+            this.btnDanhGia.TabIndex = 9;
+            this.btnDanhGia.Text = "Đánh giá";
+            this.btnDanhGia.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnDanhGia.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDanhGia.UseVisualStyleBackColor = true;
+            this.btnDanhGia.Click += new System.EventHandler(this.btnDanhGia_Click);
+            // 
+            // btnPrintTicket
+            // 
+            this.btnPrintTicket.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnPrintTicket.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrintTicket.Image = global::GPRO_QMS_Counter.Properties.Resources.if_Payment_3387295;
+            this.btnPrintTicket.Location = new System.Drawing.Point(906, 462);
+            this.btnPrintTicket.Name = "btnPrintTicket";
+            this.btnPrintTicket.Size = new System.Drawing.Size(200, 73);
+            this.btnPrintTicket.TabIndex = 9;
+            this.btnPrintTicket.Text = "In phiếu";
+            this.btnPrintTicket.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPrintTicket.UseVisualStyleBackColor = false;
+            this.btnPrintTicket.Click += new System.EventHandler(this.btnPrintTicket_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1112, 565);
+            this.ClientSize = new System.Drawing.Size(1114, 567);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.txtAdd);
             this.Controls.Add(this.txtDOB);
             this.Controls.Add(this.txtname);
@@ -1105,15 +1201,17 @@ namespace GPRO_QMS_Counter
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(485, 597);
+            this.MaximizeBox = false;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Phần mềm gọi số - GPRO QMS Counter";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);
+            this.SizeChanged += new System.EventHandler(this.FrmMain_SizeChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmMain_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -1135,6 +1233,8 @@ namespace GPRO_QMS_Counter
             this.gbGuide.PerformLayout();
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtDOB)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1227,5 +1327,12 @@ namespace GPRO_QMS_Counter
         private TextBox txtname;
         private NumericUpDown txtDOB;
         private TextBox txtAdd;
+        private Panel panel4;
+        private Button btnRecall_small;
+        private Button btnNext_small;
+        private Panel panel5;
+        private Label lbCurrentTicket_s;
+        private ToolStripMenuItem thuGọnGiaoDiệnToolStripMenuItem1;
+        private Button btnFullscreen;
     }
 }

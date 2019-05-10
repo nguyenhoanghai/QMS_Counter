@@ -50,11 +50,12 @@ namespace GPRO_QMS_Counter
             bHelp = true,
             bLogout = true,
             bPrintTicket = false,
-        IsReadSound = false;
+            bUpdateInfo = false,
+            IsReadSound = false;
 
-        int xPos = 0, 
-            yPos = 0, 
-            xPos1 = 0, 
+        int xPos = 0,
+            yPos = 0,
+            xPos1 = 0,
             yPos1 = 0,
             UseWithThirdPattern = 0;
 
@@ -139,6 +140,7 @@ namespace GPRO_QMS_Counter
                 GetSetting();
                 SetButtonForAction();
                 lbCurrentTicket.Text = "0";
+                lbCurrentTicket_s.Text = "0";
                 lbWaiting.Text = "0";
                 lbGeneralWaiting.Text = "0";
                 if (!bRegistered)
@@ -149,7 +151,6 @@ namespace GPRO_QMS_Counter
 
                 playlist = new List<string>();
                 temp = new List<string>();
-
 
                 FrmMain.IsUseMainDisplay = Settings.Default.IsUseMainDisplay;
                 if (FrmMain.IsUseMainDisplay)
@@ -162,6 +163,18 @@ namespace GPRO_QMS_Counter
                         chbkService.Items.Add(new CheckedListBoxItem(serviceObjs[i].Id, serviceObjs[i].Name));
 
             }
+            if (Settings.Default.actSmallScreen)
+                thuGọnGiaoDiệnToolStripMenuItem1_Click(sender, e);
+            else
+            {
+                if (Settings.Default.actPrintTicket)
+                    this.Size = new Size(1130, 604);
+                else
+                    this.Size = new Size(912, 604);
+            }
+
+            if (FrmMain.loginObj.UserName.Equals("GPRO Admin"))
+                âmThanhToolStripMenuItem.Enabled = true;
         }
 
         #region Sound
@@ -327,6 +340,7 @@ namespace GPRO_QMS_Counter
                 else
                 {
                     lbCurrentTicket.Text = tk.ToString();
+                    lbCurrentTicket_s.Text = tk.ToString();
                     SendDisplay(tk.ToString());
                     var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(loginObj.UserId, eCodeHex.Next);
                     if (readTemplateIds.Count > 0)
@@ -338,12 +352,13 @@ namespace GPRO_QMS_Counter
         }
         private void btRecall_Click(object sender, EventArgs e)
         {
-            int kq = BLLDailyRequire.Instance.CurrentTicket(loginObj.UserId, loginObj.EquipCode, today,UseWithThirdPattern);
+            int kq = BLLDailyRequire.Instance.CurrentTicket(loginObj.UserId, loginObj.EquipCode, today, UseWithThirdPattern);
             if (kq == 0)
                 txtResult.Text = "Hết vé";
             else
             {
                 lbCurrentTicket.Text = kq.ToString();
+                lbCurrentTicket_s.Text = kq.ToString();
                 var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(loginObj.UserId, eCodeHex.Recall);
                 if (readTemplateIds.Count > 0)
                     GetSound(readTemplateIds, kq.ToString(), loginObj.CounterId);
@@ -433,15 +448,13 @@ namespace GPRO_QMS_Counter
             if (dialogResult == DialogResult.Yes)
             {
                 this.WriteSetting();
-                if (BLLLoginHistory.Instance.CounterLoginLogOut(FrmMain.loginObj.UserId, FrmMain.loginObj.EquipCode, DateTime.Now))
-                {
-                    this.Hide();
-                    dialogResult = MessageBox.Show("Bạn đã đăng xuất thành công! \nBạn có muốn tiếp tục chương trình không?", "Đăng xuất", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
-                    if (dialogResult == DialogResult.Yes)
-                        Process.Start("GPRO_QMS_Counter.exe");
-                    else
-                        Application.Exit();
-                }
+                BLLLoginHistory.Instance.Logout(FrmMain.loginObj.UserId, FrmMain.loginObj.EquipCode, DateTime.Now);
+                this.Hide();
+                dialogResult = MessageBox.Show("Bạn đã đăng xuất thành công! \nBạn có muốn tiếp tục chương trình không?", "Đăng xuất", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                if (dialogResult == DialogResult.Yes)
+                    Process.Start("GPRO_QMS_Counter.exe");
+                else
+                    Application.Exit();
             }
         }
         private void thoátToolStripMenuItem_Click(object sender, EventArgs e)
@@ -454,7 +467,7 @@ namespace GPRO_QMS_Counter
             DialogResult dialogResult = MessageBox.Show("Bạn muốn đăng nhập bằng tài khoản khác? \nBạn sẽ đăng xuất tài khoản hiện tại.", "Đăng nhập mới", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                if (BLLLoginHistory.Instance.CounterLoginLogOut(FrmMain.loginObj.UserId, FrmMain.loginObj.EquipCode, DateTime.Now))
+                if (BLLLoginHistory.Instance.CounterLoginLogOut(FrmMain.loginObj.UserId, FrmMain.loginObj.EquipCode, DateTime.Now) == 8888)
                 {
                     this.Hide();
                     Process.Start("GPRO_QMS_Counter.exe");
@@ -478,9 +491,9 @@ namespace GPRO_QMS_Counter
         private void cấpPhiếuToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
             if (this.bPrintTicket)
-                this.Width = 1130;
+                this.Size = new Size(1130, 604);
             else
-                this.Width = 912;
+                this.Size = new Size(912, 604);
         }
         private void lưuToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -612,16 +625,19 @@ namespace GPRO_QMS_Counter
         private void thuGọnGiaoDiệnToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.splitContainer1_DoubleClick(sender, e);
-            base.Size = new Size(this.MinimumSize.Width, this.MinimumSize.Height);
+            base.Size = new Size(466, 606);
             this.thuGọnGiaoDiệnToolStripMenuItem.Visible = false;
-            this.giaoDiệnĐầyĐủToolStripMenuItem.Visible = true;
+            this.giaoDiệnĐầyĐủToolStripMenuItem.Visible = true; 
         }
         private void giaoDiệnĐầyĐủToolStripMenuItem_Click(object sender, EventArgs e)
         {
             base.Size = new Size(913, 600);
-
             this.giaoDiệnĐầyĐủToolStripMenuItem.Visible = false;
             this.thuGọnGiaoDiệnToolStripMenuItem.Visible = true;
+            if (Settings.Default.actPrintTicket)
+                this.Size = new Size(1130, 604);
+            else
+                this.Size = new Size(912, 604);
         }
         private void vềPhầnMềmToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -849,18 +865,30 @@ namespace GPRO_QMS_Counter
         private void chbkService_SelectedIndexChanged(object sender, EventArgs e)
         {
             var selectedService = (CheckedListBoxItem)chbkService.SelectedItem;
-            if (selectedService != null )
+            if (selectedService != null)
             {
                 var found = serviceObjs.FirstOrDefault(x => x.Id == (int)selectedService.Value);
-                if(found!= null && !string.IsNullOrEmpty(found.Code))
-                { TimeSpan time = TimeSpan.Parse(found.Code);
+                if (found != null && !string.IsNullOrEmpty(found.Code))
+                {
+                    TimeSpan time = TimeSpan.Parse(found.Code);
                     var date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, time.Hours, time.Minutes, time.Seconds);
                     date.AddSeconds(time.TotalSeconds);
                     timeServeAllow.Value = date;
                 }
-            }                
+            }
         }
-         
+
+
+
+        private void btnNext_small_Click(object sender, EventArgs e)
+        {
+            btNext_Click(sender, e);
+        }
+
+        private void btnRecall_small_Click(object sender, EventArgs e)
+        {
+            btRecall_Click(sender, e);
+        }
 
         private void cậpNhậtThôngTinToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -906,6 +934,7 @@ namespace GPRO_QMS_Counter
             this.bView = Settings.Default.actView;
             this.bHelp = Settings.Default.actHelp;
             this.bLogout = Settings.Default.actLogout;
+            this.bUpdateInfo = Settings.Default.actUpdateInfo;
             FrmMain.soundPath = Settings.Default.soundFolder;
             IsReadSound = Settings.Default.IsReadSound;
             printerId = Settings.Default.PrinterId;
@@ -958,6 +987,16 @@ namespace GPRO_QMS_Counter
             this.đăngXuấtToolStripMenuItem.Checked = this.bLogout;
 
             this.cấpPhiếuToolStripMenuItem.Checked = this.bPrintTicket;
+
+            this.btnEditInfo.Enabled = this.bUpdateInfo;
+            cậpNhậtThôngTinToolStripMenuItem.Checked = Settings.Default.actUpdateInfo;
+
+            btnDanhGia.Enabled = Settings.Default.actEvaluate;
+            đánhGiáToolStripMenuItem.Checked = Settings.Default.actEvaluate;
+
+            this.thuGọnGiaoDiệnToolStripMenuItem1.Enabled = Settings.Default.actSmallScreen;
+            
+            this.giúpĐỡToolStripMenuItem.Checked = this.bHelp;
         }
         #region Event
 
@@ -1069,11 +1108,29 @@ namespace GPRO_QMS_Counter
             var obj = BLLLoginHistory.Instance.GetForHome(loginObj.UserId, loginObj.EquipCode, DateTime.Now, UseWithThirdPattern);// BLLUser.Instance.ReadResult(FrmMain.loginObj.EquipCode);
             if (obj != null)
             {
+                //if (obj.IsLogout)
+                //{
+                //    tmerGetResult.Enabled = false;
+                //    MessageBox.Show("Tài khoản hiện tại đã được đăng nhập vào chương trình ở thiết bị khác. Bạn cần đăng nhập lại vào chương trình.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //    this.WriteSetting();
+                //    BLLLoginHistory.Instance.Logout(FrmMain.loginObj.UserId, FrmMain.loginObj.EquipCode, DateTime.Now);
+                //    this.Hide();
+                //    DialogResult dialogResult = MessageBox.Show("Bạn đã đăng xuất thành công! \nBạn có muốn tiếp tục chương trình không?", "Đăng xuất", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                //    if (dialogResult == DialogResult.Yes)
+                //        Process.Start("GPRO_QMS_Counter.exe");
+                //    else
+                //        Application.Exit();
+                //}
+                //else
+                //{
                 this.lbWaiting.Text = obj.CounterWaitingTickets;
                 this.lbGeneralWaiting.Text = obj.AllWaitingTickets;
                 this.statusTotalWaiting.Text = "Đang đợi: " + obj.TotalWating;
                 this.statusTotalDone.Text = "Đã giao dịch: " + obj.TotalDone;
                 this.lbCurrentTicket.Text = obj.CurrentTicket.ToString();
+                this.lbCurrentTicket_s.Text = obj.CurrentTicket.ToString();
+                btnNext_small.Text = obj.CountWaitAtCounter.ToString();
+                //  }
             }
         }
 
@@ -1092,7 +1149,7 @@ namespace GPRO_QMS_Counter
             // if (BLLData.Instance.FindButtonClick(loginObj) != null)
             //      btFinish_Click(sender, e);
 
-            if (IsReadSound && isFinishRead && temp.Count > 0)
+            if (IsReadSound && isFinishRead && temp != null && temp.Count > 0)
             {
                 player = new SoundPlayer();
                 playThread = new Thread(PlaySound);
@@ -1134,7 +1191,7 @@ namespace GPRO_QMS_Counter
                     Name = txtname.Text,
                     ServeTime = timeServeAllow.Value,
                     ServiceId = (int)selectedService.Value
-                }; 
+                };
                 if (BLLCounterSoftRequire.Instance.Insert(JsonConvert.SerializeObject(require), (int)eCounterSoftRequireType.PrintTicket))
                 {
                     lbPrintStatus.Text = "Gửi yêu cầu cấp phiếu thành công.";
@@ -1168,6 +1225,45 @@ namespace GPRO_QMS_Counter
         private void đánhGiáToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void thuGọnGiaoDiệnToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Size = new Size(207, 168);
+            this.menuStrip1.Visible = false;
+            this.splitContainer1.Visible = false;
+            this.panel4.Visible = true;
+        }
+
+        private void FrmMain_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.Height == this.MinimumSize.Height)
+            {
+                this.Size = new Size(207, 168);
+                this.menuStrip1.Visible = false;
+                this.splitContainer1.Visible = false;
+                this.panel4.Visible = true;
+            }
+            else
+            {
+                this.panel4.Visible = false;
+                this.menuStrip1.Visible = true;
+                this.splitContainer1.Visible = true;
+                this.StartPosition = FormStartPosition.CenterScreen;
+            }
+        }
+
+        private void btnFullscreen_Click(object sender, EventArgs e)
+        {
+            this.Size = new Size(1130, 604);
+            this.panel4.Visible = false;
+            this.menuStrip1.Visible = true;
+            this.splitContainer1.Visible = true;
+            this.StartPosition = FormStartPosition.CenterScreen;
+            if (this.bPrintTicket)
+                this.Size = new Size(1130, 604);
+            else
+                this.Size = new Size(912, 604);
         }
     }
 }

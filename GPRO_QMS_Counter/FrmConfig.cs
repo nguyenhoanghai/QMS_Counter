@@ -1,22 +1,15 @@
-﻿using GPRO_QMS_Counter.Helper;
-using GPRO_QMS_Counter.Properties;
+﻿using GPRO_QMS_Counter.Properties;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace GPRO_QMS_Counter
 {
     public partial class FrmConfig : Form
     {
+        bool hasChange = false;
         public FrmConfig()
         {
             InitializeComponent();
@@ -36,7 +29,21 @@ namespace GPRO_QMS_Counter
             txtSoundPath.Text = FrmMain.soundPath;
             switchReadSound.IsOn = Settings.Default.IsReadSound;
             numPrinterId.Value = FrmMain.printerId;
-            numCounterId.Value = Settings.Default.CounterId;
+            numCounterId.Value = int.Parse(ConfigurationManager.AppSettings["CounterId"].ToString());
+
+
+            swNext.IsOn = Settings.Default.actCallNext;
+            swRecall.IsOn = Settings.Default.actRecall;
+            swFinish.IsOn = Settings.Default.actFinish;
+            swCancel.IsOn = Settings.Default.actCancel;
+            swCallAny.IsOn = Settings.Default.actCallTicket;
+            swStranfer.IsOn = Settings.Default.actPass;
+            swSave.IsOn = Settings.Default.actSave;
+            swView.IsOn = Settings.Default.actView;
+            swPrint.IsOn = Settings.Default.actPrintTicket;
+            swUpdateInfo.IsOn = Settings.Default.actUpdateInfo;
+            swEvaluate.IsOn = Settings.Default.actEvaluate;
+            swSmallScreen.IsOn = Settings.Default.actSmallScreen;
         }
 
         private void toggleSwitch1_Toggled(object sender, EventArgs e)
@@ -81,9 +88,29 @@ namespace GPRO_QMS_Counter
                 }
                 Settings.Default.soundFolder = txtSoundPath.Text;
                 Settings.Default.PrinterId = (int)numPrinterId.Value;
-                Settings.Default.CounterId = (int)numCounterId.Value;
+                //  Settings.Default.CounterId = (int)numCounterId.Value;
                 Settings.Default.Save();
-                FrmMain.isRestart = true;
+                hasChange= true;
+
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+                foreach (XmlElement element in xmlDoc.DocumentElement)
+                {
+                    if (element.Name.Equals("appSettings"))
+                    {
+                        foreach (XmlNode node in element.ChildNodes)
+                        {
+                            if (node.Attributes[0].Value.Equals("CounterId"))
+                            {
+                                node.Attributes[1].Value = numCounterId.Value.ToString();
+                            }
+                        }
+                    }
+                }
+
+                xmlDoc.Save(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+                ConfigurationManager.RefreshSection("appSettings");
+
                 this.Close();
             }
         }
@@ -91,6 +118,31 @@ namespace GPRO_QMS_Counter
         private void btnclose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btSavePer_Click(object sender, EventArgs e)
+        {
+            Settings.Default.actCallNext = swNext.IsOn;
+            Settings.Default.actRecall = swRecall.IsOn;
+            Settings.Default.actFinish = swFinish.IsOn;
+            Settings.Default.actCancel = swCancel.IsOn;
+            Settings.Default.actCallTicket = swCallAny.IsOn;
+            Settings.Default.actPass = swStranfer.IsOn;
+            Settings.Default.actSave = swSave.IsOn;
+            Settings.Default.actView = swView.IsOn;
+            Settings.Default.actPrintTicket = swPrint.IsOn;
+            Settings.Default.actUpdateInfo = swUpdateInfo.IsOn;
+            Settings.Default.actEvaluate = swEvaluate.IsOn;
+            Settings.Default.actSmallScreen = swSmallScreen.IsOn;
+            Settings.Default.Save();
+            hasChange = true;
+            this.Close();
+        }
+
+        private void FrmConfig_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if(hasChange)
+                FrmMain.isRestart = true;
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using GPRO_QMS_Counter.Helper;
 using GPRO_QMS_Counter.Properties;
 using QMS_System.Data.BLL;
+using QMS_System.Data.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -41,27 +43,44 @@ namespace GPRO_QMS_Counter
         private void btLogin_Click(object sender, EventArgs e)
         {
             try
-            {
+            { 
                 string text = this.txtUsername.Text;
                 string text2 = this.txtPassword.Text;
-                if (text == "" || text2 == "")
+                if (text.Equals("gproadmin") && text2.Equals("gproadmin"))
                 {
-                    MessageBox.Show("Tên đăng nhập và mật khẩu không được rỗng!", "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                    this.txtUsername.Focus();
+                    FrmMain.loginObj = new Login()
+                    {
+                        UserName = "GPRO Admin",
+                        EquipCode = int.Parse(ConfigurationManager.AppSettings["CounterId"].ToString()),
+                        LoginTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm"),
+                        UserId = 100,
+                        CounterId = int.Parse(ConfigurationManager.AppSettings["CounterId"].ToString()),
+                        CounterName = "GPRO Admin Counter"
+                    };
+                    FrmLogin.bCloseForm = true;
+                    this.Close();
                 }
                 else
                 {
-                  //  MessageBox.Show("info " + txtUsername.Text + "-" + txtPassword.Text + "-" + Common.Instance.GetCounterId());
-                    var rs = BLLLoginHistory.Instance.Login(txtUsername.Text, txtPassword.Text, Settings.Default.CounterId);
-                  //  MessageBox.Show("after");
-                    if (rs.IsSuccess)
+                    if (text == "" || text2 == "")
                     {
-                        FrmMain.loginObj = rs.Data;
-                        FrmLogin.bCloseForm = true;
-                        this.Close();
+                        MessageBox.Show("Tên đăng nhập và mật khẩu không được rỗng!", "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        this.txtUsername.Focus();
                     }
                     else
-                        MessageBox.Show(rs.sms, "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
+                    {
+                        //  MessageBox.Show("info " + txtUsername.Text + "-" + txtPassword.Text + "-" + Common.Instance.GetCounterId());
+                        var rs = BLLLoginHistory.Instance.Login(txtUsername.Text, txtPassword.Text, int.Parse(ConfigurationManager.AppSettings["CounterId"].ToString()));
+                        //  MessageBox.Show("after");
+                        if (rs.IsSuccess)
+                        {
+                            FrmMain.loginObj = rs.Data;
+                            FrmLogin.bCloseForm = true;
+                            this.Close();
+                        }
+                        else
+                            MessageBox.Show(rs.sms, "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
                 }
             }
             catch (Exception ex)

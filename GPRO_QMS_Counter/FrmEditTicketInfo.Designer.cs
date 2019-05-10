@@ -84,7 +84,8 @@
             this.dtTime.Location = new System.Drawing.Point(267, 48);
             this.dtTime.Margin = new System.Windows.Forms.Padding(4);
             this.dtTime.Name = "dtTime";
-            this.dtTime.Size = new System.Drawing.Size(107, 29);
+            this.dtTime.ShowUpDown = true;
+            this.dtTime.Size = new System.Drawing.Size(106, 29);
             this.dtTime.TabIndex = 3;
             // 
             // label4

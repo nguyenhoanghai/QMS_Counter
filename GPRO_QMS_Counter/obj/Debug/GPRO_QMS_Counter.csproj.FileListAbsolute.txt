@@ -162,3 +162,37 @@ E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.cspr
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.exe
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.pdb
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.csprojAssemblyReference.cache
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\bin\Debug\GPRO_QMS_Counter.exe.config
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.exe
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.pdb
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\bin\Debug\GPRO_QMS_Counter.exe
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\bin\Debug\GPRO_QMS_Counter.pdb
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\bin\Debug\AxInterop.WMPLib.DLL
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\bin\Debug\EntityFramework.dll
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\bin\Debug\QMS_System.Data.dll
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\bin\Debug\GPRO.Ultilities.dll
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\bin\Debug\EntityFramework.xml
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmAbout.resources
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmBookService.resources
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmChange.resources
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmComSetting.resources
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmConfig.resources
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmEditTicketInfo.resources
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmGuide.resources
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmLogin.resources
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmMain.resources
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmRegister.resources
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmReportEvaluate.resources
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmSoundSetting.resources
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmUser.resources
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmViewWaitingList.resources
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmViewWaitingList_N.resources
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.Properties.Resources.resources
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.csproj.GenerateResource.Cache
+C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.exe.licenses
+E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmPermission.resources

@@ -149,6 +149,12 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmPermission.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPermission.Designer.cs">
+      <DependentUpon>FrmPermission.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmRegister.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -217,6 +223,9 @@
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmPermission.resx">
+      <DependentUpon>FrmPermission.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmRegister.resx">
       <DependentUpon>FrmRegister.cs</DependentUpon>
     </EmbeddedResource>
@@ -276,6 +285,7 @@
     <Content Include="Resources\deskSound.jpg" />
     <None Include="Resources\edit_info.png" />
     <Content Include="Resources\finish.jpg" />
+    <None Include="Resources\fullscreen.png" />
     <Content Include="Resources\help.jpg" />
     <None Include="Resources\if_refresh_293697.png" />
     <None Include="Resources\if_--03_1720778.png" />
@@ -284,6 +294,8 @@
     <None Include="Resources\if_cancel_13487.png" />
     <None Include="Resources\if_connect_no_5995.png" />
     <None Include="Resources\if_Payment_3387295.png" />
+    <None Include="Resources\iconfinder_Razer_Comms_670418.png" />
+    <None Include="Resources\iconfinder_Call_mobile_device_electronic_phone_telephone_1886515 %281%29.png" />
     <Content Include="Resources\login.png" />
     <Content Include="Resources\login1.jpg" />
     <Content Include="Resources\logout.gif" />
