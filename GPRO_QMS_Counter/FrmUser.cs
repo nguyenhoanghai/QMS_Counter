@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using QMS_System.Data;
 using QMS_System.Data.BLL;
+using GPRO.Core.Hai;
 
 namespace GPRO_QMS_Counter
 {
@@ -17,6 +18,7 @@ namespace GPRO_QMS_Counter
     { 
         bool changeImg = false;
         string username, pass;
+        string connectString = BaseCore.Instance.GetEntityConnectString(Application.StartupPath + "\\DATA.XML");
         public FrmUser( )
         {
             InitializeComponent(); 
@@ -60,7 +62,7 @@ namespace GPRO_QMS_Counter
                     }
                 }
                 newUser.Sex = rbNam.Checked ? true : false;
-                if (BLLUser.Instance.Update(newUser))
+                if (BLLUser.Instance.Update(connectString, newUser))
                 {
                     MessageBox.Show("Lưu thông tin nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     GetUserInfo();
@@ -91,7 +93,7 @@ namespace GPRO_QMS_Counter
         {
             try
             {
-                var user = BLLUser.Instance.Get(FrmMain.loginObj.UserId);
+                var user = BLLUser.Instance.Get(connectString, FrmMain.loginObj.UserId);
                 if (user != null)
                 {
                     txtName.Text = user.Name;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GPRO.Core.Hai;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -14,7 +15,12 @@ namespace GPRO_QMS_Counter
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            if( BaseCore.Instance.CONNECT_STATUS(Application.StartupPath + "\\DATA.XML"))
             Application.Run(new FrmMain());
+            else
+            {
+                Application.Run(new FrmSQLConnect());
+            }
             Process[] processe;
             processe = Process.GetProcessesByName("GPRO_QMS_Counter");
             foreach (Process dovi in processe)

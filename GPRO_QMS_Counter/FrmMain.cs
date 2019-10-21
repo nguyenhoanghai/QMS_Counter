@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors.Controls;
+using GPRO.Core.Hai;
 using GPRO_QMS_Counter.Helper;
 using GPRO_QMS_Counter.Properties;
 using Microsoft.VisualBasic;
@@ -60,7 +61,7 @@ namespace GPRO_QMS_Counter
             UseWithThirdPattern = 0;
 
         List<ModelSelectItem> serviceObjs = null;
-
+        string connectString = BaseCore.Instance.GetEntityConnectString(Application.StartupPath + "\\DATA.XML");
         public FrmMain()
         {
             bCheckValid = CheckValidation();
@@ -157,7 +158,7 @@ namespace GPRO_QMS_Counter
                     InitCOMPort();
 
                 chbkService.Items.Clear();
-                serviceObjs = BLLService.Instance.GetLookUp();
+                serviceObjs = BLLService.Instance.GetLookUp(connectString);
                 if (serviceObjs.Count > 0)
                     for (int i = 0; i < serviceObjs.Count; i++)
                         chbkService.Items.Add(new CheckedListBoxItem(serviceObjs[i].Id, serviceObjs[i].Name));
@@ -171,10 +172,9 @@ namespace GPRO_QMS_Counter
                     this.Size = new Size(1130, 604);
                 else
                     this.Size = new Size(912, 604);
+                if (FrmMain.loginObj.UserName.Equals("GPRO Admin"))
+                    âmThanhToolStripMenuItem.Enabled = true;
             }
-
-            if (FrmMain.loginObj.UserName.Equals("GPRO Admin"))
-                âmThanhToolStripMenuItem.Enabled = true;
         }
 
         #region Sound
@@ -218,10 +218,10 @@ namespace GPRO_QMS_Counter
 
         private void GetSound(List<int> templateIds, string ticket, int counterId)
         {
-            var readDetails = BLLReadTempDetail.Instance.Gets(templateIds);
+            var readDetails = BLLReadTempDetail.Instance.Gets(connectString, templateIds);
             if (readDetails.Count > 0)
             {
-                var sounds = BLLSound.Instance.Gets();
+                var sounds = BLLSound.Instance.Gets(connectString);
                 SoundModel soundFound;
                 var soundStr = string.Empty;
                 if (sounds.Count > 0)
@@ -247,7 +247,7 @@ namespace GPRO_QMS_Counter
                                 }
                                 else if (readDetails[y].Details[i].SoundId == (int)eSoundConfig.Counter)
                                 {
-                                    var name = BLLCounterSound.Instance.GetSoundName(counterId, readDetails[y].LanguageId);
+                                    var name = BLLCounterSound.Instance.GetSoundName(connectString, counterId, readDetails[y].LanguageId);
                                     if (!string.IsNullOrEmpty(name))
                                     {
                                         playlist.Add(name);
@@ -270,7 +270,7 @@ namespace GPRO_QMS_Counter
                     if (!string.IsNullOrEmpty(soundStr))
                     {
                         soundStr = soundStr.Substring(0, soundStr.Length - 1);
-                        BLLCounterSoftRequire.Instance.Insert(soundStr, (int)eCounterSoftRequireType.ReadSound);
+                        BLLCounterSoftRequire.Instance.Insert(connectString, soundStr, (int)eCounterSoftRequireType.ReadSound);
                     }
                 }
             }
@@ -334,7 +334,7 @@ namespace GPRO_QMS_Counter
         {
             try
             {
-                var tk = BLLDailyRequire.Instance.Next(loginObj.UserId, loginObj.EquipCode, today, UseWithThirdPattern);
+                var tk = BLLDailyRequire.Instance.Next(connectString, loginObj.UserId, loginObj.EquipCode, today, UseWithThirdPattern);
                 if (tk == 0)
                     txtResult.Text = "Hết vé";
                 else
@@ -342,7 +342,7 @@ namespace GPRO_QMS_Counter
                     lbCurrentTicket.Text = tk.ToString();
                     lbCurrentTicket_s.Text = tk.ToString();
                     SendDisplay(tk.ToString());
-                    var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(loginObj.UserId, eCodeHex.Next);
+                    var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
                     if (readTemplateIds.Count > 0)
                         GetSound(readTemplateIds, tk.ToString(), loginObj.CounterId);
                 }
@@ -352,14 +352,14 @@ namespace GPRO_QMS_Counter
         }
         private void btRecall_Click(object sender, EventArgs e)
         {
-            int kq = BLLDailyRequire.Instance.CurrentTicket(loginObj.UserId, loginObj.EquipCode, today, UseWithThirdPattern);
+            int kq = BLLDailyRequire.Instance.CurrentTicket(connectString, loginObj.UserId, loginObj.EquipCode, today, UseWithThirdPattern);
             if (kq == 0)
                 txtResult.Text = "Hết vé";
             else
             {
                 lbCurrentTicket.Text = kq.ToString();
                 lbCurrentTicket_s.Text = kq.ToString();
-                var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(loginObj.UserId, eCodeHex.Recall);
+                var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Recall);
                 if (readTemplateIds.Count > 0)
                     GetSound(readTemplateIds, kq.ToString(), loginObj.CounterId);
             }
@@ -375,7 +375,7 @@ namespace GPRO_QMS_Counter
                 DialogResult dialogResult = MessageBox.Show("Bạn muốn hủy vé " + text + " phải không?", "Thông báo hủy vé", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    if (BLLDailyRequire.Instance.DeleteTicket(int.Parse(text), today) > 0)
+                    if (BLLDailyRequire.Instance.DeleteTicket(connectString, int.Parse(text), today) > 0)
                     {
                         this.txtParam.Text = "";
                         this.txtResult.Text = "Yêu cầu Hủy vé " + text;
@@ -399,7 +399,7 @@ namespace GPRO_QMS_Counter
                     var dscho = lbWaiting.Text.Split(' ').ToList();
                     if (dscho.Contains(text))
                     {
-                        var kq = BLLDailyRequire.Instance.CallAny(loginObj.UserId, loginObj.EquipCode, int.Parse(text), today);
+                        var kq = BLLDailyRequire.Instance.CallAny(connectString, loginObj.UserId, loginObj.EquipCode, int.Parse(text), today);
                         if (kq.IsSuccess)
                         {
                             this.txtParam.Text = "";
@@ -407,7 +407,7 @@ namespace GPRO_QMS_Counter
                             lbCurrentTicket.Text = text;
                             SendDisplay(text);
 
-                            var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(loginObj.UserId, eCodeHex.Next);
+                            var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
                             if (readTemplateIds.Count > 0)
                                 GetSound(readTemplateIds, text, loginObj.CounterId);
                         }
@@ -448,7 +448,7 @@ namespace GPRO_QMS_Counter
             if (dialogResult == DialogResult.Yes)
             {
                 this.WriteSetting();
-                BLLLoginHistory.Instance.Logout(FrmMain.loginObj.UserId, FrmMain.loginObj.EquipCode, DateTime.Now);
+                BLLLoginHistory.Instance.Logout(connectString, FrmMain.loginObj.UserId, FrmMain.loginObj.EquipCode, DateTime.Now);
                 this.Hide();
                 dialogResult = MessageBox.Show("Bạn đã đăng xuất thành công! \nBạn có muốn tiếp tục chương trình không?", "Đăng xuất", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
                 if (dialogResult == DialogResult.Yes)
@@ -467,7 +467,7 @@ namespace GPRO_QMS_Counter
             DialogResult dialogResult = MessageBox.Show("Bạn muốn đăng nhập bằng tài khoản khác? \nBạn sẽ đăng xuất tài khoản hiện tại.", "Đăng nhập mới", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                if (BLLLoginHistory.Instance.CounterLoginLogOut(FrmMain.loginObj.UserId, FrmMain.loginObj.EquipCode, DateTime.Now) == 8888)
+                if (BLLLoginHistory.Instance.CounterLoginLogOut(connectString, FrmMain.loginObj.UserId, FrmMain.loginObj.EquipCode, DateTime.Now) == 8888)
                 {
                     this.Hide();
                     Process.Start("GPRO_QMS_Counter.exe");
@@ -627,7 +627,7 @@ namespace GPRO_QMS_Counter
             this.splitContainer1_DoubleClick(sender, e);
             base.Size = new Size(466, 606);
             this.thuGọnGiaoDiệnToolStripMenuItem.Visible = false;
-            this.giaoDiệnĐầyĐủToolStripMenuItem.Visible = true; 
+            this.giaoDiệnĐầyĐủToolStripMenuItem.Visible = true;
         }
         private void giaoDiệnĐầyĐủToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -781,7 +781,7 @@ namespace GPRO_QMS_Counter
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.WriteSetting();
-            BLLLoginHistory.Instance.CounterLoginLogOut(FrmMain.loginObj.UserId, FrmMain.loginObj.EquipCode, DateTime.Now);
+            BLLLoginHistory.Instance.CounterLoginLogOut(connectString, FrmMain.loginObj.UserId, FrmMain.loginObj.EquipCode, DateTime.Now);
             if (this.serialPort1.IsOpen)
                 this.serialPort1.Close();
 
@@ -900,8 +900,15 @@ namespace GPRO_QMS_Counter
             this.txtResult.Text = "";
             string text = this.lbCurrentTicket.Text;
             if (text != "" && text != "0")
-                BLLDailyRequire.Instance.DoneTicket(loginObj.UserId, loginObj.EquipCode, DateTime.Now);
+                BLLDailyRequire.Instance.DoneTicket(connectString, loginObj.UserId, loginObj.EquipCode, DateTime.Now);
         }
+
+        private void kếtNốiCSDLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var f = new FrmSQLConnect();
+            f.ShowDialog();
+        }
+
         private void kếtThúcToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!kếtThúcToolStripMenuItem.Checked)
@@ -940,7 +947,7 @@ namespace GPRO_QMS_Counter
             printerId = Settings.Default.PrinterId;
             this.bPrintTicket = Settings.Default.actPrintTicket;
 
-            configs = BLLConfig.Instance.Gets();
+            configs = BLLConfig.Instance.Gets(connectString);
             int.TryParse(GetConfigByCode(eConfigCode.UseWithThirdPattern), out UseWithThirdPattern);
         }
 
@@ -995,7 +1002,7 @@ namespace GPRO_QMS_Counter
             đánhGiáToolStripMenuItem.Checked = Settings.Default.actEvaluate;
 
             this.thuGọnGiaoDiệnToolStripMenuItem1.Enabled = Settings.Default.actSmallScreen;
-            
+
             this.giúpĐỡToolStripMenuItem.Checked = this.bHelp;
         }
         #region Event
@@ -1028,7 +1035,7 @@ namespace GPRO_QMS_Counter
                 var now = DateTime.Now;
                 if (string.IsNullOrEmpty(text))
                 {
-                    BLLDailyRequire.Instance.StoreTicket(int.Parse(text2), loginObj.UserId, loginObj.EquipCode, today);
+                    BLLDailyRequire.Instance.StoreTicket(connectString, int.Parse(text2), loginObj.UserId, loginObj.EquipCode, today);
                     txtParam.Text = "";
                     txtResult.Text = "Yêu cầu Lưu vé hiện tại";
                 }
@@ -1105,7 +1112,7 @@ namespace GPRO_QMS_Counter
 
         private void ShowResult()
         {
-            var obj = BLLLoginHistory.Instance.GetForHome(loginObj.UserId, loginObj.EquipCode, DateTime.Now, UseWithThirdPattern);// BLLUser.Instance.ReadResult(FrmMain.loginObj.EquipCode);
+            var obj = BLLLoginHistory.Instance.GetForHome(connectString, loginObj.UserId, loginObj.EquipCode, DateTime.Now, UseWithThirdPattern);// BLLUser.Instance.ReadResult(FrmMain.loginObj.EquipCode);
             if (obj != null)
             {
                 //if (obj.IsLogout)
@@ -1192,7 +1199,7 @@ namespace GPRO_QMS_Counter
                     ServeTime = timeServeAllow.Value,
                     ServiceId = (int)selectedService.Value
                 };
-                if (BLLCounterSoftRequire.Instance.Insert(JsonConvert.SerializeObject(require), (int)eCounterSoftRequireType.PrintTicket))
+                if (BLLCounterSoftRequire.Instance.Insert(connectString, JsonConvert.SerializeObject(require), (int)eCounterSoftRequireType.PrintTicket))
                 {
                     lbPrintStatus.Text = "Gửi yêu cầu cấp phiếu thành công.";
                     lbPrintStatus.ForeColor = Color.Blue;

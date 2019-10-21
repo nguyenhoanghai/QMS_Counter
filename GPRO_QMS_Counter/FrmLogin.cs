@@ -1,4 +1,5 @@
-﻿using GPRO_QMS_Counter.Helper;
+﻿using GPRO.Core.Hai;
+using GPRO_QMS_Counter.Helper;
 using GPRO_QMS_Counter.Properties;
 using QMS_System.Data.BLL;
 using QMS_System.Data.Model;
@@ -18,6 +19,7 @@ namespace GPRO_QMS_Counter
     public partial class FrmLogin : Form
     {
         public static bool bCloseForm = false;
+        string connectString = BaseCore.Instance.GetEntityConnectString(Application.StartupPath + "\\DATA.XML");
         public FrmLogin()
         {
             InitializeComponent();
@@ -70,7 +72,7 @@ namespace GPRO_QMS_Counter
                     else
                     {
                         //  MessageBox.Show("info " + txtUsername.Text + "-" + txtPassword.Text + "-" + Common.Instance.GetCounterId());
-                        var rs = BLLLoginHistory.Instance.Login(txtUsername.Text, txtPassword.Text, int.Parse(ConfigurationManager.AppSettings["CounterId"].ToString()));
+                        var rs = BLLLoginHistory.Instance.Login(connectString, txtUsername.Text, txtPassword.Text, int.Parse(ConfigurationManager.AppSettings["CounterId"].ToString()));
                         //  MessageBox.Show("after");
                         if (rs.IsSuccess)
                         {

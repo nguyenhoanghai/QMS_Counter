@@ -1,4 +1,5 @@
-﻿using QMS_System.Data.BLL;
+﻿using GPRO.Core.Hai;
+using QMS_System.Data.BLL;
 using QMS_System.Data.Model;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,8 @@ using Excel = Microsoft.Office.Interop.Excel;
 namespace GPRO_QMS_Counter
 {
     public partial class FrmReportEvaluate : Form
-    { 
+    {
+        string connectString = BaseCore.Instance.GetEntityConnectString(Application.StartupPath + "\\DATA.XML");
         public FrmReportEvaluate( )
         {
             InitializeComponent(); 
@@ -26,7 +28,7 @@ namespace GPRO_QMS_Counter
         {
             var list = new List<ModelSelectItem>();
             list.Add(new ModelSelectItem() { Id = 0, Name = "Tất cả nhân viên" });
-            list.AddRange(BLLUser.Instance.GetLookUp());
+            list.AddRange(BLLUser.Instance.GetLookUp(connectString));
             cbUser.DataSource = list;
             cbUser.DisplayMember = "Name";
         }
@@ -37,7 +39,7 @@ namespace GPRO_QMS_Counter
             if (user.Id >= 0)
             {
                 gridControl1.DataSource = null;
-                gridControl1.DataSource = BLLUserEvaluate.Instance.Gets(user.Id, new DateTime(dtFrom.Value.Year, dtFrom.Value.Month, dtFrom.Value.Day), dtTo.Value);
+                gridControl1.DataSource = BLLUserEvaluate.Instance.Gets(connectString, user.Id, new DateTime(dtFrom.Value.Year, dtFrom.Value.Month, dtFrom.Value.Day), dtTo.Value);
             }
         }
 

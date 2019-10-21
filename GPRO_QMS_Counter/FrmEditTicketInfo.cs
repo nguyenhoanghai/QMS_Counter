@@ -1,4 +1,5 @@
-﻿using QMS_System.Data.BLL;
+﻿using GPRO.Core.Hai;
+using QMS_System.Data.BLL;
 using System;
 using System.Windows.Forms;
 
@@ -7,6 +8,7 @@ namespace GPRO_QMS_Counter
     public partial class FrmEditTicketInfo : Form
     {
         int ticket = 0;
+        string connectString = BaseCore.Instance.GetEntityConnectString(Application.StartupPath + "\\DATA.XML");
         public FrmEditTicketInfo(int _ticket)
         {
             ticket = _ticket;
@@ -15,7 +17,7 @@ namespace GPRO_QMS_Counter
 
         private void FrmEditTicketInfo_Load(object sender, EventArgs e)
         {
-            var obj = BLLDailyRequire.Instance.GetTicket(ticket);
+            var obj = BLLDailyRequire.Instance.GetTicket(connectString, ticket);
             if (obj != null)
             {
                 lbTicket.Text = obj.TicketNumber.ToString();
@@ -33,7 +35,7 @@ namespace GPRO_QMS_Counter
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var rs = BLLDailyRequire.Instance.UpdateTicketInfo(Convert.ToInt32(lbTicket.Text), dtTime.Value.TimeOfDay, txtName.Text, (int)txtDOB.Value, txtAddress.Text);
+            var rs = BLLDailyRequire.Instance.UpdateTicketInfo(connectString, Convert.ToInt32(lbTicket.Text), dtTime.Value.TimeOfDay, txtName.Text, (int)txtDOB.Value, txtAddress.Text);
             if (rs == 0)
                 MessageBox.Show("Cập nhật thất bại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
