@@ -158,7 +158,7 @@ namespace GPRO_QMS_Counter
                     InitCOMPort();
 
                 chbkService.Items.Clear();
-                serviceObjs = BLLService.Instance.GetLookUp(connectString);
+                serviceObjs = BLLService.Instance.GetLookUp(connectString,false);
                 if (serviceObjs.Count > 0)
                     for (int i = 0; i < serviceObjs.Count; i++)
                         chbkService.Items.Add(new CheckedListBoxItem(serviceObjs[i].Id, serviceObjs[i].Name));
@@ -342,6 +342,9 @@ namespace GPRO_QMS_Counter
                     lbCurrentTicket.Text = tk.ToString();
                     lbCurrentTicket_s.Text = tk.ToString();
                     SendDisplay(tk.ToString());
+
+                    var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = loginObj.EquipCode, TicketNumber = tk });
+                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay);
                     var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
                     if (readTemplateIds.Count > 0)
                         GetSound(readTemplateIds, tk.ToString(), loginObj.CounterId);
@@ -359,6 +362,10 @@ namespace GPRO_QMS_Counter
             {
                 lbCurrentTicket.Text = kq.ToString();
                 lbCurrentTicket_s.Text = kq.ToString();
+
+                var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = loginObj.EquipCode, TicketNumber = kq });
+                BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendRecallToMainDisplay);
+
                 var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Recall);
                 if (readTemplateIds.Count > 0)
                     GetSound(readTemplateIds, kq.ToString(), loginObj.CounterId);
@@ -432,7 +439,7 @@ namespace GPRO_QMS_Counter
             {
                 var now = DateTime.Now;
                 txtResult.Text = "";
-                var f = new FrmChange(!string.IsNullOrEmpty(txtParam.Text) ? int.Parse(txtParam.Text) : int.Parse(lbCurrentTicket.Text));
+                var f = new FrmChange(!string.IsNullOrEmpty(txtParam.Text) ? int.Parse(txtParam.Text) : int.Parse(lbCurrentTicket.Text), FrmMain.loginObj.EquipCode);
                 f.ShowDialog();
             }
             else
@@ -947,7 +954,7 @@ namespace GPRO_QMS_Counter
             printerId = Settings.Default.PrinterId;
             this.bPrintTicket = Settings.Default.actPrintTicket;
 
-            configs = BLLConfig.Instance.Gets(connectString);
+            configs = BLLConfig.Instance.Gets(connectString,true);
             int.TryParse(GetConfigByCode(eConfigCode.UseWithThirdPattern), out UseWithThirdPattern);
         }
 

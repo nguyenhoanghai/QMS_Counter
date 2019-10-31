@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>DevExpress.Office.v15.1.Core</name>
+        <name>DevExpress.Office.v18.1.Core</name>
     </assembly>
     <members>
         <member name="T:DevExpress.Office.Utils.OfficeImageFormat">
@@ -100,6 +100,251 @@
 
 
         </member>
+        <member name="T:DevExpress.Office.Options.DataSourceTypes">
+
+            <summary>
+                <para>Lists values used to specify the data source types available in the <b>Data Source Wizard</b>.
+</para>
+            </summary>
+
+        </member>
+        <member name="F:DevExpress.Office.Options.DataSourceTypes.All">
+            <summary>
+                <para>Specifies that all data source types are available for data binding from the <b>Data Source Wizard</b>.
+</para>
+            </summary>
+
+
+        </member>
+        <member name="F:DevExpress.Office.Options.DataSourceTypes.EntityFramework">
+            <summary>
+                <para>Specifies that an Entity Framework data source is available for data binding from the <b>Data Source Wizard</b>.
+</para>
+            </summary>
+
+
+        </member>
+        <member name="F:DevExpress.Office.Options.DataSourceTypes.Excel">
+            <summary>
+                <para>Specifies that a data source used to extract data from Microsoft&#174; Excel&#174; documents is available for data binding from the <b>Data Source Wizard</b>.
+</para>
+            </summary>
+
+
+        </member>
+        <member name="F:DevExpress.Office.Options.DataSourceTypes.Object">
+            <summary>
+                <para>Specifies that an object data source is available for data binding from the <b>Data Source Wizard</b>.
+</para>
+            </summary>
+
+
+        </member>
+        <member name="F:DevExpress.Office.Options.DataSourceTypes.Sql">
+            <summary>
+                <para>Specifies that an SQL database is available for data binding from the <b>Data Source Wizard</b>.
+</para>
+            </summary>
+
+
+        </member>
+        <member name="T:DevExpress.Office.HyperlinkUriHelper">
+
+            <summary>
+                <para>Helper class to manage hyperlinks. 
+</para>
+            </summary>
+
+        </member>
+        <member name="M:DevExpress.Office.HyperlinkUriHelper.ConvertFromHyperlinkUri(System.String)">
+            <summary>
+                <para>Creates a hyperlink from a hyperlink URI. 
+</para>
+            </summary>
+            <param name="uri">
+		A string value that is target URI.
+
+            </param>
+            <returns>The resulting hyperlink.
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Office.HyperlinkUriHelper.ConvertRelativePathToAbsolute(System.String,System.String)">
+            <summary>
+                <para>Converts the hyperlink's relative path to absolute. 
+</para>
+            </summary>
+            <param name="uri">
+		 
+            </param>
+            <param name="baseUri">
+		 
+            </param>
+            <returns>A string value that is an absolute URI path. 
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Office.HyperlinkUriHelper.ConvertToHyperlinkUri(System.String)">
+            <summary>
+                <para>Creates a hyperlink to a hyperlink URI. 
+</para>
+            </summary>
+            <param name="uri">
+		A target hyperlink. 
+
+            </param>
+            <returns>The resulting URI. 
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Office.HyperlinkUriHelper.ConvertToUrl(System.String)">
+            <summary>
+                <para>Converts URI to URL. 
+</para>
+            </summary>
+            <param name="uri">
+		 
+            </param>
+            <returns> </returns>
+
+
+        </member>
+        <member name="M:DevExpress.Office.HyperlinkUriHelper.EnsureUriIsValid(System.String)">
+            <summary>
+                <para>Check whether the hyperlink URI is valid. 
+</para>
+            </summary>
+            <param name="uri">
+		A hyperlink Uri that needs to be checked. 
+
+            </param>
+            <returns>A string value that is the valid Uri. 
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Office.HyperlinkUriHelper.EscapeHyperlinkFieldParameterString(System.String)">
+            <summary>
+                <para>Replaces the <b>"\\"</b> escape character to normal backslashes.  
+</para>
+            </summary>
+            <param name="value">
+		a string value that needs to be corrected. 
+
+            </param>
+            <returns>The corrected string. 
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Office.HyperlinkUriHelper.IsLocalPath(System.String)">
+            <summary>
+                <para>Check whether the hyperlink's path is local. 
+</para>
+            </summary>
+            <param name="uri">
+		A target hyperlink's URI.
+
+            </param>
+            <returns><b>true</b>, if the path is local; otherwise, <b>false</b>.
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Office.HyperlinkUriHelper.IsRelativePath(System.String)">
+            <summary>
+                <para>Checks whether the hyperlink's path is relative. 
+</para>
+            </summary>
+            <param name="uri">
+		A target hyperlink's URI.
+
+            </param>
+            <returns><b>true</b>, if the path is relative; otherwise, <b>false</b>.
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Office.HyperlinkUriHelper.PrepareHyperlinkTooltipQuotes(System.String)">
+            <summary>
+                <para>Corrects hyperlink tooltips that contain double quotes. 
+</para>
+            </summary>
+            <param name="value">
+		The tooltip that needs to be corrected. 
+
+            </param>
+            <returns>The correct hyperlink tooltip. 
+</returns>
+
+
+        </member>
+        <member name="T:DevExpress.Office.Drawing.TileFlipType">
+
+            <summary>
+                <para>Lists values used to specify how to flip the tile contents. 
+</para>
+            </summary>
+
+        </member>
+        <member name="F:DevExpress.Office.Drawing.TileFlipType.Both">
+            <summary>
+                <para>Specifies that the tiles should be flipped both horizontally and vertically. 
+
+</para>
+            </summary>
+
+
+        </member>
+        <member name="F:DevExpress.Office.Drawing.TileFlipType.Horizontal">
+            <summary>
+                <para>Specifies that the tiles should be flipped horizontally. 
+
+</para>
+            </summary>
+
+
+        </member>
+        <member name="F:DevExpress.Office.Drawing.TileFlipType.None">
+            <summary>
+                <para>Specifies that the tiles should not be flipped. 
+
+</para>
+            </summary>
+
+
+        </member>
+        <member name="F:DevExpress.Office.Drawing.TileFlipType.Vertical">
+            <summary>
+                <para>Specifies that the tiles should be flipped vertically. 
+
+</para>
+            </summary>
+
+
+        </member>
+        <member name="T:DevExpress.Office.AzureCompatibility">
+
+            <summary>
+                <para>Hidden. Use the <see cref="T:DevExpress.Utils.AzureCompatibility"/> class instead.
+
+</para>
+            </summary>
+
+        </member>
+        <member name="P:DevExpress.Office.AzureCompatibility.Enable">
+            <summary>
+                <para>Use the <see cref="P:DevExpress.Utils.AzureCompatibility.Enable"/> property instead. 
+</para>
+            </summary>
+            <value><b>true</b> if the document export is Azure-compatible; otherwise <b>false</b>.
+</value>
+
+
+        </member>
         <member name="T:DevExpress.Office.Localization.OfficeResLocalizer">
 
             <summary>
@@ -111,7 +356,7 @@
         </member>
         <member name="M:DevExpress.Office.Localization.OfficeResLocalizer.#ctor">
             <summary>
-                <para>Initializes a new instance of the OfficeResLocalizer class with default settings.
+                <para>Initializes a new instance of the OfficeResLocalizer class with the default settings.
 </para>
             </summary>
 
@@ -127,7 +372,7 @@
         </member>
         <member name="M:DevExpress.Office.Localization.OfficeLocalizer.#ctor">
             <summary>
-                <para>Initializes a new instance of the OfficeLocalizer class with default settings.
+                <para>Initializes a new instance of the OfficeLocalizer class with the default settings.
 </para>
             </summary>
 
@@ -227,6 +472,58 @@
 		A <see cref="T:System.IO.TextWriter"/> descendant which writes exported data as a sequential series of characters.
 
             </param>
+
+
+        </member>
+        <member name="T:DevExpress.Office.Services.IUriProvider">
+
+            <summary>
+                <para>Defines the provider of the locations for external objects in a document export.
+</para>
+            </summary>
+
+        </member>
+        <member name="M:DevExpress.Office.Services.IUriProvider.CreateCssUri(System.String,System.String,System.String)">
+            <summary>
+                <para>Creates URI for CSS data.
+</para>
+            </summary>
+            <param name="rootUri">
+		A string that specifies the root URI.
+
+            </param>
+            <param name="styleText">
+		A string containing CSS definitions for which the URI is created.
+
+            </param>
+            <param name="relativeUri">
+		A string that specifies the relative part of the URI (path relative to the root).
+
+            </param>
+            <returns>A string that is the URI of CSS data.
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Office.Services.IUriProvider.CreateImageUri(System.String,DevExpress.Office.Utils.OfficeImage,System.String)">
+            <summary>
+                <para>Creates an image URI.
+</para>
+            </summary>
+            <param name="rootUri">
+		A string that specifies the root URI.
+
+            </param>
+            <param name="image">
+		An <see cref="T:DevExpress.Office.Utils.OfficeImage"/> object for which the URI is created.
+
+            </param>
+            <param name="relativeUri">
+		A string that specifies the relative part of the URI (path relative to the root).
+
+            </param>
+            <returns>A string that is the image URI.
+</returns>
 
 
         </member>
@@ -352,58 +649,6 @@
                 <para>Specifies points as measurement units. 
 </para>
             </summary>
-
-
-        </member>
-        <member name="T:DevExpress.Office.Services.IUriProvider">
-
-            <summary>
-                <para>Defines the provider of the locations for external objects in a document export.
-</para>
-            </summary>
-
-        </member>
-        <member name="M:DevExpress.Office.Services.IUriProvider.CreateCssUri(System.String,System.String,System.String)">
-            <summary>
-                <para>Creates URI for CSS data.
-</para>
-            </summary>
-            <param name="rootUri">
-		A string that specifies the root URI.
-
-            </param>
-            <param name="styleText">
-		A string containing CSS definitions for which the URI is created.
-
-            </param>
-            <param name="relativeUri">
-		A string that specifies the relative part of the URI (path relative to the root).
-
-            </param>
-            <returns>A string that is the URI of CSS data.
-</returns>
-
-
-        </member>
-        <member name="M:DevExpress.Office.Services.IUriProvider.CreateImageUri(System.String,DevExpress.Office.Utils.OfficeImage,System.String)">
-            <summary>
-                <para>Creates an image URI.
-</para>
-            </summary>
-            <param name="rootUri">
-		A string that specifies the root URI.
-
-            </param>
-            <param name="image">
-		An <see cref="T:DevExpress.Office.Utils.OfficeImage"/> object for which the URI is created.
-
-            </param>
-            <param name="relativeUri">
-		A string that specifies the relative part of the URI (path relative to the root).
-
-            </param>
-            <returns>A string that is the image URI.
-</returns>
 
 
         </member>
@@ -582,11 +827,28 @@
 
 
         </member>
+        <member name="M:DevExpress.Office.Utils.OfficeImage.DiscardCachedData">
+            <summary>
+                <para>Closes the current image stream and releases any resources associated with the current stream.
+</para>
+            </summary>
+
+
+        </member>
         <member name="M:DevExpress.Office.Utils.OfficeImage.Dispose">
             <summary>
                 <para>Releases all resources used by this object.
 </para>
             </summary>
+
+
+        </member>
+        <member name="P:DevExpress.Office.Utils.OfficeImage.EncapsulatedOfficeNativeImage">
+            <summary>
+                <para>This member supports the internal infrastructure and is not intended to be used directly from your code.
+</para>
+            </summary>
+            <value> </value>
 
 
         </member>
@@ -660,12 +922,32 @@
 
 
         </member>
+        <member name="M:DevExpress.Office.Utils.OfficeImage.GetResolution">
+            <summary>
+                <para>This member supports the internal infrastructure and is not intended to be used directly from your code.
+</para>
+            </summary>
+            <returns> 
+</returns>
+
+
+        </member>
         <member name="P:DevExpress.Office.Utils.OfficeImage.HorizontalResolution">
             <summary>
                 <para>Gets the horizontal resolution of the image in pixels per inch.
 </para>
             </summary>
             <value>The horizontal resolution of this image in pixels per inch.
+</value>
+
+
+        </member>
+        <member name="P:DevExpress.Office.Utils.OfficeImage.ImageCacheKey">
+            <summary>
+                <para>This member supports the internal infrastructure and is not intended to be used directly from your code.
+</para>
+            </summary>
+            <value>An integer value that represents a cache key under which an image is stored in the cache. 
 </value>
 
 
@@ -1137,6 +1419,20 @@
 
 
         </member>
+        <member name="M:DevExpress.Office.Utils.Units.DocumentsToEmuD(System.Single)">
+            <summary>
+                <para>Converts a measurement from EMUs (English Metric Unit) to documents (double-precision floating point value).
+</para>
+            </summary>
+            <param name="val">
+		A 64-bit integer that is the value in EMUs. 
+
+            </param>
+            <returns>A <see cref="T:System.Double"/> value that is the value in documents. 
+</returns>
+
+
+        </member>
         <member name="M:DevExpress.Office.Utils.Units.DocumentsToEmuF(System.Single)">
             <summary>
                 <para>Converts a measurement from EMUs (English Metric Unit) to documents represented by 64-bit integers.
@@ -1541,6 +1837,20 @@
 
 
         </member>
+        <member name="M:DevExpress.Office.Utils.Units.EmuToDocumentsD(System.Double)">
+            <summary>
+                <para>Converts a measurement from EMUs (double-precision floating point value) to documents (floating point value). 
+</para>
+            </summary>
+            <param name="val">
+		A <see cref="T:System.Double"/> that is the value in EMUs.
+
+            </param>
+            <returns>A <see cref="T:System.Single"/> value in documents. 
+</returns>
+
+
+        </member>
         <member name="M:DevExpress.Office.Utils.Units.EmuToDocumentsF(System.Int32)">
             <summary>
                 <para>Converts a measurement from EMUs (English Metric Unit) to documents (floating point value).
@@ -1579,6 +1889,20 @@
 
             </param>
             <returns>An integer that is the value in twips.
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Office.Utils.Units.EmuToTwipsD(System.Double)">
+            <summary>
+                <para>Converts a measurement from EMUs (double-precision floating point value) to twips (floating point value).
+</para>
+            </summary>
+            <param name="val">
+		A <see cref="T:System.Double"/> that is the value in EMUs. 
+
+            </param>
+            <returns>A <see cref="T:System.Single"/> value in twips. 
 </returns>
 
 
@@ -1888,6 +2212,95 @@
 
             </param>
             <returns>A <see cref="T:System.Single"/> value.
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Office.Utils.Units.MulDiv(System.Int32,System.Single,System.Int32)">
+            <summary>
+                <para>Multiplies two integer values and then divides the result by another integer value. The final result is cast to an integer (rounded to the nearest integer dropping the values after the decimal place).
+
+</para>
+            </summary>
+            <param name="value">
+		An integer that is the multiplicand.
+
+            </param>
+            <param name="mul">
+		An integer that is the multiplier.
+
+            </param>
+            <param name="div">
+		An integer that is the number by which the result of the previous multiplication operation is divided.
+
+            </param>
+            <returns>An integer that is the final result of the operation.
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Office.Utils.Units.MulDiv(System.Int32,System.Int32,System.Single)">
+            <summary>
+                <para>Multiplies two integer values and then divides the result by a floating point value. The final result is cast to an integer (rounded to the nearest integer dropping the values after the decimal place).
+</para>
+            </summary>
+            <param name="value">
+		An integer that is the multiplicand.
+
+            </param>
+            <param name="mul">
+		An integer that is the multiplier.
+
+            </param>
+            <param name="div">
+		A floating point value that is the number by which the result of the previous multiplication operation is divided.
+
+            </param>
+            <returns>An integer that is the final result of the operation.
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Office.Utils.Units.MulDivD(System.Double,System.Double,System.Double)">
+            <summary>
+                <para>Multiplies two double-precision floating-point values and then divides the result by another double-precision floating-point value. The final result is cast to a <b>Double</b> (rounded to the nearest integer dropping the values after the decimal place). 
+</para>
+            </summary>
+            <param name="value">
+		A double that is the multiplicand.
+
+            </param>
+            <param name="mul">
+		A double that is the multiplier. 
+
+            </param>
+            <param name="div">
+		A double-precision floating-point value that is the number by which the result of the previous multiplication operation is divided. 
+
+            </param>
+            <returns>A double-precision floating-point value that is the final result of the operation. 
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Office.Utils.Units.MulDivF(System.Single,System.Single,System.Single)">
+            <summary>
+                <para>Multiplies two floating point values and then divides the result by another floating point value.
+</para>
+            </summary>
+            <param name="value">
+		A floating point value that is the multiplicand.
+
+            </param>
+            <param name="mul">
+		A floating point value that is the multiplier.
+
+            </param>
+            <param name="div">
+		A floating point value that is the number by which the result of the previous multiplication operation is divided.
+
+            </param>
+            <returns>A floating point value that is the final result of the operation.
 </returns>
 
 
@@ -2525,6 +2938,20 @@
             </param>
             <returns>An integer that is the value in EMUs.
 
+</returns>
+
+
+        </member>
+        <member name="M:DevExpress.Office.Utils.Units.TwipsToEmuD(System.Single)">
+            <summary>
+                <para>Converts a measurement from twips (floating point value) to EMUs (double-precision floating point value).
+</para>
+            </summary>
+            <param name="val">
+		A <see cref="T:System.Single"/> value in twips. 
+
+            </param>
+            <returns>A <see cref="T:System.Double"/> that is the value in EMUs. 
 </returns>
 
 

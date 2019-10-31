@@ -33,8 +33,11 @@ namespace GPRO_QMS_Counter
             FrmMain.iDataBits = byte.Parse(this.cbDataBits.Text.ToString());
             FrmMain.sParity = (Parity)Enum.Parse(typeof(Parity), this.cbParity.Text.ToString());
             FrmMain.fStopBits = (StopBits)Enum.Parse(typeof(StopBits), this.cbStopBits.Text.ToString());
+
+
+
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            configuration.AppSettings.Settings["UseCounterDisplay"].Value = FrmMain.IsUseMainDisplay.ToString();
+            configuration.AppSettings.Settings["UseCounterDisplay"].Value = "true" ;
             configuration.AppSettings.Settings["COMPort"].Value = FrmMain.sComPort;
             configuration.AppSettings.Settings["BaudRate"].Value = FrmMain.iBaudRate.ToString();
             configuration.AppSettings.Settings["DataBits"].Value = FrmMain.iDataBits.ToString();

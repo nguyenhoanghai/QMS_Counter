@@ -59,6 +59,7 @@ namespace GPRO_QMS_Counter
             this.ẩnMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thuGọnGiaoDiệnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.giaoDiệnĐầyĐủToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kếtNốiCSDLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thốngKêToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thốngKêĐánhGiáToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.khácToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -126,7 +127,6 @@ namespace GPRO_QMS_Counter
             this.btnNext_small = new System.Windows.Forms.Button();
             this.btnDanhGia = new System.Windows.Forms.Button();
             this.btnPrintTicket = new System.Windows.Forms.Button();
-            this.kếtNốiCSDLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -326,38 +326,46 @@ namespace GPRO_QMS_Counter
             // 
             this.âmThanhToolStripMenuItem.Enabled = false;
             this.âmThanhToolStripMenuItem.Name = "âmThanhToolStripMenuItem";
-            this.âmThanhToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.âmThanhToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
             this.âmThanhToolStripMenuItem.Text = "Hệ thống";
             this.âmThanhToolStripMenuItem.Click += new System.EventHandler(this.âmThanhToolStripMenuItem_Click);
             // 
             // cổngCOMToolStripMenuItem
             // 
+            this.cổngCOMToolStripMenuItem.Enabled = false;
             this.cổngCOMToolStripMenuItem.Name = "cổngCOMToolStripMenuItem";
-            this.cổngCOMToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.cổngCOMToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
             this.cổngCOMToolStripMenuItem.Text = "Cổng COM";
             this.cổngCOMToolStripMenuItem.Click += new System.EventHandler(this.cổngCOMToolStripMenuItem_Click);
             // 
             // ẩnMenuToolStripMenuItem
             // 
             this.ẩnMenuToolStripMenuItem.Name = "ẩnMenuToolStripMenuItem";
-            this.ẩnMenuToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.ẩnMenuToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
             this.ẩnMenuToolStripMenuItem.Text = "Ẩn Menu";
             this.ẩnMenuToolStripMenuItem.Click += new System.EventHandler(this.ẩnMenuToolStripMenuItem_Click);
             // 
             // thuGọnGiaoDiệnToolStripMenuItem
             // 
             this.thuGọnGiaoDiệnToolStripMenuItem.Name = "thuGọnGiaoDiệnToolStripMenuItem";
-            this.thuGọnGiaoDiệnToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.thuGọnGiaoDiệnToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
             this.thuGọnGiaoDiệnToolStripMenuItem.Text = "Thu gọn giao diện";
             this.thuGọnGiaoDiệnToolStripMenuItem.Click += new System.EventHandler(this.thuGọnGiaoDiệnToolStripMenuItem_Click);
             // 
             // giaoDiệnĐầyĐủToolStripMenuItem
             // 
             this.giaoDiệnĐầyĐủToolStripMenuItem.Name = "giaoDiệnĐầyĐủToolStripMenuItem";
-            this.giaoDiệnĐầyĐủToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.giaoDiệnĐầyĐủToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
             this.giaoDiệnĐầyĐủToolStripMenuItem.Text = "Giao diện đầy đủ";
             this.giaoDiệnĐầyĐủToolStripMenuItem.Visible = false;
             this.giaoDiệnĐầyĐủToolStripMenuItem.Click += new System.EventHandler(this.giaoDiệnĐầyĐủToolStripMenuItem_Click);
+            // 
+            // kếtNốiCSDLToolStripMenuItem
+            // 
+            this.kếtNốiCSDLToolStripMenuItem.Name = "kếtNốiCSDLToolStripMenuItem";
+            this.kếtNốiCSDLToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.kếtNốiCSDLToolStripMenuItem.Text = "Kết nối CSDL";
+            this.kếtNốiCSDLToolStripMenuItem.Click += new System.EventHandler(this.kếtNốiCSDLToolStripMenuItem_Click);
             // 
             // thốngKêToolStripMenuItem
             // 
@@ -633,7 +641,6 @@ namespace GPRO_QMS_Counter
             this.btRecall.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btRecall.ForeColor = System.Drawing.Color.Navy;
             this.btRecall.Image = ((System.Drawing.Image)(resources.GetObject("btRecall.Image")));
-            this.btRecall.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btRecall.Location = new System.Drawing.Point(152, 7);
             this.btRecall.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btRecall.Name = "btRecall";
@@ -641,6 +648,7 @@ namespace GPRO_QMS_Counter
             this.btRecall.TabIndex = 4;
             this.btRecall.Text = "  Nhắc lại";
             this.btRecall.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btRecall.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btRecall.UseVisualStyleBackColor = false;
             this.btRecall.Click += new System.EventHandler(this.btRecall_Click);
             this.btRecall.MouseLeave += new System.EventHandler(this.btRecall_MouseLeave);
@@ -653,7 +661,6 @@ namespace GPRO_QMS_Counter
             this.btNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btNext.ForeColor = System.Drawing.Color.Navy;
             this.btNext.Image = ((System.Drawing.Image)(resources.GetObject("btNext.Image")));
-            this.btNext.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btNext.Location = new System.Drawing.Point(5, 7);
             this.btNext.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btNext.Name = "btNext";
@@ -754,7 +761,7 @@ namespace GPRO_QMS_Counter
             this.splitContainer1.Panel2.Controls.Add(this.label5);
             this.splitContainer1.Panel2.Controls.Add(this.label4);
             this.splitContainer1.Size = new System.Drawing.Size(1039, 502);
-            this.splitContainer1.SplitterDistance = 614;
+            this.splitContainer1.SplitterDistance = 613;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 6;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
@@ -780,7 +787,7 @@ namespace GPRO_QMS_Counter
             this.splitContainer2.Panel2.Controls.Add(this.lbWaiting);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
             this.splitContainer2.Panel2.Controls.Add(this.label2);
-            this.splitContainer2.Size = new System.Drawing.Size(614, 502);
+            this.splitContainer2.Size = new System.Drawing.Size(613, 502);
             this.splitContainer2.SplitterDistance = 251;
             this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 0;
@@ -883,7 +890,7 @@ namespace GPRO_QMS_Counter
             this.gbGuide.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gbGuide.Name = "gbGuide";
             this.gbGuide.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.gbGuide.Size = new System.Drawing.Size(400, 234);
+            this.gbGuide.Size = new System.Drawing.Size(398, 234);
             this.gbGuide.TabIndex = 8;
             this.gbGuide.TabStop = false;
             this.gbGuide.Text = "Hướng dẫn";
@@ -902,7 +909,7 @@ namespace GPRO_QMS_Counter
             this.txtGuide.Multiline = true;
             this.txtGuide.Name = "txtGuide";
             this.txtGuide.ReadOnly = true;
-            this.txtGuide.Size = new System.Drawing.Size(368, 198);
+            this.txtGuide.Size = new System.Drawing.Size(366, 198);
             this.txtGuide.TabIndex = 15;
             // 
             // txtParam
@@ -914,7 +921,7 @@ namespace GPRO_QMS_Counter
             this.txtParam.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtParam.MaxLength = 10;
             this.txtParam.Name = "txtParam";
-            this.txtParam.Size = new System.Drawing.Size(356, 26);
+            this.txtParam.Size = new System.Drawing.Size(354, 26);
             this.txtParam.TabIndex = 13;
             this.txtParam.TextChanged += new System.EventHandler(this.txtParam_TextChanged);
             this.txtParam.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtParam_KeyPress);
@@ -930,7 +937,7 @@ namespace GPRO_QMS_Counter
             this.txtResult.Multiline = true;
             this.txtResult.Name = "txtResult";
             this.txtResult.ReadOnly = true;
-            this.txtResult.Size = new System.Drawing.Size(356, 89);
+            this.txtResult.Size = new System.Drawing.Size(354, 89);
             this.txtResult.TabIndex = 14;
             this.txtResult.TextChanged += new System.EventHandler(this.txtResult_TextChanged);
             // 
@@ -1221,13 +1228,6 @@ namespace GPRO_QMS_Counter
             this.btnPrintTicket.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPrintTicket.UseVisualStyleBackColor = false;
             this.btnPrintTicket.Click += new System.EventHandler(this.btnPrintTicket_Click);
-            // 
-            // kếtNốiCSDLToolStripMenuItem
-            // 
-            this.kếtNốiCSDLToolStripMenuItem.Name = "kếtNốiCSDLToolStripMenuItem";
-            this.kếtNốiCSDLToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.kếtNốiCSDLToolStripMenuItem.Text = "Kết nối CSDL";
-            this.kếtNốiCSDLToolStripMenuItem.Click += new System.EventHandler(this.kếtNốiCSDLToolStripMenuItem_Click);
             // 
             // FrmMain
             // 

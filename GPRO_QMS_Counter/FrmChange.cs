@@ -15,12 +15,13 @@ namespace GPRO_QMS_Counter
 {
     public partial class FrmChange : Form
     {
-        int number = 0;
+        int number = 0, equipCode = 0;
         string connectString = BaseCore.Instance.GetEntityConnectString(Application.StartupPath + "\\DATA.XML");
-        public FrmChange(int _number)
+        public FrmChange(int _number, int _equipCode)
         {
             InitializeComponent();
             number = _number;
+            equipCode = equipCode;
         }
 
         private void FrmChange_Load(object sender, EventArgs e)
@@ -44,7 +45,7 @@ namespace GPRO_QMS_Counter
         private void btnChuyen_Click(object sender, EventArgs e)
         {
             var obj = (ModelSelectItem)cbQuay.GetSelectedDataRow();
-            if (obj != null && number != 0 && BLLDailyRequire.Instance.TranferTicket(connectString, FrmMain.loginObj.EquipCode, obj.Id, number, DateTime.Now, true))
+            if (obj != null && number != 0 && BLLDailyRequire.Instance.TranferTicket(connectString,  equipCode, obj.Id, number, DateTime.Now, true))
             {
                 MessageBox.Show("Chuyển phiếu thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
                 this.Close();
