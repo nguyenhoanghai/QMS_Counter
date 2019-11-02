@@ -166,7 +166,7 @@ namespace GPRO_QMS_Counter
             { }
             configs = BLLConfig.Instance.Gets(connectString, true);
             lib_Services = BLLService.Instance.GetsForMain(connectString);
-            ticketTemplate = GetConfigByCode(eConfigCode.TicketTemplate);
+            ticketTemplate = Settings.Default.ticketTemplate; // GetConfigByCode(eConfigCode.TicketTemplate);
             int.TryParse(GetConfigByCode(eConfigCode.NumberOfLinePerTime), out so_lien);
             int.TryParse(GetConfigByCode(eConfigCode.PrintType), out printType);
             int.TryParse(GetConfigByCode(eConfigCode.CheckTimeBeforePrintTicket), out CheckTimeBeforePrintTicket);
@@ -175,6 +175,8 @@ namespace GPRO_QMS_Counter
             int.TryParse(GetConfigByCode(eConfigCode.UseWithThirdPattern), out UseWithThirdPattern);
             soundPath = Settings.Default.soundFolder;
             InitComPort();
+
+            FrmMain.loginObj.
 
             var logins = BLLLoginHistory.Instance.GetsForMain(connectString);
             for (int i = 1; i < logins.Count; i++)

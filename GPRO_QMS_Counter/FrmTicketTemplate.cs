@@ -1,4 +1,5 @@
-﻿using QMS_System.Data.BLL;
+﻿using GPRO_QMS_Counter.Properties;
+using QMS_System.Data.BLL;
 using QMS_System.Data.Enum;
 using System;
 using System.Linq;
@@ -107,19 +108,16 @@ namespace GPRO_QMS_Counter
 
         private void btsave_Click(object sender, EventArgs e)
         {
-            
-            if (BLLConfig.Instance.Update(FrmMain2.connectString, eConfigCode.TicketTemplate, txtContent.Text))
-                if (BLLConfig.Instance.Update(FrmMain2.connectString, eConfigCode.NumberOfLinePerTime, txtsolien.Value.ToString()))
-                    MessageBox.Show("Lưu thành công!.");
-                else
-                    MessageBox.Show("Lưu thất bại.");
-            else
-                MessageBox.Show("Lưu thất bại.");
-            
-
-
-            // MessageBox.Show(txtContent.Text);
-            //txtContent.Text = "";
+            Settings.Default.ticketTemplate = txtContent.Text;
+            Settings.Default.Save();
+            FrmMain2.ticketTemplate = txtContent.Text;
+            //if (BLLConfig.Instance.Update(FrmMain2.connectString, eConfigCode.TicketTemplate, txtContent.Text))
+            //    if (BLLConfig.Instance.Update(FrmMain2.connectString, eConfigCode.NumberOfLinePerTime, txtsolien.Value.ToString()))
+            //        MessageBox.Show("Lưu thành công!.");
+            //    else
+            //        MessageBox.Show("Lưu thất bại.");
+            //else
+            //    MessageBox.Show("Lưu thất bại."); 
         }
 
         private void btDangGoi_Click(object sender, EventArgs e)

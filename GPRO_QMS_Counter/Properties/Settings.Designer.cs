@@ -310,5 +310,17 @@ namespace GPRO_QMS_Counter.Properties {
                 this["actSmallScreen"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ticketTemplate {
+            get {
+                return ((string)(this["ticketTemplate"]));
+            }
+            set {
+                this["ticketTemplate"] = value;
+            }
+        }
     }
 }

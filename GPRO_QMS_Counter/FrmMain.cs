@@ -37,7 +37,6 @@ namespace GPRO_QMS_Counter
         public static Parity sParity = Parity.None;
         public static StopBits fStopBits = StopBits.One;
         SerialPort serialPort1;
-
         List<ConfigModel> configs;
 
         bool bCallNext = true,
