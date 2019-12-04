@@ -160,8 +160,7 @@ namespace GPRO_QMS_Counter
             this.trợGiúpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1485, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1114, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -172,34 +171,34 @@ namespace GPRO_QMS_Counter
             this.đăngXuấtToolStripMenuItem,
             this.thoátToolStripMenuItem});
             this.hệThồngToolStripMenuItem.Name = "hệThồngToolStripMenuItem";
-            this.hệThồngToolStripMenuItem.Size = new System.Drawing.Size(86, 24);
+            this.hệThồngToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.hệThồngToolStripMenuItem.Text = "Hệ Thống";
             // 
             // đăngNhậpToolStripMenuItem
             // 
             this.đăngNhậpToolStripMenuItem.Name = "đăngNhậpToolStripMenuItem";
-            this.đăngNhậpToolStripMenuItem.Size = new System.Drawing.Size(157, 26);
+            this.đăngNhậpToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.đăngNhậpToolStripMenuItem.Text = "Đăng nhập";
             this.đăngNhậpToolStripMenuItem.Click += new System.EventHandler(this.đăngNhậpToolStripMenuItem_Click);
             // 
             // đăngXuấtToolStripMenuItem
             // 
             this.đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(157, 26);
+            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             this.đăngXuấtToolStripMenuItem.Click += new System.EventHandler(this.đăngXuấtToolStripMenuItem_Click);
             // 
             // thoátToolStripMenuItem
             // 
             this.thoátToolStripMenuItem.Name = "thoátToolStripMenuItem";
-            this.thoátToolStripMenuItem.Size = new System.Drawing.Size(157, 26);
+            this.thoátToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.thoátToolStripMenuItem.Text = "Thoát";
             this.thoátToolStripMenuItem.Click += new System.EventHandler(this.thoátToolStripMenuItem_Click);
             // 
             // thuGọnGiaoDiệnToolStripMenuItem1
             // 
             this.thuGọnGiaoDiệnToolStripMenuItem1.Name = "thuGọnGiaoDiệnToolStripMenuItem1";
-            this.thuGọnGiaoDiệnToolStripMenuItem1.Size = new System.Drawing.Size(144, 24);
+            this.thuGọnGiaoDiệnToolStripMenuItem1.Size = new System.Drawing.Size(116, 20);
             this.thuGọnGiaoDiệnToolStripMenuItem1.Text = "Giao diện tối thiểu";
             this.thuGọnGiaoDiệnToolStripMenuItem1.Click += new System.EventHandler(this.thuGọnGiaoDiệnToolStripMenuItem1_Click);
             // 
@@ -219,7 +218,7 @@ namespace GPRO_QMS_Counter
             this.đánhGiáToolStripMenuItem,
             this.cấpPhiếuToolStripMenuItem});
             this.hoạtĐộngToolStripMenuItem.Name = "hoạtĐộngToolStripMenuItem";
-            this.hoạtĐộngToolStripMenuItem.Size = new System.Drawing.Size(95, 24);
+            this.hoạtĐộngToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
             this.hoạtĐộngToolStripMenuItem.Text = "Hoạt Động";
             // 
             // gọiKháchTiếpTheoToolStripMenuItem
@@ -227,84 +226,84 @@ namespace GPRO_QMS_Counter
             this.gọiKháchTiếpTheoToolStripMenuItem.Checked = true;
             this.gọiKháchTiếpTheoToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.gọiKháchTiếpTheoToolStripMenuItem.Name = "gọiKháchTiếpTheoToolStripMenuItem";
-            this.gọiKháchTiếpTheoToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
+            this.gọiKháchTiếpTheoToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.gọiKháchTiếpTheoToolStripMenuItem.Text = "Gọi khách tiếp theo";
             this.gọiKháchTiếpTheoToolStripMenuItem.Click += new System.EventHandler(this.gọiKháchTiếpTheoToolStripMenuItem_Click);
             // 
             // nhắcLạiToolStripMenuItem
             // 
             this.nhắcLạiToolStripMenuItem.Name = "nhắcLạiToolStripMenuItem";
-            this.nhắcLạiToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
+            this.nhắcLạiToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.nhắcLạiToolStripMenuItem.Text = "Nhắc lại";
             this.nhắcLạiToolStripMenuItem.Click += new System.EventHandler(this.nhắcLạiToolStripMenuItem_Click);
             // 
             // kếtThúcToolStripMenuItem
             // 
             this.kếtThúcToolStripMenuItem.Name = "kếtThúcToolStripMenuItem";
-            this.kếtThúcToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
+            this.kếtThúcToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.kếtThúcToolStripMenuItem.Text = "Kết thúc";
             this.kếtThúcToolStripMenuItem.Click += new System.EventHandler(this.kếtThúcToolStripMenuItem_Click);
             // 
             // hủyToolStripMenuItem
             // 
             this.hủyToolStripMenuItem.Name = "hủyToolStripMenuItem";
-            this.hủyToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
+            this.hủyToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.hủyToolStripMenuItem.Text = "Hủy";
             this.hủyToolStripMenuItem.Click += new System.EventHandler(this.hủyToolStripMenuItem_Click);
             // 
             // gọiSốBấtKỳToolStripMenuItem
             // 
             this.gọiSốBấtKỳToolStripMenuItem.Name = "gọiSốBấtKỳToolStripMenuItem";
-            this.gọiSốBấtKỳToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
+            this.gọiSốBấtKỳToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.gọiSốBấtKỳToolStripMenuItem.Text = "Gọi số bất kỳ";
             this.gọiSốBấtKỳToolStripMenuItem.Click += new System.EventHandler(this.gọiSốBấtKỳToolStripMenuItem_Click);
             // 
             // chuyểnToolStripMenuItem
             // 
             this.chuyểnToolStripMenuItem.Name = "chuyểnToolStripMenuItem";
-            this.chuyểnToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
+            this.chuyểnToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.chuyểnToolStripMenuItem.Text = "Chuyển";
             this.chuyểnToolStripMenuItem.Click += new System.EventHandler(this.chuyểnToolStripMenuItem_Click);
             // 
             // lưuToolStripMenuItem
             // 
             this.lưuToolStripMenuItem.Name = "lưuToolStripMenuItem";
-            this.lưuToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
+            this.lưuToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.lưuToolStripMenuItem.Text = "Lưu";
             this.lưuToolStripMenuItem.Click += new System.EventHandler(this.lưuToolStripMenuItem_Click);
             // 
             // xemKháchĐợiToolStripMenuItem
             // 
             this.xemKháchĐợiToolStripMenuItem.Name = "xemKháchĐợiToolStripMenuItem";
-            this.xemKháchĐợiToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
+            this.xemKháchĐợiToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.xemKháchĐợiToolStripMenuItem.Text = "Xem khách đợi";
             this.xemKháchĐợiToolStripMenuItem.Click += new System.EventHandler(this.xemKháchĐợiToolStripMenuItem_Click);
             // 
             // giúpĐỡToolStripMenuItem
             // 
             this.giúpĐỡToolStripMenuItem.Name = "giúpĐỡToolStripMenuItem";
-            this.giúpĐỡToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
+            this.giúpĐỡToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.giúpĐỡToolStripMenuItem.Text = "Giúp đỡ";
             this.giúpĐỡToolStripMenuItem.Click += new System.EventHandler(this.giúpĐỡToolStripMenuItem_Click);
             // 
             // cậpNhậtThôngTinToolStripMenuItem
             // 
             this.cậpNhậtThôngTinToolStripMenuItem.Name = "cậpNhậtThôngTinToolStripMenuItem";
-            this.cậpNhậtThôngTinToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
+            this.cậpNhậtThôngTinToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.cậpNhậtThôngTinToolStripMenuItem.Text = "Cập nhật thông tin";
             this.cậpNhậtThôngTinToolStripMenuItem.Click += new System.EventHandler(this.cậpNhậtThôngTinToolStripMenuItem_Click);
             // 
             // đánhGiáToolStripMenuItem
             // 
             this.đánhGiáToolStripMenuItem.Name = "đánhGiáToolStripMenuItem";
-            this.đánhGiáToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
+            this.đánhGiáToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.đánhGiáToolStripMenuItem.Text = "Đánh giá";
             this.đánhGiáToolStripMenuItem.Click += new System.EventHandler(this.đánhGiáToolStripMenuItem_Click);
             // 
             // cấpPhiếuToolStripMenuItem
             // 
             this.cấpPhiếuToolStripMenuItem.Name = "cấpPhiếuToolStripMenuItem";
-            this.cấpPhiếuToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
+            this.cấpPhiếuToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.cấpPhiếuToolStripMenuItem.Text = "Cấp phiếu";
             this.cấpPhiếuToolStripMenuItem.CheckedChanged += new System.EventHandler(this.cấpPhiếuToolStripMenuItem_CheckedChanged);
             this.cấpPhiếuToolStripMenuItem.Click += new System.EventHandler(this.cấpPhiếuToolStripMenuItem_Click);
@@ -319,14 +318,14 @@ namespace GPRO_QMS_Counter
             this.giaoDiệnĐầyĐủToolStripMenuItem,
             this.kếtNốiCSDLToolStripMenuItem});
             this.càiĐặtToolStripMenuItem.Name = "càiĐặtToolStripMenuItem";
-            this.càiĐặtToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
+            this.càiĐặtToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.càiĐặtToolStripMenuItem.Text = "Cài Đặt";
             // 
             // âmThanhToolStripMenuItem
             // 
             this.âmThanhToolStripMenuItem.Enabled = false;
             this.âmThanhToolStripMenuItem.Name = "âmThanhToolStripMenuItem";
-            this.âmThanhToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.âmThanhToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.âmThanhToolStripMenuItem.Text = "Hệ thống";
             this.âmThanhToolStripMenuItem.Click += new System.EventHandler(this.âmThanhToolStripMenuItem_Click);
             // 
@@ -334,28 +333,28 @@ namespace GPRO_QMS_Counter
             // 
             this.cổngCOMToolStripMenuItem.Enabled = false;
             this.cổngCOMToolStripMenuItem.Name = "cổngCOMToolStripMenuItem";
-            this.cổngCOMToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.cổngCOMToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.cổngCOMToolStripMenuItem.Text = "Cổng COM";
             this.cổngCOMToolStripMenuItem.Click += new System.EventHandler(this.cổngCOMToolStripMenuItem_Click);
             // 
             // ẩnMenuToolStripMenuItem
             // 
             this.ẩnMenuToolStripMenuItem.Name = "ẩnMenuToolStripMenuItem";
-            this.ẩnMenuToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.ẩnMenuToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.ẩnMenuToolStripMenuItem.Text = "Ẩn Menu";
             this.ẩnMenuToolStripMenuItem.Click += new System.EventHandler(this.ẩnMenuToolStripMenuItem_Click);
             // 
             // thuGọnGiaoDiệnToolStripMenuItem
             // 
             this.thuGọnGiaoDiệnToolStripMenuItem.Name = "thuGọnGiaoDiệnToolStripMenuItem";
-            this.thuGọnGiaoDiệnToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.thuGọnGiaoDiệnToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.thuGọnGiaoDiệnToolStripMenuItem.Text = "Thu gọn giao diện";
             this.thuGọnGiaoDiệnToolStripMenuItem.Click += new System.EventHandler(this.thuGọnGiaoDiệnToolStripMenuItem_Click);
             // 
             // giaoDiệnĐầyĐủToolStripMenuItem
             // 
             this.giaoDiệnĐầyĐủToolStripMenuItem.Name = "giaoDiệnĐầyĐủToolStripMenuItem";
-            this.giaoDiệnĐầyĐủToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.giaoDiệnĐầyĐủToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.giaoDiệnĐầyĐủToolStripMenuItem.Text = "Giao diện đầy đủ";
             this.giaoDiệnĐầyĐủToolStripMenuItem.Visible = false;
             this.giaoDiệnĐầyĐủToolStripMenuItem.Click += new System.EventHandler(this.giaoDiệnĐầyĐủToolStripMenuItem_Click);
@@ -363,7 +362,7 @@ namespace GPRO_QMS_Counter
             // kếtNốiCSDLToolStripMenuItem
             // 
             this.kếtNốiCSDLToolStripMenuItem.Name = "kếtNốiCSDLToolStripMenuItem";
-            this.kếtNốiCSDLToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.kếtNốiCSDLToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.kếtNốiCSDLToolStripMenuItem.Text = "Kết nối CSDL";
             this.kếtNốiCSDLToolStripMenuItem.Click += new System.EventHandler(this.kếtNốiCSDLToolStripMenuItem_Click);
             // 
@@ -372,13 +371,13 @@ namespace GPRO_QMS_Counter
             this.thốngKêToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.thốngKêĐánhGiáToolStripMenuItem});
             this.thốngKêToolStripMenuItem.Name = "thốngKêToolStripMenuItem";
-            this.thốngKêToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.thốngKêToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.thốngKêToolStripMenuItem.Text = "Báo cáo";
             // 
             // thốngKêĐánhGiáToolStripMenuItem
             // 
             this.thốngKêĐánhGiáToolStripMenuItem.Name = "thốngKêĐánhGiáToolStripMenuItem";
-            this.thốngKêĐánhGiáToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.thốngKêĐánhGiáToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.thốngKêĐánhGiáToolStripMenuItem.Text = "Báo cáo đánh giá";
             this.thốngKêĐánhGiáToolStripMenuItem.Click += new System.EventHandler(this.thốngKêĐánhGiáToolStripMenuItem_Click);
             // 
@@ -387,13 +386,13 @@ namespace GPRO_QMS_Counter
             this.khácToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.qLLịchHẹnToolStripMenuItem});
             this.khácToolStripMenuItem.Name = "khácToolStripMenuItem";
-            this.khácToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.khácToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.khácToolStripMenuItem.Text = "Lịch hẹn";
             // 
             // qLLịchHẹnToolStripMenuItem
             // 
             this.qLLịchHẹnToolStripMenuItem.Name = "qLLịchHẹnToolStripMenuItem";
-            this.qLLịchHẹnToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.qLLịchHẹnToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.qLLịchHẹnToolStripMenuItem.Text = "QL Lịch hẹn";
             this.qLLịchHẹnToolStripMenuItem.Click += new System.EventHandler(this.qLLịchHẹnToolStripMenuItem_Click);
             // 
@@ -404,27 +403,27 @@ namespace GPRO_QMS_Counter
             this.hướngDẫnSửDụngToolStripMenuItem,
             this.đăngKýSửDụngToolStripMenuItem});
             this.trợGiúpToolStripMenuItem.Name = "trợGiúpToolStripMenuItem";
-            this.trợGiúpToolStripMenuItem.Size = new System.Drawing.Size(77, 24);
+            this.trợGiúpToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
             this.trợGiúpToolStripMenuItem.Text = "Trợ Giúp";
             // 
             // vềPhầnMềmToolStripMenuItem
             // 
             this.vềPhầnMềmToolStripMenuItem.Name = "vềPhầnMềmToolStripMenuItem";
-            this.vềPhầnMềmToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
+            this.vềPhầnMềmToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.vềPhầnMềmToolStripMenuItem.Text = "Thông tin phần mềm";
             this.vềPhầnMềmToolStripMenuItem.Click += new System.EventHandler(this.vềPhầnMềmToolStripMenuItem_Click);
             // 
             // hướngDẫnSửDụngToolStripMenuItem
             // 
             this.hướngDẫnSửDụngToolStripMenuItem.Name = "hướngDẫnSửDụngToolStripMenuItem";
-            this.hướngDẫnSửDụngToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
+            this.hướngDẫnSửDụngToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.hướngDẫnSửDụngToolStripMenuItem.Text = "Hướng dẫn sử dụng";
             this.hướngDẫnSửDụngToolStripMenuItem.Click += new System.EventHandler(this.hướngDẫnSửDụngToolStripMenuItem_Click);
             // 
             // đăngKýSửDụngToolStripMenuItem
             // 
             this.đăngKýSửDụngToolStripMenuItem.Name = "đăngKýSửDụngToolStripMenuItem";
-            this.đăngKýSửDụngToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
+            this.đăngKýSửDụngToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.đăngKýSửDụngToolStripMenuItem.Text = "Đăng ký sử dụng";
             this.đăngKýSửDụngToolStripMenuItem.Click += new System.EventHandler(this.đăngKýSửDụngToolStripMenuItem_Click);
             // 
@@ -440,10 +439,9 @@ namespace GPRO_QMS_Counter
             this.statusTotalDone,
             this.lbPrintStatus,
             this.toolStripStatusLabel2});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 673);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 542);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1485, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(1114, 25);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -494,7 +492,7 @@ namespace GPRO_QMS_Counter
             this.lbPrintStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lbPrintStatus.Name = "lbPrintStatus";
             this.lbPrintStatus.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
-            this.lbPrintStatus.Size = new System.Drawing.Size(195, 20);
+            this.lbPrintStatus.Size = new System.Drawing.Size(159, 20);
             this.lbPrintStatus.Text = "Cấp phiếu thành công.";
             this.lbPrintStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -514,10 +512,9 @@ namespace GPRO_QMS_Counter
             this.panel1.Controls.Add(this.btFinish);
             this.panel1.Controls.Add(this.btRecall);
             this.panel1.Controls.Add(this.btNext);
-            this.panel1.Location = new System.Drawing.Point(1, 532);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Location = new System.Drawing.Point(1, 432);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1193, 130);
+            this.panel1.Size = new System.Drawing.Size(895, 106);
             this.panel1.TabIndex = 3;
             // 
             // btSave
@@ -527,10 +524,9 @@ namespace GPRO_QMS_Counter
             this.btSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btSave.ForeColor = System.Drawing.Color.Navy;
             this.btSave.Image = ((System.Drawing.Image)(resources.GetObject("btSave.Image")));
-            this.btSave.Location = new System.Drawing.Point(744, 7);
-            this.btSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btSave.Location = new System.Drawing.Point(558, 6);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(147, 117);
+            this.btSave.Size = new System.Drawing.Size(110, 95);
             this.btSave.TabIndex = 11;
             this.btSave.Text = "Lưu";
             this.btSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -546,10 +542,9 @@ namespace GPRO_QMS_Counter
             this.btViewList.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btViewList.ForeColor = System.Drawing.Color.Navy;
             this.btViewList.Image = ((System.Drawing.Image)(resources.GetObject("btViewList.Image")));
-            this.btViewList.Location = new System.Drawing.Point(596, 7);
-            this.btViewList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btViewList.Location = new System.Drawing.Point(447, 6);
             this.btViewList.Name = "btViewList";
-            this.btViewList.Size = new System.Drawing.Size(141, 117);
+            this.btViewList.Size = new System.Drawing.Size(106, 95);
             this.btViewList.TabIndex = 12;
             this.btViewList.Text = "Xem khách đợi";
             this.btViewList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -563,10 +558,9 @@ namespace GPRO_QMS_Counter
             this.btLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btLogout.ForeColor = System.Drawing.Color.Navy;
             this.btLogout.Image = ((System.Drawing.Image)(resources.GetObject("btLogout.Image")));
-            this.btLogout.Location = new System.Drawing.Point(1045, 7);
-            this.btLogout.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btLogout.Location = new System.Drawing.Point(784, 6);
             this.btLogout.Name = "btLogout";
-            this.btLogout.Size = new System.Drawing.Size(141, 117);
+            this.btLogout.Size = new System.Drawing.Size(106, 95);
             this.btLogout.TabIndex = 8;
             this.btLogout.Text = "Đăng xuất";
             this.btLogout.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -582,10 +576,9 @@ namespace GPRO_QMS_Counter
             this.btHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btHelp.ForeColor = System.Drawing.Color.Navy;
             this.btHelp.Image = ((System.Drawing.Image)(resources.GetObject("btHelp.Image")));
-            this.btHelp.Location = new System.Drawing.Point(897, 7);
-            this.btHelp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btHelp.Location = new System.Drawing.Point(673, 6);
             this.btHelp.Name = "btHelp";
-            this.btHelp.Size = new System.Drawing.Size(141, 117);
+            this.btHelp.Size = new System.Drawing.Size(106, 95);
             this.btHelp.TabIndex = 7;
             this.btHelp.Text = "Giúp đỡ";
             this.btHelp.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -601,10 +594,9 @@ namespace GPRO_QMS_Counter
             this.btCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btCancel.ForeColor = System.Drawing.Color.Navy;
             this.btCancel.Image = ((System.Drawing.Image)(resources.GetObject("btCancel.Image")));
-            this.btCancel.Location = new System.Drawing.Point(447, 7);
-            this.btCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btCancel.Location = new System.Drawing.Point(335, 6);
             this.btCancel.Name = "btCancel";
-            this.btCancel.Size = new System.Drawing.Size(141, 117);
+            this.btCancel.Size = new System.Drawing.Size(106, 95);
             this.btCancel.TabIndex = 6;
             this.btCancel.Text = "Hủy";
             this.btCancel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -620,10 +612,9 @@ namespace GPRO_QMS_Counter
             this.btFinish.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.btFinish.ForeColor = System.Drawing.Color.Navy;
             this.btFinish.Image = ((System.Drawing.Image)(resources.GetObject("btFinish.Image")));
-            this.btFinish.Location = new System.Drawing.Point(299, 7);
-            this.btFinish.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btFinish.Location = new System.Drawing.Point(224, 6);
             this.btFinish.Name = "btFinish";
-            this.btFinish.Size = new System.Drawing.Size(141, 117);
+            this.btFinish.Size = new System.Drawing.Size(106, 95);
             this.btFinish.TabIndex = 5;
             this.btFinish.Text = "Hoàn tất";
             this.btFinish.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -641,10 +632,9 @@ namespace GPRO_QMS_Counter
             this.btRecall.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btRecall.ForeColor = System.Drawing.Color.Navy;
             this.btRecall.Image = ((System.Drawing.Image)(resources.GetObject("btRecall.Image")));
-            this.btRecall.Location = new System.Drawing.Point(152, 7);
-            this.btRecall.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btRecall.Location = new System.Drawing.Point(114, 6);
             this.btRecall.Name = "btRecall";
-            this.btRecall.Size = new System.Drawing.Size(141, 117);
+            this.btRecall.Size = new System.Drawing.Size(106, 95);
             this.btRecall.TabIndex = 4;
             this.btRecall.Text = "  Nhắc lại";
             this.btRecall.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -661,10 +651,9 @@ namespace GPRO_QMS_Counter
             this.btNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btNext.ForeColor = System.Drawing.Color.Navy;
             this.btNext.Image = ((System.Drawing.Image)(resources.GetObject("btNext.Image")));
-            this.btNext.Location = new System.Drawing.Point(5, 7);
-            this.btNext.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btNext.Location = new System.Drawing.Point(4, 6);
             this.btNext.Name = "btNext";
-            this.btNext.Size = new System.Drawing.Size(141, 117);
+            this.btNext.Size = new System.Drawing.Size(106, 95);
             this.btNext.TabIndex = 3;
             this.btNext.Text = "Gọi tiếp theo";
             this.btNext.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -680,10 +669,9 @@ namespace GPRO_QMS_Counter
             this.panel2.Controls.Add(this.btTranfer);
             this.panel2.Controls.Add(this.btnEditInfo);
             this.panel2.Controls.Add(this.btCallAnyTicket);
-            this.panel2.Location = new System.Drawing.Point(1036, 30);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Location = new System.Drawing.Point(777, 24);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(159, 505);
+            this.panel2.Size = new System.Drawing.Size(119, 410);
             this.panel2.TabIndex = 4;
             // 
             // btTranfer
@@ -693,10 +681,9 @@ namespace GPRO_QMS_Counter
             this.btTranfer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btTranfer.ForeColor = System.Drawing.Color.Navy;
             this.btTranfer.Image = ((System.Drawing.Image)(resources.GetObject("btTranfer.Image")));
-            this.btTranfer.Location = new System.Drawing.Point(11, 128);
-            this.btTranfer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btTranfer.Location = new System.Drawing.Point(8, 104);
             this.btTranfer.Name = "btTranfer";
-            this.btTranfer.Size = new System.Drawing.Size(141, 117);
+            this.btTranfer.Size = new System.Drawing.Size(106, 95);
             this.btTranfer.TabIndex = 10;
             this.btTranfer.Text = "Chuyển";
             this.btTranfer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -711,10 +698,9 @@ namespace GPRO_QMS_Counter
             this.btnEditInfo.ForeColor = System.Drawing.Color.Navy;
             this.btnEditInfo.Image = global::GPRO_QMS_Counter.Properties.Resources.edit_info;
             this.btnEditInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnEditInfo.Location = new System.Drawing.Point(11, 378);
-            this.btnEditInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEditInfo.Location = new System.Drawing.Point(8, 307);
             this.btnEditInfo.Name = "btnEditInfo";
-            this.btnEditInfo.Size = new System.Drawing.Size(141, 117);
+            this.btnEditInfo.Size = new System.Drawing.Size(106, 95);
             this.btnEditInfo.TabIndex = 12;
             this.btnEditInfo.Text = "Thông tin phiếu";
             this.btnEditInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -729,10 +715,9 @@ namespace GPRO_QMS_Counter
             this.btCallAnyTicket.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btCallAnyTicket.ForeColor = System.Drawing.Color.Navy;
             this.btCallAnyTicket.Image = ((System.Drawing.Image)(resources.GetObject("btCallAnyTicket.Image")));
-            this.btCallAnyTicket.Location = new System.Drawing.Point(11, 7);
-            this.btCallAnyTicket.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btCallAnyTicket.Location = new System.Drawing.Point(8, 6);
             this.btCallAnyTicket.Name = "btCallAnyTicket";
-            this.btCallAnyTicket.Size = new System.Drawing.Size(141, 117);
+            this.btCallAnyTicket.Size = new System.Drawing.Size(106, 95);
             this.btCallAnyTicket.TabIndex = 9;
             this.btCallAnyTicket.Text = "Gọi bất kỳ";
             this.btCallAnyTicket.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -744,8 +729,7 @@ namespace GPRO_QMS_Counter
             // 
             this.splitContainer1.BackColor = System.Drawing.Color.Navy;
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 30);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 24);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -760,9 +744,8 @@ namespace GPRO_QMS_Counter
             this.splitContainer1.Panel2.Controls.Add(this.txtResult);
             this.splitContainer1.Panel2.Controls.Add(this.label5);
             this.splitContainer1.Panel2.Controls.Add(this.label4);
-            this.splitContainer1.Size = new System.Drawing.Size(1039, 502);
-            this.splitContainer1.SplitterDistance = 613;
-            this.splitContainer1.SplitterWidth = 5;
+            this.splitContainer1.Size = new System.Drawing.Size(779, 408);
+            this.splitContainer1.SplitterDistance = 459;
             this.splitContainer1.TabIndex = 6;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             this.splitContainer1.DoubleClick += new System.EventHandler(this.splitContainer1_DoubleClick);
@@ -772,7 +755,6 @@ namespace GPRO_QMS_Counter
             this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.splitContainer2.Name = "splitContainer2";
             this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -787,9 +769,8 @@ namespace GPRO_QMS_Counter
             this.splitContainer2.Panel2.Controls.Add(this.lbWaiting);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
             this.splitContainer2.Panel2.Controls.Add(this.label2);
-            this.splitContainer2.Size = new System.Drawing.Size(613, 502);
-            this.splitContainer2.SplitterDistance = 251;
-            this.splitContainer2.SplitterWidth = 5;
+            this.splitContainer2.Size = new System.Drawing.Size(459, 408);
+            this.splitContainer2.SplitterDistance = 204;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.DoubleClick += new System.EventHandler(this.splitContainer2_DoubleClick);
             // 
@@ -799,10 +780,9 @@ namespace GPRO_QMS_Counter
             | System.Windows.Forms.AnchorStyles.Left)));
             this.lbCurrentTicket.Font = new System.Drawing.Font("Microsoft Sans Serif", 63.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCurrentTicket.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.lbCurrentTicket.Location = new System.Drawing.Point(8, 70);
-            this.lbCurrentTicket.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbCurrentTicket.Location = new System.Drawing.Point(6, 57);
             this.lbCurrentTicket.Name = "lbCurrentTicket";
-            this.lbCurrentTicket.Size = new System.Drawing.Size(603, 145);
+            this.lbCurrentTicket.Size = new System.Drawing.Size(452, 117);
             this.lbCurrentTicket.TabIndex = 1;
             this.lbCurrentTicket.Text = "0";
             this.lbCurrentTicket.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -813,9 +793,8 @@ namespace GPRO_QMS_Counter
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(1, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(617, 44);
+            this.label1.Size = new System.Drawing.Size(463, 36);
             this.label1.TabIndex = 0;
             this.label1.Text = "ĐANG GIAO DỊCH";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -825,10 +804,9 @@ namespace GPRO_QMS_Counter
             this.lbGeneralWaiting.AutoSize = true;
             this.lbGeneralWaiting.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbGeneralWaiting.ForeColor = System.Drawing.Color.White;
-            this.lbGeneralWaiting.Location = new System.Drawing.Point(4, 166);
-            this.lbGeneralWaiting.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbGeneralWaiting.Location = new System.Drawing.Point(3, 135);
             this.lbGeneralWaiting.Name = "lbGeneralWaiting";
-            this.lbGeneralWaiting.Size = new System.Drawing.Size(43, 46);
+            this.lbGeneralWaiting.Size = new System.Drawing.Size(36, 37);
             this.lbGeneralWaiting.TabIndex = 4;
             this.lbGeneralWaiting.Text = "0";
             this.lbGeneralWaiting.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -841,10 +819,9 @@ namespace GPRO_QMS_Counter
             this.lbWaiting.AutoSize = true;
             this.lbWaiting.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbWaiting.ForeColor = System.Drawing.Color.White;
-            this.lbWaiting.Location = new System.Drawing.Point(4, 49);
-            this.lbWaiting.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbWaiting.Location = new System.Drawing.Point(3, 40);
             this.lbWaiting.Name = "lbWaiting";
-            this.lbWaiting.Size = new System.Drawing.Size(43, 46);
+            this.lbWaiting.Size = new System.Drawing.Size(36, 37);
             this.lbWaiting.TabIndex = 3;
             this.lbWaiting.Text = "0";
             this.lbWaiting.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -857,10 +834,9 @@ namespace GPRO_QMS_Counter
             this.label3.BackColor = System.Drawing.Color.LightSkyBlue;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Navy;
-            this.label3.Location = new System.Drawing.Point(1, 116);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(1, 94);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(617, 30);
+            this.label3.Size = new System.Drawing.Size(463, 24);
             this.label3.TabIndex = 2;
             this.label3.Text = "ĐANG ĐỢI CHUNG";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -871,9 +847,8 @@ namespace GPRO_QMS_Counter
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Navy;
             this.label2.Location = new System.Drawing.Point(1, -1);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(617, 30);
+            this.label2.Size = new System.Drawing.Size(463, 24);
             this.label2.TabIndex = 1;
             this.label2.Text = "ĐANG ĐỢI TẠI QUẦY";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -886,11 +861,9 @@ namespace GPRO_QMS_Counter
             this.gbGuide.Controls.Add(this.txtGuide);
             this.gbGuide.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbGuide.ForeColor = System.Drawing.Color.Navy;
-            this.gbGuide.Location = new System.Drawing.Point(5, 258);
-            this.gbGuide.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbGuide.Location = new System.Drawing.Point(4, 209);
             this.gbGuide.Name = "gbGuide";
-            this.gbGuide.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.gbGuide.Size = new System.Drawing.Size(398, 234);
+            this.gbGuide.Size = new System.Drawing.Size(297, 190);
             this.gbGuide.TabIndex = 8;
             this.gbGuide.TabStop = false;
             this.gbGuide.Text = "Hướng dẫn";
@@ -904,12 +877,11 @@ namespace GPRO_QMS_Counter
             this.txtGuide.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtGuide.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtGuide.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.txtGuide.Location = new System.Drawing.Point(20, 26);
-            this.txtGuide.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtGuide.Location = new System.Drawing.Point(15, 21);
             this.txtGuide.Multiline = true;
             this.txtGuide.Name = "txtGuide";
             this.txtGuide.ReadOnly = true;
-            this.txtGuide.Size = new System.Drawing.Size(366, 198);
+            this.txtGuide.Size = new System.Drawing.Size(273, 161);
             this.txtGuide.TabIndex = 15;
             // 
             // txtParam
@@ -917,11 +889,10 @@ namespace GPRO_QMS_Counter
             this.txtParam.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtParam.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtParam.Location = new System.Drawing.Point(24, 70);
-            this.txtParam.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtParam.Location = new System.Drawing.Point(18, 57);
             this.txtParam.MaxLength = 10;
             this.txtParam.Name = "txtParam";
-            this.txtParam.Size = new System.Drawing.Size(354, 26);
+            this.txtParam.Size = new System.Drawing.Size(265, 22);
             this.txtParam.TabIndex = 13;
             this.txtParam.TextChanged += new System.EventHandler(this.txtParam_TextChanged);
             this.txtParam.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtParam_KeyPress);
@@ -932,12 +903,11 @@ namespace GPRO_QMS_Counter
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtResult.BackColor = System.Drawing.Color.White;
             this.txtResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtResult.Location = new System.Drawing.Point(25, 134);
-            this.txtResult.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtResult.Location = new System.Drawing.Point(19, 109);
             this.txtResult.Multiline = true;
             this.txtResult.Name = "txtResult";
             this.txtResult.ReadOnly = true;
-            this.txtResult.Size = new System.Drawing.Size(354, 89);
+            this.txtResult.Size = new System.Drawing.Size(265, 73);
             this.txtResult.TabIndex = 14;
             this.txtResult.TextChanged += new System.EventHandler(this.txtResult_TextChanged);
             // 
@@ -946,10 +916,9 @@ namespace GPRO_QMS_Counter
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(20, 107);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(15, 87);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 20);
+            this.label5.Size = new System.Drawing.Size(60, 16);
             this.label5.TabIndex = 5;
             this.label5.Text = "Kết quả";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -959,10 +928,9 @@ namespace GPRO_QMS_Counter
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(20, 47);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(15, 38);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(129, 20);
+            this.label4.Size = new System.Drawing.Size(107, 16);
             this.label4.TabIndex = 4;
             this.label4.Text = "Nhập  yêu cầu";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -996,10 +964,9 @@ namespace GPRO_QMS_Counter
             // panel3
             // 
             this.panel3.Controls.Add(this.chbkService);
-            this.panel3.Location = new System.Drawing.Point(1204, 62);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Location = new System.Drawing.Point(903, 50);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(273, 319);
+            this.panel3.Size = new System.Drawing.Size(205, 259);
             this.panel3.TabIndex = 7;
             // 
             // chbkService
@@ -1007,9 +974,8 @@ namespace GPRO_QMS_Counter
             this.chbkService.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chbkService.FormattingEnabled = true;
             this.chbkService.Location = new System.Drawing.Point(0, 0);
-            this.chbkService.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chbkService.Name = "chbkService";
-            this.chbkService.Size = new System.Drawing.Size(273, 319);
+            this.chbkService.Size = new System.Drawing.Size(205, 259);
             this.chbkService.TabIndex = 0;
             this.chbkService.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.chbkService_ItemCheck);
             this.chbkService.SelectedIndexChanged += new System.EventHandler(this.chbkService_SelectedIndexChanged);
@@ -1019,10 +985,9 @@ namespace GPRO_QMS_Counter
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.label6.Location = new System.Drawing.Point(1201, 409);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(901, 332);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(118, 17);
+            this.label6.Size = new System.Drawing.Size(95, 13);
             this.label6.TabIndex = 0;
             this.label6.Text = "TG phục vụ DK";
             // 
@@ -1031,10 +996,9 @@ namespace GPRO_QMS_Counter
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.label8.Location = new System.Drawing.Point(1204, 37);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(903, 30);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(62, 17);
+            this.label8.Size = new System.Drawing.Size(51, 13);
             this.label8.TabIndex = 11;
             this.label8.Text = "Dịch vụ";
             // 
@@ -1043,11 +1007,10 @@ namespace GPRO_QMS_Counter
             this.timeServeAllow.CustomFormat = "HH:mm:ss";
             this.timeServeAllow.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timeServeAllow.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.timeServeAllow.Location = new System.Drawing.Point(1333, 402);
-            this.timeServeAllow.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.timeServeAllow.Location = new System.Drawing.Point(1000, 327);
             this.timeServeAllow.Name = "timeServeAllow";
             this.timeServeAllow.ShowUpDown = true;
-            this.timeServeAllow.Size = new System.Drawing.Size(143, 23);
+            this.timeServeAllow.Size = new System.Drawing.Size(108, 20);
             this.timeServeAllow.TabIndex = 8;
             this.timeServeAllow.Value = new System.DateTime(2018, 9, 8, 0, 0, 0, 0);
             // 
@@ -1056,10 +1019,9 @@ namespace GPRO_QMS_Counter
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.label7.Location = new System.Drawing.Point(1201, 437);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(901, 355);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(56, 17);
+            this.label7.Size = new System.Drawing.Size(45, 13);
             this.label7.TabIndex = 12;
             this.label7.Text = "Họ tên";
             // 
@@ -1068,10 +1030,9 @@ namespace GPRO_QMS_Counter
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.label9.Location = new System.Drawing.Point(1201, 469);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Location = new System.Drawing.Point(901, 381);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(75, 17);
+            this.label9.Size = new System.Drawing.Size(59, 13);
             this.label9.TabIndex = 13;
             this.label9.Text = "Năm sinh";
             // 
@@ -1080,42 +1041,41 @@ namespace GPRO_QMS_Counter
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.label10.Location = new System.Drawing.Point(1201, 503);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Location = new System.Drawing.Point(901, 409);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(58, 17);
+            this.label10.Size = new System.Drawing.Size(47, 13);
             this.label10.TabIndex = 14;
             this.label10.Text = "Địa chỉ";
             // 
             // txtname
             // 
-            this.txtname.Location = new System.Drawing.Point(1265, 434);
-            this.txtname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtname.Location = new System.Drawing.Point(949, 353);
+            this.txtname.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtname.Name = "txtname";
-            this.txtname.Size = new System.Drawing.Size(209, 22);
+            this.txtname.Size = new System.Drawing.Size(158, 20);
             this.txtname.TabIndex = 15;
             // 
             // txtDOB
             // 
             this.txtDOB.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDOB.Location = new System.Drawing.Point(1284, 466);
-            this.txtDOB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtDOB.Location = new System.Drawing.Point(963, 379);
+            this.txtDOB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtDOB.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.txtDOB.Name = "txtDOB";
-            this.txtDOB.Size = new System.Drawing.Size(85, 24);
+            this.txtDOB.Size = new System.Drawing.Size(64, 21);
             this.txtDOB.TabIndex = 16;
             // 
             // txtAdd
             // 
-            this.txtAdd.Location = new System.Drawing.Point(1265, 498);
-            this.txtAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtAdd.Location = new System.Drawing.Point(949, 405);
+            this.txtAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtAdd.Multiline = true;
             this.txtAdd.Name = "txtAdd";
-            this.txtAdd.Size = new System.Drawing.Size(209, 63);
+            this.txtAdd.Size = new System.Drawing.Size(158, 52);
             this.txtAdd.TabIndex = 17;
             // 
             // panel4
@@ -1126,9 +1086,9 @@ namespace GPRO_QMS_Counter
             this.panel4.Controls.Add(this.btnRecall_small);
             this.panel4.Controls.Add(this.btnNext_small);
             this.panel4.Location = new System.Drawing.Point(1, -1);
-            this.panel4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(253, 158);
+            this.panel4.Size = new System.Drawing.Size(190, 128);
             this.panel4.TabIndex = 16;
             this.panel4.Visible = false;
             // 
@@ -1136,10 +1096,10 @@ namespace GPRO_QMS_Counter
             // 
             this.btnFullscreen.BackColor = System.Drawing.Color.Transparent;
             this.btnFullscreen.Image = global::GPRO_QMS_Counter.Properties.Resources.fullscreen;
-            this.btnFullscreen.Location = new System.Drawing.Point(167, 79);
-            this.btnFullscreen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnFullscreen.Location = new System.Drawing.Point(125, 64);
+            this.btnFullscreen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnFullscreen.Name = "btnFullscreen";
-            this.btnFullscreen.Size = new System.Drawing.Size(80, 74);
+            this.btnFullscreen.Size = new System.Drawing.Size(60, 60);
             this.btnFullscreen.TabIndex = 3;
             this.btnFullscreen.UseVisualStyleBackColor = false;
             this.btnFullscreen.Click += new System.EventHandler(this.btnFullscreen_Click);
@@ -1149,9 +1109,9 @@ namespace GPRO_QMS_Counter
             this.panel5.BackColor = System.Drawing.Color.Navy;
             this.panel5.Controls.Add(this.lbCurrentTicket_s);
             this.panel5.Location = new System.Drawing.Point(1, 0);
-            this.panel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(252, 74);
+            this.panel5.Size = new System.Drawing.Size(189, 60);
             this.panel5.TabIndex = 2;
             // 
             // lbCurrentTicket_s
@@ -1159,9 +1119,10 @@ namespace GPRO_QMS_Counter
             this.lbCurrentTicket_s.BackColor = System.Drawing.Color.Transparent;
             this.lbCurrentTicket_s.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, System.Drawing.FontStyle.Bold);
             this.lbCurrentTicket_s.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbCurrentTicket_s.Location = new System.Drawing.Point(-4, 0);
+            this.lbCurrentTicket_s.Location = new System.Drawing.Point(-3, 0);
+            this.lbCurrentTicket_s.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbCurrentTicket_s.Name = "lbCurrentTicket_s";
-            this.lbCurrentTicket_s.Size = new System.Drawing.Size(256, 76);
+            this.lbCurrentTicket_s.Size = new System.Drawing.Size(192, 62);
             this.lbCurrentTicket_s.TabIndex = 0;
             this.lbCurrentTicket_s.Text = "1001";
             this.lbCurrentTicket_s.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1170,10 +1131,10 @@ namespace GPRO_QMS_Counter
             // 
             this.btnRecall_small.BackColor = System.Drawing.Color.Transparent;
             this.btnRecall_small.Image = global::GPRO_QMS_Counter.Properties.Resources.iconfinder_Razer_Comms_670418;
-            this.btnRecall_small.Location = new System.Drawing.Point(85, 79);
-            this.btnRecall_small.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRecall_small.Location = new System.Drawing.Point(64, 64);
+            this.btnRecall_small.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnRecall_small.Name = "btnRecall_small";
-            this.btnRecall_small.Size = new System.Drawing.Size(80, 74);
+            this.btnRecall_small.Size = new System.Drawing.Size(60, 60);
             this.btnRecall_small.TabIndex = 1;
             this.btnRecall_small.UseVisualStyleBackColor = false;
             this.btnRecall_small.Click += new System.EventHandler(this.btnRecall_small_Click);
@@ -1184,10 +1145,10 @@ namespace GPRO_QMS_Counter
             this.btnNext_small.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNext_small.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnNext_small.Image = global::GPRO_QMS_Counter.Properties.Resources.iconfinder_Call_mobile_device_electronic_phone_telephone_1886515__1_;
-            this.btnNext_small.Location = new System.Drawing.Point(4, 79);
-            this.btnNext_small.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnNext_small.Location = new System.Drawing.Point(3, 64);
+            this.btnNext_small.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnNext_small.Name = "btnNext_small";
-            this.btnNext_small.Size = new System.Drawing.Size(80, 74);
+            this.btnNext_small.Size = new System.Drawing.Size(60, 60);
             this.btnNext_small.TabIndex = 0;
             this.btnNext_small.Text = "33";
             this.btnNext_small.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1203,10 +1164,9 @@ namespace GPRO_QMS_Counter
             this.btnDanhGia.ForeColor = System.Drawing.Color.Navy;
             this.btnDanhGia.Image = global::GPRO_QMS_Counter.Properties.Resources.if___03_1720778;
             this.btnDanhGia.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnDanhGia.Location = new System.Drawing.Point(1047, 283);
-            this.btnDanhGia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDanhGia.Location = new System.Drawing.Point(785, 230);
             this.btnDanhGia.Name = "btnDanhGia";
-            this.btnDanhGia.Size = new System.Drawing.Size(141, 117);
+            this.btnDanhGia.Size = new System.Drawing.Size(106, 95);
             this.btnDanhGia.TabIndex = 9;
             this.btnDanhGia.Text = "Đánh giá";
             this.btnDanhGia.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1219,10 +1179,9 @@ namespace GPRO_QMS_Counter
             this.btnPrintTicket.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnPrintTicket.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrintTicket.Image = global::GPRO_QMS_Counter.Properties.Resources.if_Payment_3387295;
-            this.btnPrintTicket.Location = new System.Drawing.Point(1208, 569);
-            this.btnPrintTicket.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrintTicket.Location = new System.Drawing.Point(906, 462);
             this.btnPrintTicket.Name = "btnPrintTicket";
-            this.btnPrintTicket.Size = new System.Drawing.Size(267, 90);
+            this.btnPrintTicket.Size = new System.Drawing.Size(200, 73);
             this.btnPrintTicket.TabIndex = 9;
             this.btnPrintTicket.Text = "In phiếu";
             this.btnPrintTicket.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -1231,9 +1190,9 @@ namespace GPRO_QMS_Counter
             // 
             // FrmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1485, 698);
+            this.ClientSize = new System.Drawing.Size(1114, 567);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.txtAdd);
             this.Controls.Add(this.txtDOB);
@@ -1256,7 +1215,6 @@ namespace GPRO_QMS_Counter
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

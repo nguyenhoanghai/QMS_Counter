@@ -31,6 +31,10 @@ namespace GPRO_QMS_Counter
             numPrinterId.Value = FrmMain.printerId;
             numCounterId.Value = int.Parse(ConfigurationManager.AppSettings["CounterId"].ToString());
 
+            printCOM_cb.Items.Clear();
+            printCOM_cb.Items.AddRange(SerialPort.GetPortNames());
+            printCOM_cb.Text = Settings.Default.PrintCOM;
+            switchPrinter.IsOn = Settings.Default.UsePrintMachine;
 
             swNext.IsOn = Settings.Default.actCallNext;
             swRecall.IsOn = Settings.Default.actRecall;
@@ -67,6 +71,8 @@ namespace GPRO_QMS_Counter
             {
                 Settings.Default.IsUseMainDisplay = toggleSwitch1.IsOn;
                 Settings.Default.IsReadSound = switchReadSound.IsOn;
+                Settings.Default.UsePrintMachine = switchPrinter.IsOn;
+                Settings.Default.PrintCOM = printCOM_cb.Text;
                 Settings.Default.COMPort = cbComPort.Text;
                 Settings.Default.BaudRate = Convert.ToInt32(cbBaudRate.Text);
                 Settings.Default.DataBits = Convert.ToInt32(cbDataBits.Text);

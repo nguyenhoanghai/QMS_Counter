@@ -1,6 +1,4 @@
 ﻿using GPRO_QMS_Counter.Properties;
-using QMS_System.Data.BLL;
-using QMS_System.Data.Enum;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -161,16 +159,27 @@ namespace GPRO_QMS_Counter
 
             content = content.Replace("[STT]", "1001");
             content = content.Replace("[ten-quay]", "quay 1");
+            content = content.Replace("[ten-dich-vu]", "dich vu 1");
             content = content.Replace("[ngay]", ("ngay: " + now.ToString("dd/MM/yyyy")));
             content = content.Replace("[gio]", (" gio: " + now.ToString("HH/mm")));
             content = content.Replace("[dang-goi]", " dang goi 1000");
             content = content.Replace("[cat-giay]", "\x1b\x69|+|");
 
             var arr = content.Split(new string[] { "|+|" }, StringSplitOptions.RemoveEmptyEntries).ToArray();
-            for (int i = 0; i < arr.Length; i++)
+            for (int ii = 0; ii < txtsolien.Value; ii++)
             {
-                FrmMain2.comPort.Write(arr[i]);
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    FrmMain2.printSerialCOM.Write(arr[i]);
+                }
             }
+        }
+
+        private void btnTenDichVu_Click(object sender, EventArgs e)
+        {
+            string content = txtContent.Text;
+            content += "[ten-dich-vu]";
+            txtContent.Text = content;
         }
     }
 }

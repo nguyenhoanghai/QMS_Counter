@@ -31,12 +31,14 @@
             this.components = new System.ComponentModel.Container();
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barBTPrint = new DevExpress.XtraBars.BarButtonItem();
-            this.barBtComStatus = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtPrintComStatus = new DevExpress.XtraBars.BarButtonItem();
             this.btnCauHinh = new DevExpress.XtraBars.BarButtonItem();
             this.lbErrorsms = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.btnTicketTemplate = new DevExpress.XtraBars.BarButtonItem();
             this.btconnectsql = new DevExpress.XtraBars.BarButtonItem();
+            this.btOpenGoiSO = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtDisplayComStatus = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -44,6 +46,7 @@
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.TmerQuetComport = new System.Windows.Forms.Timer(this.components);
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             this.SuspendLayout();
@@ -54,20 +57,22 @@
             this.ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbon.ExpandCollapseItem,
             this.barBTPrint,
-            this.barBtComStatus,
+            this.barBtPrintComStatus,
             this.btnCauHinh,
             this.lbErrorsms,
             this.barButtonItem1,
             this.btnTicketTemplate,
-            this.btconnectsql});
+            this.btconnectsql,
+            this.btOpenGoiSO,
+            this.barBtDisplayComStatus});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
             this.ribbon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ribbon.MaxItemId = 8;
+            this.ribbon.MaxItemId = 10;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
             this.ribbonPage2});
-            this.ribbon.Size = new System.Drawing.Size(880, 178);
+            this.ribbon.Size = new System.Drawing.Size(1036, 178);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             // 
             // barBTPrint
@@ -79,12 +84,13 @@
             this.barBTPrint.Name = "barBTPrint";
             this.barBTPrint.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBTPrint_ItemClick);
             // 
-            // barBtComStatus
+            // barBtPrintComStatus
             // 
-            this.barBtComStatus.Id = 2;
-            this.barBtComStatus.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.False;
-            this.barBtComStatus.ImageOptions.Image = global::GPRO_QMS_Counter.Properties.Resources.com_port_dis;
-            this.barBtComStatus.Name = "barBtComStatus";
+            this.barBtPrintComStatus.Caption = "Printer";
+            this.barBtPrintComStatus.Id = 2;
+            this.barBtPrintComStatus.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.False;
+            this.barBtPrintComStatus.ImageOptions.Image = global::GPRO_QMS_Counter.Properties.Resources.com_port_dis;
+            this.barBtPrintComStatus.Name = "barBtPrintComStatus";
             // 
             // btnCauHinh
             // 
@@ -96,7 +102,7 @@
             // 
             // lbErrorsms
             // 
-            this.lbErrorsms.Caption = "barStaticItem1";
+            this.lbErrorsms.Caption = "b";
             this.lbErrorsms.Id = 4;
             this.lbErrorsms.Name = "lbErrorsms";
             // 
@@ -124,6 +130,21 @@
             this.btconnectsql.Name = "btconnectsql";
             this.btconnectsql.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btconnectsql_ItemClick);
             // 
+            // btOpenGoiSO
+            // 
+            this.btOpenGoiSO.Caption = "Màn hình Gọi số";
+            this.btOpenGoiSO.Id = 8;
+            this.btOpenGoiSO.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.deskSound;
+            this.btOpenGoiSO.Name = "btOpenGoiSO";
+            this.btOpenGoiSO.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem2_ItemClick);
+            // 
+            // barBtDisplayComStatus
+            // 
+            this.barBtDisplayComStatus.Caption = "Display ";
+            this.barBtDisplayComStatus.Id = 9;
+            this.barBtDisplayComStatus.ImageOptions.Image = global::GPRO_QMS_Counter.Properties.Resources.com_port_dis;
+            this.barBtDisplayComStatus.Name = "barBtDisplayComStatus";
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -133,8 +154,8 @@
             // 
             // ribbonPageGroup1
             // 
-            this.ribbonPageGroup1.ItemLinks.Add(this.barBTPrint);
-            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem1);
+            this.ribbonPageGroup1.ItemLinks.Add(this.btOpenGoiSO, true);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barBTPrint, true);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
             // ribbonPage2
@@ -143,24 +164,27 @@
             this.ribbonPageGroup2});
             this.ribbonPage2.Name = "ribbonPage2";
             this.ribbonPage2.Text = "Cấu hình";
+            this.ribbonPage2.Visible = false;
             // 
             // ribbonPageGroup2
             // 
             this.ribbonPageGroup2.ItemLinks.Add(this.btnCauHinh);
-            this.ribbonPageGroup2.ItemLinks.Add(this.btnTicketTemplate);
-            this.ribbonPageGroup2.ItemLinks.Add(this.btconnectsql);
+            this.ribbonPageGroup2.ItemLinks.Add(this.btnTicketTemplate, true);
+            this.ribbonPageGroup2.ItemLinks.Add(this.btconnectsql, true);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem1, true);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             // 
             // ribbonStatusBar
             // 
             this.ribbonStatusBar.ForeColor = System.Drawing.Color.Transparent;
-            this.ribbonStatusBar.ItemLinks.Add(this.barBtComStatus);
-            this.ribbonStatusBar.ItemLinks.Add(this.lbErrorsms);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 459);
+            this.ribbonStatusBar.ItemLinks.Add(this.barBtDisplayComStatus);
+            this.ribbonStatusBar.ItemLinks.Add(this.barBtPrintComStatus, true);
+            this.ribbonStatusBar.ItemLinks.Add(this.lbErrorsms, true);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 762);
             this.ribbonStatusBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(880, 37);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(1036, 37);
             // 
             // xtraTabbedMdiManager1
             // 
@@ -171,19 +195,30 @@
             this.TmerQuetComport.Enabled = true;
             this.TmerQuetComport.Tick += new System.EventHandler(this.TmerQuetComport_Tick);
             // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Id = 2;
+            this.barButtonItem2.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.False;
+            this.barButtonItem2.ImageOptions.Image = global::GPRO_QMS_Counter.Properties.Resources.com_port_dis;
+            this.barButtonItem2.Name = "barButtonItem2";
+            // 
             // FrmMain2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(880, 496);
+            this.ClientSize = new System.Drawing.Size(1036, 799);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
             this.IsMdiContainer = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximumSize = new System.Drawing.Size(1046, 800);
+            this.MinimumSize = new System.Drawing.Size(1046, 800);
             this.Name = "FrmMain2";
             this.Ribbon = this.ribbon;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StatusBar = this.ribbonStatusBar;
             this.Text = "Gọi số tự động GPRO";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain2_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain2_Load);
             this.MdiChildActivate += new System.EventHandler(this.FrmMain2_MdiChildActivate);
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
@@ -201,7 +236,7 @@
 		private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar;
         private DevExpress.XtraTabbedMdi.XtraTabbedMdiManager xtraTabbedMdiManager1;
         private DevExpress.XtraBars.BarButtonItem barBTPrint;
-        private DevExpress.XtraBars.BarButtonItem barBtComStatus;
+        private DevExpress.XtraBars.BarButtonItem barBtPrintComStatus;
         private DevExpress.XtraBars.BarButtonItem btnCauHinh;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage2;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
@@ -210,5 +245,8 @@
         private System.Windows.Forms.Timer TmerQuetComport;
         private DevExpress.XtraBars.BarButtonItem btnTicketTemplate;
         private DevExpress.XtraBars.BarButtonItem btconnectsql;
+        private DevExpress.XtraBars.BarButtonItem btOpenGoiSO;
+        private DevExpress.XtraBars.BarButtonItem barBtDisplayComStatus;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
     }
 }

@@ -55,7 +55,7 @@
             this.panel1.Location = new System.Drawing.Point(2, 25);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1148, 389);
+            this.panel1.Size = new System.Drawing.Size(1148, 401);
             this.panel1.TabIndex = 0;
             // 
             // groupControl1
@@ -71,7 +71,7 @@
             this.groupControl1.Location = new System.Drawing.Point(5, 5);
             this.groupControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(1152, 110);
+            this.groupControl1.Size = new System.Drawing.Size(1152, 100);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "Thông tin chung";
             // 
@@ -101,7 +101,7 @@
             this.txtAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtAdd.Multiline = true;
             this.txtAdd.Name = "txtAdd";
-            this.txtAdd.Size = new System.Drawing.Size(299, 46);
+            this.txtAdd.Size = new System.Drawing.Size(736, 38);
             this.txtAdd.TabIndex = 23;
             // 
             // txtDOB
@@ -177,16 +177,15 @@
             this.gServices.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.gServices.Controls.Add(this.panel1);
-            this.gServices.Location = new System.Drawing.Point(5, 121);
+            this.gServices.Location = new System.Drawing.Point(5, 109);
             this.gServices.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gServices.Name = "gServices";
-            this.gServices.Size = new System.Drawing.Size(1152, 416);
+            this.gServices.Size = new System.Drawing.Size(1152, 428);
             this.gServices.TabIndex = 1;
             this.gServices.Text = "Dịch vụ";
             // 
             // timer1
             // 
-            this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 

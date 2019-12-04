@@ -20,6 +20,7 @@ namespace GPRO_QMS_Counter
     public partial class FrmMain2 : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         List<ConfigModel> configs;
+        public static Login loginObj;
         public static string
              connectString,
              errorsms,
@@ -33,14 +34,17 @@ namespace GPRO_QMS_Counter
             UseWithThirdPattern = 0,
             CheckTimeBeforePrintTicket = 0;
         public static DateTime today = DateTime.Now;
-        public static SerialPort comPort = new SerialPort();
+        public static SerialPort
+            printSerialCOM = new SerialPort(),
+            displaySerialCOM = new SerialPort();
+        public static bool IsUseMainDisplay = false;
         public static List<ServiceDayModel> lib_Services;
         List<string> dataSendToComport = new List<string>();
         int q = -1;
         bool genUserTabFinish = false,
             IsReadSound = false,
             isFinishRead = true,
-            bRegistered = false, 
+            bRegistered = false,
             bCheckValid = false;
         static List<string> temp, playlist;
         SoundPlayer player;
@@ -49,53 +53,58 @@ namespace GPRO_QMS_Counter
 
         private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (comPort.IsOpen)
+            if (printSerialCOM.IsOpen)
             {
-                comPort.Write("\x1b\x61\x01"); //canh giua
-                comPort.Write("\x1d\x21\x01"); // font 2x1
+                printSerialCOM.Write("\x1b\x61\x01"); //canh giua
+                printSerialCOM.Write("\x1d\x21\x01"); // font 2x1
 
-                comPort.Write("Cong ty tnhh cn cn phat trien\n");
-                comPort.Write("============================================\n");
-                comPort.Write("\x1d\x21\x00"); // font normal
-                comPort.Write("Dia chi: 36/1c nguyen khuyen p.6 quan binh thanh tp ho chi minh\n");
-                comPort.Write("\x1d\x21\x22"); // font 3x3
-                comPort.Write("1001");
-                comPort.Write("\n");
-                comPort.Write("\x1d\x21\x01"); // font 2x1
-                comPort.Write("Quay 1");
-                comPort.Write("\n");
-                comPort.Write("\x1b\x61\x00"); //canh trai
-                comPort.Write("\x1d\x21\x00"); // font normal
-                comPort.Write("Cau huong dan\n");
-                comPort.Write("\x1b\x61\x01"); //canh giua
-                comPort.Write("-------------------------");
-                comPort.Write("\n");
-                comPort.Write("\x1b\x61\x00"); //canh trai
-                comPort.Write("Ngay: 1/1/2019 Gio: 10:10 Dang goi: 4001\n");
-                comPort.Write("\n\n\n\x1b\x69");
+                printSerialCOM.Write("Cong ty tnhh cn cn phat trien\n");
+                printSerialCOM.Write("============================================\n");
+                printSerialCOM.Write("\x1d\x21\x00"); // font normal
+                printSerialCOM.Write("Dia chi: 36/1c nguyen khuyen p.6 quan binh thanh tp ho chi minh\n");
+                printSerialCOM.Write("\x1d\x21\x22"); // font 3x3
+                printSerialCOM.Write("1001");
+                printSerialCOM.Write("\n");
+                printSerialCOM.Write("\x1d\x21\x01"); // font 2x1
+                printSerialCOM.Write("Quay 1");
+                printSerialCOM.Write("\n");
+                printSerialCOM.Write("\x1b\x61\x00"); //canh trai
+                printSerialCOM.Write("\x1d\x21\x00"); // font normal
+                printSerialCOM.Write("Cau huong dan\n");
+                printSerialCOM.Write("\x1b\x61\x01"); //canh giua
+                printSerialCOM.Write("-------------------------");
+                printSerialCOM.Write("\n");
+                printSerialCOM.Write("\x1b\x61\x00"); //canh trai
+                printSerialCOM.Write("Ngay: 1/1/2019 Gio: 10:10 Dang goi: 4001\n");
+                printSerialCOM.Write("\n\n\n\x1b\x69");
             }
         }
 
         private void FrmMain2_MdiChildActivate(object sender, EventArgs e)
         {
-            if (genUserTabFinish)
-                if (MdiChildren.Any())
-                {
-                    if (this.ActiveMdiChild is IChildMethods)
-                        ((IChildMethods)this.ActiveMdiChild).enableTimer();
-
-                    var control = ((System.Windows.Forms.ContainerControl)sender).ActiveControl;
-                    foreach (Form f in this.MdiChildren)
+            try
+            {
+                if (genUserTabFinish)
+                    if (MdiChildren.Any())
                     {
-                        if (f.GetType() == typeof(FrmMain3))
-                        {
-                            if (f.Text != control.Text)
-                                ((IChildMethods)f).disableTimer();
+                        if (this.ActiveMdiChild is IChildMethods)
+                            ((IChildMethods)this.ActiveMdiChild).enableTimer();
 
+                        var control = ((System.Windows.Forms.ContainerControl)sender).ActiveControl;
+                        foreach (Form f in this.MdiChildren)
+                        {
+                            if (f.GetType() == typeof(FrmMain3))
+                            {
+                                if (f.Text != control.Text)
+                                    ((IChildMethods)f).disableTimer();
+
+                            }
                         }
                     }
-                }
-
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void btnCauHinh_ItemClick(object sender, ItemClickEventArgs e)
@@ -152,39 +161,38 @@ namespace GPRO_QMS_Counter
                 FrmLogin frmLogin = new FrmLogin();
                 frmLogin.ShowDialog();
                 InitializeComponent();
-              //  InitCOMPort();
+                //  InitCOMPort();
             }
         }
 
-        private void FrmMain2_Load(object sender, EventArgs e)
+        private void FrmMain2_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try
+            if (printSerialCOM.IsOpen)
+                printSerialCOM.Close();
+
+            if (displaySerialCOM.IsOpen)
+                displaySerialCOM.Close();
+        }
+
+        private void barButtonItem2_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            MdiChildren.Any();
+            var currentItems = new List<string>();
+            foreach (var item in MdiChildren)
             {
-                connectString = BaseCore.Instance.GetEntityConnectString(Application.StartupPath + "\\DATA.XML");
+                currentItems.Add(item.Text);
             }
-            catch (Exception)
-            { }
-            configs = BLLConfig.Instance.Gets(connectString, true);
-            lib_Services = BLLService.Instance.GetsForMain(connectString);
-            ticketTemplate = Settings.Default.ticketTemplate; // GetConfigByCode(eConfigCode.TicketTemplate);
-            int.TryParse(GetConfigByCode(eConfigCode.NumberOfLinePerTime), out so_lien);
-            int.TryParse(GetConfigByCode(eConfigCode.PrintType), out printType);
-            int.TryParse(GetConfigByCode(eConfigCode.CheckTimeBeforePrintTicket), out CheckTimeBeforePrintTicket);
-            int.TryParse(GetConfigByCode(eConfigCode.PrintTicketReturnCurrentNumberOrServiceCode), out printTicketReturnCurrentNumberOrServiceCode);
-            int.TryParse(GetConfigByCode(eConfigCode.StartNumber), out startNumber);
-            int.TryParse(GetConfigByCode(eConfigCode.UseWithThirdPattern), out UseWithThirdPattern);
-            soundPath = Settings.Default.soundFolder;
-            InitComPort();
 
-            FrmMain.loginObj.
-
-            var logins = BLLLoginHistory.Instance.GetsForMain(connectString);
-            for (int i = 1; i < logins.Count; i++)
+            var genCounter = loginObj.Counters.Where(x => !currentItems.Contains(x.CounterName)).ToList();
+            if (genCounter.Count > 0)
             {
-                var f = new FrmMain3(logins[i]);
-                f.Text = logins[i].CounterName;
-                f.MdiParent = this;
-                f.Show();
+                for (int i = 0; i < genCounter.Count; i++)
+                {
+                    var f = new FrmMain3(genCounter[i]);
+                    f.Text = genCounter[i].CounterName;
+                    f.MdiParent = this;
+                    f.Show();
+                }
             }
             genUserTabFinish = true;
 
@@ -192,10 +200,65 @@ namespace GPRO_QMS_Counter
             if (MdiChildren.Any())
                 if (this.ActiveMdiChild is IChildMethods)
                     ((IChildMethods)this.ActiveMdiChild).enableTimer();
-            IsReadSound = Settings.Default.IsReadSound;
-            playlist = new List<string>();
-            temp = new List<string>();
         }
+
+        private void FrmMain2_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                // mo chuc nang cau hinh cho admin
+                if (loginObj == null)
+                    ribbonPage2.Visible = true;
+
+                try
+                {
+                    connectString = BaseCore.Instance.GetEntityConnectString(Application.StartupPath + "\\DATA.XML");
+                }
+                catch (Exception)
+                { }
+                configs = BLLConfig.Instance.Gets(connectString, true);
+                lib_Services = BLLService.Instance.GetsForMain(connectString);
+                ticketTemplate = Settings.Default.ticketTemplate; // GetConfigByCode(eConfigCode.TicketTemplate);
+                int.TryParse(GetConfigByCode(eConfigCode.NumberOfLinePerTime), out so_lien);
+                int.TryParse(GetConfigByCode(eConfigCode.PrintType), out printType);
+                int.TryParse(GetConfigByCode(eConfigCode.CheckTimeBeforePrintTicket), out CheckTimeBeforePrintTicket);
+                int.TryParse(GetConfigByCode(eConfigCode.PrintTicketReturnCurrentNumberOrServiceCode), out printTicketReturnCurrentNumberOrServiceCode);
+                int.TryParse(GetConfigByCode(eConfigCode.StartNumber), out startNumber);
+                int.TryParse(GetConfigByCode(eConfigCode.UseWithThirdPattern), out UseWithThirdPattern);
+                soundPath = Settings.Default.soundFolder;
+                if (Settings.Default.UsePrintMachine)
+                    InitPrintComPort();
+                if (loginObj != null && loginObj.Counters != null && loginObj.Counters.Count > 0)
+                {
+                    // var logins = BLLLoginHistory.Instance.GetsForMain(connectString);
+                    // for (int i = 1; i < logins.Count; i++) 
+                    for (int i = 0; i < loginObj.Counters.Count; i++)
+                    {
+                        var f = new FrmMain3(loginObj.Counters[i]);
+                        f.Text = loginObj.Counters[i].CounterName;
+                        f.MdiParent = this;
+                        f.Show();
+                    }
+                }
+                genUserTabFinish = true;
+
+                //check call active
+                if (MdiChildren.Any())
+                    if (this.ActiveMdiChild is IChildMethods)
+                        ((IChildMethods)this.ActiveMdiChild).enableTimer();
+                IsReadSound = Settings.Default.IsReadSound;
+                playlist = new List<string>();
+                temp = new List<string>();
+
+                IsUseMainDisplay = Settings.Default.IsUseMainDisplay;
+                if (FrmMain.IsUseMainDisplay)
+                    InitDisplayCOMPort();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
 
         private bool CheckValidation()
         {
@@ -283,23 +346,24 @@ namespace GPRO_QMS_Counter
             return null;
         }
 
-        #region Keypad COMPort
-        private void InitComPort()
+        #region Print COMPort
+        private void InitPrintComPort()
         {
             try
             {
-                comPort.PortName = Settings.Default.COMPort;
-                comPort.BaudRate = Settings.Default.BaudRate;
-                comPort.DataBits = Settings.Default.DataBits;
-                comPort.Parity = Settings.Default.Parity;
-                comPort.StopBits = Settings.Default.StopBits;
-                comPort.Encoding = Encoding.GetEncoding("iso-8859-1");
+                printSerialCOM.PortName = Settings.Default.PrintCOM.ToString();
+                barBtPrintComStatus.Caption = "Printer " + Settings.Default.PrintCOM.ToString();
+                printSerialCOM.BaudRate = Settings.Default.BaudRate;
+                printSerialCOM.DataBits = Settings.Default.DataBits;
+                printSerialCOM.Parity = Settings.Default.Parity;
+                printSerialCOM.StopBits = Settings.Default.StopBits;
+                printSerialCOM.Encoding = Encoding.GetEncoding("iso-8859-1");
                 try
                 {
-                    FrmMain2.comPort.ReadTimeout = 1;
-                    FrmMain2.comPort.WriteTimeout = 1;
-                    FrmMain2.comPort.Open();
-                    barBtComStatus.Glyph = global::GPRO_QMS_Counter.Properties.Resources.com_port;
+                    FrmMain2.printSerialCOM.ReadTimeout = 1;
+                    FrmMain2.printSerialCOM.WriteTimeout = 1;
+                    FrmMain2.printSerialCOM.Open();
+                    barBtPrintComStatus.Glyph = global::GPRO_QMS_Counter.Properties.Resources.com_port;
                     // FrmMain2.comPort.DataReceived += new SerialDataReceivedEventHandler(comPort_DataReceived);
                 }
                 catch (Exception)
@@ -313,106 +377,26 @@ namespace GPRO_QMS_Counter
             }
         }
 
-        //private void comPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        //{
-        //    this.Invoke(new EventHandler(RecieverData));
-        //}
-
-        public void PrintNewTicket(int printerId,
-            int serviceId,
-            int businessId,
-            bool isTouchScreen,
-            bool isProgrammer,
-            TimeSpan? timeServeAllow,
-            string Name,
-            string Address,
-            int? DOB,
-             string MaBenhNhan,
-            string MaPhongKham,
-            string SttPhongKham,
-            string SoXe
-            )
-        {
-
-        }
-
-
-        private void TmerQuetComport_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (comPort.IsOpen)
-                {
-                    q++;
-                    if (dataSendToComport.Count > 0)
-                    {
-                        if (!isSendDataKeyPad)
-                        {
-                            q = 0;
-                            isSendDataKeyPad = true;
-                        }
-                        if (q < dataSendToComport.Count())
-                        {
-                            SendRequest(dataSendToComport[q]);
-                            // lbSendData = dataSendToComport[q];
-                            // lbQuet.Caption = dataSendToComport[q].ToString().Replace(' ', ',');
-                        }
-                        else
-                        {
-                            q = -1;
-                            dataSendToComport.Clear();
-                            isSendDataKeyPad = false;
-                        }
-                    }
-                    //else
-                    //{
-                    //    if (q < equipmentIds.Count())
-                    //    {
-                    //        lbSendrequest = equipmentIds[q];
-                    //        SendRequest(("AA " + equipmentIds[q]));
-                    //        lbQuet.Caption = lbSendrequest;
-                    //        if (q == (equipmentIds.Count() - 1))
-                    //            q = -1;
-                    //    }
-                    //    else
-                    //        q = -1;
-                    //}
-                }
-
-                lbErrorsms.Caption = errorsms;
-            }
-            catch (Exception ex)
-            {
-            }
-
-            if (IsReadSound && isFinishRead && temp != null && temp.Count > 0)
-            {
-                player = new SoundPlayer();
-                playThread = new Thread(PlaySound);
-                playThread.Start();
-            }
-        }
-
-        private void SendRequest(string value)
-        {
-            try
-            {
-                byte[] newMsg = BaseCore.Instance.HexStringToByteArray(value);
-                comPort.Write(newMsg, 0, newMsg.Length);
-                Thread.Sleep(20);
-            }
-            catch
-            { }
-        }
-
-        private void CounterProcess(string[] hexStr)
-        {
-        }
-
 
         #endregion
 
         #region Sound
+        private void TmerQuetComport_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (IsReadSound && isFinishRead && temp != null && temp.Count > 0)
+                {
+                    player = new SoundPlayer();
+                    playThread = new Thread(PlaySound);
+                    playThread.Start();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
         public void PlaySound()
         {
             try
@@ -506,11 +490,76 @@ namespace GPRO_QMS_Counter
                     if (!string.IsNullOrEmpty(soundStr))
                     {
                         soundStr = soundStr.Substring(0, soundStr.Length - 1);
-                        BLLCounterSoftRequire.Instance.Insert(connectString, soundStr, (int)eCounterSoftRequireType.ReadSound);
+                        BLLCounterSoftRequire.Instance.Insert(connectString, soundStr, (int)eCounterSoftRequireType.ReadSound, counterId);
                     }
                 }
             }
         }
+        #endregion  
+
+        #region Display COM port
+        private void InitDisplayCOMPort()
+        {
+            try
+            {
+                displaySerialCOM.PortName = Settings.Default.COMPort.ToString();
+                barBtDisplayComStatus.Caption = "Display " + Settings.Default.COMPort.ToString();
+                displaySerialCOM.BaudRate = Settings.Default.BaudRate;
+                displaySerialCOM.DataBits = Settings.Default.DataBits;
+                displaySerialCOM.Parity = Settings.Default.Parity;
+                displaySerialCOM.StopBits = Settings.Default.StopBits;
+                try
+                {
+                    FrmMain2.displaySerialCOM.Open();
+                    barBtDisplayComStatus.Glyph = global::GPRO_QMS_Counter.Properties.Resources.com_port;
+                    // FrmMain2.comPort.DataReceived += new SerialDataReceivedEventHandler(comPort_DataReceived);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Lỗi: không thể kết nối với cổng COM Keypad, Vui lòng thử cấu hình lại kết nối", "Lỗi kết nối", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lấy thông tin Com Keypad bị lỗi.\n" + ex.Message, "Lỗi Com Keypad");
+            }
+        }
+
+        public static void SendDisplay(string sResult)
+        {
+            try
+            {
+                if (IsUseMainDisplay)
+                {
+                    string text = sResult;
+                    if (text.Length < 4)
+                        text = string.Format("{0:0000}", int.Parse(text));
+
+                    byte[] array = new byte[3];
+                    array[0] = 170;
+                    byte[] array2 = array;
+                    array2[1] = byte.Parse((int.Parse(text.Substring(0, 1)) * 16 + int.Parse(text.Substring(1, 1))).ToString());
+                    array2[2] = byte.Parse((int.Parse(text.Substring(2, 1)) * 16 + int.Parse(text.Substring(3, 1))).ToString());
+                    if (!displaySerialCOM.IsOpen)
+                    {
+                        try
+                        {
+                            displaySerialCOM.Open();
+                            displaySerialCOM.DtrEnable = true;
+                            displaySerialCOM.RtsEnable = true;
+                        }
+                        catch
+                        {
+                        }
+                    }
+                    displaySerialCOM.Write(array2, 0, array2.Length);
+                }
+            }
+            catch (Exception)
+            { }
+        }
+
         #endregion
+
     }
 }

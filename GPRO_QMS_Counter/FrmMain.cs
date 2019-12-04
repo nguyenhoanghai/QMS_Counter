@@ -157,7 +157,7 @@ namespace GPRO_QMS_Counter
                     InitCOMPort();
 
                 chbkService.Items.Clear();
-                serviceObjs = BLLService.Instance.GetLookUp(connectString,false);
+                serviceObjs = BLLService.Instance.GetLookUp(connectString, false);
                 if (serviceObjs.Count > 0)
                     for (int i = 0; i < serviceObjs.Count; i++)
                         chbkService.Items.Add(new CheckedListBoxItem(serviceObjs[i].Id, serviceObjs[i].Name));
@@ -269,7 +269,7 @@ namespace GPRO_QMS_Counter
                     if (!string.IsNullOrEmpty(soundStr))
                     {
                         soundStr = soundStr.Substring(0, soundStr.Length - 1);
-                        BLLCounterSoftRequire.Instance.Insert(connectString, soundStr, (int)eCounterSoftRequireType.ReadSound);
+                        BLLCounterSoftRequire.Instance.Insert(connectString, soundStr, (int)eCounterSoftRequireType.ReadSound, FrmMain.loginObj.CounterId);
                     }
                 }
             }
@@ -343,7 +343,7 @@ namespace GPRO_QMS_Counter
                     SendDisplay(tk.ToString());
 
                     var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = loginObj.EquipCode, TicketNumber = tk });
-                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay);
+                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, FrmMain.loginObj.CounterId);
                     var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
                     if (readTemplateIds.Count > 0)
                         GetSound(readTemplateIds, tk.ToString(), loginObj.CounterId);
@@ -361,9 +361,10 @@ namespace GPRO_QMS_Counter
             {
                 lbCurrentTicket.Text = kq.ToString();
                 lbCurrentTicket_s.Text = kq.ToString();
+                SendDisplay(kq.ToString());
 
                 var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = loginObj.EquipCode, TicketNumber = kq });
-                BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendRecallToMainDisplay);
+                BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendRecallToMainDisplay, FrmMain.loginObj.CounterId);
 
                 var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Recall);
                 if (readTemplateIds.Count > 0)
@@ -819,14 +820,20 @@ namespace GPRO_QMS_Counter
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (FrmMain.isRestart)
+            try
             {
-                this.Hide();
-                Process.Start("GPRO_QMS_Counter.exe");
-                FrmMain.isRestart = false;
+                if (FrmMain.isRestart)
+                {
+                    this.Hide();
+                    Process.Start("GPRO_QMS_Counter.exe");
+                    FrmMain.isRestart = false;
+                }
+                else
+                    ShowResult();
             }
-            else
-                ShowResult();
+            catch (Exception)
+            {
+            }
         }
         private void đăngKýSửDụngToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -953,7 +960,7 @@ namespace GPRO_QMS_Counter
             printerId = Settings.Default.PrinterId;
             this.bPrintTicket = Settings.Default.actPrintTicket;
 
-            configs = BLLConfig.Instance.Gets(connectString,true);
+            configs = BLLConfig.Instance.Gets(connectString, true);
             int.TryParse(GetConfigByCode(eConfigCode.UseWithThirdPattern), out UseWithThirdPattern);
         }
 
@@ -1161,13 +1168,19 @@ namespace GPRO_QMS_Counter
         {
             // if (BLLData.Instance.FindButtonClick(loginObj) != null)
             //      btFinish_Click(sender, e);
-
-            if (IsReadSound && isFinishRead && temp != null && temp.Count > 0)
+            try
             {
-                player = new SoundPlayer();
-                playThread = new Thread(PlaySound);
-                playThread.Start();
+                if (IsReadSound && isFinishRead && temp != null && temp.Count > 0)
+                {
+                    player = new SoundPlayer();
+                    playThread = new Thread(PlaySound);
+                    playThread.Start();
+                }
             }
+            catch (Exception)
+            {
+            }
+
         }
 
         private void timerResetInfo_Tick(object sender, EventArgs e)

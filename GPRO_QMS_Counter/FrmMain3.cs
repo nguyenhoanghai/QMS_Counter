@@ -43,7 +43,14 @@ namespace GPRO_QMS_Counter
         #region quet thong tin
         private void timer1_Tick(object sender, EventArgs e)
         {
-            ShowResult();
+            try
+            {
+                ShowResult();
+            }
+            catch (Exception)
+            {
+            }
+
         }
 
         public void enableTimer()
@@ -90,7 +97,7 @@ namespace GPRO_QMS_Counter
             {
                 this.timer3.Stop();
                 this.lbGeneralWaiting.Left = 4;
-                this.lbGeneralWaiting.Top = 315;
+                this.lbGeneralWaiting.Top = 370;
             }
         }
 
@@ -106,36 +113,50 @@ namespace GPRO_QMS_Counter
             {
                 this.timer2.Stop();
                 this.lbWaiting.Left = 4;
-                this.lbWaiting.Top = 235;
+                this.lbWaiting.Top = 288;
             }
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if (this.xPos1 <= -this.lbWaiting.Width)
+            try
             {
-                this.lbWaiting.Location = new Point(this.splitContainer1.Panel1.Width, this.yPos1);
-                this.xPos1 = this.splitContainer1.Panel1.Width;
+                if (this.xPos1 <= -this.lbWaiting.Width)
+                {
+                    this.lbWaiting.Location = new Point(this.splitContainer1.Panel1.Width, this.yPos1);
+                    this.xPos1 = this.splitContainer1.Panel1.Width;
+                }
+                else
+                {
+                    this.lbWaiting.Location = new Point(this.xPos1, this.yPos1);
+                    this.xPos1 -= 3;
+                }
             }
-            else
+            catch (Exception)
             {
-                this.lbWaiting.Location = new Point(this.xPos1, this.yPos1);
-                this.xPos1 -= 3;
             }
+
         }
 
         private void timer3_Tick(object sender, EventArgs e)
         {
-            if (this.xPos <= -this.lbGeneralWaiting.Width)
+            try
             {
-                this.lbGeneralWaiting.Location = new Point(this.splitContainer1.Panel1.Width, this.yPos);
-                this.xPos = this.splitContainer1.Panel1.Width;
+                if (this.xPos <= -this.lbGeneralWaiting.Width)
+                {
+                    this.lbGeneralWaiting.Location = new Point(this.splitContainer1.Panel1.Width, this.yPos);
+                    this.xPos = this.splitContainer1.Panel1.Width;
+                }
+                else
+                {
+                    this.lbGeneralWaiting.Location = new Point(this.xPos, this.yPos);
+                    this.xPos -= 3;
+                }
             }
-            else
+            catch (Exception)
             {
-                this.lbGeneralWaiting.Location = new Point(this.xPos, this.yPos);
-                this.xPos -= 3;
             }
+
         }
 
         #endregion
@@ -151,14 +172,13 @@ namespace GPRO_QMS_Counter
                 else
                 {
                     lbCurrentTicket.Text = tk.ToString();
-                    // lbCurrentTicket_s.Text = tk.ToString();
-                    //  SendDisplay(tk.ToString());
+                    FrmMain2.SendDisplay(tk.ToString());
 
                     var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = loginObj.EquipCode, TicketNumber = tk });
-                    BLLCounterSoftRequire.Instance.Insert(FrmMain2.connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay);
+                    BLLCounterSoftRequire.Instance.Insert(FrmMain2.connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, counterId);
                     var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(FrmMain2.connectString, loginObj.UserId, eCodeHex.Next);
                     if (readTemplateIds.Count > 0)
-                        FrmMain2.GetSound(readTemplateIds, tk.ToString(), loginObj.Id);
+                        FrmMain2.GetSound(readTemplateIds, tk.ToString(), loginObj.CounterCode);
                 }
             }
             catch (Exception)
@@ -173,14 +193,14 @@ namespace GPRO_QMS_Counter
             else
             {
                 lbCurrentTicket.Text = kq.ToString();
-                // lbCurrentTicket_s.Text = kq.ToString();
+                FrmMain2.SendDisplay(kq.ToString()); 
 
                 var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = loginObj.EquipCode, TicketNumber = kq });
-                BLLCounterSoftRequire.Instance.Insert(FrmMain2.connectString, requireJSON, (int)eCounterSoftRequireType.SendRecallToMainDisplay);
+                BLLCounterSoftRequire.Instance.Insert(FrmMain2.connectString, requireJSON, (int)eCounterSoftRequireType.SendRecallToMainDisplay, counterId);
 
                 var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(FrmMain2.connectString, loginObj.UserId, eCodeHex.Recall);
                 if (readTemplateIds.Count > 0)
-                    FrmMain2.GetSound(readTemplateIds, kq.ToString(), loginObj.Id);
+                    FrmMain2.GetSound(readTemplateIds, kq.ToString(), loginObj.CounterCode);
             }
         }
 
@@ -192,7 +212,8 @@ namespace GPRO_QMS_Counter
                 string text = this.txtParam.Text.ToString().Trim();
                 if (!string.IsNullOrEmpty(text) && !Information.IsNumeric(text))
                 {
-                    MessageBox.Show("Bạn phải nhập số vé bất kỳ muốn gọi.", "Thông báo gọi vé", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    //MessageBox.Show("Bạn phải nhập số vé bất kỳ muốn gọi.", "Thông báo gọi vé", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    this.txtResult.Text = "Bạn phải nhập số vé bất kỳ muốn gọi.";
                     this.txtParam.Focus();
                 }
                 else
@@ -206,11 +227,11 @@ namespace GPRO_QMS_Counter
                             this.txtParam.Text = "";
                             this.txtResult.Text = "Yêu cầu Gọi số " + text;
                             lbCurrentTicket.Text = text;
-                            //SendDisplay(text);
+                            FrmMain2.SendDisplay(text);
 
                             var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(FrmMain2.connectString, loginObj.UserId, eCodeHex.Next);
                             if (readTemplateIds.Count > 0)
-                                FrmMain2.GetSound(readTemplateIds, text, loginObj.Id);
+                                FrmMain2.GetSound(readTemplateIds, text, loginObj.CounterCode);
                         }
                         else
                         {
@@ -219,7 +240,8 @@ namespace GPRO_QMS_Counter
                         }
                     }
                     else
-                        MessageBox.Show("Số : " + text + " không có trong danh sách chờ của Quầy .Vui lòng nhập số nằm trong danh sách chờ của Quầy.", "Thông báo gọi vé", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        this.txtResult.Text = "Số : " + text + " không có trong danh sách chờ của Quầy .Vui lòng nhập số nằm trong danh sách chờ của Quầy.";
+                    // MessageBox.Show("Số : " + text + " không có trong danh sách chờ của Quầy .Vui lòng nhập số nằm trong danh sách chờ của Quầy.", "Thông báo gọi vé", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
             }
             catch (Exception)
@@ -227,10 +249,6 @@ namespace GPRO_QMS_Counter
             }
         }
 
-        private void SendDisplay(string text)
-        {
-            throw new NotImplementedException();
-        }
 
         private void btFinish_Click(object sender, EventArgs e)
         {

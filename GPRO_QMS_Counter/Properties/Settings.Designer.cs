@@ -322,5 +322,29 @@ namespace GPRO_QMS_Counter.Properties {
                 this["ticketTemplate"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM1")]
+        public string PrintCOM {
+            get {
+                return ((string)(this["PrintCOM"]));
+            }
+            set {
+                this["PrintCOM"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UsePrintMachine {
+            get {
+                return ((bool)(this["UsePrintMachine"]));
+            }
+            set {
+                this["UsePrintMachine"] = value;
+            }
+        }
     }
 }

@@ -1,17 +1,8 @@
 ﻿using GPRO.Core.Hai;
-using GPRO_QMS_Counter.Helper;
-using GPRO_QMS_Counter.Properties;
 using QMS_System.Data.BLL;
 using QMS_System.Data.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GPRO_QMS_Counter
@@ -45,7 +36,7 @@ namespace GPRO_QMS_Counter
         private void btLogin_Click(object sender, EventArgs e)
         {
             try
-            { 
+            {
                 string text = this.txtUsername.Text;
                 string text2 = this.txtPassword.Text;
                 if (text.Equals("gproadmin") && text2.Equals("gproadmin"))
@@ -72,11 +63,22 @@ namespace GPRO_QMS_Counter
                     else
                     {
                         //  MessageBox.Show("info " + txtUsername.Text + "-" + txtPassword.Text + "-" + Common.Instance.GetCounterId());
-                        var rs = BLLLoginHistory.Instance.Login(connectString, txtUsername.Text, txtPassword.Text, int.Parse(ConfigurationManager.AppSettings["CounterId"].ToString()));
-                        //  MessageBox.Show("after");
+                        int apptype = 1;
+                        try
+                        {
+                            int.TryParse(ConfigurationManager.AppSettings["AppType"].ToString(), out apptype);
+                        }
+                        catch (Exception) { }
+                        ResponseBaseModel rs;
+                        if (apptype == 1)
+                            rs = BLLLoginHistory.Instance.Login(connectString, txtUsername.Text, txtPassword.Text, int.Parse(ConfigurationManager.AppSettings["CounterId"].ToString()));
+                        else
+                            rs = BLLLoginHistory.Instance.Login(connectString, txtUsername.Text, txtPassword.Text);
+
                         if (rs.IsSuccess)
                         {
                             FrmMain.loginObj = rs.Data;
+                            FrmMain2.loginObj = rs.Data;
                             FrmLogin.bCloseForm = true;
                             this.Close();
                         }

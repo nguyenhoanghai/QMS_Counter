@@ -94,8 +94,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.txtResult);
             this.splitContainer1.Panel2.Controls.Add(this.label6);
             this.splitContainer1.Panel2.Controls.Add(this.label7);
-            this.splitContainer1.Size = new System.Drawing.Size(851, 448);
-            this.splitContainer1.SplitterDistance = 485;
+            this.splitContainer1.Size = new System.Drawing.Size(1167, 516);
+            this.splitContainer1.SplitterDistance = 665;
             this.splitContainer1.TabIndex = 0;
             // 
             // lbCounterName
@@ -106,9 +106,9 @@
             this.lbCounterName.Location = new System.Drawing.Point(4, 9);
             this.lbCounterName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCounterName.Name = "lbCounterName";
-            this.lbCounterName.Size = new System.Drawing.Size(186, 46);
+            this.lbCounterName.Size = new System.Drawing.Size(198, 46);
             this.lbCounterName.TabIndex = 8;
-            this.lbCounterName.Text = "Bàn số 1";
+            this.lbCounterName.Text = "Bàn 0000";
             this.lbCounterName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lbGeneralWaiting
@@ -116,7 +116,7 @@
             this.lbGeneralWaiting.AutoSize = true;
             this.lbGeneralWaiting.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbGeneralWaiting.ForeColor = System.Drawing.Color.White;
-            this.lbGeneralWaiting.Location = new System.Drawing.Point(4, 395);
+            this.lbGeneralWaiting.Location = new System.Drawing.Point(4, 456);
             this.lbGeneralWaiting.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbGeneralWaiting.Name = "lbGeneralWaiting";
             this.lbGeneralWaiting.Size = new System.Drawing.Size(43, 46);
@@ -130,10 +130,10 @@
             this.label3.BackColor = System.Drawing.Color.LightSkyBlue;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Navy;
-            this.label3.Location = new System.Drawing.Point(3, 347);
+            this.label3.Location = new System.Drawing.Point(3, 408);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(481, 30);
+            this.label3.Size = new System.Drawing.Size(661, 30);
             this.label3.TabIndex = 5;
             this.label3.Text = "ĐANG ĐỢI CHUNG";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -143,7 +143,7 @@
             this.lbWaiting.AutoSize = true;
             this.lbWaiting.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbWaiting.ForeColor = System.Drawing.Color.White;
-            this.lbWaiting.Location = new System.Drawing.Point(4, 289);
+            this.lbWaiting.Location = new System.Drawing.Point(4, 350);
             this.lbWaiting.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbWaiting.Name = "lbWaiting";
             this.lbWaiting.Size = new System.Drawing.Size(43, 46);
@@ -157,24 +157,24 @@
             this.label2.BackColor = System.Drawing.Color.LightSkyBlue;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Navy;
-            this.label2.Location = new System.Drawing.Point(3, 250);
+            this.label2.Location = new System.Drawing.Point(3, 311);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(481, 30);
+            this.label2.Size = new System.Drawing.Size(663, 30);
             this.label2.TabIndex = 3;
             this.label2.Text = "ĐANG ĐỢI TẠI QUẦY";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbCurrentTicket
             // 
-            this.lbCurrentTicket.Font = new System.Drawing.Font("Microsoft Sans Serif", 63.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCurrentTicket.Font = new System.Drawing.Font("Microsoft Sans Serif", 90F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCurrentTicket.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.lbCurrentTicket.Location = new System.Drawing.Point(0, 105);
             this.lbCurrentTicket.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCurrentTicket.Name = "lbCurrentTicket";
-            this.lbCurrentTicket.Size = new System.Drawing.Size(483, 145);
+            this.lbCurrentTicket.Size = new System.Drawing.Size(666, 206);
             this.lbCurrentTicket.TabIndex = 2;
-            this.lbCurrentTicket.Text = "0";
+            this.lbCurrentTicket.Text = "0000";
             this.lbCurrentTicket.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
@@ -185,7 +185,7 @@
             this.label1.Location = new System.Drawing.Point(1, 62);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(483, 44);
+            this.label1.Size = new System.Drawing.Size(663, 44);
             this.label1.TabIndex = 1;
             this.label1.Text = "ĐANG GIAO DỊCH";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -197,10 +197,10 @@
             this.btTranfer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btTranfer.ForeColor = System.Drawing.Color.Navy;
             this.btTranfer.Image = ((System.Drawing.Image)(resources.GetObject("btTranfer.Image")));
-            this.btTranfer.Location = new System.Drawing.Point(125, 330);
+            this.btTranfer.Location = new System.Drawing.Point(172, 384);
             this.btTranfer.Margin = new System.Windows.Forms.Padding(4);
             this.btTranfer.Name = "btTranfer";
-            this.btTranfer.Size = new System.Drawing.Size(116, 114);
+            this.btTranfer.Size = new System.Drawing.Size(156, 121);
             this.btTranfer.TabIndex = 24;
             this.btTranfer.Text = "Chuyển";
             this.btTranfer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -214,10 +214,10 @@
             this.btCallAnyTicket.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btCallAnyTicket.ForeColor = System.Drawing.Color.Navy;
             this.btCallAnyTicket.Image = ((System.Drawing.Image)(resources.GetObject("btCallAnyTicket.Image")));
-            this.btCallAnyTicket.Location = new System.Drawing.Point(243, 210);
+            this.btCallAnyTicket.Location = new System.Drawing.Point(339, 255);
             this.btCallAnyTicket.Margin = new System.Windows.Forms.Padding(4);
             this.btCallAnyTicket.Name = "btCallAnyTicket";
-            this.btCallAnyTicket.Size = new System.Drawing.Size(115, 114);
+            this.btCallAnyTicket.Size = new System.Drawing.Size(155, 121);
             this.btCallAnyTicket.TabIndex = 23;
             this.btCallAnyTicket.Text = "Gọi bất kỳ";
             this.btCallAnyTicket.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -233,10 +233,10 @@
             this.btCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btCancel.ForeColor = System.Drawing.Color.Navy;
             this.btCancel.Image = ((System.Drawing.Image)(resources.GetObject("btCancel.Image")));
-            this.btCancel.Location = new System.Drawing.Point(243, 330);
+            this.btCancel.Location = new System.Drawing.Point(338, 384);
             this.btCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btCancel.Name = "btCancel";
-            this.btCancel.Size = new System.Drawing.Size(116, 114);
+            this.btCancel.Size = new System.Drawing.Size(156, 121);
             this.btCancel.TabIndex = 22;
             this.btCancel.Text = "Hủy";
             this.btCancel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -252,10 +252,10 @@
             this.btFinish.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.btFinish.ForeColor = System.Drawing.Color.Navy;
             this.btFinish.Image = ((System.Drawing.Image)(resources.GetObject("btFinish.Image")));
-            this.btFinish.Location = new System.Drawing.Point(7, 330);
+            this.btFinish.Location = new System.Drawing.Point(9, 384);
             this.btFinish.Margin = new System.Windows.Forms.Padding(4);
             this.btFinish.Name = "btFinish";
-            this.btFinish.Size = new System.Drawing.Size(115, 114);
+            this.btFinish.Size = new System.Drawing.Size(155, 121);
             this.btFinish.TabIndex = 21;
             this.btFinish.Text = "Hoàn tất";
             this.btFinish.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -271,10 +271,10 @@
             this.btRecall.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btRecall.ForeColor = System.Drawing.Color.Navy;
             this.btRecall.Image = ((System.Drawing.Image)(resources.GetObject("btRecall.Image")));
-            this.btRecall.Location = new System.Drawing.Point(125, 210);
+            this.btRecall.Location = new System.Drawing.Point(172, 255);
             this.btRecall.Margin = new System.Windows.Forms.Padding(4);
             this.btRecall.Name = "btRecall";
-            this.btRecall.Size = new System.Drawing.Size(116, 114);
+            this.btRecall.Size = new System.Drawing.Size(156, 121);
             this.btRecall.TabIndex = 20;
             this.btRecall.Text = "  Nhắc lại";
             this.btRecall.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -289,11 +289,10 @@
             this.btNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btNext.ForeColor = System.Drawing.Color.Navy;
             this.btNext.Image = ((System.Drawing.Image)(resources.GetObject("btNext.Image")));
-            this.btNext.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btNext.Location = new System.Drawing.Point(5, 210);
+            this.btNext.Location = new System.Drawing.Point(7, 255);
             this.btNext.Margin = new System.Windows.Forms.Padding(4);
             this.btNext.Name = "btNext";
-            this.btNext.Size = new System.Drawing.Size(116, 114);
+            this.btNext.Size = new System.Drawing.Size(156, 121);
             this.btNext.TabIndex = 19;
             this.btNext.Text = "Gọi tiếp theo";
             this.btNext.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -310,7 +309,7 @@
             this.txtParam.Margin = new System.Windows.Forms.Padding(4);
             this.txtParam.MaxLength = 10;
             this.txtParam.Name = "txtParam";
-            this.txtParam.Size = new System.Drawing.Size(353, 26);
+            this.txtParam.Size = new System.Drawing.Size(489, 26);
             this.txtParam.TabIndex = 17;
             // 
             // txtResult
@@ -324,7 +323,7 @@
             this.txtResult.Multiline = true;
             this.txtResult.Name = "txtResult";
             this.txtResult.ReadOnly = true;
-            this.txtResult.Size = new System.Drawing.Size(352, 107);
+            this.txtResult.Size = new System.Drawing.Size(488, 151);
             this.txtResult.TabIndex = 18;
             // 
             // label6
@@ -374,9 +373,9 @@
             this.statusLoginTime,
             this.statusTotalWaiting,
             this.statusTotalDone});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 450);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 518);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(859, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1167, 24);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -417,7 +416,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(859, 474);
+            this.ClientSize = new System.Drawing.Size(1167, 542);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.splitContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

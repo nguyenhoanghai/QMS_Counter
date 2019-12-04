@@ -56,6 +56,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.swSmallScreen = new DevExpress.XtraEditors.ToggleSwitch();
+            this.label19 = new System.Windows.Forms.Label();
             this.btSavePer = new System.Windows.Forms.Button();
             this.swEvaluate = new DevExpress.XtraEditors.ToggleSwitch();
             this.swView = new DevExpress.XtraEditors.ToggleSwitch();
@@ -84,8 +86,10 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.swSmallScreen = new DevExpress.XtraEditors.ToggleSwitch();
+            this.printCOM_cb = new System.Windows.Forms.ComboBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.switchPrinter = new DevExpress.XtraEditors.ToggleSwitch();
             ((System.ComponentModel.ISupportInitialize)(this.toggleSwitch1.Properties)).BeginInit();
             this.pnCOMSetting.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtSoundPath.Properties)).BeginInit();
@@ -95,6 +99,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.swSmallScreen.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.swEvaluate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.swView.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.swNext.Properties)).BeginInit();
@@ -106,12 +111,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.swUpdateInfo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.swCancel.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.swPrint.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.swSmallScreen.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.switchPrinter.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // toggleSwitch1
             // 
-            this.toggleSwitch1.Location = new System.Drawing.Point(210, 11);
+            this.toggleSwitch1.Location = new System.Drawing.Point(210, 12);
             this.toggleSwitch1.Margin = new System.Windows.Forms.Padding(4);
             this.toggleSwitch1.Name = "toggleSwitch1";
             this.toggleSwitch1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -121,7 +126,7 @@
             this.toggleSwitch1.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             this.toggleSwitch1.Properties.OffText = "Không";
             this.toggleSwitch1.Properties.OnText = "Có";
-            this.toggleSwitch1.Size = new System.Drawing.Size(153, 27);
+            this.toggleSwitch1.Size = new System.Drawing.Size(153, 29);
             this.toggleSwitch1.TabIndex = 0;
             this.toggleSwitch1.Toggled += new System.EventHandler(this.toggleSwitch1_Toggled);
             // 
@@ -293,16 +298,16 @@
             this.label6.Location = new System.Drawing.Point(8, 22);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(90, 21);
+            this.label6.Size = new System.Drawing.Size(117, 21);
             this.label6.TabIndex = 15;
-            this.label6.Text = "COM Port";
+            this.label6.Text = "Display COM";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Blue;
-            this.label7.Location = new System.Drawing.Point(7, 244);
+            this.label7.Location = new System.Drawing.Point(7, 290);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(267, 21);
@@ -311,7 +316,7 @@
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(628, 300);
+            this.simpleButton1.Location = new System.Drawing.Point(628, 346);
             this.simpleButton1.Margin = new System.Windows.Forms.Padding(4);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(43, 28);
@@ -323,7 +328,7 @@
             // 
             this.btnclose.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnclose.Image = global::GPRO_QMS_Counter.Properties.Resources.if_cancel_13487;
-            this.btnclose.Location = new System.Drawing.Point(499, 336);
+            this.btnclose.Location = new System.Drawing.Point(499, 382);
             this.btnclose.Margin = new System.Windows.Forms.Padding(4);
             this.btnclose.Name = "btnclose";
             this.btnclose.Size = new System.Drawing.Size(172, 39);
@@ -337,7 +342,7 @@
             // 
             this.btnsave.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnsave.Image = global::GPRO_QMS_Counter.Properties.Resources.if_save_173091;
-            this.btnsave.Location = new System.Drawing.Point(319, 336);
+            this.btnsave.Location = new System.Drawing.Point(319, 382);
             this.btnsave.Margin = new System.Windows.Forms.Padding(4);
             this.btnsave.Name = "btnsave";
             this.btnsave.Size = new System.Drawing.Size(172, 39);
@@ -349,7 +354,7 @@
             // 
             // txtSoundPath
             // 
-            this.txtSoundPath.Location = new System.Drawing.Point(11, 267);
+            this.txtSoundPath.Location = new System.Drawing.Point(11, 313);
             this.txtSoundPath.Margin = new System.Windows.Forms.Padding(4);
             this.txtSoundPath.Name = "txtSoundPath";
             this.txtSoundPath.Size = new System.Drawing.Size(609, 62);
@@ -360,7 +365,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Blue;
-            this.label8.Location = new System.Drawing.Point(7, 202);
+            this.label8.Location = new System.Drawing.Point(7, 248);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(166, 21);
@@ -369,7 +374,7 @@
             // 
             // switchReadSound
             // 
-            this.switchReadSound.Location = new System.Drawing.Point(186, 198);
+            this.switchReadSound.Location = new System.Drawing.Point(210, 244);
             this.switchReadSound.Margin = new System.Windows.Forms.Padding(4);
             this.switchReadSound.Name = "switchReadSound";
             this.switchReadSound.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -379,7 +384,7 @@
             this.switchReadSound.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             this.switchReadSound.Properties.OffText = "Không";
             this.switchReadSound.Properties.OnText = "Có";
-            this.switchReadSound.Size = new System.Drawing.Size(169, 27);
+            this.switchReadSound.Size = new System.Drawing.Size(153, 29);
             this.switchReadSound.TabIndex = 22;
             // 
             // label9
@@ -387,7 +392,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Blue;
-            this.label9.Location = new System.Drawing.Point(371, 202);
+            this.label9.Location = new System.Drawing.Point(371, 248);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(97, 21);
@@ -397,7 +402,7 @@
             // numPrinterId
             // 
             this.numPrinterId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numPrinterId.Location = new System.Drawing.Point(487, 202);
+            this.numPrinterId.Location = new System.Drawing.Point(487, 248);
             this.numPrinterId.Margin = new System.Windows.Forms.Padding(4);
             this.numPrinterId.Name = "numPrinterId";
             this.numPrinterId.Size = new System.Drawing.Size(93, 26);
@@ -433,11 +438,15 @@
             this.tabControl1.Location = new System.Drawing.Point(9, 9);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(688, 416);
+            this.tabControl1.Size = new System.Drawing.Size(688, 504);
             this.tabControl1.TabIndex = 27;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.printCOM_cb);
+            this.tabPage1.Controls.Add(this.label23);
+            this.tabPage1.Controls.Add(this.label29);
+            this.tabPage1.Controls.Add(this.switchPrinter);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.numCounterId);
             this.tabPage1.Controls.Add(this.toggleSwitch1);
@@ -455,7 +464,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(680, 387);
+            this.tabPage1.Size = new System.Drawing.Size(680, 475);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Cấu hình";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -495,10 +504,35 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(680, 387);
+            this.tabPage2.Size = new System.Drawing.Size(680, 476);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Phân quyền";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // swSmallScreen
+            // 
+            this.swSmallScreen.Location = new System.Drawing.Point(520, 113);
+            this.swSmallScreen.Margin = new System.Windows.Forms.Padding(4);
+            this.swSmallScreen.Name = "swSmallScreen";
+            this.swSmallScreen.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.swSmallScreen.Properties.Appearance.ForeColor = System.Drawing.Color.Brown;
+            this.swSmallScreen.Properties.Appearance.Options.UseFont = true;
+            this.swSmallScreen.Properties.Appearance.Options.UseForeColor = true;
+            this.swSmallScreen.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
+            this.swSmallScreen.Properties.OffText = "Không";
+            this.swSmallScreen.Properties.OnText = "Có";
+            this.swSmallScreen.Size = new System.Drawing.Size(153, 29);
+            this.swSmallScreen.TabIndex = 31;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(372, 118);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(132, 17);
+            this.label19.TabIndex = 30;
+            this.label19.Text = "Giao diện tối thiểu";
             // 
             // btSavePer
             // 
@@ -526,7 +560,7 @@
             this.swEvaluate.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             this.swEvaluate.Properties.OffText = "Không";
             this.swEvaluate.Properties.OnText = "Có";
-            this.swEvaluate.Size = new System.Drawing.Size(153, 27);
+            this.swEvaluate.Size = new System.Drawing.Size(153, 29);
             this.swEvaluate.TabIndex = 28;
             // 
             // swView
@@ -541,7 +575,7 @@
             this.swView.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             this.swView.Properties.OffText = "Không";
             this.swView.Properties.OnText = "Có";
-            this.swView.Size = new System.Drawing.Size(153, 27);
+            this.swView.Size = new System.Drawing.Size(153, 29);
             this.swView.TabIndex = 27;
             // 
             // swNext
@@ -556,7 +590,7 @@
             this.swNext.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             this.swNext.Properties.OffText = "Không";
             this.swNext.Properties.OnText = "Có";
-            this.swNext.Size = new System.Drawing.Size(153, 27);
+            this.swNext.Size = new System.Drawing.Size(153, 29);
             this.swNext.TabIndex = 26;
             // 
             // swRecall
@@ -571,7 +605,7 @@
             this.swRecall.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             this.swRecall.Properties.OffText = "Không";
             this.swRecall.Properties.OnText = "Có";
-            this.swRecall.Size = new System.Drawing.Size(153, 27);
+            this.swRecall.Size = new System.Drawing.Size(153, 29);
             this.swRecall.TabIndex = 25;
             // 
             // swCallAny
@@ -586,7 +620,7 @@
             this.swCallAny.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             this.swCallAny.Properties.OffText = "Không";
             this.swCallAny.Properties.OnText = "Có";
-            this.swCallAny.Size = new System.Drawing.Size(153, 27);
+            this.swCallAny.Size = new System.Drawing.Size(153, 29);
             this.swCallAny.TabIndex = 24;
             // 
             // swFinish
@@ -601,7 +635,7 @@
             this.swFinish.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             this.swFinish.Properties.OffText = "Không";
             this.swFinish.Properties.OnText = "Có";
-            this.swFinish.Size = new System.Drawing.Size(153, 27);
+            this.swFinish.Size = new System.Drawing.Size(153, 29);
             this.swFinish.TabIndex = 23;
             // 
             // swStranfer
@@ -616,7 +650,7 @@
             this.swStranfer.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             this.swStranfer.Properties.OffText = "Không";
             this.swStranfer.Properties.OnText = "Có";
-            this.swStranfer.Size = new System.Drawing.Size(153, 27);
+            this.swStranfer.Size = new System.Drawing.Size(153, 29);
             this.swStranfer.TabIndex = 22;
             // 
             // swSave
@@ -631,7 +665,7 @@
             this.swSave.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             this.swSave.Properties.OffText = "Không";
             this.swSave.Properties.OnText = "Có";
-            this.swSave.Size = new System.Drawing.Size(153, 27);
+            this.swSave.Size = new System.Drawing.Size(153, 29);
             this.swSave.TabIndex = 21;
             // 
             // swUpdateInfo
@@ -646,7 +680,7 @@
             this.swUpdateInfo.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             this.swUpdateInfo.Properties.OffText = "Không";
             this.swUpdateInfo.Properties.OnText = "Có";
-            this.swUpdateInfo.Size = new System.Drawing.Size(153, 27);
+            this.swUpdateInfo.Size = new System.Drawing.Size(153, 29);
             this.swUpdateInfo.TabIndex = 20;
             // 
             // swCancel
@@ -661,7 +695,7 @@
             this.swCancel.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             this.swCancel.Properties.OffText = "Không";
             this.swCancel.Properties.OnText = "Có";
-            this.swCancel.Size = new System.Drawing.Size(153, 27);
+            this.swCancel.Size = new System.Drawing.Size(153, 29);
             this.swCancel.TabIndex = 19;
             // 
             // swPrint
@@ -676,7 +710,7 @@
             this.swPrint.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             this.swPrint.Properties.OffText = "Không";
             this.swPrint.Properties.OnText = "Có";
-            this.swPrint.Size = new System.Drawing.Size(153, 27);
+            this.swPrint.Size = new System.Drawing.Size(153, 29);
             this.swPrint.TabIndex = 18;
             // 
             // label28
@@ -834,36 +868,60 @@
             this.label11.TabIndex = 0;
             this.label11.Text = "Gọi mới";
             // 
-            // label19
+            // printCOM_cb
             // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(372, 118);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(132, 17);
-            this.label19.TabIndex = 30;
-            this.label19.Text = "Giao diện tối thiểu";
+            this.printCOM_cb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.printCOM_cb.FormattingEnabled = true;
+            this.printCOM_cb.Location = new System.Drawing.Point(487, 194);
+            this.printCOM_cb.Margin = new System.Windows.Forms.Padding(4);
+            this.printCOM_cb.Name = "printCOM_cb";
+            this.printCOM_cb.Size = new System.Drawing.Size(165, 28);
+            this.printCOM_cb.TabIndex = 19;
             // 
-            // swSmallScreen
+            // label23
             // 
-            this.swSmallScreen.Location = new System.Drawing.Point(520, 113);
-            this.swSmallScreen.Margin = new System.Windows.Forms.Padding(4);
-            this.swSmallScreen.Name = "swSmallScreen";
-            this.swSmallScreen.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.swSmallScreen.Properties.Appearance.ForeColor = System.Drawing.Color.Brown;
-            this.swSmallScreen.Properties.Appearance.Options.UseFont = true;
-            this.swSmallScreen.Properties.Appearance.Options.UseForeColor = true;
-            this.swSmallScreen.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
-            this.swSmallScreen.Properties.OffText = "Không";
-            this.swSmallScreen.Properties.OnText = "Có";
-            this.swSmallScreen.Size = new System.Drawing.Size(153, 27);
-            this.swSmallScreen.TabIndex = 31;
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.ForeColor = System.Drawing.Color.Blue;
+            this.label23.Location = new System.Drawing.Point(371, 198);
+            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(110, 21);
+            this.label23.TabIndex = 20;
+            this.label23.Text = "COM Máy in";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.ForeColor = System.Drawing.Color.Blue;
+            this.label29.Location = new System.Drawing.Point(7, 196);
+            this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(144, 21);
+            this.label29.TabIndex = 28;
+            this.label29.Text = "Sử dụng máy in";
+            // 
+            // switchPrinter
+            // 
+            this.switchPrinter.Location = new System.Drawing.Point(210, 193);
+            this.switchPrinter.Margin = new System.Windows.Forms.Padding(4);
+            this.switchPrinter.Name = "switchPrinter";
+            this.switchPrinter.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.switchPrinter.Properties.Appearance.ForeColor = System.Drawing.Color.Brown;
+            this.switchPrinter.Properties.Appearance.Options.UseFont = true;
+            this.switchPrinter.Properties.Appearance.Options.UseForeColor = true;
+            this.switchPrinter.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
+            this.switchPrinter.Properties.OffText = "Không";
+            this.switchPrinter.Properties.OnText = "Có";
+            this.switchPrinter.Size = new System.Drawing.Size(153, 29);
+            this.switchPrinter.TabIndex = 27;
             // 
             // FrmConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(703, 431);
+            this.ClientSize = new System.Drawing.Size(703, 518);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(711, 427);
@@ -884,6 +942,7 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.swSmallScreen.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.swEvaluate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.swView.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.swNext.Properties)).EndInit();
@@ -895,7 +954,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.swUpdateInfo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.swCancel.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.swPrint.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.swSmallScreen.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.switchPrinter.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -960,5 +1019,9 @@
         private System.Windows.Forms.Label label27;
         private DevExpress.XtraEditors.ToggleSwitch swSmallScreen;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ComboBox printCOM_cb;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label29;
+        private DevExpress.XtraEditors.ToggleSwitch switchPrinter;
     }
 }
