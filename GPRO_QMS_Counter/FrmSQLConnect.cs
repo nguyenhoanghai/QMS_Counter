@@ -1,13 +1,8 @@
 ﻿using GPRO.Core.Hai;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -15,7 +10,7 @@ namespace GPRO_QMS_Counter
 {
     public partial class FrmSQLConnect : Form
     {
-        string conString = "";
+        string conString = "", database = "";
         public FrmSQLConnect()
         {
             InitializeComponent();
@@ -24,8 +19,13 @@ namespace GPRO_QMS_Counter
         private void btnConnect_Click(object sender, EventArgs e)
         {
             if (checkValid())
-                CreateNewXMLFile();
+                if (File.Exists(Application.StartupPath + "\\DATA.XML"))
+                    UpdateXMLFile();
+                else
+                    CreateNewXMLFile();
         }
+
+
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -41,11 +41,13 @@ namespace GPRO_QMS_Counter
             {
                 var infos = info.Split(',');
                 txtServerName.Text = infos[0];
-                cbDatabases.Text = infos[1];
+
                 txtLogin.Text = infos[2];
                 txtPass.Text = infos[3];
                 chkIsAuthen.Checked = bool.Parse(infos[4]);
                 chkIsAuthen_CheckedChanged(sender, e);
+                database = infos[1];
+                getDatabases();
             }
         }
 
@@ -78,6 +80,10 @@ namespace GPRO_QMS_Counter
                     da.Fill(ds, "databasenames");
                     this.cbDatabases.DataSource = ds.Tables["databasenames"];
                     this.cbDatabases.DisplayMember = "name";
+                    if (!string.IsNullOrEmpty(database))
+                    {
+                        cbDatabases.Text = database;
+                    }
                 }
                 catch
                 {
@@ -130,7 +136,7 @@ namespace GPRO_QMS_Counter
             XmlDocument xmlDocument = new XmlDocument();
             XmlNode newChild = xmlDocument.CreateXmlDeclaration("1.0", "UTF-8", null);
             xmlDocument.AppendChild(newChild);
-            XmlNode xmlNode = xmlDocument.CreateElement("String_Connect");
+            XmlNode xmlNode = xmlDocument.CreateElement("SystemConfig");
             xmlDocument.AppendChild(xmlNode);
 
             XmlNode xmlNode2 = xmlDocument.CreateElement("SQLServer");
@@ -159,16 +165,98 @@ namespace GPRO_QMS_Counter
             xmlNode7.AppendChild(xmlDocument.CreateTextNode(chkIsAuthen.Checked.ToString()));
             xmlNode2.AppendChild(xmlNode7);
 
-            xmlDocument.Save(filename);
 
+            XmlNode appConfigNode = xmlDocument.CreateElement("AppConfig");
+            xmlNode.AppendChild(appConfigNode);
+
+            XmlNode templateNode = xmlDocument.CreateElement("Template");
+            templateNode.AppendChild(xmlDocument.CreateTextNode(""));
+            appConfigNode.AppendChild(templateNode);
+
+            XmlNode soLienNode = xmlDocument.CreateElement("SoLien");
+            soLienNode.AppendChild(xmlDocument.CreateTextNode("1"));
+            appConfigNode.AppendChild(soLienNode);
+
+            XmlNode counterIdNode = xmlDocument.CreateElement("CounterId");
+            counterIdNode.AppendChild(xmlDocument.CreateTextNode("1"));
+            appConfigNode.AppendChild(counterIdNode);
+
+            XmlNode useDisplayNode = xmlDocument.CreateElement("Display");
+            useDisplayNode.AppendChild(xmlDocument.CreateTextNode("False"));
+            appConfigNode.AppendChild(useDisplayNode);
+
+            XmlNode comDisplayNode = xmlDocument.CreateElement("COMDisplay");
+            comDisplayNode.AppendChild(xmlDocument.CreateTextNode("COM"));
+            appConfigNode.AppendChild(comDisplayNode);
+
+            XmlNode usePrintNode = xmlDocument.CreateElement("Print");
+            usePrintNode.AppendChild(xmlDocument.CreateTextNode("False"));
+            appConfigNode.AppendChild(usePrintNode);
+
+            XmlNode comPrintNode = xmlDocument.CreateElement("COMPrint");
+            comPrintNode.AppendChild(xmlDocument.CreateTextNode("COM"));
+            appConfigNode.AppendChild(comPrintNode);
+
+            XmlNode printCodeNode = xmlDocument.CreateElement("PrintCode");
+            printCodeNode.AppendChild(xmlDocument.CreateTextNode("27"));
+            appConfigNode.AppendChild(printCodeNode);
+
+            XmlNode readSoundNode = xmlDocument.CreateElement("ReadSound");
+            readSoundNode.AppendChild(xmlDocument.CreateTextNode("False"));
+            appConfigNode.AppendChild(readSoundNode);
+
+            XmlNode soundPathNode = xmlDocument.CreateElement("SoundPath");
+            soundPathNode.AppendChild(xmlDocument.CreateTextNode(""));
+            appConfigNode.AppendChild(soundPathNode);
+
+            xmlDocument.Save(filename);
             Application.Restart();
             Environment.Exit(0);
+        }
+
+        private void UpdateXMLFile()
+        {
+            try
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(Application.StartupPath + "\\DATA.XML");
+                foreach (XmlElement element in xmlDoc.DocumentElement)
+                {
+                    if (element.Name.Equals("SQLServer"))
+                    {
+                        foreach (XmlNode node in element.ChildNodes)
+                        {
+                            try
+                            {
+                                switch (node.Name)
+                                {
+                                    case "Server_Name": node.InnerText = EncryptionHelper.Instance.Encrypt(txtServerName.Text); break;
+                                    case "Database": node.InnerText = EncryptionHelper.Instance.Encrypt(cbDatabases.Text); break;
+                                    case "User": node.InnerText = EncryptionHelper.Instance.Encrypt(txtLogin.Text); break;
+                                    case "Password": node.InnerText = EncryptionHelper.Instance.Encrypt(txtPass.Text); break;
+                                    case "Window_Authenticate": node.InnerText = chkIsAuthen.Checked.ToString(); break; 
+                                }
+                            }
+                            catch (Exception)
+                            {
+                            }
+                        }
+                    }
+                }
+                xmlDoc.Save(Application.StartupPath + "\\DATA.XML");
+                Application.Restart();
+                Environment.Exit(0);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Cập nhật cấu hình bị lỗi.");
+            }
         }
 
         private void cbDatabases_Enter(object sender, EventArgs e)
         {
             getDatabases();
         }
-         
+
     }
 }

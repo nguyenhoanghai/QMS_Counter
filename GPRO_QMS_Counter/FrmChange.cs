@@ -47,7 +47,7 @@ namespace GPRO_QMS_Counter
             var obj = (ModelSelectItem)cbQuay.GetSelectedDataRow();
             if (obj != null && number != 0 && BLLDailyRequire.Instance.TranferTicket(connectString,  equipCode, obj.Id, number, DateTime.Now, true))
             {
-                MessageBox.Show("Chuyển phiếu thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
+               // MessageBox.Show("Chuyển phiếu thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
                 this.Close();
             }
             else

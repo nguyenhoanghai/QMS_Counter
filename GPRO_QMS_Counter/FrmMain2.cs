@@ -8,12 +8,14 @@ using QMS_System.Data.Enum;
 using QMS_System.Data.Model;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO.Ports;
 using System.Linq;
 using System.Media;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace GPRO_QMS_Counter
 {
@@ -39,17 +41,21 @@ namespace GPRO_QMS_Counter
             displaySerialCOM = new SerialPort();
         public static bool IsUseMainDisplay = false;
         public static List<ServiceDayModel> lib_Services;
+        public static List<ModelSelectItem> serviceObjs;
         List<string> dataSendToComport = new List<string>();
         int q = -1;
         bool genUserTabFinish = false,
             IsReadSound = false,
             isFinishRead = true,
             bRegistered = false,
-            bCheckValid = false;
+            bCheckValid = false,
+            UsePrintMachine=false;
         static List<string> temp, playlist;
         SoundPlayer player;
         Thread playThread;
         string soundPath = string.Empty;
+     public  static List<int> serviceIds;
+       
 
         private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -158,11 +164,16 @@ namespace GPRO_QMS_Counter
 
             if (bCheckValid)
             {
-                FrmLogin frmLogin = new FrmLogin();
+                FrmLogin frmLogin = new FrmLogin(connectString);
                 frmLogin.ShowDialog();
                 InitializeComponent();
                 //  InitCOMPort();
             }
+        }
+
+        private void ribbon_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void FrmMain2_FormClosing(object sender, FormClosingEventArgs e)
@@ -217,16 +228,45 @@ namespace GPRO_QMS_Counter
                 catch (Exception)
                 { }
                 configs = BLLConfig.Instance.Gets(connectString, true);
-                lib_Services = BLLService.Instance.GetsForMain(connectString);
-                ticketTemplate = Settings.Default.ticketTemplate; // GetConfigByCode(eConfigCode.TicketTemplate);
+                lib_Services = BLLService.Instance.GetsForMain(connectString); 
                 int.TryParse(GetConfigByCode(eConfigCode.NumberOfLinePerTime), out so_lien);
                 int.TryParse(GetConfigByCode(eConfigCode.PrintType), out printType);
                 int.TryParse(GetConfigByCode(eConfigCode.CheckTimeBeforePrintTicket), out CheckTimeBeforePrintTicket);
                 int.TryParse(GetConfigByCode(eConfigCode.PrintTicketReturnCurrentNumberOrServiceCode), out printTicketReturnCurrentNumberOrServiceCode);
                 int.TryParse(GetConfigByCode(eConfigCode.StartNumber), out startNumber);
                 int.TryParse(GetConfigByCode(eConfigCode.UseWithThirdPattern), out UseWithThirdPattern);
-                soundPath = Settings.Default.soundFolder;
-                if (Settings.Default.UsePrintMachine)
+                 
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(Application.StartupPath + "\\DATA.XML");
+                foreach (XmlElement element in xmlDoc.DocumentElement)
+                {
+                    if (element.Name.Equals("AppConfig"))
+                    {
+                        foreach (XmlNode node in element.ChildNodes)
+                        {
+                            try
+                            {
+                                switch (node.Name)
+                                {
+                                    //case "CounterId": numCounterId.Value = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); break;
+                                    case "Display": IsUseMainDisplay = Convert.ToBoolean(node.InnerText); break;
+                                    case "COMDisplay": displaySerialCOM.PortName = node.InnerText; break;
+                                    case "Print": UsePrintMachine = Convert.ToBoolean(node.InnerText); break;
+                                    case "COMPrint": printSerialCOM.PortName = node.InnerText; break;
+                                    //case "PrintCode": numPrinterId.Value = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); ; break;
+                                    case "ReadSound": IsReadSound = Convert.ToBoolean(node.InnerText); break;
+                                    case "SoundPath": soundPath = node.InnerText; break;
+                                    case "Template": ticketTemplate = node.InnerText; break;
+                                    case "SoLien": so_lien = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); ; break;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                            }
+                        }
+                    }
+                }
+                if (UsePrintMachine)
                     InitPrintComPort();
                 if (loginObj != null && loginObj.Counters != null && loginObj.Counters.Count > 0)
                 {
@@ -245,14 +285,16 @@ namespace GPRO_QMS_Counter
                 //check call active
                 if (MdiChildren.Any())
                     if (this.ActiveMdiChild is IChildMethods)
-                        ((IChildMethods)this.ActiveMdiChild).enableTimer();
-                IsReadSound = Settings.Default.IsReadSound;
+                        ((IChildMethods)this.ActiveMdiChild).enableTimer(); 
                 playlist = new List<string>();
                 temp = new List<string>();
-
-                IsUseMainDisplay = Settings.Default.IsUseMainDisplay;
-                if (FrmMain.IsUseMainDisplay)
+                 
+                 if (IsUseMainDisplay)
                     InitDisplayCOMPort();
+
+                serviceIds = (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["ServiceIds"].ToString()) ? ConfigurationManager.AppSettings["ServiceIds"].ToString() : "1,2,3,4,5,6").Split(',').Select(x => Convert.ToInt32(x)).ToList();
+                serviceObjs = BLLService.Instance.GetLookUp(connectString, false);
+                serviceObjs = serviceObjs.Where(x => serviceIds.Contains(x.Id)).ToList();
             }
             catch (Exception)
             {
@@ -350,21 +392,16 @@ namespace GPRO_QMS_Counter
         private void InitPrintComPort()
         {
             try
-            {
-                printSerialCOM.PortName = Settings.Default.PrintCOM.ToString();
-                barBtPrintComStatus.Caption = "Printer " + Settings.Default.PrintCOM.ToString();
-                printSerialCOM.BaudRate = Settings.Default.BaudRate;
-                printSerialCOM.DataBits = Settings.Default.DataBits;
-                printSerialCOM.Parity = Settings.Default.Parity;
-                printSerialCOM.StopBits = Settings.Default.StopBits;
-                printSerialCOM.Encoding = Encoding.GetEncoding("iso-8859-1");
+            { 
+                barBtPrintComStatus.Caption = "Printer " + printSerialCOM.PortName;
+                printSerialCOM.BaudRate = 9600;
+                printSerialCOM.DataBits = 8;
+                printSerialCOM.Parity =  Parity.None;
+                printSerialCOM.StopBits =  StopBits.One; 
                 try
-                {
-                    FrmMain2.printSerialCOM.ReadTimeout = 1;
-                    FrmMain2.printSerialCOM.WriteTimeout = 1;
-                    FrmMain2.printSerialCOM.Open();
-                    barBtPrintComStatus.Glyph = global::GPRO_QMS_Counter.Properties.Resources.com_port;
-                    // FrmMain2.comPort.DataReceived += new SerialDataReceivedEventHandler(comPort_DataReceived);
+                { 
+                    printSerialCOM.Open();
+                    barBtPrintComStatus.Glyph = global::GPRO_QMS_Counter.Properties.Resources.com_port; 
                 }
                 catch (Exception)
                 {
@@ -501,18 +538,16 @@ namespace GPRO_QMS_Counter
         private void InitDisplayCOMPort()
         {
             try
-            {
-                displaySerialCOM.PortName = Settings.Default.COMPort.ToString();
-                barBtDisplayComStatus.Caption = "Display " + Settings.Default.COMPort.ToString();
-                displaySerialCOM.BaudRate = Settings.Default.BaudRate;
-                displaySerialCOM.DataBits = Settings.Default.DataBits;
-                displaySerialCOM.Parity = Settings.Default.Parity;
-                displaySerialCOM.StopBits = Settings.Default.StopBits;
+            { 
+                barBtDisplayComStatus.Caption = "Display " + displaySerialCOM.PortName;
+                displaySerialCOM.BaudRate = 9600;
+                displaySerialCOM.DataBits = 8;
+                displaySerialCOM.Parity =  Parity.None;
+                displaySerialCOM.StopBits =  StopBits.One;
                 try
                 {
-                    FrmMain2.displaySerialCOM.Open();
-                    barBtDisplayComStatus.Glyph = global::GPRO_QMS_Counter.Properties.Resources.com_port;
-                    // FrmMain2.comPort.DataReceived += new SerialDataReceivedEventHandler(comPort_DataReceived);
+                    displaySerialCOM.Open();
+                    barBtDisplayComStatus.Glyph = global::GPRO_QMS_Counter.Properties.Resources.com_port; 
                 }
                 catch (Exception)
                 {

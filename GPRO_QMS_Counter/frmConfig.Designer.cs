@@ -55,6 +55,10 @@
             this.label10 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.printCOM_cb = new System.Windows.Forms.ComboBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.switchPrinter = new DevExpress.XtraEditors.ToggleSwitch();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.swSmallScreen = new DevExpress.XtraEditors.ToggleSwitch();
             this.label19 = new System.Windows.Forms.Label();
@@ -86,10 +90,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.printCOM_cb = new System.Windows.Forms.ComboBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.switchPrinter = new DevExpress.XtraEditors.ToggleSwitch();
             ((System.ComponentModel.ISupportInitialize)(this.toggleSwitch1.Properties)).BeginInit();
             this.pnCOMSetting.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtSoundPath.Properties)).BeginInit();
@@ -98,6 +98,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numCounterId)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.switchPrinter.Properties)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.swSmallScreen.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.swEvaluate.Properties)).BeginInit();
@@ -111,7 +112,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.swUpdateInfo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.swCancel.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.swPrint.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.switchPrinter.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // toggleSwitch1
@@ -241,6 +241,7 @@
             this.cbComPort.Name = "cbComPort";
             this.cbComPort.Size = new System.Drawing.Size(165, 28);
             this.cbComPort.TabIndex = 9;
+            this.cbComPort.SelectedIndexChanged += new System.EventHandler(this.cbComPort_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -469,6 +470,55 @@
             this.tabPage1.Text = "Cấu hình";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // printCOM_cb
+            // 
+            this.printCOM_cb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.printCOM_cb.FormattingEnabled = true;
+            this.printCOM_cb.Location = new System.Drawing.Point(487, 194);
+            this.printCOM_cb.Margin = new System.Windows.Forms.Padding(4);
+            this.printCOM_cb.Name = "printCOM_cb";
+            this.printCOM_cb.Size = new System.Drawing.Size(165, 28);
+            this.printCOM_cb.TabIndex = 19;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.ForeColor = System.Drawing.Color.Blue;
+            this.label23.Location = new System.Drawing.Point(371, 198);
+            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(110, 21);
+            this.label23.TabIndex = 20;
+            this.label23.Text = "COM Máy in";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.ForeColor = System.Drawing.Color.Blue;
+            this.label29.Location = new System.Drawing.Point(7, 196);
+            this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(144, 21);
+            this.label29.TabIndex = 28;
+            this.label29.Text = "Sử dụng máy in";
+            // 
+            // switchPrinter
+            // 
+            this.switchPrinter.Location = new System.Drawing.Point(210, 193);
+            this.switchPrinter.Margin = new System.Windows.Forms.Padding(4);
+            this.switchPrinter.Name = "switchPrinter";
+            this.switchPrinter.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.switchPrinter.Properties.Appearance.ForeColor = System.Drawing.Color.Brown;
+            this.switchPrinter.Properties.Appearance.Options.UseFont = true;
+            this.switchPrinter.Properties.Appearance.Options.UseForeColor = true;
+            this.switchPrinter.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
+            this.switchPrinter.Properties.OffText = "Không";
+            this.switchPrinter.Properties.OnText = "Có";
+            this.switchPrinter.Size = new System.Drawing.Size(153, 29);
+            this.switchPrinter.TabIndex = 27;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.swSmallScreen);
@@ -504,7 +554,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(680, 476);
+            this.tabPage2.Size = new System.Drawing.Size(680, 475);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Phân quyền";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -868,55 +918,6 @@
             this.label11.TabIndex = 0;
             this.label11.Text = "Gọi mới";
             // 
-            // printCOM_cb
-            // 
-            this.printCOM_cb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.printCOM_cb.FormattingEnabled = true;
-            this.printCOM_cb.Location = new System.Drawing.Point(487, 194);
-            this.printCOM_cb.Margin = new System.Windows.Forms.Padding(4);
-            this.printCOM_cb.Name = "printCOM_cb";
-            this.printCOM_cb.Size = new System.Drawing.Size(165, 28);
-            this.printCOM_cb.TabIndex = 19;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.ForeColor = System.Drawing.Color.Blue;
-            this.label23.Location = new System.Drawing.Point(371, 198);
-            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(110, 21);
-            this.label23.TabIndex = 20;
-            this.label23.Text = "COM Máy in";
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.ForeColor = System.Drawing.Color.Blue;
-            this.label29.Location = new System.Drawing.Point(7, 196);
-            this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(144, 21);
-            this.label29.TabIndex = 28;
-            this.label29.Text = "Sử dụng máy in";
-            // 
-            // switchPrinter
-            // 
-            this.switchPrinter.Location = new System.Drawing.Point(210, 193);
-            this.switchPrinter.Margin = new System.Windows.Forms.Padding(4);
-            this.switchPrinter.Name = "switchPrinter";
-            this.switchPrinter.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.switchPrinter.Properties.Appearance.ForeColor = System.Drawing.Color.Brown;
-            this.switchPrinter.Properties.Appearance.Options.UseFont = true;
-            this.switchPrinter.Properties.Appearance.Options.UseForeColor = true;
-            this.switchPrinter.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
-            this.switchPrinter.Properties.OffText = "Không";
-            this.switchPrinter.Properties.OnText = "Có";
-            this.switchPrinter.Size = new System.Drawing.Size(153, 29);
-            this.switchPrinter.TabIndex = 27;
-            // 
             // FrmConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -940,6 +941,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.switchPrinter.Properties)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.swSmallScreen.Properties)).EndInit();
@@ -954,7 +956,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.swUpdateInfo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.swCancel.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.swPrint.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.switchPrinter.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

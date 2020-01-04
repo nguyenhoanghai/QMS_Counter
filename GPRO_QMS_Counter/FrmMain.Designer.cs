@@ -77,6 +77,7 @@ namespace GPRO_QMS_Counter
             this.lbPrintStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnGoiUuTien = new System.Windows.Forms.Button();
             this.btSave = new System.Windows.Forms.Button();
             this.btViewList = new System.Windows.Forms.Button();
             this.btLogout = new System.Windows.Forms.Button();
@@ -504,6 +505,7 @@ namespace GPRO_QMS_Counter
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Controls.Add(this.btnGoiUuTien);
             this.panel1.Controls.Add(this.btSave);
             this.panel1.Controls.Add(this.btViewList);
             this.panel1.Controls.Add(this.btLogout);
@@ -516,6 +518,24 @@ namespace GPRO_QMS_Counter
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(895, 106);
             this.panel1.TabIndex = 3;
+            // 
+            // btnGoiUuTien
+            // 
+            this.btnGoiUuTien.BackColor = System.Drawing.Color.Red;
+            this.btnGoiUuTien.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnGoiUuTien.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGoiUuTien.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGoiUuTien.ForeColor = System.Drawing.Color.White;
+            this.btnGoiUuTien.Image = ((System.Drawing.Image)(resources.GetObject("btnGoiUuTien.Image")));
+            this.btnGoiUuTien.Location = new System.Drawing.Point(230, 6);
+            this.btnGoiUuTien.Name = "btnGoiUuTien";
+            this.btnGoiUuTien.Size = new System.Drawing.Size(106, 95);
+            this.btnGoiUuTien.TabIndex = 13;
+            this.btnGoiUuTien.Text = "Gọi ưu tiên";
+            this.btnGoiUuTien.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnGoiUuTien.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnGoiUuTien.UseVisualStyleBackColor = false;
+            this.btnGoiUuTien.Click += new System.EventHandler(this.btnGoiUuTien_Click);
             // 
             // btSave
             // 
@@ -745,7 +765,7 @@ namespace GPRO_QMS_Counter
             this.splitContainer1.Panel2.Controls.Add(this.label5);
             this.splitContainer1.Panel2.Controls.Add(this.label4);
             this.splitContainer1.Size = new System.Drawing.Size(779, 408);
-            this.splitContainer1.SplitterDistance = 459;
+            this.splitContainer1.SplitterDistance = 458;
             this.splitContainer1.TabIndex = 6;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             this.splitContainer1.DoubleClick += new System.EventHandler(this.splitContainer1_DoubleClick);
@@ -769,7 +789,7 @@ namespace GPRO_QMS_Counter
             this.splitContainer2.Panel2.Controls.Add(this.lbWaiting);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
             this.splitContainer2.Panel2.Controls.Add(this.label2);
-            this.splitContainer2.Size = new System.Drawing.Size(459, 408);
+            this.splitContainer2.Size = new System.Drawing.Size(458, 408);
             this.splitContainer2.SplitterDistance = 204;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.DoubleClick += new System.EventHandler(this.splitContainer2_DoubleClick);
@@ -1345,5 +1365,6 @@ namespace GPRO_QMS_Counter
         private ToolStripMenuItem thuGọnGiaoDiệnToolStripMenuItem1;
         private Button btnFullscreen;
         private ToolStripMenuItem kếtNốiCSDLToolStripMenuItem;
+        private Button btnGoiUuTien;
     }
 }

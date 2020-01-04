@@ -14,11 +14,17 @@ namespace GPRO_QMS_Counter
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             if (File.Exists(Application.StartupPath + "\\DATA.XML"))
-                if (ConfigurationManager.AppSettings["AppType"] != null &&
-                    ConfigurationManager.AppSettings["AppType"].ToString() == "2")
-                    Application.Run(new FrmMain2());
-                else
-                    Application.Run(new FrmMain());
+            {
+                string apptype = (ConfigurationManager.AppSettings["AppType"] != null &&
+                    !string.IsNullOrEmpty(ConfigurationManager.AppSettings["AppType"].ToString()) ?
+                    ConfigurationManager.AppSettings["AppType"].ToString() : "1");
+                switch (apptype)
+                {
+                    case "2": Application.Run(new FrmMain2()); break;
+                    case "4": Application.Run(new FrmMain4()); break;
+                    default: Application.Run(new FrmMain()); break;
+                }
+            }
             else
                 Application.Run(new FrmSQLConnect());
 

@@ -4,6 +4,7 @@ using QMS_System.Data.Model;
 using System;
 using System.Configuration;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace GPRO_QMS_Counter
 {
@@ -11,14 +12,37 @@ namespace GPRO_QMS_Counter
     {
         public static bool bCloseForm = false;
         string connectString = BaseCore.Instance.GetEntityConnectString(Application.StartupPath + "\\DATA.XML");
-        public FrmLogin()
+        int counterId = 1;
+        public FrmLogin(string _connectString)
         {
+            if (string.IsNullOrEmpty(connectString))
+                connectString = _connectString;
             InitializeComponent();
         }
 
         private void FrmLogin_Load(object sender, EventArgs e)
-        {
-
+        { 
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(Application.StartupPath + "\\DATA.XML");
+            foreach (XmlElement element in xmlDoc.DocumentElement)
+            {
+                if (element.Name.Equals("AppConfig"))
+                {
+                    foreach (XmlNode node in element.ChildNodes)
+                    {
+                        try
+                        {
+                            switch (node.Name)
+                            {
+                                case "CounterId": counterId = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); break;
+                               }
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+                    }
+                }
+            }
         }
 
         private void FrmLogin_FormClosing(object sender, FormClosingEventArgs e)
@@ -44,10 +68,10 @@ namespace GPRO_QMS_Counter
                     FrmMain.loginObj = new Login()
                     {
                         UserName = "GPRO Admin",
-                        EquipCode = int.Parse(ConfigurationManager.AppSettings["CounterId"].ToString()),
+                        EquipCode = counterId,
                         LoginTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm"),
                         UserId = 100,
-                        CounterId = int.Parse(ConfigurationManager.AppSettings["CounterId"].ToString()),
+                        CounterId = counterId,
                         CounterName = "GPRO Admin Counter"
                     };
                     FrmLogin.bCloseForm = true;
@@ -70,8 +94,8 @@ namespace GPRO_QMS_Counter
                         }
                         catch (Exception) { }
                         ResponseBaseModel rs;
-                        if (apptype == 1)
-                            rs = BLLLoginHistory.Instance.Login(connectString, txtUsername.Text, txtPassword.Text, int.Parse(ConfigurationManager.AppSettings["CounterId"].ToString()));
+                        if (apptype == 1 || apptype==4)
+                            rs = BLLLoginHistory.Instance.Login(connectString, txtUsername.Text, txtPassword.Text, counterId);
                         else
                             rs = BLLLoginHistory.Instance.Login(connectString, txtUsername.Text, txtPassword.Text);
 
@@ -79,6 +103,7 @@ namespace GPRO_QMS_Counter
                         {
                             FrmMain.loginObj = rs.Data;
                             FrmMain2.loginObj = rs.Data;
+                            FrmMain4.loginObj = rs.Data;
                             FrmLogin.bCloseForm = true;
                             this.Close();
                         }

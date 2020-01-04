@@ -65,8 +65,8 @@
       <HintPath>..\Library\Microsoft.Office.Interop.Excel.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="QMS_System.Data">
       <HintPath>..\Library\QMS_System.Data.dll</HintPath>
@@ -162,6 +162,12 @@
     </Compile>
     <Compile Include="FrmMain3.Designer.cs">
       <DependentUpon>FrmMain3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMain4.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMain4.Designer.cs">
+      <DependentUpon>FrmMain4.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmPermission.cs">
       <SubType>Form</SubType>
@@ -268,6 +274,9 @@
     <EmbeddedResource Include="FrmMain3.resx">
       <DependentUpon>FrmMain3.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmMain4.resx">
+      <DependentUpon>FrmMain4.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmPermission.resx">
       <DependentUpon>FrmPermission.cs</DependentUpon>
     </EmbeddedResource>
@@ -356,6 +365,7 @@
     <None Include="Resources\iconfinder_Razer_Comms_670418.png" />
     <None Include="Resources\iconfinder_Call_mobile_device_electronic_phone_telephone_1886515 %281%29.png" />
     <None Include="Resources\if_our_process_2_45123.png" />
+    <None Include="Resources\iconfinder_receipt_3339034.png" />
     <Content Include="Resources\login.png" />
     <Content Include="Resources\login1.jpg" />
     <Content Include="Resources\logout.gif" />

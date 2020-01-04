@@ -17,6 +17,7 @@ using System.Linq;
 using System.Media;
 using System.Threading;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace GPRO_QMS_Counter
 {
@@ -30,7 +31,9 @@ namespace GPRO_QMS_Counter
         public static string soundPath = string.Empty;
         public static bool isRestart = false;
         public static Login loginObj = null;
-        public static bool IsUseMainDisplay = false, bRegistered = false, bCheckValid = false;
+        public static bool IsUseMainDisplay = false,
+            bRegistered = false,
+            bCheckValid = false;
         public static string sComPort = "COM1";
         public static int iBaudRate = 9600;
         public static int iDataBits = 8, printerId = 10;
@@ -71,7 +74,7 @@ namespace GPRO_QMS_Counter
             }
             if (bCheckValid)
             {
-                FrmLogin frmLogin = new FrmLogin();
+                FrmLogin frmLogin = new FrmLogin(connectString);
                 frmLogin.ShowDialog();
                 InitializeComponent();
                 InitCOMPort();
@@ -152,7 +155,6 @@ namespace GPRO_QMS_Counter
                 playlist = new List<string>();
                 temp = new List<string>();
 
-                FrmMain.IsUseMainDisplay = Settings.Default.IsUseMainDisplay;
                 if (FrmMain.IsUseMainDisplay)
                     InitCOMPort();
 
@@ -162,17 +164,18 @@ namespace GPRO_QMS_Counter
                     for (int i = 0; i < serviceObjs.Count; i++)
                         chbkService.Items.Add(new CheckedListBoxItem(serviceObjs[i].Id, serviceObjs[i].Name));
 
-            }
-            if (Settings.Default.actSmallScreen)
-                thuGọnGiaoDiệnToolStripMenuItem1_Click(sender, e);
-            else
-            {
-                if (Settings.Default.actPrintTicket)
-                    this.Size = new Size(1130, 604);
+
+                if (Settings.Default.actSmallScreen)
+                    thuGọnGiaoDiệnToolStripMenuItem1_Click(sender, e);
                 else
-                    this.Size = new Size(912, 604);
-                if (FrmMain.loginObj.UserName.Equals("GPRO Admin"))
-                    âmThanhToolStripMenuItem.Enabled = true;
+                {
+                    if (Settings.Default.actPrintTicket)
+                        this.Size = new Size(1130, 604);
+                    else
+                        this.Size = new Size(912, 604);
+                    if (FrmMain.loginObj.UserName.Equals("GPRO Admin"))
+                        âmThanhToolStripMenuItem.Enabled = true;
+                }
             }
         }
 
@@ -204,10 +207,16 @@ namespace GPRO_QMS_Counter
             {
                 while (temp.Count > 0)
                 {
-                    player.SoundLocation = (soundPath + temp[0]);
-                    int iTime = SoundInfo.GetSoundLength(player.SoundLocation.Trim()) - 0;
-                    player.Play();
-                    Thread.Sleep(iTime);
+                    try
+                    {
+                        player.SoundLocation = (soundPath + temp[0]);
+                        int iTime = SoundInfo.GetSoundLength(player.SoundLocation.Trim()) - 0;
+                        player.Play();
+                        Thread.Sleep(iTime);
+                    }
+                    catch (Exception)
+                    {
+                    }
                     temp.Remove(temp[0]);
                 }
             }
@@ -280,11 +289,10 @@ namespace GPRO_QMS_Counter
         private void InitCOMPort()
         {
             serialPort1 = new SerialPort();
-            sComPort = Settings.Default.COMPort;
-            iBaudRate = Settings.Default.BaudRate;
-            iDataBits = Settings.Default.DataBits;
-            sParity = Settings.Default.Parity;
-            fStopBits = Settings.Default.StopBits;
+            iBaudRate = 9600;
+            iDataBits = 8;
+            sParity = Parity.None;
+            fStopBits = StopBits.One;
             this.serialPort1.PortName = sComPort;
             this.serialPort1.BaudRate = iBaudRate;
             this.serialPort1.DataBits = iDataBits;
@@ -922,6 +930,30 @@ namespace GPRO_QMS_Counter
             f.ShowDialog();
         }
 
+        private void btnGoiUuTien_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var tk = BLLDailyRequire.Instance.Next_KetLuan(connectString, loginObj.UserId, loginObj.EquipCode, today, UseWithThirdPattern);
+                if (tk == 0)
+                    txtResult.Text = "Hết vé";
+                else
+                {
+                    lbCurrentTicket.Text = tk.ToString();
+                    lbCurrentTicket_s.Text = tk.ToString();
+                    SendDisplay(tk.ToString());
+
+                    var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = loginObj.EquipCode, TicketNumber = tk });
+                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, FrmMain.loginObj.CounterId);
+                    var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
+                    if (readTemplateIds.Count > 0)
+                        GetSound(readTemplateIds, tk.ToString(), loginObj.CounterId);
+                }
+            }
+            catch (Exception)
+            { }
+        }
+
         private void kếtThúcToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!kếtThúcToolStripMenuItem.Checked)
@@ -955,10 +987,33 @@ namespace GPRO_QMS_Counter
             this.bHelp = Settings.Default.actHelp;
             this.bLogout = Settings.Default.actLogout;
             this.bUpdateInfo = Settings.Default.actUpdateInfo;
-            FrmMain.soundPath = Settings.Default.soundFolder;
-            IsReadSound = Settings.Default.IsReadSound;
-            printerId = Settings.Default.PrinterId;
+
             this.bPrintTicket = Settings.Default.actPrintTicket;
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(Application.StartupPath + "\\DATA.XML");
+            foreach (XmlElement element in xmlDoc.DocumentElement)
+            {
+                if (element.Name.Equals("AppConfig"))
+                {
+                    foreach (XmlNode node in element.ChildNodes)
+                    {
+                        try
+                        {
+                            switch (node.Name)
+                            {
+                                case "Display": IsUseMainDisplay = Convert.ToBoolean(node.InnerText); break;
+                                case "COMDisplay": sComPort = node.InnerText; break;
+                                case "PrintCode": printerId = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); ; break;
+                                case "ReadSound": IsReadSound = Convert.ToBoolean(node.InnerText); break;
+                                case "SoundPath": soundPath = node.InnerText; break;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+                    }
+                }
+            }
 
             configs = BLLConfig.Instance.Gets(connectString, true);
             int.TryParse(GetConfigByCode(eConfigCode.UseWithThirdPattern), out UseWithThirdPattern);

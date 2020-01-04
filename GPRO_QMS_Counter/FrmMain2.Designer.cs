@@ -72,8 +72,9 @@
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
             this.ribbonPage2});
-            this.ribbon.Size = new System.Drawing.Size(1036, 178);
+            this.ribbon.Size = new System.Drawing.Size(889, 143);
             this.ribbon.StatusBar = this.ribbonStatusBar;
+            this.ribbon.Click += new System.EventHandler(this.ribbon_Click);
             // 
             // barBTPrint
             // 
@@ -180,11 +181,11 @@
             this.ribbonStatusBar.ItemLinks.Add(this.barBtDisplayComStatus);
             this.ribbonStatusBar.ItemLinks.Add(this.barBtPrintComStatus, true);
             this.ribbonStatusBar.ItemLinks.Add(this.lbErrorsms, true);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 762);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 625);
             this.ribbonStatusBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1036, 37);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(889, 31);
             // 
             // xtraTabbedMdiManager1
             // 
@@ -204,9 +205,9 @@
             // 
             // FrmMain2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1036, 799);
+            this.ClientSize = new System.Drawing.Size(889, 656);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
             this.IsMdiContainer = true;

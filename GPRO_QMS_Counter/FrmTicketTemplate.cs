@@ -1,7 +1,7 @@
-﻿using GPRO_QMS_Counter.Properties;
-using System;
+﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace GPRO_QMS_Counter
 {
@@ -106,16 +106,31 @@ namespace GPRO_QMS_Counter
 
         private void btsave_Click(object sender, EventArgs e)
         {
-            Settings.Default.ticketTemplate = txtContent.Text;
-            Settings.Default.Save();
-            FrmMain2.ticketTemplate = txtContent.Text;
-            //if (BLLConfig.Instance.Update(FrmMain2.connectString, eConfigCode.TicketTemplate, txtContent.Text))
-            //    if (BLLConfig.Instance.Update(FrmMain2.connectString, eConfigCode.NumberOfLinePerTime, txtsolien.Value.ToString()))
-            //        MessageBox.Show("Lưu thành công!.");
-            //    else
-            //        MessageBox.Show("Lưu thất bại.");
-            //else
-            //    MessageBox.Show("Lưu thất bại."); 
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(Application.StartupPath + "\\DATA.XML");
+            foreach (XmlElement element in xmlDoc.DocumentElement)
+            {
+                if (element.Name.Equals("AppConfig"))
+                {
+                    foreach (XmlNode node in element.ChildNodes)
+                    {
+                        try
+                        {
+                            switch (node.Name)
+                            {
+                                case "Template": node.InnerText = txtContent.Text.ToString(); break;
+                                case "SoLien": node.InnerText = txtsolien.Value.ToString(); break;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+                    }
+                }
+            }
+            xmlDoc.Save(Application.StartupPath + "\\DATA.XML");
+            Application.Restart();
+            Environment.Exit(0);
         }
 
         private void btDangGoi_Click(object sender, EventArgs e)
@@ -140,9 +155,29 @@ namespace GPRO_QMS_Counter
         }
 
         private void FrmTicketTemplate_Load(object sender, EventArgs e)
-        {
-            txtContent.Text = FrmMain2.ticketTemplate; // BLLConfig.Instance.GetConfigByCode(FrmMain2.connectString, eConfigCode.TicketTemplate);
-            txtsolien.Value = FrmMain2.so_lien;
+        { 
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(Application.StartupPath + "\\DATA.XML");
+            foreach (XmlElement element in xmlDoc.DocumentElement)
+            {
+                if (element.Name.Equals("AppConfig"))
+                {
+                    foreach (XmlNode node in element.ChildNodes)
+                    {
+                        try
+                        {
+                            switch (node.Name)
+                            {
+                                case "Template": txtContent.Text = node.InnerText; break;
+                                case "SoLien": txtsolien.Value = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); break;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+                    }
+                }
+            }
         }
 
         private void btTest_Click(object sender, EventArgs e)

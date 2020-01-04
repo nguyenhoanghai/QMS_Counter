@@ -17,24 +17,16 @@ namespace GPRO_QMS_Counter
 
         private void FrmConfig_Load(object sender, EventArgs e)
         {
-            toggleSwitch1_Toggled(sender, e);
-            toggleSwitch1.IsOn = Settings.Default.IsUseMainDisplay;
+            toggleSwitch1_Toggled(sender, e); 
             cbComPort.Items.Clear();
-            cbComPort.Items.AddRange(SerialPort.GetPortNames());
-            cbComPort.Text = FrmMain.sComPort;
+            cbComPort.Items.AddRange(SerialPort.GetPortNames()); 
             cbBaudRate.Text = FrmMain.iBaudRate.ToString();
             cbDataBits.Text = FrmMain.iDataBits.ToString();
             cbParity.Text = FrmMain.sParity.ToString();
-            cbStopBits.Text = FrmMain.fStopBits.ToString();
-            txtSoundPath.Text = FrmMain.soundPath;
-            switchReadSound.IsOn = Settings.Default.IsReadSound;
-            numPrinterId.Value = FrmMain.printerId;
-            numCounterId.Value = int.Parse(ConfigurationManager.AppSettings["CounterId"].ToString());
+            cbStopBits.Text = FrmMain.fStopBits.ToString();  
 
             printCOM_cb.Items.Clear();
-            printCOM_cb.Items.AddRange(SerialPort.GetPortNames());
-            printCOM_cb.Text = Settings.Default.PrintCOM;
-            switchPrinter.IsOn = Settings.Default.UsePrintMachine;
+            printCOM_cb.Items.AddRange(SerialPort.GetPortNames()); 
 
             swNext.IsOn = Settings.Default.actCallNext;
             swRecall.IsOn = Settings.Default.actRecall;
@@ -48,6 +40,35 @@ namespace GPRO_QMS_Counter
             swUpdateInfo.IsOn = Settings.Default.actUpdateInfo;
             swEvaluate.IsOn = Settings.Default.actEvaluate;
             swSmallScreen.IsOn = Settings.Default.actSmallScreen;
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(Application.StartupPath + "\\DATA.XML");
+            foreach (XmlElement element in xmlDoc.DocumentElement)
+            {
+                if (element.Name.Equals("AppConfig"))
+                {
+                    foreach (XmlNode node in element.ChildNodes)
+                    {
+                        try
+                        {
+                            switch (node.Name)
+                            {
+                                case "CounterId": numCounterId.Value = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); break;
+                                case "Display": toggleSwitch1.IsOn = Convert.ToBoolean(node.InnerText); break;
+                                case "COMDisplay": cbComPort.Text = node.InnerText; break;
+                                case "Print": switchPrinter.IsOn = Convert.ToBoolean(node.InnerText); break;
+                                case "COMPrint": printCOM_cb.Text = node.InnerText; break;
+                                case "PrintCode": numPrinterId.Value = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); ; break;
+                                case "ReadSound": switchReadSound.IsOn = Convert.ToBoolean(node.InnerText); break;
+                                case "SoundPath": txtSoundPath.Text = node.InnerText; break;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+                    }
+                }
+            }
         }
 
         private void toggleSwitch1_Toggled(object sender, EventArgs e)
@@ -68,56 +89,39 @@ namespace GPRO_QMS_Counter
         {
             DialogResult dialogResult = MessageBox.Show("Thông tin cấu hình sẽ được lưu lại và Chương trình sẽ khởi động lại. Bạn có chắc muốn lưu lại thông tin cấu hình không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
-            {
-                Settings.Default.IsUseMainDisplay = toggleSwitch1.IsOn;
-                Settings.Default.IsReadSound = switchReadSound.IsOn;
-                Settings.Default.UsePrintMachine = switchPrinter.IsOn;
-                Settings.Default.PrintCOM = printCOM_cb.Text;
-                Settings.Default.COMPort = cbComPort.Text;
-                Settings.Default.BaudRate = Convert.ToInt32(cbBaudRate.Text);
-                Settings.Default.DataBits = Convert.ToInt32(cbDataBits.Text);
-                switch (cbParity.Text)
-                {
-                    case "None": Settings.Default.Parity = Parity.None; break;
-                    case "Even": Settings.Default.Parity = Parity.Even; break;
-                    case "Mark": Settings.Default.Parity = Parity.Mark; break;
-                    case "Odd": Settings.Default.Parity = Parity.Odd; break;
-                    case "Space": Settings.Default.Parity = Parity.Space; break;
-                }
-
-                switch (cbStopBits.Text)
-                {
-                    case "None": Settings.Default.StopBits = StopBits.None; break;
-                    case "One": Settings.Default.StopBits = StopBits.One; break;
-                    case "OnePointFive": Settings.Default.StopBits = StopBits.OnePointFive; break;
-                    case "Two": Settings.Default.StopBits = StopBits.Two; break;
-                }
-                Settings.Default.soundFolder = txtSoundPath.Text;
-                Settings.Default.PrinterId = (int)numPrinterId.Value;
-                //  Settings.Default.CounterId = (int)numCounterId.Value;
-                Settings.Default.Save();
-                hasChange= true;
-
+            {  
                 XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.Load(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+                xmlDoc.Load(Application.StartupPath + "\\DATA.XML");
                 foreach (XmlElement element in xmlDoc.DocumentElement)
                 {
-                    if (element.Name.Equals("appSettings"))
+                    if (element.Name.Equals("AppConfig"))
                     {
                         foreach (XmlNode node in element.ChildNodes)
                         {
-                            if (node.Attributes[0].Value.Equals("CounterId"))
+                            try
                             {
-                                node.Attributes[1].Value = numCounterId.Value.ToString();
+                                switch (node.Name)
+                                {
+                                    case "CounterId": node.InnerText = numCounterId.Value.ToString(); break;
+                                    case "Display": node.InnerText = toggleSwitch1.IsOn.ToString(); break;
+                                    case "COMDisplay": node.InnerText = cbComPort.Text.ToString(); break;
+                                    case "Print": node.InnerText = switchPrinter.IsOn.ToString(); break;
+                                    case "COMPrint": node.InnerText = printCOM_cb.Text.ToString(); break;
+                                    case "PrintCode": node.InnerText = numPrinterId.Value.ToString(); break;
+                                    case "ReadSound": node.InnerText = switchReadSound.IsOn.ToString(); break;
+                                    case "SoundPath": node.InnerText = txtSoundPath.Text.ToString(); break;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
                             }
                         }
                     }
                 }
-
-                xmlDoc.Save(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+                xmlDoc.Save(Application.StartupPath + "\\DATA.XML");
                 ConfigurationManager.RefreshSection("appSettings");
-
-                this.Close();
+                Application.Restart();
+                Environment.Exit(0);
             }
         }
 
@@ -147,8 +151,13 @@ namespace GPRO_QMS_Counter
 
         private void FrmConfig_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if(hasChange)
+            if (hasChange)
                 FrmMain.isRestart = true;
+        }
+
+        private void cbComPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
