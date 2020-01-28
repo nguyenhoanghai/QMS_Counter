@@ -1,7 +1,6 @@
 ﻿using GPRO.Core.Hai;
 using GPRO_QMS_Counter.Helper;
 using GPRO_QMS_Counter.Models;
-using GPRO_QMS_Counter.Properties;
 using Microsoft.VisualBasic;
 using Microsoft.Win32;
 using Newtonsoft.Json;
@@ -11,18 +10,19 @@ using QMS_System.Data.Model;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
 using System.Media;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 
 namespace GPRO_QMS_Counter
 {
-    public partial class FrmMain4 : Form
+    public partial class Form1 : Form
     {
         public static List<int> serviceIds;
         public static List<ModelSelectItem> serviceObjs;
@@ -55,20 +55,21 @@ namespace GPRO_QMS_Counter
              xPos = 0,
             yPos = 230,
             xPos1 = 0,
-            yPos1 = 135;
+            yPos1 = 135,
+            soNutDV1dong = 3;
         bool genUserTabFinish = false,
             IsReadSound = false,
             isFinishRead = true,
             bRegistered = false,
             bCheckValid = false,
-            UsePrintMachine = false;
+            UsePrintMachine = false,
+            FirstLoad = true;
+        public SqlConnection sqlCon = new SqlConnection();
         static List<string> temp, playlist;
         SoundPlayer player;
-        Thread playThread;
+        Thread playThread, refreshThread;
         string soundPath = string.Empty;
-
-
-        public FrmMain4()
+        public Form1()
         {
             bCheckValid = CheckValidation();
             if (!bCheckValid)
@@ -85,6 +86,7 @@ namespace GPRO_QMS_Counter
                 //  InitCOMPort();
             }
         }
+
         private bool CheckValidation()
         {
             RegistryKey localMachine = Registry.LocalMachine;
@@ -135,24 +137,65 @@ namespace GPRO_QMS_Counter
             return result;
         }
 
-
-        private void FrmMain4_Load(object sender, EventArgs e)
+        #region Form event
+        private void btnClose_Click(object sender, EventArgs e)
         {
-            Rectangle screen = Screen.PrimaryScreen.WorkingArea;
-            MaximumSize = new Size(screen.Width, 583);
-            MinimumSize = new Size(screen.Width, 583);
+            Application.Exit();
+        }
+
+        private void btnMaximize_Click(object sender, EventArgs e)
+        {
             WindowState = FormWindowState.Maximized;
-            StartPosition = FormStartPosition.CenterScreen;
+            btnMaximize.Visible = false;
+            btnNormalSize.Visible = true;
+            btnNormalSize.Location = new Point(btnMaximize.Location.X, btnMaximize.Location.Y);
+        }
+        private void btnNormalSize_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Normal;
+            btnMaximize.Visible = true;
+            btnNormalSize.Visible = false;
+        }
+        private void btnMinimize_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+        #endregion
+
+        #region kéo form 
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+        #endregion
+
+        private void RemovePlaceHolder(Object sender, EventArgs e)
+        {
+            if (txtParam.Text == "Yêu cầu xử lý ...") txtParam.Text = "";
+        }
+        private void AddPlaceHolder(Object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtParam.Text)) txtParam.Text = "Yêu cầu xử lý ...";
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             try
             {
                 try
                 {
                     connectString = BaseCore.Instance.GetEntityConnectString(Application.StartupPath + "\\DATA.XML");
+                    ConnectDatabase();
                 }
                 catch (Exception) { }
                 configs = BLLConfig.Instance.Gets(connectString, true);
                 lib_Services = BLLService.Instance.GetsForMain(connectString);
-                 
+
                 int.TryParse(GetConfigByCode(eConfigCode.NumberOfLinePerTime), out so_lien);
                 int.TryParse(GetConfigByCode(eConfigCode.PrintType), out printType);
                 int.TryParse(GetConfigByCode(eConfigCode.CheckTimeBeforePrintTicket), out CheckTimeBeforePrintTicket);
@@ -182,7 +225,8 @@ namespace GPRO_QMS_Counter
                                     case "SoundPath": soundPath = node.InnerText; break;
                                     case "Template": ticketTemplate = node.InnerText; break;
                                     case "SoLien": so_lien = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); ; break;
-                                  }
+                                    case "NumberOfButton": soNutDV1dong = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 3); ; break;
+                                }
                             }
                             catch (Exception ex)
                             {
@@ -190,12 +234,15 @@ namespace GPRO_QMS_Counter
                         }
                     }
                 }
-                 
+
+                if (IsReadSound)
+                    timerDocAmThanh.Enabled = true;
+
                 if (UsePrintMachine)
                     InitPrintComPort();
-                 
+
                 playlist = new List<string>();
-                temp = new List<string>(); 
+                temp = new List<string>();
 
                 if (IsUseMainDisplay)
                     InitDisplayCOMPort();
@@ -210,23 +257,253 @@ namespace GPRO_QMS_Counter
                     counterId = loginObj.CounterId;
                     equipCode = loginObj.EquipCode;
                 }
-                ShowResult();
+
+                if (loginObj.UserName.ToLower().Equals("gpro admin"))
+                {
+                    btConnectSQL.Enabled = true;
+                    btSetting.Enabled = true;
+                    btTemplate.Enabled = true;
+                }
+                lbWaiting.Text = "0";
+                //Control.CheckForIllegalCrossThreadCalls = false;
+                // refreshThread = new Thread(refreshData);
+                //refreshThread.IsBackground = true;
+                // refreshThread.Start();
+                refreshData();
             }
             catch (Exception ex)
             {
             }
         }
 
+        private void ConnectDatabase()
+        {
+            string strConnectionString = DatabaseConnection.Instance.GetConnectionString(Application.StartupPath + "\\DATA.XML");
+            try
+            {
+                sqlCon = new SqlConnection(strConnectionString);
+                sqlCon.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(strConnectionString);
+                MessageBox.Show(ex.Message);
+                MessageBox.Show("Lỗi ConnectDatabase: Không thể kết nối với CSDL, Vui lòng thử cấu hình lại kết nối", "Lỗi kết nối", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FrmSQLConnect form = new FrmSQLConnect();
+                form.Show();
+            }
+        }
+
+        private string GetConfigByCode(string code)
+        {
+            if (configs != null && configs.Count > 0)
+            {
+                var obj = configs.FirstOrDefault(x => x.Code.Trim().ToUpper().Equals(code.Trim().ToUpper()));
+                return obj != null ? obj.Value : string.Empty;
+            }
+            return string.Empty;
+        }
+
+        private void ShowResult()
+        {
+            // var obj = BLLLoginHistory.Instance.GetForHome(connectString, loginObj.UserId, equipCode, DateTime.Now, UseWithThirdPattern);// BLLUser.Instance.ReadResult(FrmMain.loginObj.EquipCode);
+            var obj = BLLLoginHistory.Instance.GetForHome(sqlCon, loginObj.UserId, equipCode, DateTime.Now, UseWithThirdPattern);// BLLUser.Instance.ReadResult(FrmMain.loginObj.EquipCode);
+            if (obj != null)
+            {
+                //if (FirstLoad)
+                //{
+                //    lbWaiting.Invoke(new MethodInvoker(() => { lbWaiting.Text = obj.CounterWaitingTickets; }));
+                //    statusTotalWaiting.Invoke(new MethodInvoker(() => { statusTotalWaiting.Text = "Đang đợi: " + obj.TotalWating; }));
+                //    statusTotalDone.Invoke(new MethodInvoker(() => { statusTotalDone.Text = "Đã giao dịch: " + obj.TotalDone; }));
+                //    lbCurrentTicket.Invoke(new MethodInvoker(() => { lbCurrentTicket.Text = obj.CurrentTicket.ToString(); }));
+                //    FirstLoad = false;
+                //}
+                //else
+                //{
+                this.lbWaiting.Text = obj.CounterWaitingTickets;
+                this.statusTotalWaiting.Text = "Đang đợi: " + obj.TotalWating;
+                this.statusTotalDone.Text = "Đã giao dịch: " + obj.TotalDone;
+                this.lbCurrentTicket.Text = obj.CurrentTicket.ToString();
+                //  }
+
+                // MessageBox.Show("end ShowResult");
+            }
+            //   else
+            // MessageBox.Show("end ShowResult no");
+        }
+
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //    refreshThread = new Thread(refreshData);
+            //refreshThread.Start();  
+            try
+            {
+                ShowResult();
+                UpdateServiceInfo();
+            }
+            catch (Exception ex)
+            { }
+        }
+
+        private void refreshData()
+        {
+            //timer1.Enabled = false;
+            try
+            {
+                ShowResult();
+                UpdateServiceInfo();
+            }
+            catch (Exception ex)
+            {
+            }
+            //  timer1.Enabled = true;
+            //  refreshThread.Abort();
+            //  Thread.Sleep(2000);
+            //refreshData();
+        }
+
+        private void lbWaiting_TextChanged(object sender, EventArgs e)
+        {
+            if (this.lbWaiting.Text.Length > 24)
+            {
+                this.xPos1 = this.lbWaiting.Location.X;
+                this.yPos1 = this.lbWaiting.Location.Y;
+                if (!timer2.Enabled)
+                    this.timer2.Start();
+            }
+            else
+            {
+                if (timer2.Enabled)
+                    this.timer2.Stop();
+                this.lbWaiting.Left = 4;
+                // this.lbWaiting.Top = 205;
+            }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.xPos1 <= -this.lbWaiting.Width)
+                {
+                    this.lbWaiting.Location = new Point(this.panel12.Width, this.yPos1);
+                    this.xPos1 = this.panel12.Width;
+                }
+                else
+                {
+                    this.lbWaiting.Location = new Point(this.xPos1, this.yPos1);
+                    this.xPos1 -= 3;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        #region menu
+        private void btConnectSQL_Click(object sender, EventArgs e)
+        {
+            var f = new FrmSQLConnect();
+            f.ShowDialog();
+        }
+
+        private void btTemplate_Click(object sender, EventArgs e)
+        {
+            var f = new FrmTicketTemplate();
+            f.ShowDialog();
+        }
+
+        private void btSetting_Click(object sender, EventArgs e)
+        {
+            var f = new FrmConfig();
+            f.ShowDialog();
+        }
+        #endregion
+
+        #region services
+        private void CreateServicesButton()
+        {
+            try
+            {
+                if (serviceObjs.Count > 0)
+                {
+                    ServiceControl serviceControl;
+                    ServiceControlModel model;
+                    ModelSelectItem obj;
+                    panel11.Controls.Clear();
+                    int x = 5, y = 5, current = 0;
+                    // for (int i = 0; i < serviceObjs.Count; i += soNutDV1dong)
+                    for (int i = 0; i < serviceIds.Count; i += soNutDV1dong)
+                    {
+                        for (int ii = 0; ii < soNutDV1dong; ii++)
+                        {
+                            try
+                            {
+                                obj = serviceObjs.FirstOrDefault(a => a.Id == serviceIds[current]); //serviceObjs[current];
+                                if (obj != null)
+                                {
+                                    model = new ServiceControlModel() { Id = obj.Id, Name = obj.Name, wait = 0, Time = (!string.IsNullOrEmpty(obj.Code) ? obj.Code : "00:00:00") };
+                                    serviceControl = new ServiceControl(model);
+                                    serviceControl.Location = new System.Drawing.Point(x, y);
+                                    serviceControl.Name = "ctr_" + obj.Id; 
+                                    serviceControl.printTicketEvent += new EventHandler<PrintTicketEventArgs>(PrintTicket);
+                                    panel11.Controls.Add(serviceControl);
+                                    x += 280;
+
+                                    if (ii == soNutDV1dong - 1)
+                                    {
+                                        y += 75;
+                                        x = 5;
+                                    }
+                                }
+
+                            }
+                            catch (Exception) { }
+                            current++;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void UpdateServiceInfo()
+        {
+            try
+            {
+                int i = 0;
+                // var serviceObjs = BLLService.Instance.GetLookUp(connectString, true);
+                var serviceObjs = BLLService.Instance.GetLookUp(sqlCon, true);
+                serviceObjs = serviceObjs.Where(x => serviceIds.Contains(x.Id)).ToList();
+                foreach (Control c in panel11.Controls)
+                {
+                    string name =  c.Name  ;
+                    int serId = Convert.ToInt32(name.Split('_')[1]);
+                    ((IServiceControl)c).updateWaiting(serviceObjs.FirstOrDefault(x=>x.Id==serId).Data);
+                    i++;
+                }
+                //Thread.Sleep(1000);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        #endregion
+
         #region Display COM port
         private void InitDisplayCOMPort()
         {
             try
-            { 
-                btDisplayStatus.Text = "Display " +  displaySerialCOM.PortName;
+            {
+                btDisplayStatus.Text = "Display " + displaySerialCOM.PortName;
                 displaySerialCOM.BaudRate = 9600;
                 displaySerialCOM.DataBits = 8;
-                displaySerialCOM.Parity =  Parity.None;
-                displaySerialCOM.StopBits =  StopBits.One;
+                displaySerialCOM.Parity = Parity.None;
+                displaySerialCOM.StopBits = StopBits.One;
                 try
                 {
                     displaySerialCOM.Open();
@@ -283,18 +560,18 @@ namespace GPRO_QMS_Counter
         private void InitPrintComPort()
         {
             try
-            { 
+            {
                 btPrintStatus.Text = "Printer " + printSerialCOM.PortName;
-                printSerialCOM.BaudRate =9600;
+                printSerialCOM.BaudRate = 9600;
                 printSerialCOM.DataBits = 8;
-                printSerialCOM.Parity =  Parity.None;
-                printSerialCOM.StopBits =  StopBits.One; 
+                printSerialCOM.Parity = Parity.None;
+                printSerialCOM.StopBits = StopBits.One;
                 try
                 {
                     printSerialCOM.ReadTimeout = 1;
                     printSerialCOM.WriteTimeout = 1;
                     printSerialCOM.Open();
-                    btPrintStatus.Image = global::GPRO_QMS_Counter.Properties.Resources.com_port; 
+                    btPrintStatus.Image = global::GPRO_QMS_Counter.Properties.Resources.com_port;
                 }
                 catch (Exception)
                 {
@@ -304,69 +581,6 @@ namespace GPRO_QMS_Counter
             catch (Exception ex)
             {
                 MessageBox.Show("Lấy thông tin Com Keypad bị lỗi.\n" + ex.Message, "Lỗi Com Keypad");
-            }
-        }
-
-
-        #endregion
-
-        private void CreateServicesButton()
-        {
-            try
-            {
-                if (serviceObjs.Count > 0)
-                {
-                    ServiceControl serviceControl;
-                    ServiceControlModel model;
-                    ModelSelectItem obj;
-                    panel6.Controls.Clear();
-                    int x = 5, y = 5;
-                    for (int i = 0; i < serviceObjs.Count; i += 3)
-                    {
-                        obj = serviceObjs[i];
-                        model = new ServiceControlModel() { Id = obj.Id, Name = obj.Name, wait = 0, Time = (!string.IsNullOrEmpty(obj.Code) ? obj.Code : "00:00:00") };
-                        serviceControl = new ServiceControl(model);
-                        serviceControl.Location = new System.Drawing.Point(x, y);
-                        serviceControl.Name = "ctr" + i;
-                        serviceControl.printTicketEvent += new EventHandler<PrintTicketEventArgs>(PrintTicket);
-                        panel6.Controls.Add(serviceControl);
-
-                        try
-                        {
-                            obj = serviceObjs[i + 1];
-                            if (obj != null)
-                            {
-                                x += 280;
-                                model = new ServiceControlModel() { Id = obj.Id, Name = obj.Name, wait = 0, Time = (!string.IsNullOrEmpty(obj.Code) ? obj.Code : "00:00:00") };
-                                serviceControl = new ServiceControl(model);
-                                serviceControl.Location = new System.Drawing.Point(x, y);
-                                serviceControl.Name = "ctr" + (i + 1);
-                                serviceControl.printTicketEvent += new EventHandler<PrintTicketEventArgs>(PrintTicket);
-                                panel6.Controls.Add(serviceControl);
-                            }
-
-                            obj = serviceObjs[i + 2];
-                            if (obj != null)
-                            {
-                                x += 280;
-                                model = new ServiceControlModel() { Id = obj.Id, Name = obj.Name, wait = 0, Time = (!string.IsNullOrEmpty(obj.Code) ? obj.Code : "00:00:00") };
-                                serviceControl = new ServiceControl(model);
-                                serviceControl.Location = new System.Drawing.Point(x, y);
-                                serviceControl.Name = "ctr" + (i + 2);
-                                serviceControl.printTicketEvent += new EventHandler<PrintTicketEventArgs>(PrintTicket);
-                                panel6.Controls.Add(serviceControl);
-
-                                y += 75;
-                                x = 5;
-                            }
-                        }
-                        catch (Exception)
-                        { }
-                    }
-                }
-            }
-            catch (Exception)
-            {
             }
         }
 
@@ -455,207 +669,38 @@ namespace GPRO_QMS_Counter
             }
         }
 
-
-
-        #region quet thong tin
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                ShowResult();
-            }
-            catch (Exception)
-            {
-            }
-
-        }
-
-        private void ShowResult()
-        {
-            var obj = BLLLoginHistory.Instance.GetForHome(connectString, loginObj.UserId, equipCode, DateTime.Now, UseWithThirdPattern);// BLLUser.Instance.ReadResult(FrmMain.loginObj.EquipCode);
-            if (obj != null)
-            {
-                this.lbWaiting.Text = obj.CounterWaitingTickets;
-                this.lbGeneralWaiting.Text = obj.AllWaitingTickets;
-                this.statusTotalWaiting.Text = "Đang đợi: " + obj.TotalWating;
-                this.statusTotalDone.Text = "Đã giao dịch: " + obj.TotalDone;
-                this.lbCurrentTicket.Text = obj.CurrentTicket.ToString(); 
-            }
-        }
-
-        #endregion
-
-        #region chu chay
-        private void lbGeneralWaiting_TextChanged(object sender, EventArgs e)
-        {
-            if (this.lbGeneralWaiting.Text.Length > 26)
-            {
-                this.xPos = this.lbGeneralWaiting.Location.X;
-                this.yPos = this.lbGeneralWaiting.Location.Y;
-                if (!timer3.Enabled)
-                    this.timer3.Start();
-            }
-            else
-            {
-                if (timer3.Enabled)
-                    this.timer3.Stop();
-                this.lbGeneralWaiting.Left = 4;
-                this.lbGeneralWaiting.Top = 280;
-            }
-        }
-
-        private void lbWaiting_TextChanged(object sender, EventArgs e)
-        {
-            if (this.lbWaiting.Text.Length > 26)
-            {
-                this.xPos1 = this.lbWaiting.Location.X;
-                this.yPos1 = this.lbWaiting.Location.Y;
-                if (!timer2.Enabled)
-                    this.timer2.Start();
-            }
-            else
-            {
-                if (timer2.Enabled)
-                    this.timer2.Stop();
-                this.lbWaiting.Left = 4;
-                this.lbWaiting.Top = 205;
-            }
-        }
-
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (this.xPos1 <= -this.lbWaiting.Width)
-                {
-                    this.lbWaiting.Location = new Point(this.panel5.Width, this.yPos1);
-                    this.xPos1 = this.panel5.Width;
-                }
-                else
-                {
-                    this.lbWaiting.Location = new Point(this.xPos1, this.yPos1);
-                    this.xPos1 -= 3;
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void timer3_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (this.xPos <= -this.lbGeneralWaiting.Width)
-                {
-                    this.lbGeneralWaiting.Location = new Point(this.panel5.Width, this.yPos);
-                    this.xPos = this.panel5.Width;
-                }
-                else
-                {
-                    this.lbGeneralWaiting.Location = new Point(this.xPos, this.yPos);
-                    this.xPos -= 3;
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        #endregion
-
         private void Print(int newNum, int oldNum, string tenquay, string tendichvu)
         {
-            var template = ticketTemplate;
-            var now = DateTime.Now;
-            template = template.Replace("[canh-giua]", "\x1b\x61\x01|+|");
-            template = template.Replace("[canh-trai]", "\x1b\x61\x00|+|");
-            template = template.Replace("[1x1]", "\x1d\x21\x00|+|");
-            template = template.Replace("[2x1]", "\x1d\x21\x01|+|");
-            template = template.Replace("[3x1]", "\x1d\x21\x02|+|");
-            template = template.Replace("[2x2]", "\x1d\x21\x11|+|");
-            template = template.Replace("[3x3]", "\x1d\x21\x22|+|");
+            if (printSerialCOM.IsOpen)
+            {
+                var template = ticketTemplate;
+                var now = DateTime.Now;
+                template = template.Replace("[canh-giua]", "\x1b\x61\x01|+|");
+                template = template.Replace("[canh-trai]", "\x1b\x61\x00|+|");
+                template = template.Replace("[1x1]", "\x1d\x21\x00|+|");
+                template = template.Replace("[2x1]", "\x1d\x21\x01|+|");
+                template = template.Replace("[3x1]", "\x1d\x21\x02|+|");
+                template = template.Replace("[2x2]", "\x1d\x21\x11|+|");
+                template = template.Replace("[3x3]", "\x1d\x21\x22|+|");
 
-            template = template.Replace("[STT]", newNum.ToString());
-            template = template.Replace("[ten-quay]", tenquay);
-            template = template.Replace("[ten-dich-vu]", tendichvu);
-            template = template.Replace("[ngay]", ("ngay: " + now.ToString("dd/MM/yyyy")));
-            template = template.Replace("[gio]", (" gio: " + now.ToString("HH/mm")));
-            template = template.Replace("[dang-goi]", " dang goi " + oldNum);
-            template = template.Replace("[cat-giay]", "\x1b\x69|+|");
+                template = template.Replace("[STT]", newNum.ToString());
+                template = template.Replace("[ten-quay]", tenquay);
+                template = template.Replace("[ten-dich-vu]", tendichvu);
+                template = template.Replace("[ngay]", ("ngay: " + now.ToString("dd/MM/yyyy")));
+                template = template.Replace("[gio]", (" gio: " + now.ToString("HH/mm")));
+                template = template.Replace("[dang-goi]", " dang goi " + oldNum);
+                template = template.Replace("[cat-giay]", "\x1b\x69|+|");
 
-            var arr = template.Split(new string[] { "|+|" }, StringSplitOptions.RemoveEmptyEntries).ToArray();
-            for (int ii = 0; ii < so_lien; ii++)
-                for (int i = 0; i < arr.Length; i++)
-                    printSerialCOM.Write(arr[i]);
+                var arr = template.Split(new string[] { "|+|" }, StringSplitOptions.RemoveEmptyEntries).ToArray();
+
+                for (int ii = 0; ii < so_lien; ii++)
+                    for (int i = 0; i < arr.Length; i++)
+                        printSerialCOM.Write(arr[i]);
+            }
             UpdateServiceInfo();
             ShowResult();
         }
 
-        private void UpdateServiceInfo()
-        {
-            try
-            {
-                int i = 0;
-                var serviceObjs = BLLService.Instance.GetLookUp(connectString, true);
-                serviceObjs = serviceObjs.Where(x => serviceIds.Contains(x.Id)).ToList();
-                foreach (Control c in panel6.Controls)
-                {
-                    ((IServiceControl)c).updateWaiting(serviceObjs[i].Data);
-                    i++;
-                }
-                //Thread.Sleep(1000);
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void FrmMain4_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            try
-            {
-                if (loginObj != null && !string.IsNullOrEmpty(connectString))
-                    BLLLoginHistory.Instance.CounterLoginLogOut(connectString, loginObj.UserId, equipCode, DateTime.Now);
-                if (displaySerialCOM.IsOpen)
-                    displaySerialCOM.Close();
-                if (printSerialCOM.IsOpen)
-                    printSerialCOM.Close();
-            }
-            catch (Exception)
-            {
-            }
-
-        }
-
-        private string GetConfigByCode(string code)
-        {
-            if (configs != null && configs.Count > 0)
-            {
-                var obj = configs.FirstOrDefault(x => x.Code.Trim().ToUpper().Equals(code.Trim().ToUpper()));
-                return obj != null ? obj.Value : string.Empty;
-            }
-            return string.Empty;
-        }
-
-        #region menu
-        private void btConnectSQL_Click(object sender, EventArgs e)
-        {
-            var f = new FrmSQLConnect();
-            f.ShowDialog();
-        }
-
-        private void btTemplate_Click(object sender, EventArgs e)
-        {
-            var f = new FrmTicketTemplate();
-            f.ShowDialog();
-        }
-
-        private void btSetting_Click(object sender, EventArgs e)
-        {
-            var f = new FrmConfig();
-            f.ShowDialog();
-        }
         #endregion
 
         #region button event
@@ -840,11 +885,17 @@ namespace GPRO_QMS_Counter
             {
                 while (temp.Count > 0)
                 {
+                    try
+                    {
+                        player.SoundLocation = (soundPath + temp[0]);
+                        int iTime = SoundInfo.GetSoundLength(player.SoundLocation.Trim()) - 0;
+                        player.Play();
+                        Thread.Sleep(iTime);
+                    }
+                    catch (Exception)
+                    {
+                    }
 
-                    player.SoundLocation = (soundPath + temp[0]);
-                    int iTime = SoundInfo.GetSoundLength(player.SoundLocation.Trim()) - 0;
-                    player.Play();
-                    Thread.Sleep(iTime);
                     temp.Remove(temp[0]);
                 }
             }
@@ -912,7 +963,5 @@ namespace GPRO_QMS_Counter
             }
         }
         #endregion  
-
-
     }
 }

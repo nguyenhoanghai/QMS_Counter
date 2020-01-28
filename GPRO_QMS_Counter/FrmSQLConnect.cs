@@ -209,6 +209,10 @@ namespace GPRO_QMS_Counter
             soundPathNode.AppendChild(xmlDocument.CreateTextNode(""));
             appConfigNode.AppendChild(soundPathNode);
 
+            XmlNode slNutDichVuCapPhieuNode = xmlDocument.CreateElement("NumberOfButton");
+            slNutDichVuCapPhieuNode.AppendChild(xmlDocument.CreateTextNode("3"));
+            appConfigNode.AppendChild(slNutDichVuCapPhieuNode);
+
             xmlDocument.Save(filename);
             Application.Restart();
             Environment.Exit(0);

@@ -2,7 +2,7 @@
 <SystemConfig>
   <SQLServer id="1">
     <Server_Name>QNd8Qi1YHVg6gBfOh9dXCw==</Server_Name>
-    <Database>lxufIdkUVuu5deoTUrqjhA==</Database>
+    <Database>3sJZ+O5+2eJqbBTkD3o6+A==</Database>
     <User>ZXhwutftOGY2GQGN7xFCdA==</User>
     <Password>u83X0HO/seCu6CcDOMQghA==</Password>
     <Window_Authenticate>False</Window_Authenticate>
@@ -30,7 +30,8 @@
     <Print>True</Print>
     <COMPrint>COM10</COMPrint>
     <PrintCode>27</PrintCode>
-    <ReadSound>False</ReadSound>
-    <SoundPath>C:\Users\DoNguyen\Desktop\41 tt\QMS\Sound</SoundPath>
+    <ReadSound>True</ReadSound>
+    <SoundPath>C:\Users\DoNguyen\Desktop\Audios\</SoundPath>
+    <NumberOfButton>3</NumberOfButton>
   </AppConfig>
 </SystemConfig>

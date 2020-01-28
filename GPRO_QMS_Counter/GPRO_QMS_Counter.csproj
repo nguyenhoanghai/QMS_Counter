@@ -89,6 +89,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CirclePictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +178,12 @@
     <Compile Include="FrmMain4.Designer.cs">
       <DependentUpon>FrmMain4.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmMainPhongKham.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMainPhongKham.Designer.cs">
+      <DependentUpon>FrmMainPhongKham.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmPermission.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -241,6 +256,9 @@
     <Compile Include="ServiceControl.Designer.cs">
       <DependentUpon>ServiceControl.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmAbout.resx">
       <DependentUpon>FrmAbout.cs</DependentUpon>
     </EmbeddedResource>
@@ -276,6 +294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain4.resx">
       <DependentUpon>FrmMain4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMainPhongKham.resx">
+      <DependentUpon>FrmMainPhongKham.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPermission.resx">
       <DependentUpon>FrmPermission.cs</DependentUpon>
@@ -350,6 +371,7 @@
     <None Include="Resources\checklist %281%29.png" />
     <None Include="Resources\com_port.png" />
     <None Include="Resources\com_port_dis.png" />
+    <None Include="Resources\cerrar.png" />
     <Content Include="Resources\deskSound.jpg" />
     <None Include="Resources\edit_info.png" />
     <Content Include="Resources\finish.jpg" />
@@ -366,14 +388,21 @@
     <None Include="Resources\iconfinder_Call_mobile_device_electronic_phone_telephone_1886515 %281%29.png" />
     <None Include="Resources\if_our_process_2_45123.png" />
     <None Include="Resources\iconfinder_receipt_3339034.png" />
+    <None Include="Resources\iconfinder_Interface_layout_multi_column_design_column_website_1886962.png" />
+    <None Include="Resources\iconfinder_coupon_3387315.png" />
+    <None Include="Resources\iconfinder_cmyk-03_906566.png" />
+    <None Include="Resources\iconfinder_Options_105206.png" />
     <Content Include="Resources\login.png" />
     <Content Include="Resources\login1.jpg" />
     <Content Include="Resources\logout.gif" />
+    <None Include="Resources\maxi.png" />
+    <None Include="Resources\minimazar.png" />
     <Content Include="Resources\move.png" />
     <Content Include="Resources\next.jpg" />
     <Content Include="Resources\recall.png" />
     <None Include="Resources\register_now_button_2.png" />
     <None Include="Resources\Register-now-PNG-Overlay.png" />
+    <None Include="Resources\res.png" />
     <Content Include="Resources\save.png" />
     <None Include="Resources\server_connect.png" />
     <Content Include="Resources\ticketSound.jpg" />

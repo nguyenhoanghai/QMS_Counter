@@ -21,7 +21,7 @@ namespace GPRO_QMS_Counter
         }
 
         private void FrmLogin_Load(object sender, EventArgs e)
-        { 
+        {
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(Application.StartupPath + "\\DATA.XML");
             foreach (XmlElement element in xmlDoc.DocumentElement)
@@ -35,7 +35,7 @@ namespace GPRO_QMS_Counter
                             switch (node.Name)
                             {
                                 case "CounterId": counterId = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); break;
-                               }
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -65,7 +65,8 @@ namespace GPRO_QMS_Counter
                 string text2 = this.txtPassword.Text;
                 if (text.Equals("gproadmin") && text2.Equals("gproadmin"))
                 {
-                    FrmMain.loginObj = new Login()
+
+                    var login = new Login()
                     {
                         UserName = "GPRO Admin",
                         EquipCode = counterId,
@@ -74,6 +75,11 @@ namespace GPRO_QMS_Counter
                         CounterId = counterId,
                         CounterName = "GPRO Admin Counter"
                     };
+                    FrmMain.loginObj =  login;
+                    FrmMain2.loginObj = login;
+                    FrmMain4.loginObj =  login;
+                    Form1.loginObj = login;
+                    FrmMainPhongKham.loginObj = login;
                     FrmLogin.bCloseForm = true;
                     this.Close();
                 }
@@ -94,16 +100,23 @@ namespace GPRO_QMS_Counter
                         }
                         catch (Exception) { }
                         ResponseBaseModel rs;
-                        if (apptype == 1 || apptype==4)
-                            rs = BLLLoginHistory.Instance.Login(connectString, txtUsername.Text, txtPassword.Text, counterId);
-                        else
-                            rs = BLLLoginHistory.Instance.Login(connectString, txtUsername.Text, txtPassword.Text);
-
+                        switch (apptype)
+                        {
+                            case 1:
+                            case 4:
+                            case 5:
+                                rs = BLLLoginHistory.Instance.Login(connectString, txtUsername.Text, txtPassword.Text, counterId); break;
+                            default:
+                                rs = BLLLoginHistory.Instance.Login(connectString, txtUsername.Text, txtPassword.Text);
+                                break;
+                        }
                         if (rs.IsSuccess)
                         {
                             FrmMain.loginObj = rs.Data;
                             FrmMain2.loginObj = rs.Data;
                             FrmMain4.loginObj = rs.Data;
+                            Form1.loginObj = rs.Data;
+                            FrmMainPhongKham.loginObj = rs.Data;
                             FrmLogin.bCloseForm = true;
                             this.Close();
                         }
