@@ -483,6 +483,12 @@ namespace GPRO_QMS_Counter
             }
         }
 
+        private void btActive_Click(object sender, EventArgs e)
+        {
+            var f = new FrmRegister();
+            f.ShowDialog();
+        }
+
         #endregion
 
         #region chu chay

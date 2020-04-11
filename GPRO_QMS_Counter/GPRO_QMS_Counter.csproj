@@ -392,6 +392,7 @@
     <None Include="Resources\iconfinder_coupon_3387315.png" />
     <None Include="Resources\iconfinder_cmyk-03_906566.png" />
     <None Include="Resources\iconfinder_Options_105206.png" />
+    <None Include="Resources\iconfinder_stock_keyring_21472.png" />
     <Content Include="Resources\login.png" />
     <Content Include="Resources\login1.jpg" />
     <Content Include="Resources\logout.gif" />

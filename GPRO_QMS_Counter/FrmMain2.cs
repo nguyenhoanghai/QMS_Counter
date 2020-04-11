@@ -1,7 +1,6 @@
 ﻿using DevExpress.XtraBars;
 using GPRO.Core.Hai;
 using GPRO_QMS_Counter.Helper;
-using GPRO_QMS_Counter.Properties;
 using Microsoft.Win32;
 using QMS_System.Data.BLL;
 using QMS_System.Data.Enum;
@@ -12,7 +11,6 @@ using System.Configuration;
 using System.IO.Ports;
 using System.Linq;
 using System.Media;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
@@ -49,13 +47,13 @@ namespace GPRO_QMS_Counter
             isFinishRead = true,
             bRegistered = false,
             bCheckValid = false,
-            UsePrintMachine=false;
+            UsePrintMachine = false;
         static List<string> temp, playlist;
         SoundPlayer player;
         Thread playThread;
         string soundPath = string.Empty;
-     public  static List<int> serviceIds;
-       
+        public static List<int> serviceIds;
+
 
         private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -171,6 +169,12 @@ namespace GPRO_QMS_Counter
             }
         }
 
+        private void btActive_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var forms = new FrmRegister();
+            forms.Show();
+        }
+
         private void ribbon_Click(object sender, EventArgs e)
         {
 
@@ -228,14 +232,14 @@ namespace GPRO_QMS_Counter
                 catch (Exception)
                 { }
                 configs = BLLConfig.Instance.Gets(connectString, true);
-                lib_Services = BLLService.Instance.GetsForMain(connectString); 
+                lib_Services = BLLService.Instance.GetsForMain(connectString);
                 int.TryParse(GetConfigByCode(eConfigCode.NumberOfLinePerTime), out so_lien);
                 int.TryParse(GetConfigByCode(eConfigCode.PrintType), out printType);
                 int.TryParse(GetConfigByCode(eConfigCode.CheckTimeBeforePrintTicket), out CheckTimeBeforePrintTicket);
                 int.TryParse(GetConfigByCode(eConfigCode.PrintTicketReturnCurrentNumberOrServiceCode), out printTicketReturnCurrentNumberOrServiceCode);
                 int.TryParse(GetConfigByCode(eConfigCode.StartNumber), out startNumber);
                 int.TryParse(GetConfigByCode(eConfigCode.UseWithThirdPattern), out UseWithThirdPattern);
-                 
+
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(Application.StartupPath + "\\DATA.XML");
                 foreach (XmlElement element in xmlDoc.DocumentElement)
@@ -285,11 +289,11 @@ namespace GPRO_QMS_Counter
                 //check call active
                 if (MdiChildren.Any())
                     if (this.ActiveMdiChild is IChildMethods)
-                        ((IChildMethods)this.ActiveMdiChild).enableTimer(); 
+                        ((IChildMethods)this.ActiveMdiChild).enableTimer();
                 playlist = new List<string>();
                 temp = new List<string>();
-                 
-                 if (IsUseMainDisplay)
+
+                if (IsUseMainDisplay)
                     InitDisplayCOMPort();
 
                 serviceIds = (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["ServiceIds"].ToString()) ? ConfigurationManager.AppSettings["ServiceIds"].ToString() : "1,2,3,4,5,6").Split(',').Select(x => Convert.ToInt32(x)).ToList();
@@ -392,16 +396,16 @@ namespace GPRO_QMS_Counter
         private void InitPrintComPort()
         {
             try
-            { 
+            {
                 barBtPrintComStatus.Caption = "Printer " + printSerialCOM.PortName;
                 printSerialCOM.BaudRate = 9600;
                 printSerialCOM.DataBits = 8;
-                printSerialCOM.Parity =  Parity.None;
-                printSerialCOM.StopBits =  StopBits.One; 
+                printSerialCOM.Parity = Parity.None;
+                printSerialCOM.StopBits = StopBits.One;
                 try
-                { 
+                {
                     printSerialCOM.Open();
-                    barBtPrintComStatus.Glyph = global::GPRO_QMS_Counter.Properties.Resources.com_port; 
+                    barBtPrintComStatus.Glyph = global::GPRO_QMS_Counter.Properties.Resources.com_port;
                 }
                 catch (Exception)
                 {
@@ -538,16 +542,16 @@ namespace GPRO_QMS_Counter
         private void InitDisplayCOMPort()
         {
             try
-            { 
+            {
                 barBtDisplayComStatus.Caption = "Display " + displaySerialCOM.PortName;
                 displaySerialCOM.BaudRate = 9600;
                 displaySerialCOM.DataBits = 8;
-                displaySerialCOM.Parity =  Parity.None;
-                displaySerialCOM.StopBits =  StopBits.One;
+                displaySerialCOM.Parity = Parity.None;
+                displaySerialCOM.StopBits = StopBits.One;
                 try
                 {
                     displaySerialCOM.Open();
-                    barBtDisplayComStatus.Glyph = global::GPRO_QMS_Counter.Properties.Resources.com_port; 
+                    barBtDisplayComStatus.Glyph = global::GPRO_QMS_Counter.Properties.Resources.com_port;
                 }
                 catch (Exception)
                 {

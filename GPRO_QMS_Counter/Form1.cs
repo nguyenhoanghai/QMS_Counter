@@ -332,6 +332,12 @@ namespace GPRO_QMS_Counter
             // MessageBox.Show("end ShowResult no");
         }
 
+        private void btActive_Click(object sender, EventArgs e)
+        {
+            var f = new FrmRegister();
+            f.ShowDialog();
+
+        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {

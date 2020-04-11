@@ -2,7 +2,7 @@
 <SystemConfig>
   <SQLServer id="1">
     <Server_Name>QNd8Qi1YHVg6gBfOh9dXCw==</Server_Name>
-    <Database>3sJZ+O5+2eJqbBTkD3o6+A==</Database>
+    <Database>FVn3nIe8+nfM/5p8PYcrp1WwAcnPRtDpRIa4tlz9s7UXjNgnB/2oTtt8WzTmB/qo</Database>
     <User>ZXhwutftOGY2GQGN7xFCdA==</User>
     <Password>u83X0HO/seCu6CcDOMQghA==</Password>
     <Window_Authenticate>False</Window_Authenticate>
@@ -24,13 +24,13 @@
 
 [cat-giay]</Template>
     <SoLien>1</SoLien>
-    <CounterId>2</CounterId>
-    <Display>True</Display>
+    <CounterId>21</CounterId>
+    <Display>False</Display>
     <COMDisplay>COM2</COMDisplay>
-    <Print>True</Print>
+    <Print>False</Print>
     <COMPrint>COM10</COMPrint>
     <PrintCode>27</PrintCode>
-    <ReadSound>True</ReadSound>
+    <ReadSound>False</ReadSound>
     <SoundPath>C:\Users\DoNguyen\Desktop\Audios\</SoundPath>
     <NumberOfButton>3</NumberOfButton>
   </AppConfig>

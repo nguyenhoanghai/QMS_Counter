@@ -263,6 +263,16 @@ namespace GPRO_QMS_Counter.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_stock_keyring_21472 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_stock_keyring_21472", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap if___03_1720778 {
             get {
                 object obj = ResourceManager.GetObject("if_--03_1720778", resourceCulture);

@@ -324,6 +324,12 @@ namespace GPRO_QMS_Counter
 
         }
 
+        private void btActive_Click(object sender, EventArgs e)
+        {
+            var f = new FrmRegister();
+            f.ShowDialog();
+        }
+
         #region chu chay
         private void RemovePlaceHolder(Object sender, EventArgs e)
         {

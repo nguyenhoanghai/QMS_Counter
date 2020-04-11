@@ -49,6 +49,7 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.lbCurrentTicket = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btActive = new System.Windows.Forms.Button();
             this.circlePictureBox1 = new GPRO_QMS_Counter.CirclePictureBox();
             this.btTemplate = new System.Windows.Forms.Button();
             this.btConnectSQL = new System.Windows.Forms.Button();
@@ -93,9 +94,9 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(473, 528);
+            this.panel1.Size = new System.Drawing.Size(631, 650);
             this.panel1.TabIndex = 0;
             // 
             // panel5
@@ -103,10 +104,10 @@
             this.panel5.Controls.Add(this.panel8);
             this.panel5.Controls.Add(this.panel6);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(82, 31);
-            this.panel5.Margin = new System.Windows.Forms.Padding(2);
+            this.panel5.Location = new System.Drawing.Point(109, 38);
+            this.panel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(391, 465);
+            this.panel5.Size = new System.Drawing.Size(522, 573);
             this.panel5.TabIndex = 0;
             // 
             // panel8
@@ -119,10 +120,10 @@
             this.panel8.Controls.Add(this.btCallAnyTicket);
             this.panel8.Controls.Add(this.btNext);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel8.Location = new System.Drawing.Point(0, 263);
-            this.panel8.Margin = new System.Windows.Forms.Padding(2);
+            this.panel8.Location = new System.Drawing.Point(0, 324);
+            this.panel8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(391, 202);
+            this.panel8.Size = new System.Drawing.Size(522, 249);
             this.panel8.TabIndex = 2;
             // 
             // btnGoiUuTien
@@ -134,9 +135,10 @@
             this.btnGoiUuTien.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGoiUuTien.ForeColor = System.Drawing.Color.White;
             this.btnGoiUuTien.Image = ((System.Drawing.Image)(resources.GetObject("btnGoiUuTien.Image")));
-            this.btnGoiUuTien.Location = new System.Drawing.Point(22, 106);
+            this.btnGoiUuTien.Location = new System.Drawing.Point(29, 130);
+            this.btnGoiUuTien.Margin = new System.Windows.Forms.Padding(4);
             this.btnGoiUuTien.Name = "btnGoiUuTien";
-            this.btnGoiUuTien.Size = new System.Drawing.Size(98, 92);
+            this.btnGoiUuTien.Size = new System.Drawing.Size(131, 113);
             this.btnGoiUuTien.TabIndex = 40;
             this.btnGoiUuTien.Text = "Gọi ưu tiên";
             this.btnGoiUuTien.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -156,9 +158,10 @@
             this.btFinish.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.btFinish.ForeColor = System.Drawing.Color.Yellow;
             this.btFinish.Image = ((System.Drawing.Image)(resources.GetObject("btFinish.Image")));
-            this.btFinish.Location = new System.Drawing.Point(147, 105);
+            this.btFinish.Location = new System.Drawing.Point(196, 129);
+            this.btFinish.Margin = new System.Windows.Forms.Padding(4);
             this.btFinish.Name = "btFinish";
-            this.btFinish.Size = new System.Drawing.Size(98, 92);
+            this.btFinish.Size = new System.Drawing.Size(131, 113);
             this.btFinish.TabIndex = 36;
             this.btFinish.Text = "Hoàn tất";
             this.btFinish.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -177,9 +180,10 @@
             this.btTranfer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btTranfer.ForeColor = System.Drawing.Color.Yellow;
             this.btTranfer.Image = ((System.Drawing.Image)(resources.GetObject("btTranfer.Image")));
-            this.btTranfer.Location = new System.Drawing.Point(205, 50);
+            this.btTranfer.Location = new System.Drawing.Point(273, 62);
+            this.btTranfer.Margin = new System.Windows.Forms.Padding(4);
             this.btTranfer.Name = "btTranfer";
-            this.btTranfer.Size = new System.Drawing.Size(98, 92);
+            this.btTranfer.Size = new System.Drawing.Size(131, 113);
             this.btTranfer.TabIndex = 39;
             this.btTranfer.Text = "Chuyển";
             this.btTranfer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -199,9 +203,10 @@
             this.btCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btCancel.ForeColor = System.Drawing.Color.Yellow;
             this.btCancel.Image = ((System.Drawing.Image)(resources.GetObject("btCancel.Image")));
-            this.btCancel.Location = new System.Drawing.Point(270, 104);
+            this.btCancel.Location = new System.Drawing.Point(360, 128);
+            this.btCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btCancel.Name = "btCancel";
-            this.btCancel.Size = new System.Drawing.Size(98, 92);
+            this.btCancel.Size = new System.Drawing.Size(131, 113);
             this.btCancel.TabIndex = 37;
             this.btCancel.Text = "Hủy";
             this.btCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -220,9 +225,10 @@
             this.btRecall.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btRecall.ForeColor = System.Drawing.Color.Yellow;
             this.btRecall.Image = ((System.Drawing.Image)(resources.GetObject("btRecall.Image")));
-            this.btRecall.Location = new System.Drawing.Point(147, 7);
+            this.btRecall.Location = new System.Drawing.Point(196, 9);
+            this.btRecall.Margin = new System.Windows.Forms.Padding(4);
             this.btRecall.Name = "btRecall";
-            this.btRecall.Size = new System.Drawing.Size(98, 92);
+            this.btRecall.Size = new System.Drawing.Size(131, 113);
             this.btRecall.TabIndex = 35;
             this.btRecall.Text = "  Nhắc lại";
             this.btRecall.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -241,9 +247,10 @@
             this.btCallAnyTicket.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btCallAnyTicket.ForeColor = System.Drawing.Color.Yellow;
             this.btCallAnyTicket.Image = ((System.Drawing.Image)(resources.GetObject("btCallAnyTicket.Image")));
-            this.btCallAnyTicket.Location = new System.Drawing.Point(270, 6);
+            this.btCallAnyTicket.Location = new System.Drawing.Point(360, 7);
+            this.btCallAnyTicket.Margin = new System.Windows.Forms.Padding(4);
             this.btCallAnyTicket.Name = "btCallAnyTicket";
-            this.btCallAnyTicket.Size = new System.Drawing.Size(98, 92);
+            this.btCallAnyTicket.Size = new System.Drawing.Size(131, 113);
             this.btCallAnyTicket.TabIndex = 38;
             this.btCallAnyTicket.Text = "Gọi bất kỳ";
             this.btCallAnyTicket.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -262,9 +269,10 @@
             this.btNext.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btNext.ForeColor = System.Drawing.Color.Yellow;
             this.btNext.Image = ((System.Drawing.Image)(resources.GetObject("btNext.Image")));
-            this.btNext.Location = new System.Drawing.Point(22, 7);
+            this.btNext.Location = new System.Drawing.Point(29, 9);
+            this.btNext.Margin = new System.Windows.Forms.Padding(4);
             this.btNext.Name = "btNext";
-            this.btNext.Size = new System.Drawing.Size(98, 92);
+            this.btNext.Size = new System.Drawing.Size(131, 113);
             this.btNext.TabIndex = 34;
             this.btNext.Text = "Gọi tiếp theo";
             this.btNext.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -278,9 +286,9 @@
             this.panel6.Controls.Add(this.panel7);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(0, 0);
-            this.panel6.Margin = new System.Windows.Forms.Padding(2);
+            this.panel6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(391, 465);
+            this.panel6.Size = new System.Drawing.Size(522, 573);
             this.panel6.TabIndex = 32;
             // 
             // panel12
@@ -289,21 +297,22 @@
             this.panel12.Controls.Add(this.label3);
             this.panel12.Controls.Add(this.lbWaiting);
             this.panel12.Controls.Add(this.txtParam);
-            this.panel12.Location = new System.Drawing.Point(0, 140);
-            this.panel12.Margin = new System.Windows.Forms.Padding(2);
+            this.panel12.Location = new System.Drawing.Point(0, 172);
+            this.panel12.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(391, 119);
+            this.panel12.Size = new System.Drawing.Size(521, 146);
             this.panel12.TabIndex = 1;
             // 
             // txtResult
             // 
             this.txtResult.BackColor = System.Drawing.Color.Gainsboro;
             this.txtResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtResult.Location = new System.Drawing.Point(3, 96);
+            this.txtResult.Location = new System.Drawing.Point(4, 118);
+            this.txtResult.Margin = new System.Windows.Forms.Padding(4);
             this.txtResult.Multiline = true;
             this.txtResult.Name = "txtResult";
             this.txtResult.ReadOnly = true;
-            this.txtResult.Size = new System.Drawing.Size(386, 22);
+            this.txtResult.Size = new System.Drawing.Size(513, 26);
             this.txtResult.TabIndex = 23;
             this.txtResult.Text = "Kết quả xử lý .";
             // 
@@ -313,8 +322,9 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Navy;
             this.label3.Location = new System.Drawing.Point(0, 0);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(391, 24);
+            this.label3.Size = new System.Drawing.Size(521, 30);
             this.label3.TabIndex = 6;
             this.label3.Text = "ĐANG ĐỢI TẠI QUẦY";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -324,9 +334,10 @@
             this.lbWaiting.AutoSize = true;
             this.lbWaiting.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbWaiting.ForeColor = System.Drawing.Color.Yellow;
-            this.lbWaiting.Location = new System.Drawing.Point(3, 28);
+            this.lbWaiting.Location = new System.Drawing.Point(4, 34);
+            this.lbWaiting.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbWaiting.Name = "lbWaiting";
-            this.lbWaiting.Size = new System.Drawing.Size(36, 37);
+            this.lbWaiting.Size = new System.Drawing.Size(43, 46);
             this.lbWaiting.TabIndex = 7;
             this.lbWaiting.Text = "0";
             this.lbWaiting.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -335,10 +346,11 @@
             // txtParam
             // 
             this.txtParam.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtParam.Location = new System.Drawing.Point(3, 70);
+            this.txtParam.Location = new System.Drawing.Point(4, 86);
+            this.txtParam.Margin = new System.Windows.Forms.Padding(4);
             this.txtParam.MaxLength = 10;
             this.txtParam.Name = "txtParam";
-            this.txtParam.Size = new System.Drawing.Size(386, 22);
+            this.txtParam.Size = new System.Drawing.Size(513, 26);
             this.txtParam.TabIndex = 22;
             this.txtParam.Text = "Yêu cầu xử lý ...";
             this.txtParam.TextChanged += new System.EventHandler(this.lbWaiting_TextChanged);
@@ -352,9 +364,9 @@
             this.panel7.Controls.Add(this.lbCurrentTicket);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 0);
-            this.panel7.Margin = new System.Windows.Forms.Padding(2);
+            this.panel7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(391, 135);
+            this.panel7.Size = new System.Drawing.Size(522, 166);
             this.panel7.TabIndex = 0;
             // 
             // lbCurrentTicket
@@ -363,33 +375,52 @@
             this.lbCurrentTicket.Font = new System.Drawing.Font("Tahoma", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCurrentTicket.ForeColor = System.Drawing.Color.Yellow;
             this.lbCurrentTicket.Location = new System.Drawing.Point(0, 0);
-            this.lbCurrentTicket.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbCurrentTicket.Name = "lbCurrentTicket";
-            this.lbCurrentTicket.Size = new System.Drawing.Size(391, 135);
+            this.lbCurrentTicket.Size = new System.Drawing.Size(522, 166);
             this.lbCurrentTicket.TabIndex = 0;
             this.lbCurrentTicket.Text = "9999";
             this.lbCurrentTicket.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.btActive);
             this.panel4.Controls.Add(this.circlePictureBox1);
             this.panel4.Controls.Add(this.btTemplate);
             this.panel4.Controls.Add(this.btConnectSQL);
             this.panel4.Controls.Add(this.btSetting);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel4.Location = new System.Drawing.Point(0, 31);
-            this.panel4.Margin = new System.Windows.Forms.Padding(2);
+            this.panel4.Location = new System.Drawing.Point(0, 38);
+            this.panel4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(82, 465);
+            this.panel4.Size = new System.Drawing.Size(109, 573);
             this.panel4.TabIndex = 1;
+            // 
+            // btActive
+            // 
+            this.btActive.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btActive.FlatAppearance.BorderSize = 0;
+            this.btActive.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(178)))), ((int)(((byte)(185)))));
+            this.btActive.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(101)))), ((int)(((byte)(115)))));
+            this.btActive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btActive.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btActive.ForeColor = System.Drawing.Color.White;
+            this.btActive.Image = global::GPRO_QMS_Counter.Properties.Resources.iconfinder_stock_keyring_21472;
+            this.btActive.Location = new System.Drawing.Point(0, 378);
+            this.btActive.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btActive.Name = "btActive";
+            this.btActive.Size = new System.Drawing.Size(109, 70);
+            this.btActive.TabIndex = 14;
+            this.btActive.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btActive.UseVisualStyleBackColor = true;
+            this.btActive.Click += new System.EventHandler(this.btActive_Click);
             // 
             // circlePictureBox1
             // 
             this.circlePictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("circlePictureBox1.Image")));
-            this.circlePictureBox1.Location = new System.Drawing.Point(8, 7);
-            this.circlePictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.circlePictureBox1.Location = new System.Drawing.Point(11, 9);
+            this.circlePictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.circlePictureBox1.Name = "circlePictureBox1";
-            this.circlePictureBox1.Size = new System.Drawing.Size(68, 73);
+            this.circlePictureBox1.Size = new System.Drawing.Size(91, 90);
             this.circlePictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.circlePictureBox1.TabIndex = 10;
             this.circlePictureBox1.TabStop = false;
@@ -405,10 +436,10 @@
             this.btTemplate.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btTemplate.ForeColor = System.Drawing.Color.White;
             this.btTemplate.Image = global::GPRO_QMS_Counter.Properties.Resources.iconfinder_coupon_3387315;
-            this.btTemplate.Location = new System.Drawing.Point(1, 247);
-            this.btTemplate.Margin = new System.Windows.Forms.Padding(2);
+            this.btTemplate.Location = new System.Drawing.Point(1, 304);
+            this.btTemplate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btTemplate.Name = "btTemplate";
-            this.btTemplate.Size = new System.Drawing.Size(82, 57);
+            this.btTemplate.Size = new System.Drawing.Size(109, 70);
             this.btTemplate.TabIndex = 13;
             this.btTemplate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btTemplate.UseVisualStyleBackColor = true;
@@ -425,10 +456,10 @@
             this.btConnectSQL.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btConnectSQL.ForeColor = System.Drawing.Color.White;
             this.btConnectSQL.Image = global::GPRO_QMS_Counter.Properties.Resources.iconfinder_cmyk_03_906566;
-            this.btConnectSQL.Location = new System.Drawing.Point(1, 180);
-            this.btConnectSQL.Margin = new System.Windows.Forms.Padding(2);
+            this.btConnectSQL.Location = new System.Drawing.Point(1, 222);
+            this.btConnectSQL.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btConnectSQL.Name = "btConnectSQL";
-            this.btConnectSQL.Size = new System.Drawing.Size(82, 57);
+            this.btConnectSQL.Size = new System.Drawing.Size(109, 70);
             this.btConnectSQL.TabIndex = 11;
             this.btConnectSQL.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btConnectSQL.UseVisualStyleBackColor = true;
@@ -445,10 +476,10 @@
             this.btSetting.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btSetting.ForeColor = System.Drawing.Color.White;
             this.btSetting.Image = global::GPRO_QMS_Counter.Properties.Resources.iconfinder_Options_105206;
-            this.btSetting.Location = new System.Drawing.Point(1, 119);
-            this.btSetting.Margin = new System.Windows.Forms.Padding(2);
+            this.btSetting.Location = new System.Drawing.Point(1, 146);
+            this.btSetting.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btSetting.Name = "btSetting";
-            this.btSetting.Size = new System.Drawing.Size(82, 57);
+            this.btSetting.Size = new System.Drawing.Size(109, 70);
             this.btSetting.TabIndex = 12;
             this.btSetting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btSetting.UseVisualStyleBackColor = true;
@@ -465,9 +496,9 @@
             this.panel3.Controls.Add(this.label2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(473, 31);
+            this.panel3.Size = new System.Drawing.Size(631, 38);
             this.panel3.TabIndex = 0;
             this.panel3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel3_MouseDown);
             // 
@@ -476,10 +507,10 @@
             this.btnNormalSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNormalSize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNormalSize.Image = global::GPRO_QMS_Counter.Properties.Resources.res;
-            this.btnNormalSize.Location = new System.Drawing.Point(364, 6);
-            this.btnNormalSize.Margin = new System.Windows.Forms.Padding(2);
+            this.btnNormalSize.Location = new System.Drawing.Point(485, 7);
+            this.btnNormalSize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNormalSize.Name = "btnNormalSize";
-            this.btnNormalSize.Size = new System.Drawing.Size(16, 18);
+            this.btnNormalSize.Size = new System.Drawing.Size(21, 22);
             this.btnNormalSize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnNormalSize.TabIndex = 11;
             this.btnNormalSize.TabStop = false;
@@ -491,10 +522,10 @@
             this.btnMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMinimize.Image = global::GPRO_QMS_Counter.Properties.Resources.minimazar;
-            this.btnMinimize.Location = new System.Drawing.Point(393, 6);
-            this.btnMinimize.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMinimize.Location = new System.Drawing.Point(524, 7);
+            this.btnMinimize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnMinimize.Name = "btnMinimize";
-            this.btnMinimize.Size = new System.Drawing.Size(16, 18);
+            this.btnMinimize.Size = new System.Drawing.Size(21, 22);
             this.btnMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnMinimize.TabIndex = 10;
             this.btnMinimize.TabStop = false;
@@ -506,10 +537,10 @@
             this.btnMaximize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMaximize.Enabled = false;
             this.btnMaximize.Image = global::GPRO_QMS_Counter.Properties.Resources.maxi;
-            this.btnMaximize.Location = new System.Drawing.Point(421, 6);
-            this.btnMaximize.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMaximize.Location = new System.Drawing.Point(561, 7);
+            this.btnMaximize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnMaximize.Name = "btnMaximize";
-            this.btnMaximize.Size = new System.Drawing.Size(16, 18);
+            this.btnMaximize.Size = new System.Drawing.Size(21, 22);
             this.btnMaximize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnMaximize.TabIndex = 9;
             this.btnMaximize.TabStop = false;
@@ -520,10 +551,10 @@
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClose.Image = global::GPRO_QMS_Counter.Properties.Resources.cerrar;
-            this.btnClose.Location = new System.Drawing.Point(448, 6);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(2);
+            this.btnClose.Location = new System.Drawing.Point(597, 7);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(16, 18);
+            this.btnClose.Size = new System.Drawing.Size(21, 22);
             this.btnClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnClose.TabIndex = 8;
             this.btnClose.TabStop = false;
@@ -532,10 +563,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::GPRO_QMS_Counter.Properties.Resources._1499069963_headphone;
-            this.pictureBox1.Location = new System.Drawing.Point(4, 2);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Location = new System.Drawing.Point(5, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(26, 28);
+            this.pictureBox1.Size = new System.Drawing.Size(35, 34);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
@@ -545,10 +576,9 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Yellow;
-            this.label2.Location = new System.Drawing.Point(34, 9);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(45, 11);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(269, 14);
+            this.label2.Size = new System.Drawing.Size(313, 18);
             this.label2.TabIndex = 6;
             this.label2.Text = "GPRO Gọi số - Hệ thống xếp hàng tự động";
             this.label2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel3_MouseDown);
@@ -559,10 +589,10 @@
             this.panel2.Controls.Add(this.statusTotalWaiting);
             this.panel2.Controls.Add(this.btDisplayStatus);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 496);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2);
+            this.panel2.Location = new System.Drawing.Point(0, 611);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(473, 32);
+            this.panel2.Size = new System.Drawing.Size(631, 39);
             this.panel2.TabIndex = 0;
             // 
             // statusTotalDone
@@ -570,10 +600,9 @@
             this.statusTotalDone.AutoSize = true;
             this.statusTotalDone.Font = new System.Drawing.Font("Arial", 10.2F);
             this.statusTotalDone.ForeColor = System.Drawing.Color.Yellow;
-            this.statusTotalDone.Location = new System.Drawing.Point(237, 7);
-            this.statusTotalDone.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.statusTotalDone.Location = new System.Drawing.Point(316, 9);
             this.statusTotalDone.Name = "statusTotalDone";
-            this.statusTotalDone.Size = new System.Drawing.Size(107, 16);
+            this.statusTotalDone.Size = new System.Drawing.Size(126, 19);
             this.statusTotalDone.TabIndex = 33;
             this.statusTotalDone.Text = "Đã giao dịch : 0";
             // 
@@ -582,10 +611,9 @@
             this.statusTotalWaiting.AutoSize = true;
             this.statusTotalWaiting.Font = new System.Drawing.Font("Arial", 10.2F);
             this.statusTotalWaiting.ForeColor = System.Drawing.Color.Yellow;
-            this.statusTotalWaiting.Location = new System.Drawing.Point(137, 7);
-            this.statusTotalWaiting.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.statusTotalWaiting.Location = new System.Drawing.Point(183, 9);
             this.statusTotalWaiting.Name = "statusTotalWaiting";
-            this.statusTotalWaiting.Size = new System.Drawing.Size(86, 16);
+            this.statusTotalWaiting.Size = new System.Drawing.Size(102, 19);
             this.statusTotalWaiting.TabIndex = 32;
             this.statusTotalWaiting.Text = "Đang đợi : 0";
             // 
@@ -596,10 +624,10 @@
             this.btDisplayStatus.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btDisplayStatus.ForeColor = System.Drawing.Color.Yellow;
             this.btDisplayStatus.Image = global::GPRO_QMS_Counter.Properties.Resources.com_port_dis;
-            this.btDisplayStatus.Location = new System.Drawing.Point(2, 2);
-            this.btDisplayStatus.Margin = new System.Windows.Forms.Padding(2);
+            this.btDisplayStatus.Location = new System.Drawing.Point(3, 2);
+            this.btDisplayStatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btDisplayStatus.Name = "btDisplayStatus";
-            this.btDisplayStatus.Size = new System.Drawing.Size(130, 27);
+            this.btDisplayStatus.Size = new System.Drawing.Size(173, 33);
             this.btDisplayStatus.TabIndex = 30;
             this.btDisplayStatus.Text = "Display COM";
             this.btDisplayStatus.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -622,12 +650,12 @@
             // 
             // FrmMainPhongKham
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(473, 528);
+            this.ClientSize = new System.Drawing.Size(631, 650);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FrmMainPhongKham";
             this.Text = "FrmMainPhongKham";
             this.Load += new System.EventHandler(this.FrmMainPhongKham_Load);
@@ -692,5 +720,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Timer timerDocAmThanh;
+        private System.Windows.Forms.Button btActive;
     }
 }

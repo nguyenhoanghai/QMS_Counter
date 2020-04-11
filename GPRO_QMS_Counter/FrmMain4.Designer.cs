@@ -34,6 +34,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.statusTotalDone = new System.Windows.Forms.Label();
+            this.statusTotalWaiting = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -60,8 +62,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
-            this.statusTotalWaiting = new System.Windows.Forms.Label();
-            this.statusTotalDone = new System.Windows.Forms.Label();
             this.btRecall = new System.Windows.Forms.Button();
             this.btTranfer = new System.Windows.Forms.Button();
             this.btNext = new System.Windows.Forms.Button();
@@ -73,6 +73,7 @@
             this.btTemplate = new System.Windows.Forms.Button();
             this.btSetting = new System.Windows.Forms.Button();
             this.btConnectSQL = new System.Windows.Forms.Button();
+            this.btActive = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -85,6 +86,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(99)))), ((int)(((byte)(99)))));
+            this.panel1.Controls.Add(this.btActive);
             this.panel1.Controls.Add(this.btTemplate);
             this.panel1.Controls.Add(this.btSetting);
             this.panel1.Controls.Add(this.btConnectSQL);
@@ -129,6 +131,28 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1112, 34);
             this.panel2.TabIndex = 1;
+            // 
+            // statusTotalDone
+            // 
+            this.statusTotalDone.AutoSize = true;
+            this.statusTotalDone.Font = new System.Drawing.Font("Arial", 10.2F);
+            this.statusTotalDone.ForeColor = System.Drawing.Color.White;
+            this.statusTotalDone.Location = new System.Drawing.Point(530, 8);
+            this.statusTotalDone.Name = "statusTotalDone";
+            this.statusTotalDone.Size = new System.Drawing.Size(126, 19);
+            this.statusTotalDone.TabIndex = 27;
+            this.statusTotalDone.Text = "Đã giao dịch : 0";
+            // 
+            // statusTotalWaiting
+            // 
+            this.statusTotalWaiting.AutoSize = true;
+            this.statusTotalWaiting.Font = new System.Drawing.Font("Arial", 10.2F);
+            this.statusTotalWaiting.ForeColor = System.Drawing.Color.White;
+            this.statusTotalWaiting.Location = new System.Drawing.Point(394, 7);
+            this.statusTotalWaiting.Name = "statusTotalWaiting";
+            this.statusTotalWaiting.Size = new System.Drawing.Size(102, 19);
+            this.statusTotalWaiting.TabIndex = 26;
+            this.statusTotalWaiting.Text = "Đang đợi : 0";
             // 
             // panel4
             // 
@@ -434,28 +458,6 @@
             this.timer3.Interval = 70;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
-            // statusTotalWaiting
-            // 
-            this.statusTotalWaiting.AutoSize = true;
-            this.statusTotalWaiting.Font = new System.Drawing.Font("Arial", 10.2F);
-            this.statusTotalWaiting.ForeColor = System.Drawing.Color.White;
-            this.statusTotalWaiting.Location = new System.Drawing.Point(394, 7);
-            this.statusTotalWaiting.Name = "statusTotalWaiting";
-            this.statusTotalWaiting.Size = new System.Drawing.Size(102, 19);
-            this.statusTotalWaiting.TabIndex = 26;
-            this.statusTotalWaiting.Text = "Đang đợi : 0";
-            // 
-            // statusTotalDone
-            // 
-            this.statusTotalDone.AutoSize = true;
-            this.statusTotalDone.Font = new System.Drawing.Font("Arial", 10.2F);
-            this.statusTotalDone.ForeColor = System.Drawing.Color.White;
-            this.statusTotalDone.Location = new System.Drawing.Point(530, 8);
-            this.statusTotalDone.Name = "statusTotalDone";
-            this.statusTotalDone.Size = new System.Drawing.Size(126, 19);
-            this.statusTotalDone.TabIndex = 27;
-            this.statusTotalDone.Text = "Đã giao dịch : 0";
-            // 
             // btRecall
             // 
             this.btRecall.BackColor = System.Drawing.Color.Transparent;
@@ -648,6 +650,21 @@
             this.btConnectSQL.UseVisualStyleBackColor = true;
             this.btConnectSQL.Click += new System.EventHandler(this.btConnectSQL_Click);
             // 
+            // btActive
+            // 
+            this.btActive.FlatAppearance.BorderSize = 0;
+            this.btActive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btActive.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btActive.ForeColor = System.Drawing.Color.White;
+            this.btActive.Image = global::GPRO_QMS_Counter.Properties.Resources.iconfinder_stock_keyring_21472;
+            this.btActive.Location = new System.Drawing.Point(0, 289);
+            this.btActive.Name = "btActive";
+            this.btActive.Size = new System.Drawing.Size(60, 53);
+            this.btActive.TabIndex = 4;
+            this.btActive.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btActive.UseVisualStyleBackColor = true;
+            this.btActive.Click += new System.EventHandler(this.btActive_Click);
+            // 
             // FrmMain4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -731,5 +748,6 @@
         private System.Windows.Forms.Timer timer3;
         private System.Windows.Forms.Label statusTotalDone;
         private System.Windows.Forms.Label statusTotalWaiting;
+        private System.Windows.Forms.Button btActive;
     }
 }
