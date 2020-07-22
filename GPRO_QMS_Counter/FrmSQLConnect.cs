@@ -248,8 +248,7 @@ namespace GPRO_QMS_Counter
                     }
                 }
                 xmlDoc.Save(Application.StartupPath + "\\DATA.XML");
-                Application.Restart();
-                Environment.Exit(0);
+                Application.Restart(); 
             }
             catch (Exception)
             {

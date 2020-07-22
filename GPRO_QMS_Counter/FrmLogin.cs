@@ -80,6 +80,7 @@ namespace GPRO_QMS_Counter
                     FrmMain4.loginObj =  login;
                     Form1.loginObj = login;
                     FrmMainPhongKham.loginObj = login;
+                    FrmPhongKhamHuuNghi.loginObj = login;
                     FrmLogin.bCloseForm = true;
                     this.Close();
                 }
@@ -105,11 +106,14 @@ namespace GPRO_QMS_Counter
                             case 1:
                             case 4:
                             case 5:
+                            case 6:
                                 rs = BLLLoginHistory.Instance.Login(connectString, txtUsername.Text, txtPassword.Text, counterId); break;
                             default:
+                               
                                 rs = BLLLoginHistory.Instance.Login(connectString, txtUsername.Text, txtPassword.Text);
                                 break;
                         }
+                       // MessageBox.Show(connectString);
                         if (rs.IsSuccess)
                         {
                             FrmMain.loginObj = rs.Data;
@@ -117,6 +121,7 @@ namespace GPRO_QMS_Counter
                             FrmMain4.loginObj = rs.Data;
                             Form1.loginObj = rs.Data;
                             FrmMainPhongKham.loginObj = rs.Data;
+                            FrmPhongKhamHuuNghi.loginObj = rs.Data;
                             FrmLogin.bCloseForm = true;
                             this.Close();
                         }
@@ -127,8 +132,8 @@ namespace GPRO_QMS_Counter
             }
             catch (Exception ex)
             {
-                throw ex;
-                // MessageBox.Show("Lỗi: trong quá trình kiểm tra đăng nhập"+ex.Message, "Lỗi truy vấn", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                //throw ex;
+               MessageBox.Show("Lỗi: trong quá trình kiểm tra đăng nhập"+ex.Message, "Lỗi truy vấn", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 

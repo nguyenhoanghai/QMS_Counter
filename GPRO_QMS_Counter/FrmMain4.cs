@@ -396,7 +396,7 @@ namespace GPRO_QMS_Counter
                                 errorsms = "Dịch vụ số " + e.Require.ServiceId + " đã ngưng cấp số. Xin quý khách vui lòng đến vào buổi giao dịch sau.";
                             else
                             {
-                                var rs = BLLDailyRequire.Instance.PrintNewTicket(connectString, e.Require.ServiceId, serObj.StartNumber, 0, now, printType, e.Require.ServeTime.TimeOfDay, txtname.Text, txtAdd.Text, ((int)txtDOB.Value), txtma.Text, "", "", "");
+                                var rs = BLLDailyRequire.Instance.PrintNewTicket(connectString, e.Require.ServiceId, serObj.StartNumber, 0, now, printType, e.Require.ServeTime.TimeOfDay, txtname.Text, txtAdd.Text, ((int)txtDOB.Value), txtma.Text, "", "", "", "", "");
                                 if (rs.IsSuccess)
                                 {
                                     lastTicket = (int)rs.Data;
@@ -422,7 +422,7 @@ namespace GPRO_QMS_Counter
                                 errorsms = "Dịch vụ số " + e.Require.ServiceId + " đã ngưng cấp số. Xin quý khách vui lòng đến vào buổi giao dịch sau.";
                             else
                             {
-                                var rs = BLLDailyRequire.Instance.PrintNewTicket(connectString, e.Require.ServiceId, startNumber, 0, now, printType, (e.Require.ServeTime != null ? e.Require.ServeTime.TimeOfDay : serObj.TimeProcess.TimeOfDay), txtname.Text, txtAdd.Text, (int)txtDOB.Value, txtma.Text, "", "", "");
+                                var rs = BLLDailyRequire.Instance.PrintNewTicket(connectString, e.Require.ServiceId, startNumber, 0, now, printType, (e.Require.ServeTime != null ? e.Require.ServeTime.TimeOfDay : serObj.TimeProcess.TimeOfDay), txtname.Text, txtAdd.Text, (int)txtDOB.Value, txtma.Text, "", "", "", "", "");
                                 if (rs.IsSuccess)
                                 {
                                     lastTicket = (int)rs.Data;

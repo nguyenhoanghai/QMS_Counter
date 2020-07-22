@@ -59,7 +59,7 @@ namespace GPRO_QMS_Counter
             isFinishRead = true,
             bRegistered = false,
             bCheckValid = false,
-            UsePrintMachine = false ,
+            UsePrintMachine = false,
             FirstLoad = true;
         public SqlConnection sqlCon = new SqlConnection();
         static List<string> temp, playlist;
@@ -160,7 +160,7 @@ namespace GPRO_QMS_Counter
             WindowState = FormWindowState.Minimized;
         }
         #endregion
-         
+
         private void FrmMainPhongKham_Load(object sender, EventArgs e)
         {
             try
@@ -171,7 +171,7 @@ namespace GPRO_QMS_Counter
                     ConnectDatabase();
                 }
                 catch (Exception) { }
-                configs = BLLConfig.Instance.Gets(connectString, true); 
+                configs = BLLConfig.Instance.Gets(connectString, true);
 
                 int.TryParse(GetConfigByCode(eConfigCode.NumberOfLinePerTime), out so_lien);
                 int.TryParse(GetConfigByCode(eConfigCode.PrintType), out printType);
@@ -226,8 +226,8 @@ namespace GPRO_QMS_Counter
                     counterId = loginObj.CounterId;
                     equipCode = loginObj.EquipCode;
                 }
-               
-                 if (loginObj.UserName.ToLower().Equals("gpro admin"))
+
+                if (loginObj.UserName.ToLower().Equals("gpro admin"))
                 {
                     btConnectSQL.Enabled = true;
                     btSetting.Enabled = true;
@@ -245,14 +245,14 @@ namespace GPRO_QMS_Counter
         }
 
         private void refreshData()
-        { 
+        {
             try
             {
-                ShowResult(); 
+                ShowResult();
             }
             catch (Exception ex)
             {
-            } 
+            }
             Thread.Sleep(2000);
             refreshData();
         }
@@ -311,10 +311,10 @@ namespace GPRO_QMS_Counter
                 //}
                 //else
                 //{
-                    this.lbWaiting.Text = obj.CounterWaitingTickets;
-                    this.statusTotalWaiting.Text = "Đang đợi: " + obj.TotalWating;
-                    this.statusTotalDone.Text = "Đã giao dịch: " + obj.TotalDone;
-                    this.lbCurrentTicket.Text = obj.CurrentTicket.ToString();
+                this.lbWaiting.Text = obj.CounterWaitingTickets;
+                this.statusTotalWaiting.Text = "Đang đợi: " + obj.TotalWating;
+                this.statusTotalDone.Text = "Đã giao dịch: " + obj.TotalDone;
+                this.lbCurrentTicket.Text = obj.CurrentTicket.ToString();
                 //} 
             }
         }
@@ -338,7 +338,7 @@ namespace GPRO_QMS_Counter
         private void AddPlaceHolder(Object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtParam.Text)) txtParam.Text = "Yêu cầu xử lý ...";
-        } 
+        }
 
         private void lbWaiting_TextChanged(object sender, EventArgs e)
         {
@@ -436,12 +436,11 @@ namespace GPRO_QMS_Counter
                     if (readTemplateIds.Count > 0)
                         GetSound(readTemplateIds, tk.ToString(), counterId);
                 }
-               // ShowResult();
+                // ShowResult();
             }
             catch (Exception)
             { }
         }
-         
 
         private void btRecall_Click(object sender, EventArgs e)
         {
@@ -460,7 +459,7 @@ namespace GPRO_QMS_Counter
                 if (readTemplateIds.Count > 0)
                     GetSound(readTemplateIds, kq.ToString(), counterId);
             }
-           // ShowResult();
+            // ShowResult();
         }
 
         private void btFinish_Click(object sender, EventArgs e)
@@ -469,7 +468,7 @@ namespace GPRO_QMS_Counter
             string text = this.lbCurrentTicket.Text;
             if (text != "" && text != "0")
                 BLLDailyRequire.Instance.DoneTicket(connectString, loginObj.UserId, equipCode, DateTime.Now);
-           // ShowResult();
+            // ShowResult();
 
         }
 
@@ -512,13 +511,12 @@ namespace GPRO_QMS_Counter
                         this.txtResult.Text = "Số : " + text + " không có trong danh sách chờ của Quầy .Vui lòng nhập số nằm trong danh sách chờ của Quầy.";
                     // MessageBox.Show("Số : " + text + " không có trong danh sách chờ của Quầy .Vui lòng nhập số nằm trong danh sách chờ của Quầy.", "Thông báo gọi vé", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
-              //  ShowResult();
+                //  ShowResult();
             }
             catch (Exception)
             {
             }
-
-        }
+  }
 
         private void btTranfer_Click(object sender, EventArgs e)
         {
@@ -531,7 +529,7 @@ namespace GPRO_QMS_Counter
             }
             else
                 this.txtResult.Text = "Không thể thực hiện chuyển vé chưa xác định!";
-           // ShowResult();
+            // ShowResult();
         }
 
         private void btCancel_Click(object sender, EventArgs e)
@@ -552,7 +550,7 @@ namespace GPRO_QMS_Counter
                     }
                 }
             }
-           // ShowResult();
+            // ShowResult();
         }
         #endregion
 
@@ -602,15 +600,15 @@ namespace GPRO_QMS_Counter
                 {
                     try
                     {
-player.SoundLocation = (soundPath + temp[0]);
-                    int iTime = SoundInfo.GetSoundLength(player.SoundLocation.Trim()) - 0;
-                    player.Play();
-                    Thread.Sleep(iTime);
+                        player.SoundLocation = (soundPath + temp[0]);
+                        int iTime = SoundInfo.GetSoundLength(player.SoundLocation.Trim()) - 0;
+                        player.Play();
+                        Thread.Sleep(iTime);
                     }
                     catch (Exception)
-                    { 
+                    {
                     }
-                    
+
                     temp.Remove(temp[0]);
                 }
             }

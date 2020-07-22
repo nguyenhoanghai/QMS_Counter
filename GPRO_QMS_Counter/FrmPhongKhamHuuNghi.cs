@@ -1,15 +1,14 @@
 ﻿using GPRO.Core.Hai;
 using GPRO_QMS_Counter.Helper;
-using GPRO_QMS_Counter.Models;
 using Microsoft.VisualBasic;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using QMS_System.Data.BLL;
+using QMS_System.Data.BLL.HuuNghi;
 using QMS_System.Data.Enum;
 using QMS_System.Data.Model;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO.Ports;
@@ -22,16 +21,13 @@ using System.Xml;
 
 namespace GPRO_QMS_Counter
 {
-    public partial class Form1 : Form
+    public partial class FrmPhongKhamHuuNghi : Form
     {
-        public static List<int> serviceIds;
-        public static List<ModelSelectItem> serviceObjs;
-        public static List<ServiceDayModel> lib_Services;
         public static string
-              connectString,
-              errorsms,
-              SoundLockPrintTicket = "khoa.wav",
-              ticketTemplate;
+             connectString,
+             errorsms,
+             SoundLockPrintTicket = "khoa.wav",
+             ticketTemplate;
         public static int
             so_lien = 1,
             printType = 1,
@@ -44,7 +40,6 @@ namespace GPRO_QMS_Counter
         public static Login loginObj;
         public static DateTime today = DateTime.Now;
         public static SerialPort
-            printSerialCOM = new SerialPort(),
             displaySerialCOM = new SerialPort();
 
         List<ConfigModel> configs;
@@ -58,18 +53,25 @@ namespace GPRO_QMS_Counter
             yPos1 = 135,
             soNutDV1dong = 3;
         bool genUserTabFinish = false,
-            IsReadSound = false,
-            isFinishRead = true,
-            bRegistered = false,
-            bCheckValid = false,
-            UsePrintMachine = false,
-            FirstLoad = true;
+                    IsReadSound = false,
+                    isFinishRead = true,
+                    bRegistered = false,
+                    bCheckValid = false,
+                    UsePrintMachine = false,
+                    FirstLoad = true;
+
+
+
         public SqlConnection sqlCon = new SqlConnection();
+
+
+
         static List<string> temp, playlist;
         SoundPlayer player;
         Thread playThread, refreshThread;
         string soundPath = string.Empty;
-        public Form1()
+
+        public FrmPhongKhamHuuNghi()
         {
             bCheckValid = CheckValidation();
             if (!bCheckValid)
@@ -137,53 +139,7 @@ namespace GPRO_QMS_Counter
             return result;
         }
 
-        #region Form event
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void btnMaximize_Click(object sender, EventArgs e)
-        {
-            WindowState = FormWindowState.Maximized;
-            btnMaximize.Visible = false;
-            btnNormalSize.Visible = true;
-            btnNormalSize.Location = new Point(btnMaximize.Location.X, btnMaximize.Location.Y);
-        }
-        private void btnNormalSize_Click(object sender, EventArgs e)
-        {
-            WindowState = FormWindowState.Normal;
-            btnMaximize.Visible = true;
-            btnNormalSize.Visible = false;
-        }
-        private void btnMinimize_Click(object sender, EventArgs e)
-        {
-            WindowState = FormWindowState.Minimized;
-        }
-        #endregion
-
-        #region kéo form 
-        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
-        private extern static void ReleaseCapture();
-        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
-        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
-        {
-            ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
-        }
-        #endregion
-
-        private void RemovePlaceHolder(Object sender, EventArgs e)
-        {
-            if (txtParam.Text == "Yêu cầu xử lý ...") txtParam.Text = "";
-        }
-        private void AddPlaceHolder(Object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtParam.Text)) txtParam.Text = "Yêu cầu xử lý ...";
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
+        private void FrmPhongKhamHuuNghi_Load(object sender, EventArgs e)
         {
             try
             {
@@ -194,7 +150,6 @@ namespace GPRO_QMS_Counter
                 }
                 catch (Exception) { }
                 configs = BLLConfig.Instance.Gets(connectString, true);
-                lib_Services = BLLService.Instance.GetsForMain(connectString);
 
                 int.TryParse(GetConfigByCode(eConfigCode.NumberOfLinePerTime), out so_lien);
                 int.TryParse(GetConfigByCode(eConfigCode.PrintType), out printType);
@@ -218,8 +173,8 @@ namespace GPRO_QMS_Counter
                                     //case "CounterId": numCounterId.Value = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); break;
                                     case "Display": IsUseMainDisplay = Convert.ToBoolean(node.InnerText); break;
                                     case "COMDisplay": displaySerialCOM.PortName = node.InnerText; break;
-                                    case "Print": UsePrintMachine = Convert.ToBoolean(node.InnerText); break;
-                                    case "COMPrint": printSerialCOM.PortName = node.InnerText; break;
+                                    //case "Print": UsePrintMachine = Convert.ToBoolean(node.InnerText); break;
+                                    // case "COMPrint": printSerialCOM.PortName = node.InnerText; break;
                                     //case "PrintCode": numPrinterId.Value = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); ; break;
                                     case "ReadSound": IsReadSound = Convert.ToBoolean(node.InnerText); break;
                                     case "SoundPath": soundPath = node.InnerText; break;
@@ -235,22 +190,14 @@ namespace GPRO_QMS_Counter
                     }
                 }
 
-                if (IsReadSound)
-                    timerDocAmThanh.Enabled = true;
-
-                if (UsePrintMachine)
-                    InitPrintComPort();
-
                 playlist = new List<string>();
                 temp = new List<string>();
 
+                if (IsReadSound)
+                    timerDocAmThanh.Enabled = true;
+
                 if (IsUseMainDisplay)
                     InitDisplayCOMPort();
-
-                serviceIds = (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["ServiceIds"].ToString()) ? ConfigurationManager.AppSettings["ServiceIds"].ToString() : "1,2,3,4,5,6").Split(',').Select(x => Convert.ToInt32(x)).ToList();
-                serviceObjs = BLLService.Instance.GetLookUp(connectString, false);
-                serviceObjs = serviceObjs.Where(x => serviceIds.Contains(x.Id)).ToList();
-                CreateServicesButton();
 
                 if (loginObj != null)
                 {
@@ -264,16 +211,28 @@ namespace GPRO_QMS_Counter
                     btSetting.Enabled = true;
                     btTemplate.Enabled = true;
                 }
-                lbWaiting.Text = "0";
-                //Control.CheckForIllegalCrossThreadCalls = false;
-                // refreshThread = new Thread(refreshData);
+
+                //refreshThread = new Thread(refreshData);
                 //refreshThread.IsBackground = true;
-                // refreshThread.Start();
-                refreshData();
+                //refreshThread.Start();
+                ShowResult();
             }
             catch (Exception ex)
             {
             }
+        }
+
+        private void refreshData()
+        {
+            try
+            {
+                ShowResult();
+            }
+            catch (Exception ex)
+            {
+            }
+            Thread.Sleep(2000);
+            refreshData();
         }
 
         private void ConnectDatabase()
@@ -284,10 +243,8 @@ namespace GPRO_QMS_Counter
                 sqlCon = new SqlConnection(strConnectionString);
                 sqlCon.Open();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(strConnectionString);
-                MessageBox.Show(ex.Message);
                 MessageBox.Show("Lỗi ConnectDatabase: Không thể kết nối với CSDL, Vui lòng thử cấu hình lại kết nối", "Lỗi kết nối", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 FrmSQLConnect form = new FrmSQLConnect();
                 form.Show();
@@ -302,6 +259,17 @@ namespace GPRO_QMS_Counter
                 return obj != null ? obj.Value : string.Empty;
             }
             return string.Empty;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                ShowResult();
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         private void ShowResult()
@@ -320,53 +288,53 @@ namespace GPRO_QMS_Counter
                 //}
                 //else
                 //{
+                this.lbQualuot.Text = obj.CounterWaitingTickets_qualuot;
                 this.lbWaiting.Text = obj.CounterWaitingTickets;
                 this.statusTotalWaiting.Text = "Đang đợi: " + obj.TotalWating;
                 this.statusTotalDone.Text = "Đã giao dịch: " + obj.TotalDone;
                 this.lbCurrentTicket.Text = obj.CurrentTicket.ToString();
-                //  }
-
-                // MessageBox.Show("end ShowResult");
+                //} 
             }
-            //   else
-            // MessageBox.Show("end ShowResult no");
         }
 
-        private void btActive_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
-            var f = new FrmRegister();
-            f.ShowDialog();
-
+            Application.Exit();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void btnMinimize_Click(object sender, EventArgs e)
         {
-            //    refreshThread = new Thread(refreshData);
-            //refreshThread.Start();  
-            try
-            {
-                ShowResult();
-                UpdateServiceInfo();
-            }
-            catch (Exception ex)
-            { }
+            WindowState = FormWindowState.Minimized;
         }
 
-        private void refreshData()
+        #region kéo form 
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+
+        private void label2_MouseDown(object sender, MouseEventArgs e)
         {
-            //timer1.Enabled = false;
-            try
-            {
-                ShowResult();
-                UpdateServiceInfo();
-            }
-            catch (Exception ex)
-            {
-            }
-            //  timer1.Enabled = true;
-            //  refreshThread.Abort();
-            //  Thread.Sleep(2000);
-            //refreshData();
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+
+        private void panel3_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+        #endregion
+
+        #region chu chay
+        private void RemovePlaceHolder(Object sender, EventArgs e)
+        {
+            if (txtParam.Text == "Yêu cầu xử lý ...") txtParam.Text = "";
+        }
+        private void AddPlaceHolder(Object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtParam.Text)) txtParam.Text = "Yêu cầu xử lý ...";
         }
 
         private void lbWaiting_TextChanged(object sender, EventArgs e)
@@ -407,306 +375,42 @@ namespace GPRO_QMS_Counter
             }
         }
 
-        #region menu
-        private void btConnectSQL_Click(object sender, EventArgs e)
+        private void lbQualuot_TextChanged(object sender, EventArgs e)
         {
-            var f = new FrmSQLConnect();
-            f.ShowDialog();
+            if (this.lbQualuot.Text.Length > 24)
+            {
+                this.xPos = this.lbQualuot.Location.X;
+                this.yPos = this.lbQualuot.Location.Y;
+                if (!timerLBQualuot.Enabled)
+                    this.timerLBQualuot.Start();
+            }
+            else
+            {
+                if (timerLBQualuot.Enabled)
+                    this.timerLBQualuot.Stop();
+                this.lbQualuot.Left = 4;
+                // this.lbWaiting.Top = 205;
+            }
         }
-
-        private void btTemplate_Click(object sender, EventArgs e)
-        {
-            var f = new FrmTicketTemplate();
-            f.ShowDialog();
-        }
-
-        private void btSetting_Click(object sender, EventArgs e)
-        {
-            var f = new FrmConfig();
-            f.ShowDialog();
-        }
-        #endregion
-
-        #region services
-        private void CreateServicesButton()
+        private void timerLBQualuot_Tick(object sender, EventArgs e)
         {
             try
             {
-                if (serviceObjs.Count > 0)
+                if (this.xPos1 <= -this.lbQualuot.Width)
                 {
-                    ServiceControl serviceControl;
-                    ServiceControlModel model;
-                    ModelSelectItem obj;
-                    panel11.Controls.Clear();
-                    int x = 5, y = 5, current = 0;
-                    // for (int i = 0; i < serviceObjs.Count; i += soNutDV1dong)
-                    for (int i = 0; i < serviceIds.Count; i += soNutDV1dong)
-                    {
-                        for (int ii = 0; ii < soNutDV1dong; ii++)
-                        {
-                            try
-                            {
-                                obj = serviceObjs.FirstOrDefault(a => a.Id == serviceIds[current]); //serviceObjs[current];
-                                if (obj != null)
-                                {
-                                    model = new ServiceControlModel() { Id = obj.Id, Name = obj.Name, wait = 0, Time = (!string.IsNullOrEmpty(obj.Code) ? obj.Code : "00:00:00") };
-                                    serviceControl = new ServiceControl(model);
-                                    serviceControl.Location = new System.Drawing.Point(x, y);
-                                    serviceControl.Name = "ctr_" + obj.Id; 
-                                    serviceControl.printTicketEvent += new EventHandler<PrintTicketEventArgs>(PrintTicket);
-                                    panel11.Controls.Add(serviceControl);
-                                    x += 280;
-
-                                    if (ii == soNutDV1dong - 1)
-                                    {
-                                        y += 75;
-                                        x = 5;
-                                    }
-                                }
-
-                            }
-                            catch (Exception) { }
-                            current++;
-                        }
-                    }
+                    this.lbQualuot.Location = new Point(this.panel12.Width, this.yPos);
+                    this.xPos = this.panel12.Width;
+                }
+                else
+                {
+                    this.lbQualuot.Location = new Point(this.xPos, this.yPos);
+                    this.xPos -= 3;
                 }
             }
             catch (Exception)
             {
             }
         }
-
-        private void UpdateServiceInfo()
-        {
-            try
-            {
-                int i = 0;
-                // var serviceObjs = BLLService.Instance.GetLookUp(connectString, true);
-                var serviceObjs = BLLService.Instance.GetLookUp(sqlCon, true);
-                serviceObjs = serviceObjs.Where(x => serviceIds.Contains(x.Id)).ToList();
-                foreach (Control c in panel11.Controls)
-                {
-                    string name =  c.Name  ;
-                    int serId = Convert.ToInt32(name.Split('_')[1]);
-                    ((IServiceControl)c).updateWaiting(serviceObjs.FirstOrDefault(x=>x.Id==serId).Data);
-                    i++;
-                }
-                //Thread.Sleep(1000);
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        #endregion
-
-        #region Display COM port
-        private void InitDisplayCOMPort()
-        {
-            try
-            {
-                btDisplayStatus.Text = "Display " + displaySerialCOM.PortName;
-                displaySerialCOM.BaudRate = 9600;
-                displaySerialCOM.DataBits = 8;
-                displaySerialCOM.Parity = Parity.None;
-                displaySerialCOM.StopBits = StopBits.One;
-                try
-                {
-                    displaySerialCOM.Open();
-                    btDisplayStatus.Image = global::GPRO_QMS_Counter.Properties.Resources.com_port;
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Lỗi: không thể kết nối với cổng COM Keypad, Vui lòng thử cấu hình lại kết nối", "Lỗi kết nối", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lấy thông tin Com Keypad bị lỗi.\n" + ex.Message, "Lỗi Com Keypad");
-            }
-        }
-
-        public static void SendDisplay(string sResult)
-        {
-            try
-            {
-                if (IsUseMainDisplay)
-                {
-                    string text = sResult;
-                    if (text.Length < 4)
-                        text = string.Format("{0:0000}", int.Parse(text));
-
-                    byte[] array = new byte[3];
-                    array[0] = 170;
-                    byte[] array2 = array;
-                    array2[1] = byte.Parse((int.Parse(text.Substring(0, 1)) * 16 + int.Parse(text.Substring(1, 1))).ToString());
-                    array2[2] = byte.Parse((int.Parse(text.Substring(2, 1)) * 16 + int.Parse(text.Substring(3, 1))).ToString());
-                    if (!displaySerialCOM.IsOpen)
-                    {
-                        try
-                        {
-                            displaySerialCOM.Open();
-                            displaySerialCOM.DtrEnable = true;
-                            displaySerialCOM.RtsEnable = true;
-                        }
-                        catch
-                        {
-                        }
-                    }
-                    displaySerialCOM.Write(array2, 0, array2.Length);
-                }
-            }
-            catch (Exception)
-            { }
-        }
-
-        #endregion
-
-        #region Print COMPort
-        private void InitPrintComPort()
-        {
-            try
-            {
-                btPrintStatus.Text = "Printer " + printSerialCOM.PortName;
-                printSerialCOM.BaudRate = 9600;
-                printSerialCOM.DataBits = 8;
-                printSerialCOM.Parity = Parity.None;
-                printSerialCOM.StopBits = StopBits.One;
-                try
-                {
-                    printSerialCOM.ReadTimeout = 1;
-                    printSerialCOM.WriteTimeout = 1;
-                    printSerialCOM.Open();
-                    btPrintStatus.Image = global::GPRO_QMS_Counter.Properties.Resources.com_port;
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Lỗi: không thể kết nối với cổng COM Keypad, Vui lòng thử cấu hình lại kết nối", "Lỗi kết nối", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lấy thông tin Com Keypad bị lỗi.\n" + ex.Message, "Lỗi Com Keypad");
-            }
-        }
-
-        private void PrintTicket(object sender, PrintTicketEventArgs e)
-        {
-            try
-            {
-                int lastTicket = 0,
-                                newNumber = -1,
-                            nghiepVu = 0;
-                string printStr = string.Empty,
-                    tenquay = string.Empty;
-                bool err = false;
-                ServiceDayModel serObj = null;
-                DateTime now = DateTime.Now;
-                switch (printType)
-                {
-                    case (int)ePrintType.TheoTungDichVu:
-                        #region
-                        serObj = lib_Services.FirstOrDefault(x => x.Id == e.Require.ServiceId);
-                        if (serObj == null)
-                            errorsms = "Dịch vụ số " + e.Require.ServiceId + " không tồn tại. Xin quý khách vui lòng chọn dịch vụ khác.";
-                        else
-                        {
-                            if (CheckTimeBeforePrintTicket == 1 && serObj.Shifts.FirstOrDefault(x => now.TimeOfDay >= x.Start.TimeOfDay && now.TimeOfDay <= x.End.TimeOfDay) == null)
-                                // temp.Add(SoundLockPrintTicket);
-                                errorsms = "Dịch vụ số " + e.Require.ServiceId + " đã ngưng cấp số. Xin quý khách vui lòng đến vào buổi giao dịch sau.";
-                            else
-                            {
-                                var rs = BLLDailyRequire.Instance.PrintNewTicket(connectString, e.Require.ServiceId, serObj.StartNumber, 0, now, printType, e.Require.ServeTime.TimeOfDay, txtname.Text, txtAdd.Text, ((int)txtDOB.Value), txtma.Text, "", "", "","","");
-                                if (rs.IsSuccess)
-                                {
-                                    lastTicket = (int)rs.Data;
-                                    nghiepVu = rs.Data_1;
-                                    newNumber = ((int)rs.Data + 1);
-                                    tenquay = rs.Data_2;
-                                }
-                                else
-                                    errorsms = rs.Errors[0].Message;
-                            }
-                        }
-                        #endregion
-                        break;
-                    case (int)ePrintType.BatDauChung:
-                        #region MyRegion
-                        serObj = lib_Services.FirstOrDefault(x => x.Id == e.Require.ServiceId);
-                        if (serObj == null)
-                            errorsms = "Dịch vụ số " + e.Require.ServiceId + " không tồn tại. Xin quý khách vui lòng chọn dịch vụ khác.";
-                        else
-                        {
-                            if (CheckTimeBeforePrintTicket == 1 && serObj.Shifts.FirstOrDefault(x => now.TimeOfDay >= x.Start.TimeOfDay && now.TimeOfDay <= x.End.TimeOfDay) == null)
-                                //temp.Add(SoundLockPrintTicket);
-                                errorsms = "Dịch vụ số " + e.Require.ServiceId + " đã ngưng cấp số. Xin quý khách vui lòng đến vào buổi giao dịch sau.";
-                            else
-                            {
-                                var rs = BLLDailyRequire.Instance.PrintNewTicket(connectString, e.Require.ServiceId, startNumber, 0, now, printType, (e.Require.ServeTime != null ? e.Require.ServeTime.TimeOfDay : serObj.TimeProcess.TimeOfDay), txtname.Text, txtAdd.Text, (int)txtDOB.Value, txtma.Text, "", "", "", "", "");
-                                if (rs.IsSuccess)
-                                {
-                                    lastTicket = (int)rs.Data;
-                                    nghiepVu = rs.Data_1;
-                                    newNumber = ((int)rs.Data + 1);
-                                    tenquay = rs.Data_2;
-                                }
-                                else
-                                    errorsms = rs.Errors[0].Message;
-                            }
-                        }
-                        #endregion
-                        break;
-                    case (int)ePrintType.TheoGioiHanSoPhieu:
-                        #region MyRegion
-
-                        #endregion
-                        break;
-                }
-
-                if (newNumber >= 0)
-                {
-                    errorsms = printStr.ToString();
-                    // dataSendToComport.Add(printStr);
-                    Print(newNumber, lastTicket, tenquay, serObj.Name);
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void Print(int newNum, int oldNum, string tenquay, string tendichvu)
-        {
-            if (printSerialCOM.IsOpen)
-            {
-                var template = ticketTemplate;
-                var now = DateTime.Now;
-                template = template.Replace("[canh-giua]", "\x1b\x61\x01|+|");
-                template = template.Replace("[canh-trai]", "\x1b\x61\x00|+|");
-                template = template.Replace("[1x1]", "\x1d\x21\x00|+|");
-                template = template.Replace("[2x1]", "\x1d\x21\x01|+|");
-                template = template.Replace("[3x1]", "\x1d\x21\x02|+|");
-                template = template.Replace("[2x2]", "\x1d\x21\x11|+|");
-                template = template.Replace("[3x3]", "\x1d\x21\x22|+|");
-
-                template = template.Replace("[STT]", newNum.ToString());
-                template = template.Replace("[ten-quay]", tenquay);
-                template = template.Replace("[ten-dich-vu]", tendichvu);
-                template = template.Replace("[ngay]", ("ngay: " + now.ToString("dd/MM/yyyy")));
-                template = template.Replace("[gio]", (" gio: " + now.ToString("HH/mm")));
-                template = template.Replace("[dang-goi]", " dang goi " + oldNum);
-                template = template.Replace("[cat-giay]", "\x1b\x69|+|");
-
-                var arr = template.Split(new string[] { "|+|" }, StringSplitOptions.RemoveEmptyEntries).ToArray();
-
-                for (int ii = 0; ii < so_lien; ii++)
-                    for (int i = 0; i < arr.Length; i++)
-                        printSerialCOM.Write(arr[i]);
-            }
-            UpdateServiceInfo();
-            ShowResult();
-        }
-
         #endregion
 
         #region button event
@@ -727,40 +431,58 @@ namespace GPRO_QMS_Counter
                     var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
                     if (readTemplateIds.Count > 0)
                         GetSound(readTemplateIds, tk.ToString(), counterId);
+                    ShowResult();
                 }
-                ShowResult();
+
             }
             catch (Exception)
             { }
         }
 
-        private void btRecall_Click(object sender, EventArgs e)
+        private void btnGoiUuTien_Click(object sender, EventArgs e)
         {
-            int kq = BLLDailyRequire.Instance.CurrentTicket(connectString, loginObj.UserId, equipCode, today, UseWithThirdPattern);
-            if (kq == 0)
-                txtResult.Text = "Hết vé";
-            else
+            try
             {
-                lbCurrentTicket.Text = kq.ToString();
-                SendDisplay(kq.ToString());
+                var tk = BLLDailyRequire.Instance.Next_KetLuan(connectString, loginObj.UserId, equipCode, today, UseWithThirdPattern);
+                if (tk == 0)
+                    txtResult.Text = "Hết vé";
+                else
+                {
+                    lbCurrentTicket.Text = tk.ToString();
+                    SendDisplay(tk.ToString());
 
-                var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = equipCode, TicketNumber = kq });
-                BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendRecallToMainDisplay, counterId);
+                    var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = equipCode, TicketNumber = tk });
+                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, counterId);
+                    var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
+                    if (readTemplateIds.Count > 0)
+                        GetSound(readTemplateIds, tk.ToString(), counterId);
+                    ShowResult();
+                }
 
-                var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Recall);
-                if (readTemplateIds.Count > 0)
-                    GetSound(readTemplateIds, kq.ToString(), counterId);
             }
-            ShowResult();
+            catch (Exception)
+            { }
         }
 
-        private void btFinish_Click(object sender, EventArgs e)
+        private void btTranfer_Click(object sender, EventArgs e)
         {
-            this.txtResult.Text = "";
-            string text = this.lbCurrentTicket.Text;
-            if (text != "" && text != "0")
-                BLLDailyRequire.Instance.DoneTicket(connectString, loginObj.UserId, equipCode, DateTime.Now);
-            ShowResult();
+            txtResult.Text = "";
+            string text = txtParam.Text.Trim();
+            if (text == "" || text == "Yêu cầu xử lý ...")
+                text = this.lbCurrentTicket.Text;
+            if (!string.IsNullOrEmpty(text) && text.All(char.IsDigit) && text != "0")
+            {
+                DialogResult dialogResult = MessageBox.Show("Bạn muốn phiếu " + text + " qua lượt phải không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    if (BLLHuuNghi.Instance.QuaLuot(connectString, int.Parse(text), today) > 0)
+                    {
+                        this.txtParam.Text = "";
+                        this.txtResult.Text = "Yêu cầu vé qua lượt  " + text;
+                        ShowResult();
+                    }
+                }
+            }
 
         }
 
@@ -779,7 +501,8 @@ namespace GPRO_QMS_Counter
                 else
                 {
                     var dscho = lbWaiting.Text.Split(' ').ToList();
-                    if (dscho.Contains(text))
+                    var dsqualuot = lbQualuot.Text.Split(' ').ToList();
+                    if (dscho.Contains(text) || dsqualuot.Contains(text))
                     {
                         var kq = BLLDailyRequire.Instance.CallAny(connectString, loginObj.UserId, equipCode, int.Parse(text), today);
                         if (kq.IsSuccess)
@@ -792,6 +515,7 @@ namespace GPRO_QMS_Counter
                             var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
                             if (readTemplateIds.Count > 0)
                                 GetSound(readTemplateIds, text, counterId);
+                            ShowResult();
                         }
                         else
                         {
@@ -803,26 +527,45 @@ namespace GPRO_QMS_Counter
                         this.txtResult.Text = "Số : " + text + " không có trong danh sách chờ của Quầy .Vui lòng nhập số nằm trong danh sách chờ của Quầy.";
                     // MessageBox.Show("Số : " + text + " không có trong danh sách chờ của Quầy .Vui lòng nhập số nằm trong danh sách chờ của Quầy.", "Thông báo gọi vé", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
-                ShowResult();
+                // 
             }
             catch (Exception)
             {
             }
-
         }
 
-        private void btTranfer_Click(object sender, EventArgs e)
+        private void btRecall_Click(object sender, EventArgs e)
         {
-            if ((!string.IsNullOrEmpty(lbCurrentTicket.Text) && lbCurrentTicket.Text != "0") || !string.IsNullOrEmpty(txtParam.Text))
+            try
             {
-                var now = DateTime.Now;
-                txtResult.Text = "";
-                var f = new FrmChange(!string.IsNullOrEmpty(txtParam.Text) ? int.Parse(txtParam.Text) : int.Parse(lbCurrentTicket.Text), equipCode);
-                f.ShowDialog();
+                int kq = BLLDailyRequire.Instance.CurrentTicket(connectString, loginObj.UserId, equipCode, today, UseWithThirdPattern);
+                if (kq == 0)
+                    txtResult.Text = "Hết vé";
+                else
+                {
+                    lbCurrentTicket.Text = kq.ToString();
+                    SendDisplay(kq.ToString());
+
+                    var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = equipCode, TicketNumber = kq });
+                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendRecallToMainDisplay, counterId);
+
+                    var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Recall);
+                    if (readTemplateIds.Count > 0)
+                        GetSound(readTemplateIds, kq.ToString(), counterId);
+                }
             }
-            else
-                this.txtResult.Text = "Không thể thực hiện chuyển vé chưa xác định!";
-            ShowResult();
+            catch (Exception ex) { }
+        }
+
+        private void btFinish_Click(object sender, EventArgs e)
+        {
+            this.txtResult.Text = "";
+            string text = this.lbCurrentTicket.Text;
+            if (text != "" && text != "0")
+            {
+                BLLDailyRequire.Instance.DoneTicket(connectString, loginObj.UserId, equipCode, DateTime.Now);
+                ShowResult();
+            }
         }
 
         private void btCancel_Click(object sender, EventArgs e)
@@ -840,15 +583,42 @@ namespace GPRO_QMS_Counter
                     {
                         this.txtParam.Text = "";
                         this.txtResult.Text = "Yêu cầu Hủy vé " + text;
+                        ShowResult();
                     }
                 }
             }
-            ShowResult();
         }
         #endregion
 
+        #region menu
+        private void btConnectSQL_Click(object sender, EventArgs e)
+        {
+            var f = new FrmSQLConnect();
+            f.ShowDialog();
+        }
+
+        private void btTemplate_Click(object sender, EventArgs e)
+        {
+            var f = new FrmTicketTemplate();
+            f.ShowDialog();
+        }
+
+        private void btSetting_Click(object sender, EventArgs e)
+        {
+            var f = new FrmConfig();
+            f.ShowDialog();
+        }
+
+        private void btActive_Click(object sender, EventArgs e)
+        {
+            var f = new FrmRegister();
+            f.ShowDialog();
+        }
+
+        #endregion
+
         #region Sound
-        private void TmerQuetComport_Tick(object sender, EventArgs e)
+        private void timerDocAmThanh_Tick(object sender, EventArgs e)
         {
             try
             {
@@ -968,6 +738,68 @@ namespace GPRO_QMS_Counter
                 }
             }
         }
-        #endregion  
+        #endregion
+
+        #region Display COM port
+        private void InitDisplayCOMPort()
+        {
+            try
+            {
+                btDisplayStatus.Text = "Display " + displaySerialCOM.PortName;
+                displaySerialCOM.BaudRate = 9600;
+                displaySerialCOM.DataBits = 8;
+                displaySerialCOM.Parity = Parity.None;
+                displaySerialCOM.StopBits = StopBits.One;
+                try
+                {
+                    displaySerialCOM.Open();
+                    btDisplayStatus.Image = global::GPRO_QMS_Counter.Properties.Resources.com_port;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Lỗi: không thể kết nối với cổng COM Keypad, Vui lòng thử cấu hình lại kết nối", "Lỗi kết nối", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lấy thông tin Com Keypad bị lỗi.\n" + ex.Message, "Lỗi Com Keypad");
+            }
+        }
+
+        public void SendDisplay(string sResult)
+        {
+            try
+            {
+                if (IsUseMainDisplay)
+                {
+                    string text = sResult;
+                    if (text.Length < 4)
+                        text = string.Format("{0:0000}", int.Parse(text));
+
+                    byte[] array = new byte[3];
+                    array[0] = 170;
+                    byte[] array2 = array;
+                    array2[1] = byte.Parse((int.Parse(text.Substring(0, 1)) * 16 + int.Parse(text.Substring(1, 1))).ToString());
+                    array2[2] = byte.Parse((int.Parse(text.Substring(2, 1)) * 16 + int.Parse(text.Substring(3, 1))).ToString());
+                    if (!displaySerialCOM.IsOpen)
+                    {
+                        try
+                        {
+                            displaySerialCOM.Open();
+                            displaySerialCOM.DtrEnable = true;
+                            displaySerialCOM.RtsEnable = true;
+                        }
+                        catch
+                        {
+                        }
+                    }
+                    displaySerialCOM.Write(array2, 0, array2.Length);
+                }
+            }
+            catch (Exception)
+            { }
+        }
+
+        #endregion
     }
 }

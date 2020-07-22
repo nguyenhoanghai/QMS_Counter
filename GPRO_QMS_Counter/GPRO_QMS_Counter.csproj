@@ -190,6 +190,12 @@
     <Compile Include="FrmPermission.Designer.cs">
       <DependentUpon>FrmPermission.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmPhongKhamHuuNghi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPhongKhamHuuNghi.Designer.cs">
+      <DependentUpon>FrmPhongKhamHuuNghi.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmPrintTicket.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -300,6 +306,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPermission.resx">
       <DependentUpon>FrmPermission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPhongKhamHuuNghi.resx">
+      <DependentUpon>FrmPhongKhamHuuNghi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPrintTicket.resx">
       <DependentUpon>FrmPrintTicket.cs</DependentUpon>
