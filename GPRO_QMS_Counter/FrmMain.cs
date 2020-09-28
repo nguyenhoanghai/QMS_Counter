@@ -74,7 +74,7 @@ namespace GPRO_QMS_Counter
             }
             if (bCheckValid)
             {
-                FrmLogin frmLogin = new FrmLogin(connectString);
+                FrmLogin frmLogin = new FrmLogin( );
                 frmLogin.ShowDialog();
                 InitializeComponent();
                 InitCOMPort();

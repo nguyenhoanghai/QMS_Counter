@@ -1,4 +1,5 @@
 ﻿using GPRO.Core.Hai;
+using Newtonsoft.Json;
 using QMS_System.Data.BLL;
 using QMS_System.Data.Model;
 using System;
@@ -11,12 +12,10 @@ namespace GPRO_QMS_Counter
     public partial class FrmLogin : Form
     {
         public static bool bCloseForm = false;
-        string connectString = BaseCore.Instance.GetEntityConnectString(Application.StartupPath + "\\DATA.XML");
+        string connectString = string.Empty;
         int counterId = 1;
-        public FrmLogin(string _connectString)
+        public FrmLogin()
         {
-            if (string.IsNullOrEmpty(connectString))
-                connectString = _connectString;
             InitializeComponent();
         }
 
@@ -48,7 +47,15 @@ namespace GPRO_QMS_Counter
         private void FrmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!FrmLogin.bCloseForm)
-                Application.Exit();
+            {
+                DialogResult dr = MessageBox.Show("Bạn có muốn đóng chương trình không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    Application.Exit();
+                }
+                else
+                    e.Cancel = true;
+            }
         }
 
         private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
@@ -65,7 +72,6 @@ namespace GPRO_QMS_Counter
                 string text2 = this.txtPassword.Text;
                 if (text.Equals("gproadmin") && text2.Equals("gproadmin"))
                 {
-
                     var login = new Login()
                     {
                         UserName = "GPRO Admin",
@@ -75,14 +81,16 @@ namespace GPRO_QMS_Counter
                         CounterId = counterId,
                         CounterName = "GPRO Admin Counter"
                     };
-                    FrmMain.loginObj =  login;
+                    FrmMain.loginObj = login;
                     FrmMain2.loginObj = login;
-                    FrmMain4.loginObj =  login;
+                    FrmMain4.loginObj = login;
                     Form1.loginObj = login;
                     FrmMainPhongKham.loginObj = login;
                     FrmPhongKhamHuuNghi.loginObj = login;
                     FrmLogin.bCloseForm = true;
+                  //  MessageBox.Show(JsonConvert.SerializeObject(login));
                     this.Close();
+
                 }
                 else
                 {
@@ -93,6 +101,7 @@ namespace GPRO_QMS_Counter
                     }
                     else
                     {
+                        connectString = BaseCore.Instance.GetEntityConnectString(Application.StartupPath + "\\DATA.XML");
                         //  MessageBox.Show("info " + txtUsername.Text + "-" + txtPassword.Text + "-" + Common.Instance.GetCounterId());
                         int apptype = 1;
                         try
@@ -109,11 +118,11 @@ namespace GPRO_QMS_Counter
                             case 6:
                                 rs = BLLLoginHistory.Instance.Login(connectString, txtUsername.Text, txtPassword.Text, counterId); break;
                             default:
-                               
+
                                 rs = BLLLoginHistory.Instance.Login(connectString, txtUsername.Text, txtPassword.Text);
                                 break;
                         }
-                       // MessageBox.Show(connectString);
+                        // MessageBox.Show(connectString);
                         if (rs.IsSuccess)
                         {
                             FrmMain.loginObj = rs.Data;
@@ -133,14 +142,18 @@ namespace GPRO_QMS_Counter
             catch (Exception ex)
             {
                 //throw ex;
-               MessageBox.Show("Lỗi: trong quá trình kiểm tra đăng nhập"+ex.Message, "Lỗi truy vấn", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show("Lỗi: trong quá trình kiểm tra đăng nhập" + ex.Message, "Lỗi truy vấn", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
         private void btExit_Click(object sender, EventArgs e)
         {
-            FrmLogin.bCloseForm = true;
-            Application.Exit();
+            DialogResult dr = MessageBox.Show("Bạn có muốn đóng chương trình không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                FrmLogin.bCloseForm = true;
+                Application.Exit();
+            }
         }
     }
 }

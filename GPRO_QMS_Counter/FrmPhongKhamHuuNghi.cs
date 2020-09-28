@@ -1,16 +1,15 @@
 ﻿using GPRO.Core.Hai;
 using GPRO_QMS_Counter.Helper;
-using Microsoft.VisualBasic;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using QMS_System.Data.BLL;
 using QMS_System.Data.BLL.HuuNghi;
 using QMS_System.Data.Enum;
 using QMS_System.Data.Model;
+using QMS_System.ThirdApp.Enum;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
 using System.Media;
@@ -70,22 +69,32 @@ namespace GPRO_QMS_Counter
         SoundPlayer player;
         Thread playThread, refreshThread;
         string soundPath = string.Empty;
+        string maPK = string.Empty, maBN = string.Empty;
+        int sttDangGoi = 0;
 
         public FrmPhongKhamHuuNghi()
         {
-            bCheckValid = CheckValidation();
-            if (!bCheckValid)
+            try
             {
-                FrmRegister frmRegister = new FrmRegister();
-                frmRegister.ShowDialog();
-            }
+                bCheckValid = CheckValidation();
+                if (!bCheckValid)
+                {
+                    FrmRegister frmRegister = new FrmRegister();
+                    frmRegister.ShowDialog();
+                }
 
-            if (bCheckValid)
+                if (bCheckValid)
+                {
+                    FrmLogin frmLogin = new FrmLogin();
+
+                    frmLogin.ShowDialog();
+                    InitializeComponent();
+                    //  InitCOMPort();
+                }
+            }
+            catch (Exception ex)
             {
-                FrmLogin frmLogin = new FrmLogin(connectString);
-                frmLogin.ShowDialog();
-                InitializeComponent();
-                //  InitCOMPort();
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -143,79 +152,80 @@ namespace GPRO_QMS_Counter
         {
             try
             {
-                try
-                {
-                    connectString = BaseCore.Instance.GetEntityConnectString(Application.StartupPath + "\\DATA.XML");
-                    ConnectDatabase();
-                }
-                catch (Exception) { }
-                configs = BLLConfig.Instance.Gets(connectString, true);
-
-                int.TryParse(GetConfigByCode(eConfigCode.NumberOfLinePerTime), out so_lien);
-                int.TryParse(GetConfigByCode(eConfigCode.PrintType), out printType);
-                int.TryParse(GetConfigByCode(eConfigCode.CheckTimeBeforePrintTicket), out CheckTimeBeforePrintTicket);
-                int.TryParse(GetConfigByCode(eConfigCode.PrintTicketReturnCurrentNumberOrServiceCode), out printTicketReturnCurrentNumberOrServiceCode);
-                int.TryParse(GetConfigByCode(eConfigCode.StartNumber), out startNumber);
-                int.TryParse(GetConfigByCode(eConfigCode.UseWithThirdPattern), out UseWithThirdPattern);
-
-                XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.Load(Application.StartupPath + "\\DATA.XML");
-                foreach (XmlElement element in xmlDoc.DocumentElement)
-                {
-                    if (element.Name.Equals("AppConfig"))
-                    {
-                        foreach (XmlNode node in element.ChildNodes)
-                        {
-                            try
-                            {
-                                switch (node.Name)
-                                {
-                                    //case "CounterId": numCounterId.Value = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); break;
-                                    case "Display": IsUseMainDisplay = Convert.ToBoolean(node.InnerText); break;
-                                    case "COMDisplay": displaySerialCOM.PortName = node.InnerText; break;
-                                    //case "Print": UsePrintMachine = Convert.ToBoolean(node.InnerText); break;
-                                    // case "COMPrint": printSerialCOM.PortName = node.InnerText; break;
-                                    //case "PrintCode": numPrinterId.Value = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); ; break;
-                                    case "ReadSound": IsReadSound = Convert.ToBoolean(node.InnerText); break;
-                                    case "SoundPath": soundPath = node.InnerText; break;
-                                    case "Template": ticketTemplate = node.InnerText; break;
-                                    case "SoLien": so_lien = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); ; break;
-                                    case "NumberOfButton": soNutDV1dong = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 3); ; break;
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                            }
-                        }
-                    }
-                }
-
-                playlist = new List<string>();
-                temp = new List<string>();
-
-                if (IsReadSound)
-                    timerDocAmThanh.Enabled = true;
-
-                if (IsUseMainDisplay)
-                    InitDisplayCOMPort();
-
-                if (loginObj != null)
-                {
-                    counterId = loginObj.CounterId;
-                    equipCode = loginObj.EquipCode;
-                }
-
-                if (loginObj.UserName.ToLower().Equals("gpro admin"))
+                //MessageBox.Show(loginObj.UserName.ToLower());
+                if (loginObj.UserName.Equals("GPRO Admin"))
                 {
                     btConnectSQL.Enabled = true;
                     btSetting.Enabled = true;
                     btTemplate.Enabled = true;
                 }
+                else
+                {
+                    try
+                    {
+                        connectString = BaseCore.Instance.GetEntityConnectString(Application.StartupPath + "\\DATA.XML");
+                        ConnectDatabase();
+                    }
+                    catch (Exception) { }
+                    configs = BLLConfig.Instance.Gets(connectString, true);
 
-                //refreshThread = new Thread(refreshData);
-                //refreshThread.IsBackground = true;
-                //refreshThread.Start();
-                ShowResult();
+                    int.TryParse(GetConfigByCode(eConfigCode.NumberOfLinePerTime), out so_lien);
+                    int.TryParse(GetConfigByCode(eConfigCode.PrintType), out printType);
+                    int.TryParse(GetConfigByCode(eConfigCode.CheckTimeBeforePrintTicket), out CheckTimeBeforePrintTicket);
+                    int.TryParse(GetConfigByCode(eConfigCode.PrintTicketReturnCurrentNumberOrServiceCode), out printTicketReturnCurrentNumberOrServiceCode);
+                    int.TryParse(GetConfigByCode(eConfigCode.StartNumber), out startNumber);
+                    int.TryParse(GetConfigByCode(eConfigCode.UseWithThirdPattern), out UseWithThirdPattern);
+
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.Load(Application.StartupPath + "\\DATA.XML");
+                    foreach (XmlElement element in xmlDoc.DocumentElement)
+                    {
+                        if (element.Name.Equals("AppConfig"))
+                        {
+                            foreach (XmlNode node in element.ChildNodes)
+                            {
+                                try
+                                {
+                                    switch (node.Name)
+                                    {
+                                        //case "CounterId": numCounterId.Value = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); break;
+                                        case "Display": IsUseMainDisplay = Convert.ToBoolean(node.InnerText); break;
+                                        case "COMDisplay": displaySerialCOM.PortName = node.InnerText; break;
+                                        //case "Print": UsePrintMachine = Convert.ToBoolean(node.InnerText); break;
+                                        // case "COMPrint": printSerialCOM.PortName = node.InnerText; break;
+                                        //case "PrintCode": numPrinterId.Value = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); ; break;
+                                        case "ReadSound": IsReadSound = Convert.ToBoolean(node.InnerText); break;
+                                        case "SoundPath": soundPath = node.InnerText; break;
+                                        case "Template": ticketTemplate = node.InnerText; break;
+                                        case "SoLien": so_lien = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); ; break;
+                                        case "NumberOfButton": soNutDV1dong = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 3); ; break;
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                }
+                            }
+                        }
+                    }
+
+                    playlist = new List<string>();
+                    temp = new List<string>();
+
+                    if (IsReadSound)
+                        timerDocAmThanh.Enabled = true;
+
+                    if (IsUseMainDisplay)
+                        InitDisplayCOMPort();
+
+                    if (loginObj != null)
+                    {
+                        counterId = loginObj.CounterId;
+                        equipCode = loginObj.EquipCode;
+                    }
+                    dataGridView1.AutoGenerateColumns = false; 
+                    ShowResult();
+                    getLastTicket();                    
+                }
             }
             catch (Exception ex)
             {
@@ -226,12 +236,15 @@ namespace GPRO_QMS_Counter
         {
             try
             {
-                ShowResult();
+                // ShowResult();
+              // gridControl1.DataSource = null;
+              //  gridControl1.DataSource = BLLHuuNghi.Instance.DSBNCho(sqlCon, loginObj.CounterCode, (int)eDailyRequireType.KhamBenh);
+
             }
             catch (Exception ex)
             {
             }
-            Thread.Sleep(2000);
+            Thread.Sleep(15000);
             refreshData();
         }
 
@@ -269,37 +282,83 @@ namespace GPRO_QMS_Counter
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void ShowResult()
         {
             // var obj = BLLLoginHistory.Instance.GetForHome(connectString, loginObj.UserId, equipCode, DateTime.Now, UseWithThirdPattern);// BLLUser.Instance.ReadResult(FrmMain.loginObj.EquipCode);
-            var obj = BLLLoginHistory.Instance.GetForHome(sqlCon, loginObj.UserId, equipCode, DateTime.Now, UseWithThirdPattern);// BLLUser.Instance.ReadResult(FrmMain.loginObj.EquipCode);
-            if (obj != null)
+            //var obj = BLLLoginHistory.Instance.GetForHome(sqlCon, loginObj.UserId, equipCode, DateTime.Now, UseWithThirdPattern);// BLLUser.Instance.ReadResult(FrmMain.loginObj.EquipCode);
+            //if (obj != null)
+            //{
+            //    if (FirstLoad)
+            //    {
+            //        lbWaiting.Invoke(new MethodInvoker(() => { lbWaiting.Text = obj.CounterWaitingTickets; }));
+            //        statusTotalWaiting.Invoke(new MethodInvoker(() => { statusTotalWaiting.Text = "Đang đợi: " + obj.TotalWating; }));
+            //        statusTotalDone.Invoke(new MethodInvoker(() => { statusTotalDone.Text = "Đã giao dịch: " + obj.TotalDone; }));
+            //        lbCurrentTicket.Invoke(new MethodInvoker(() => { lbCurrentTicket.Text = obj.CurrentTicket.ToString(); }));
+            //        FirstLoad = false;
+            //    }
+            //    else
+            //    {
+
+            //        this.statusTotalWaiting.Text = "Đang đợi: " + obj.TotalWating;
+            //        this.statusTotalDone.Text = "Đã giao dịch: " + obj.TotalDone;
+            //        this.lbCurrentTicket.Text = obj.CurrentTicket.ToString();
+            //    }
+            //}
+
+            try
             {
-                //if (FirstLoad)
-                //{
-                //    lbWaiting.Invoke(new MethodInvoker(() => { lbWaiting.Text = obj.CounterWaitingTickets; }));
-                //    statusTotalWaiting.Invoke(new MethodInvoker(() => { statusTotalWaiting.Text = "Đang đợi: " + obj.TotalWating; }));
-                //    statusTotalDone.Invoke(new MethodInvoker(() => { statusTotalDone.Text = "Đã giao dịch: " + obj.TotalDone; }));
-                //    lbCurrentTicket.Invoke(new MethodInvoker(() => { lbCurrentTicket.Text = obj.CurrentTicket.ToString(); }));
-                //    FirstLoad = false;
-                //}
-                //else
-                //{
-                this.lbQualuot.Text = obj.CounterWaitingTickets_qualuot;
-                this.lbWaiting.Text = obj.CounterWaitingTickets;
-                this.statusTotalWaiting.Text = "Đang đợi: " + obj.TotalWating;
-                this.statusTotalDone.Text = "Đã giao dịch: " + obj.TotalDone;
-                this.lbCurrentTicket.Text = obj.CurrentTicket.ToString();
-                //} 
+                //MessageBox.Show(loginObj.CounterCode);
+                  var objs = BLLHuuNghi.Instance.DSBNCho(sqlCon, loginObj.CounterCode, (int)eDailyRequireType.KhamBenh);
+                //MessageBox.Show(objs.Count.ToString());
+                dataGridView1.DataSource = objs; 
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void getLastTicket()
+        {
+            try
+            {
+                var lastTicket = BLLHuuNghi.Instance.GetCurrentTicket(connectString, loginObj.UserId, loginObj.EquipCode);
+                if (lastTicket.IsSuccess)
+                {
+                    sttDangGoi = lastTicket.Data_3.TicketNumber;
+                    lbCurrentTicket.Text = sttDangGoi.ToString();
+                    SendDisplay(lastTicket.Data_3.TicketNumber.ToString());
+                    var infoArr = (lastTicket.Data_3.Note as string).Split(',').ToArray();
+                    if (infoArr != null && infoArr.Length == 4)
+                    {
+                        maBN = infoArr[1];
+                        maPK = infoArr[0];
+                        lbBNinfo.Text = maBN + " - " + infoArr[2] + " - " + infoArr[3];
+                    }
+                }
+                else
+                {
+                    sttDangGoi = 0;
+                    lbCurrentTicket.Text = sttDangGoi.ToString();
+                    SendDisplay(sttDangGoi.ToString());
+                    maBN = "";
+                    maPK = "";
+                    lbBNinfo.Text = "---";
+                }
+            }
+            catch (Exception)
+            { 
             }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            DialogResult dr = MessageBox.Show("Bạn có muốn đóng chương trình không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+                Application.Exit();
         }
 
         private void btnMinimize_Click(object sender, EventArgs e)
@@ -325,115 +384,45 @@ namespace GPRO_QMS_Counter
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
-        #endregion
-
-        #region chu chay
-        private void RemovePlaceHolder(Object sender, EventArgs e)
-        {
-            if (txtParam.Text == "Yêu cầu xử lý ...") txtParam.Text = "";
-        }
-        private void AddPlaceHolder(Object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtParam.Text)) txtParam.Text = "Yêu cầu xử lý ...";
-        }
-
-        private void lbWaiting_TextChanged(object sender, EventArgs e)
-        {
-            if (this.lbWaiting.Text.Length > 24)
-            {
-                this.xPos1 = this.lbWaiting.Location.X;
-                this.yPos1 = this.lbWaiting.Location.Y;
-                if (!timer2.Enabled)
-                    this.timer2.Start();
-            }
-            else
-            {
-                if (timer2.Enabled)
-                    this.timer2.Stop();
-                this.lbWaiting.Left = 4;
-                // this.lbWaiting.Top = 205;
-            }
-        }
-
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (this.xPos1 <= -this.lbWaiting.Width)
-                {
-                    this.lbWaiting.Location = new Point(this.panel12.Width, this.yPos1);
-                    this.xPos1 = this.panel12.Width;
-                }
-                else
-                {
-                    this.lbWaiting.Location = new Point(this.xPos1, this.yPos1);
-                    this.xPos1 -= 3;
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void lbQualuot_TextChanged(object sender, EventArgs e)
-        {
-            if (this.lbQualuot.Text.Length > 24)
-            {
-                this.xPos = this.lbQualuot.Location.X;
-                this.yPos = this.lbQualuot.Location.Y;
-                if (!timerLBQualuot.Enabled)
-                    this.timerLBQualuot.Start();
-            }
-            else
-            {
-                if (timerLBQualuot.Enabled)
-                    this.timerLBQualuot.Stop();
-                this.lbQualuot.Left = 4;
-                // this.lbWaiting.Top = 205;
-            }
-        }
-        private void timerLBQualuot_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (this.xPos1 <= -this.lbQualuot.Width)
-                {
-                    this.lbQualuot.Location = new Point(this.panel12.Width, this.yPos);
-                    this.xPos = this.panel12.Width;
-                }
-                else
-                {
-                    this.lbQualuot.Location = new Point(this.xPos, this.yPos);
-                    this.xPos -= 3;
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
-        #endregion
+        #endregion         
 
         #region button event
         private void btNext_Click(object sender, EventArgs e)
         {
             try
-            {
-                var tk = BLLDailyRequire.Instance.Next(connectString, loginObj.UserId, equipCode, today, UseWithThirdPattern);
-                if (tk == 0)
-                    txtResult.Text = "Hết vé";
-                else
+            { 
+                DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
+                if (rows.Count > 0)
                 {
-                    lbCurrentTicket.Text = tk.ToString();
-                    SendDisplay(tk.ToString());
+                    int stt = 0;
+                    int.TryParse(rows[0].Cells[0].Value.ToString(), out stt);
+                    //MessageBox.Show(rows[0].Cells[1].Value.ToString());
 
-                    var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = equipCode, TicketNumber = tk });
-                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, counterId);
-                    var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
-                    if (readTemplateIds.Count > 0)
-                        GetSound(readTemplateIds, tk.ToString(), counterId);
-                    ShowResult();
+                    var tk = BLLHuuNghi.Instance.CallAny(connectString, loginObj.UserId, equipCode, stt, today, (int)eDailyRequireType.KhamBenh);
+                    if (tk.IsSuccess)
+                    {
+                        sttDangGoi = tk.Data_3.TicketNumber;
+                        lbCurrentTicket.Text = sttDangGoi.ToString();
+                        SendDisplay(tk.Data_3.TicketNumber.ToString());
+
+                        var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = equipCode, TicketNumber = tk.Data_3.TicketNumber });
+                        BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, counterId);
+                        var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
+                        if (readTemplateIds.Count > 0)
+                            GetSound(readTemplateIds, tk.Data_3.TicketNumber.ToString(), counterId);
+
+                        var infoArr = (tk.Data_3.Note as string).Split(',').ToArray();
+                        if (infoArr != null && infoArr.Length == 4)
+                        {
+                            maBN = infoArr[1];
+                            maPK = infoArr[0];
+                            lbBNinfo.Text = maBN + " - " + infoArr[2] + " - " + infoArr[3];
+                        }
+                        ShowResult();
+                    }                    
                 }
-
+                else
+                    MessageBox.Show("Xin vui lòng chọn bệnh nhân cần gọi.", "Lỗi thao tác", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception)
             { }
@@ -444,9 +433,7 @@ namespace GPRO_QMS_Counter
             try
             {
                 var tk = BLLDailyRequire.Instance.Next_KetLuan(connectString, loginObj.UserId, equipCode, today, UseWithThirdPattern);
-                if (tk == 0)
-                    txtResult.Text = "Hết vé";
-                else
+                if (tk != 0)
                 {
                     lbCurrentTicket.Text = tk.ToString();
                     SendDisplay(tk.ToString());
@@ -456,102 +443,104 @@ namespace GPRO_QMS_Counter
                     var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
                     if (readTemplateIds.Count > 0)
                         GetSound(readTemplateIds, tk.ToString(), counterId);
-                    ShowResult();
+                    //   ShowResult();
                 }
-
             }
             catch (Exception)
             { }
         }
 
         private void btTranfer_Click(object sender, EventArgs e)
-        {
-            txtResult.Text = "";
-            string text = txtParam.Text.Trim();
-            if (text == "" || text == "Yêu cầu xử lý ...")
-                text = this.lbCurrentTicket.Text;
-            if (!string.IsNullOrEmpty(text) && text.All(char.IsDigit) && text != "0")
+        { 
+            if (  sttDangGoi > 0 &&
+                !string.IsNullOrEmpty(loginObj.CounterCode) &&
+                !string.IsNullOrEmpty(maBN))
             {
-                DialogResult dialogResult = MessageBox.Show("Bạn muốn phiếu " + text + " qua lượt phải không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                DialogResult dialogResult = MessageBox.Show("Bạn muốn phiếu " + sttDangGoi + " qua lượt phải không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    if (BLLHuuNghi.Instance.QuaLuot(connectString, int.Parse(text), today) > 0)
+                    if (BLLHuuNghi.Instance.QuaLuot(connectString, sttDangGoi, loginObj.CounterCode, maBN, (int)eDailyRequireType.KhamBenh) > 0)
                     {
-                        this.txtParam.Text = "";
-                        this.txtResult.Text = "Yêu cầu vé qua lượt  " + text;
                         ShowResult();
+                        getLastTicket();
                     }
                 }
             }
-
         }
 
         private void btCallAnyTicket_Click(object sender, EventArgs e)
         {
-            try
-            {
-                this.txtResult.Text = "";
-                string text = this.txtParam.Text.ToString().Trim();
-                if (!string.IsNullOrEmpty(text) && !Information.IsNumeric(text))
-                {
-                    //MessageBox.Show("Bạn phải nhập số vé bất kỳ muốn gọi.", "Thông báo gọi vé", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    this.txtResult.Text = "Bạn phải nhập số vé bất kỳ muốn gọi.";
-                    this.txtParam.Focus();
-                }
-                else
-                {
-                    var dscho = lbWaiting.Text.Split(' ').ToList();
-                    var dsqualuot = lbQualuot.Text.Split(' ').ToList();
-                    if (dscho.Contains(text) || dsqualuot.Contains(text))
-                    {
-                        var kq = BLLDailyRequire.Instance.CallAny(connectString, loginObj.UserId, equipCode, int.Parse(text), today);
-                        if (kq.IsSuccess)
-                        {
-                            this.txtParam.Text = "";
-                            this.txtResult.Text = "Yêu cầu Gọi số " + text;
-                            lbCurrentTicket.Text = text;
-                            SendDisplay(text);
+            //try
+            //{
+            //    this.txtResult.Text = "";
+            //    string text = this.txtParam.Text.ToString().Trim();
+            //    if (!string.IsNullOrEmpty(text) && !Information.IsNumeric(text))
+            //    {
+            //        //MessageBox.Show("Bạn phải nhập số vé bất kỳ muốn gọi.", "Thông báo gọi vé", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            //        this.txtResult.Text = "Bạn phải nhập số vé bất kỳ muốn gọi.";
+            //        this.txtParam.Focus();
+            //    }
+            //    else
+            //    {
+            //        var dscho = lbWaiting.Text.Split(' ').ToList();
+            //        var dsqualuot = lbQualuot.Text.Split(' ').ToList();
+            //        if (dscho.Contains(text) || dsqualuot.Contains(text))
+            //        {
+            //            var kq = BLLDailyRequire.Instance.CallAny(connectString, loginObj.UserId, equipCode, int.Parse(text), today);
+            //            if (kq.IsSuccess)
+            //            {
+            //                this.txtParam.Text = "";
+            //                this.txtResult.Text = "Yêu cầu Gọi số " + text;
+            //                lbCurrentTicket.Text = text;
+            //                SendDisplay(text);
 
-                            var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
-                            if (readTemplateIds.Count > 0)
-                                GetSound(readTemplateIds, text, counterId);
-                            ShowResult();
-                        }
-                        else
-                        {
-                            this.txtParam.Text = "";
-                            this.txtResult.Text = kq.sms;
-                        }
-                    }
-                    else
-                        this.txtResult.Text = "Số : " + text + " không có trong danh sách chờ của Quầy .Vui lòng nhập số nằm trong danh sách chờ của Quầy.";
-                    // MessageBox.Show("Số : " + text + " không có trong danh sách chờ của Quầy .Vui lòng nhập số nằm trong danh sách chờ của Quầy.", "Thông báo gọi vé", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                }
-                // 
-            }
-            catch (Exception)
-            {
-            }
+            //                var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
+            //                if (readTemplateIds.Count > 0)
+            //                    GetSound(readTemplateIds, text, counterId);
+            //                ShowResult();
+            //            }
+            //            else
+            //            {
+            //                this.txtParam.Text = "";
+            //                this.txtResult.Text = kq.sms;
+            //            }
+            //        }
+            //        else
+            //            this.txtResult.Text = "Số : " + text + " không có trong danh sách chờ của Quầy .Vui lòng nhập số nằm trong danh sách chờ của Quầy.";
+            //        // MessageBox.Show("Số : " + text + " không có trong danh sách chờ của Quầy .Vui lòng nhập số nằm trong danh sách chờ của Quầy.", "Thông báo gọi vé", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            //    }
+            //    // 
+            //}
+            //catch (Exception)
+            //{
+            //}
         }
 
         private void btRecall_Click(object sender, EventArgs e)
         {
             try
             {
-                int kq = BLLDailyRequire.Instance.CurrentTicket(connectString, loginObj.UserId, equipCode, today, UseWithThirdPattern);
-                if (kq == 0)
-                    txtResult.Text = "Hết vé";
-                else
+                var tk = BLLHuuNghi.Instance.CallAny(connectString, loginObj.UserId, equipCode, sttDangGoi, today, (int)eDailyRequireType.KhamBenh);
+                if (tk.IsSuccess)
                 {
-                    lbCurrentTicket.Text = kq.ToString();
-                    SendDisplay(kq.ToString());
+                    sttDangGoi = tk.Data_3.TicketNumber;
+                    lbCurrentTicket.Text = sttDangGoi.ToString();
+                    SendDisplay(tk.Data_3.TicketNumber.ToString());
 
-                    var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = equipCode, TicketNumber = kq });
-                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendRecallToMainDisplay, counterId);
-
-                    var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Recall);
+                    var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = equipCode, TicketNumber = tk.Data_3.TicketNumber });
+                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, counterId);
+                    var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
                     if (readTemplateIds.Count > 0)
-                        GetSound(readTemplateIds, kq.ToString(), counterId);
+                        GetSound(readTemplateIds, tk.Data_3.TicketNumber.ToString(), counterId);
+
+                    var infoArr = (tk.Data_3.Note as string).Split(',').ToArray();
+                    if (infoArr != null && infoArr.Length == 4)
+                    {
+                        maBN = infoArr[1];
+                        maPK = infoArr[0];
+                        lbBNinfo.Text = maBN + " - " + infoArr[2] + " - " + infoArr[3];
+                    }
+                    ShowResult();
                 }
             }
             catch (Exception ex) { }
@@ -559,34 +548,34 @@ namespace GPRO_QMS_Counter
 
         private void btFinish_Click(object sender, EventArgs e)
         {
-            this.txtResult.Text = "";
-            string text = this.lbCurrentTicket.Text;
-            if (text != "" && text != "0")
-            {
-                BLLDailyRequire.Instance.DoneTicket(connectString, loginObj.UserId, equipCode, DateTime.Now);
-                ShowResult();
-            }
+            //this.txtResult.Text = "";
+            //string text = this.lbCurrentTicket.Text;
+            //if (text != "" && text != "0")
+            //{
+            //    BLLDailyRequire.Instance.DoneTicket(connectString, loginObj.UserId, equipCode, DateTime.Now);
+            //    ShowResult();
+            //}
         }
 
         private void btCancel_Click(object sender, EventArgs e)
         {
-            txtResult.Text = "";
-            string text = txtParam.Text.Trim();
-            if (text == "")
-                text = this.lbCurrentTicket.Text;
-            if (!string.IsNullOrEmpty(text) && text.All(char.IsDigit))
-            {
-                DialogResult dialogResult = MessageBox.Show("Bạn muốn hủy vé " + text + " phải không?", "Thông báo hủy vé", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    if (BLLDailyRequire.Instance.DeleteTicket(connectString, int.Parse(text), today) > 0)
-                    {
-                        this.txtParam.Text = "";
-                        this.txtResult.Text = "Yêu cầu Hủy vé " + text;
-                        ShowResult();
-                    }
-                }
-            }
+            //txtResult.Text = "";
+            //string text = txtParam.Text.Trim();
+            //if (text == "")
+            //    text = this.lbCurrentTicket.Text;
+            //if (!string.IsNullOrEmpty(text) && text.All(char.IsDigit))
+            //{
+            //    DialogResult dialogResult = MessageBox.Show("Bạn muốn hủy vé " + text + " phải không?", "Thông báo hủy vé", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            //    if (dialogResult == DialogResult.Yes)
+            //    {
+            //        if (BLLDailyRequire.Instance.DeleteTicket(connectString, int.Parse(text), today) > 0)
+            //        {
+            //            this.txtParam.Text = "";
+            //            this.txtResult.Text = "Yêu cầu Hủy vé " + text;
+            //            ShowResult();
+            //        }
+            //    }
+            //}
         }
         #endregion
 
