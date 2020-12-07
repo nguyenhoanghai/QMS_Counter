@@ -25,7 +25,7 @@
 
 [cat-giay]</Template>
     <SoLien>1</SoLien>
-    <CounterId>15</CounterId>
+    <CounterId>6</CounterId>
     <Display>False</Display>
     <COMDisplay>COM2</COMDisplay>
     <Print>False</Print>
