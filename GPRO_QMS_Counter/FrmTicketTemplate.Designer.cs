@@ -40,6 +40,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnTenDichVu = new System.Windows.Forms.Button();
             this.btDangGoi = new System.Windows.Forms.Button();
             this.btTenQuay = new System.Windows.Forms.Button();
             this.btSTT = new System.Windows.Forms.Button();
@@ -55,7 +56,7 @@
             this.btThemVB = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtVB = new System.Windows.Forms.TextBox();
-            this.btnTenDichVu = new System.Windows.Forms.Button();
+            this.btKhungGio = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -194,6 +195,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btKhungGio);
             this.groupBox3.Controls.Add(this.btnTenDichVu);
             this.groupBox3.Controls.Add(this.btDangGoi);
             this.groupBox3.Controls.Add(this.btTenQuay);
@@ -212,6 +214,17 @@
             this.groupBox3.TabIndex = 11;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Khác";
+            // 
+            // btnTenDichVu
+            // 
+            this.btnTenDichVu.Location = new System.Drawing.Point(224, 96);
+            this.btnTenDichVu.Margin = new System.Windows.Forms.Padding(4);
+            this.btnTenDichVu.Name = "btnTenDichVu";
+            this.btnTenDichVu.Size = new System.Drawing.Size(100, 28);
+            this.btnTenDichVu.TabIndex = 19;
+            this.btnTenDichVu.Text = "Tên dịch vụ";
+            this.btnTenDichVu.UseVisualStyleBackColor = true;
+            this.btnTenDichVu.Click += new System.EventHandler(this.btnTenDichVu_Click);
             // 
             // btDangGoi
             // 
@@ -388,16 +401,16 @@
             this.txtVB.Size = new System.Drawing.Size(451, 22);
             this.txtVB.TabIndex = 13;
             // 
-            // btnTenDichVu
+            // btKhungGio
             // 
-            this.btnTenDichVu.Location = new System.Drawing.Point(224, 96);
-            this.btnTenDichVu.Margin = new System.Windows.Forms.Padding(4);
-            this.btnTenDichVu.Name = "btnTenDichVu";
-            this.btnTenDichVu.Size = new System.Drawing.Size(100, 28);
-            this.btnTenDichVu.TabIndex = 19;
-            this.btnTenDichVu.Text = "Tên dịch vụ";
-            this.btnTenDichVu.UseVisualStyleBackColor = true;
-            this.btnTenDichVu.Click += new System.EventHandler(this.btnTenDichVu_Click);
+            this.btKhungGio.Location = new System.Drawing.Point(11, 98);
+            this.btKhungGio.Margin = new System.Windows.Forms.Padding(4);
+            this.btKhungGio.Name = "btKhungGio";
+            this.btKhungGio.Size = new System.Drawing.Size(97, 28);
+            this.btKhungGio.TabIndex = 20;
+            this.btKhungGio.Text = "khung giờ";
+            this.btKhungGio.UseVisualStyleBackColor = true;
+            this.btKhungGio.Click += new System.EventHandler(this.btKhungGio_Click);
             // 
             // FrmTicketTemplate
             // 
@@ -449,5 +462,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtVB;
         private System.Windows.Forms.Button btnTenDichVu;
+        private System.Windows.Forms.Button btKhungGio;
     }
 }

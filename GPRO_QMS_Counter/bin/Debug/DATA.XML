@@ -1,22 +1,23 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <SystemConfig>
   <SQLServer id="1">
-    <Server_Name>
-    </Server_Name>
-    <Database>5eQK1TwLQ/1nueanfqE7qWcVEWhjZFFLmy9g45elsq0=</Database>
+    <Server_Name>QNd8Qi1YHVg6gBfOh9dXCw==</Server_Name>
+    <Database>0jNEWwCg++g4gjOP2s6fwdnldeiPbFVHH/xAZHAV49g=</Database>
     <User>ZXhwutftOGY2GQGN7xFCdA==</User>
     <Password>u83X0HO/seCu6CcDOMQghA==</Password>
     <Window_Authenticate>False</Window_Authenticate>
   </SQLServer>
   <AppConfig>
-    <Template>[canh-giua][2x1]BENH VIEN QUAN 6
+    <Template>[canh-giua][2x2]BV Răng Hàm Mặt TW-TPHCM
+
+[1x1]Khoa Chỉnh Nha[2x1]
 [canh-giua]========================================
 
 [2x2][ten-dich-vu]
+
 [canh-giua][3x3]STT:[STT]
 [canh-trai][1x1]
-  + Uu tien so tu 1 den 50
-  + Khong uu tien so tu 51 tro len
+* đề nghị bệnh nhân theo dõi trên màn hình Tivi. Xin cảm ơn!.
 ------------------------------------------------
 [ngay]  [gio]  [dang-goi]
 
@@ -25,11 +26,11 @@
 
 [cat-giay]</Template>
     <SoLien>1</SoLien>
-    <CounterId>6</CounterId>
+    <CounterId>18</CounterId>
     <Display>False</Display>
     <COMDisplay>COM2</COMDisplay>
-    <Print>False</Print>
-    <COMPrint>COM10</COMPrint>
+    <Print>True</Print>
+    <COMPrint>COM8</COMPrint>
     <PrintCode>27</PrintCode>
     <ReadSound>False</ReadSound>
     <SoundPath>C:\Users\DoNguyen\Desktop\Audios\</SoundPath>

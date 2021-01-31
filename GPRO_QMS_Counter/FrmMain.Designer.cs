@@ -68,6 +68,9 @@ namespace GPRO_QMS_Counter
             this.vềPhầnMềmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hướngDẫnSửDụngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.đăngKýSửDụngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.danhMụcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kháchHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cuộcHẹnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusStaffName = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLoginTime = new System.Windows.Forms.ToolStripStatusLabel();
@@ -158,7 +161,8 @@ namespace GPRO_QMS_Counter
             this.càiĐặtToolStripMenuItem,
             this.thốngKêToolStripMenuItem,
             this.khácToolStripMenuItem,
-            this.trợGiúpToolStripMenuItem});
+            this.trợGiúpToolStripMenuItem,
+            this.danhMụcToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1114, 24);
@@ -427,6 +431,29 @@ namespace GPRO_QMS_Counter
             this.đăngKýSửDụngToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.đăngKýSửDụngToolStripMenuItem.Text = "Đăng ký sử dụng";
             this.đăngKýSửDụngToolStripMenuItem.Click += new System.EventHandler(this.đăngKýSửDụngToolStripMenuItem_Click);
+            // 
+            // danhMụcToolStripMenuItem
+            // 
+            this.danhMụcToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.kháchHàngToolStripMenuItem,
+            this.cuộcHẹnToolStripMenuItem});
+            this.danhMụcToolStripMenuItem.Name = "danhMụcToolStripMenuItem";
+            this.danhMụcToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
+            this.danhMụcToolStripMenuItem.Text = "Danh mục";
+            // 
+            // kháchHàngToolStripMenuItem
+            // 
+            this.kháchHàngToolStripMenuItem.Name = "kháchHàngToolStripMenuItem";
+            this.kháchHàngToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.kháchHàngToolStripMenuItem.Text = "Khách hàng";
+            this.kháchHàngToolStripMenuItem.Click += new System.EventHandler(this.kháchHàngToolStripMenuItem_Click);
+            // 
+            // cuộcHẹnToolStripMenuItem
+            // 
+            this.cuộcHẹnToolStripMenuItem.Name = "cuộcHẹnToolStripMenuItem";
+            this.cuộcHẹnToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.cuộcHẹnToolStripMenuItem.Text = "Cuộc hẹn";
+            this.cuộcHẹnToolStripMenuItem.Click += new System.EventHandler(this.cuộcHẹnToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -765,7 +792,7 @@ namespace GPRO_QMS_Counter
             this.splitContainer1.Panel2.Controls.Add(this.label5);
             this.splitContainer1.Panel2.Controls.Add(this.label4);
             this.splitContainer1.Size = new System.Drawing.Size(779, 408);
-            this.splitContainer1.SplitterDistance = 458;
+            this.splitContainer1.SplitterDistance = 457;
             this.splitContainer1.TabIndex = 6;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             this.splitContainer1.DoubleClick += new System.EventHandler(this.splitContainer1_DoubleClick);
@@ -789,7 +816,7 @@ namespace GPRO_QMS_Counter
             this.splitContainer2.Panel2.Controls.Add(this.lbWaiting);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
             this.splitContainer2.Panel2.Controls.Add(this.label2);
-            this.splitContainer2.Size = new System.Drawing.Size(458, 408);
+            this.splitContainer2.Size = new System.Drawing.Size(457, 408);
             this.splitContainer2.SplitterDistance = 204;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.DoubleClick += new System.EventHandler(this.splitContainer2_DoubleClick);
@@ -1366,5 +1393,8 @@ namespace GPRO_QMS_Counter
         private Button btnFullscreen;
         private ToolStripMenuItem kếtNốiCSDLToolStripMenuItem;
         private Button btnGoiUuTien;
+        private ToolStripMenuItem danhMụcToolStripMenuItem;
+        private ToolStripMenuItem kháchHàngToolStripMenuItem;
+        private ToolStripMenuItem cuộcHẹnToolStripMenuItem;
     }
 }

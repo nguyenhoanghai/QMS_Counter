@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -40,6 +40,7 @@
       <HintPath>..\Library\AxInterop.WMPLib.DLL</HintPath>
     </Reference>
     <Reference Include="DevExpress.Data.v18.1, Version=18.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Images.v18.1, Version=18.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v18.1.Core, Version=18.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Utils.v18.1, Version=18.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraBars.v18.1, Version=18.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -55,9 +56,16 @@
     <Reference Include="GPRO.Core.Hai">
       <HintPath>..\Library\GPRO.Core.Hai.dll</HintPath>
     </Reference>
+    <Reference Include="GPRO.Ultilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\GPRO.Ultilities.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.WMPLib">
       <HintPath>..\Library\Interop.WMPLib.DLL</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Lib_KetNoi">
+      <HintPath>..\Library\RangHamMat\Lib_KetNoi.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -67,6 +75,12 @@
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.DataAccess">
+      <HintPath>..\Library\RangHamMat\Oracle.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess">
+      <HintPath>..\Library\RangHamMat\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="QMS_System.Data">
       <HintPath>..\Library\QMS_System.Data.dll</HintPath>
@@ -101,6 +115,18 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmCaiDangNhap_RHM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCaiDangNhap_RHM.Designer.cs">
+      <DependentUpon>FrmCaiDangNhap_RHM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCapPhieu_RHM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCapPhieu_RHM.Designer.cs">
+      <DependentUpon>FrmCapPhieu_RHM.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +159,12 @@
     <Compile Include="FrmComSetting.Designer.cs">
       <DependentUpon>FrmComSetting.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCustomer.Designer.cs">
+      <DependentUpon>frmCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmDeskNumber.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +176,12 @@
     </Compile>
     <Compile Include="FrmEditTicketInfo.Designer.cs">
       <DependentUpon>FrmEditTicketInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmGoiSo_RHM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmGoiSo_RHM.Designer.cs">
+      <DependentUpon>FrmGoiSo_RHM.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmGuide.cs">
       <SubType>Form</SubType>
@@ -187,6 +225,12 @@
     <Compile Include="FrmMainPhongKham.Designer.cs">
       <DependentUpon>FrmMainPhongKham.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmMainRHM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMainRHM.Designer.cs">
+      <DependentUpon>FrmMainRHM.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmPermission.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -216,6 +260,12 @@
     </Compile>
     <Compile Include="FrmReportEvaluate.Designer.cs">
       <DependentUpon>FrmReportEvaluate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSchedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSchedule.Designer.cs">
+      <DependentUpon>frmSchedule.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmSoundSetting.cs">
       <SubType>Form</SubType>
@@ -274,6 +324,12 @@
     <EmbeddedResource Include="FrmBookService.resx">
       <DependentUpon>FrmBookService.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmCaiDangNhap_RHM.resx">
+      <DependentUpon>FrmCaiDangNhap_RHM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCapPhieu_RHM.resx">
+      <DependentUpon>FrmCapPhieu_RHM.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmChange.resx">
       <DependentUpon>FrmChange.cs</DependentUpon>
     </EmbeddedResource>
@@ -283,8 +339,14 @@
     <EmbeddedResource Include="frmConfig.resx">
       <DependentUpon>FrmConfig.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmCustomer.resx">
+      <DependentUpon>frmCustomer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmEditTicketInfo.resx">
       <DependentUpon>FrmEditTicketInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmGoiSo_RHM.resx">
+      <DependentUpon>FrmGoiSo_RHM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmGuide.resx">
       <DependentUpon>FrmGuide.cs</DependentUpon>
@@ -307,6 +369,9 @@
     <EmbeddedResource Include="FrmMainPhongKham.resx">
       <DependentUpon>FrmMainPhongKham.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmMainRHM.resx">
+      <DependentUpon>FrmMainRHM.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmPermission.resx">
       <DependentUpon>FrmPermission.cs</DependentUpon>
     </EmbeddedResource>
@@ -321,6 +386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmReportEvaluate.resx">
       <DependentUpon>FrmReportEvaluate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSchedule.resx">
+      <DependentUpon>frmSchedule.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSoundSetting.resx">
       <DependentUpon>FrmSoundSetting.cs</DependentUpon>
@@ -378,14 +446,18 @@
     <Content Include="Resources\1496758275_key_go.ico" />
     <None Include="Resources\vspk-icon-256.png" />
     <None Include="Resources\callAny.png" />
+    <None Include="Resources\add.png" />
     <Content Include="Resources\callticket.png" />
     <Content Include="Resources\cancel.jpg" />
     <None Include="Resources\checklist %281%29.png" />
     <None Include="Resources\com_port.png" />
     <None Include="Resources\com_port_dis.png" />
     <None Include="Resources\cerrar.png" />
+    <None Include="Resources\delete.png" />
     <Content Include="Resources\deskSound.jpg" />
     <None Include="Resources\edit_info.png" />
+    <None Include="Resources\edit.png" />
+    <None Include="Resources\edit2.png" />
     <Content Include="Resources\finish.jpg" />
     <None Include="Resources\fullscreen.png" />
     <Content Include="Resources\help.jpg" />

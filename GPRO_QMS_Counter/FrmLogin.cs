@@ -87,6 +87,7 @@ namespace GPRO_QMS_Counter
                     Form1.loginObj = login;
                     FrmMainPhongKham.loginObj = login;
                     FrmPhongKhamHuuNghi.loginObj = login;
+                    FrmMainRHM.loginObj = login;
                     FrmLogin.bCloseForm = true;
                   //  MessageBox.Show(JsonConvert.SerializeObject(login));
                     this.Close();

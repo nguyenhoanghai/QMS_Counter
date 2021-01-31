@@ -146,10 +146,10 @@ namespace GPRO_QMS_Counter
                 lbCurrentTicket_s.Text = "0";
                 lbWaiting.Text = "0";
                 lbGeneralWaiting.Text = "0";
-                if (!bRegistered)
+               // if (!bRegistered)
                     đăngKýSửDụngToolStripMenuItem.Enabled = true;
-                else
-                    đăngKýSửDụngToolStripMenuItem.Enabled = false;
+               // else
+              //      đăngKýSửDụngToolStripMenuItem.Enabled = false;
 
 
                 playlist = new List<string>();
@@ -952,6 +952,18 @@ namespace GPRO_QMS_Counter
             }
             catch (Exception)
             { }
+        }
+
+        private void kháchHàngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var f = new frmCustomer();
+            f.ShowDialog();
+        }
+
+        private void cuộcHẹnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var f = new frmSchedule();
+            f.ShowDialog();
         }
 
         private void kếtThúcToolStripMenuItem_Click(object sender, EventArgs e)

@@ -1,5 +1,4 @@
-﻿using DevExpress.XtraBars;
-using GPRO.Core.Hai;
+﻿using GPRO.Core.Hai;
 using GPRO_QMS_Counter.Helper;
 using Microsoft.Win32;
 using QMS_System.Data.BLL;
@@ -7,17 +6,22 @@ using QMS_System.Data.Enum;
 using QMS_System.Data.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
+using System.Data;
+using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
 using System.Media;
+using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
 namespace GPRO_QMS_Counter
 {
-    public partial class FrmMain2 : DevExpress.XtraBars.Ribbon.RibbonForm
+    public partial class FrmMainRHM : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         List<ConfigModel> configs;
         public static Login loginObj;
@@ -48,14 +52,66 @@ namespace GPRO_QMS_Counter
             bRegistered = false,
             bCheckValid = false,
             UsePrintMachine = false;
-        static List<string> temp, playlist;
-        SoundPlayer player;
-        Thread playThread;
-        string soundPath = string.Empty;
-        public static List<int> serviceIds;
 
+        private void barBTPrint_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = IsActive(typeof(FrmCapPhieu_RHM));
+            if (frm == null)
+            {
+                var f = new FrmCapPhieu_RHM();
+                f.MdiParent = this;
+                f.Show();
+            }
+            else
+                frm.Activate();
+        }
 
-        private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
+        private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = IsActive(typeof(frmCustomer));
+            if (frm == null)
+            {
+                var f = new frmCustomer();
+                f.MdiParent = this;
+                f.Show();
+            }
+            else
+                frm.Activate();
+        }
+
+        private void barButtonItem5_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = IsActive(typeof(frmSchedule));
+            if (frm == null)
+            {
+                var f = new frmSchedule();
+                f.MdiParent = this;
+                f.Show();
+            }
+            else
+                frm.Activate();
+        }
+
+        private void btnCauHinh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = IsActive(typeof(FrmConfig));
+            if (frm == null)
+            {
+                var forms = new FrmConfig();
+                forms.MdiParent = this;
+                forms.Show();
+            }
+            else
+                frm.Activate();
+        }
+
+        private void btActive_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var forms = new FrmRegister();
+            forms.Show();
+        }
+
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (printSerialCOM.IsOpen)
             {
@@ -84,143 +140,139 @@ namespace GPRO_QMS_Counter
             }
         }
 
-        private void FrmMain2_MdiChildActivate(object sender, EventArgs e)
+        private void btOpenGoiSO_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            try
-            {
-                if (genUserTabFinish)
-                    if (MdiChildren.Any())
-                    {
-                        if (this.ActiveMdiChild is IChildMethods)
-                            ((IChildMethods)this.ActiveMdiChild).enableTimer();
-
-                        var control = ((System.Windows.Forms.ContainerControl)sender).ActiveControl;
-                        foreach (Form f in this.MdiChildren)
-                        {
-                            if (f.GetType() == typeof(FrmMain3))
-                            {
-                                if (f.Text != control.Text)
-                                    ((IChildMethods)f).disableTimer();
-
-                            }
-                        }
-                    }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void btnCauHinh_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            Form frm = IsActive(typeof(FrmConfig));
+            Form frm = IsActive(typeof(FrmGoiSo_RHM));
             if (frm == null)
             {
-                var forms = new FrmConfig();
-                forms.MdiParent = this;
-                forms.Show();
+                var f = new FrmGoiSo_RHM( );
+                f.MdiParent = this;
+                f.Show();
             }
             else
                 frm.Activate();
         }
 
-        private void btnTicketTemplate_ItemClick(object sender, ItemClickEventArgs e)
+        private void btnTicketTemplate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Form frm = IsActive(typeof(FrmTicketTemplate));
             if (frm == null)
             {
-                var forms = new FrmTicketTemplate();
-                forms.MdiParent = this;
-                forms.Show();
+                var f = new FrmTicketTemplate();
+                f.MdiParent = this;
+                f.Show();
             }
             else
                 frm.Activate();
         }
 
-        private void btconnectsql_ItemClick(object sender, ItemClickEventArgs e)
+        private void btconnectsql_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Form frm = IsActive(typeof(FrmSQLConnect));
             if (frm == null)
             {
-                var forms = new FrmSQLConnect();
-                forms.MdiParent = this;
-                forms.Show();
+                var f = new FrmSQLConnect();
+                f.MdiParent = this;
+                f.Show();
             }
             else
                 frm.Activate();
         }
 
-        bool isSendDataKeyPad = false;
-        public FrmMain2()
+        static List<string> temp, playlist;
+        SoundPlayer player;
+        Thread playThread;
+        string soundPath = string.Empty;
+        public static List<int> serviceIds;
+
+        public FrmMainRHM()
         {
-            bCheckValid = CheckValidation();
-            if (!bCheckValid)
+            try
             {
-                FrmRegister frmRegister = new FrmRegister();
-                frmRegister.ShowDialog();
-            }
-
-            if (bCheckValid)
-            {
-                FrmLogin frmLogin = new FrmLogin( );
-                frmLogin.ShowDialog();
-                InitializeComponent();
-                //  InitCOMPort();
-            }
-        }
-
-        private void btActive_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            var forms = new FrmRegister();
-            forms.Show();
-        }
-
-         
-
-        private void ribbon_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FrmMain2_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (printSerialCOM.IsOpen)
-                printSerialCOM.Close();
-
-            if (displaySerialCOM.IsOpen)
-                displaySerialCOM.Close();
-        }
-
-        private void barButtonItem2_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            MdiChildren.Any();
-            var currentItems = new List<string>();
-            foreach (var item in MdiChildren)
-            {
-                currentItems.Add(item.Text);
-            }
-
-            var genCounter = loginObj.Counters.Where(x => !currentItems.Contains(x.CounterName)).ToList();
-            if (genCounter.Count > 0)
-            {
-                for (int i = 0; i < genCounter.Count; i++)
+                bCheckValid = CheckValidation();
+                if (!bCheckValid)
                 {
-                    var f = new FrmMain3(genCounter[i]);
-                    f.Text = genCounter[i].CounterName;
-                    f.MdiParent = this;
-                    f.Show();
+                    FrmRegister frmRegister = new FrmRegister();
+                    frmRegister.ShowDialog();
+                }
+
+                //if (bCheckValid)
+                //{
+                //    FrmLogin frmLogin = new FrmLogin();
+                //    frmLogin.ShowDialog();
+                    InitializeComponent();
+                //}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private Form IsActive(Type ftype)
+        {
+            foreach (Form f in this.MdiChildren)
+            {
+                if (f.GetType() == ftype)
+                {
+                    return f;
                 }
             }
-            genUserTabFinish = true;
-
-            //check call active
-            if (MdiChildren.Any())
-                if (this.ActiveMdiChild is IChildMethods)
-                    ((IChildMethods)this.ActiveMdiChild).enableTimer();
+            return null;
         }
-
-        private void FrmMain2_Load(object sender, EventArgs e)
+        private bool CheckValidation()
         {
+            RegistryKey localMachine = Registry.LocalMachine;
+            RegistryKey registryKey = localMachine.OpenSubKey("Software\\GPRO\\QMS Counter Soft");
+            bool result;
+            if (registryKey != null)
+            {
+                string text = (string)registryKey.GetValue("SoftDate");
+                registryKey.Close();
+                if (text == null)
+                {
+                    MessageBox.Show("Phần mềm Điều Khiển Gọi Số chưa được đăng ký sử dụng.\nVui lòng đăng ký trước khi sử dụng.", "Thông báo Chưa đăng ký", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    bRegistered = false;
+                    result = false;
+                }
+                else
+                {
+                    int num = Convert.ToInt32(text, 16);
+                    DateTime dateTime = new DateTime(2000 + int.Parse(num.ToString().Substring(0, 2)), int.Parse(num.ToString().Substring(2, 2)), int.Parse(num.ToString().Substring(4)));
+                    if (DateTime.Compare(DateTime.Now, dateTime.AddDays(-7.0)) > 0 & DateTime.Compare(DateTime.Now, dateTime) < 0)
+                    {
+                        MessageBox.Show("Phần mềm Điều Khiển Gọi Số sắp hết hạn sử dụng. Bạn chỉ còn sử dụng được " + (dateTime - DateTime.Now).Days.ToString() + " ngày.\nVui lòng liên hệ Công ty TNHH Giải Pháp Công Nghệ Chuyên Nghiệp Phát Triển để gia hạn sử dụng.\nTrân trọng cảm ơn.", "Thông báo Hết hạn", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        bRegistered = false;
+                        result = true;
+                    }
+                    else
+                    {
+                        if (DateTime.Compare(DateTime.Now, dateTime) > 0)
+                        {
+                            MessageBox.Show("Phần mềm Điều Khiển Gọi Số đã hết hạn sử dụng.\nVui lòng liên hệ Công ty TNHH Giải Pháp Công Nghệ Chuyên Nghiệp Phát Triển để gia hạn sử dụng.\nTrân trọng cảm ơn.", "Hết hạn dùng", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                            bRegistered = false;
+                            result = false;
+                        }
+                        else
+                        {
+                            bRegistered = true;
+                            result = true;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Phần mềm Điều Khiển Gọi Số chưa được đăng ký sử dụng.\nVui lòng đăng ký trước khi sử dụng.", "Thông báo Chưa đăng ký", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                bRegistered = false;
+                result = false;
+            }
+            return result;
+        }
+        
+        private void FrmMainRHM_Load(object sender, EventArgs e)
+        {
+            lbErrorsms.Caption = "";
             try
             {
                 // mo chuc nang cau hinh cho admin
@@ -295,69 +347,18 @@ namespace GPRO_QMS_Counter
                 playlist = new List<string>();
                 temp = new List<string>();
 
-                if (IsUseMainDisplay)
-                    InitDisplayCOMPort();
+              //  if (IsUseMainDisplay)
+                //    InitDisplayCOMPort();
 
                 serviceIds = (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["ServiceIds"].ToString()) ? ConfigurationManager.AppSettings["ServiceIds"].ToString() : "1,2,3,4,5,6").Split(',').Select(x => Convert.ToInt32(x)).ToList();
                 serviceObjs = BLLService.Instance.GetLookUp(connectString, false);
                 serviceObjs = serviceObjs.Where(x => serviceIds.Contains(x.Id)).ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
             }
         }
-
-
-        private bool CheckValidation()
-        {
-            RegistryKey localMachine = Registry.LocalMachine;
-            RegistryKey registryKey = localMachine.OpenSubKey("Software\\GPRO\\QMS Counter Soft");
-            bool result;
-            if (registryKey != null)
-            {
-                string text = (string)registryKey.GetValue("SoftDate");
-                registryKey.Close();
-                if (text == null)
-                {
-                    MessageBox.Show("Phần mềm Điều Khiển Gọi Số chưa được đăng ký sử dụng.\nVui lòng đăng ký trước khi sử dụng.", "Thông báo Chưa đăng ký", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                    bRegistered = false;
-                    result = false;
-                }
-                else
-                {
-                    int num = Convert.ToInt32(text, 16);
-                    DateTime dateTime = new DateTime(2000 + int.Parse(num.ToString().Substring(0, 2)), int.Parse(num.ToString().Substring(2, 2)), int.Parse(num.ToString().Substring(4)));
-                    if (DateTime.Compare(DateTime.Now, dateTime.AddDays(-7.0)) > 0 & DateTime.Compare(DateTime.Now, dateTime) < 0)
-                    {
-                        MessageBox.Show("Phần mềm Điều Khiển Gọi Số sắp hết hạn sử dụng. Bạn chỉ còn sử dụng được " + (dateTime - DateTime.Now).Days.ToString() + " ngày.\nVui lòng liên hệ Công ty TNHH Giải Pháp Công Nghệ Chuyên Nghiệp Phát Triển để gia hạn sử dụng.\nTrân trọng cảm ơn.", "Thông báo Hết hạn", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        bRegistered = false;
-                        result = true;
-                    }
-                    else
-                    {
-                        if (DateTime.Compare(DateTime.Now, dateTime) > 0)
-                        {
-                            MessageBox.Show("Phần mềm Điều Khiển Gọi Số đã hết hạn sử dụng.\nVui lòng liên hệ Công ty TNHH Giải Pháp Công Nghệ Chuyên Nghiệp Phát Triển để gia hạn sử dụng.\nTrân trọng cảm ơn.", "Hết hạn dùng", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                            bRegistered = false;
-                            result = false;
-                        }
-                        else
-                        {
-                            bRegistered = true;
-                            result = true;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Phần mềm Điều Khiển Gọi Số chưa được đăng ký sử dụng.\nVui lòng đăng ký trước khi sử dụng.", "Thông báo Chưa đăng ký", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                bRegistered = false;
-                result = false;
-            }
-            return result;
-        }
-
+         
 
         private string GetConfigByCode(string code)
         {
@@ -367,31 +368,6 @@ namespace GPRO_QMS_Counter
                 return obj != null ? obj.Value : string.Empty;
             }
             return string.Empty;
-        }
-
-        private void barBTPrint_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            Form frm = IsActive(typeof(FrmPrintTicket));
-            if (frm == null)
-            {
-                var forms = new FrmPrintTicket(connectString);
-                forms.MdiParent = this;
-                forms.Show();
-            }
-            else
-                frm.Activate();
-        }
-
-        private Form IsActive(Type ftype)
-        {
-            foreach (Form f in this.MdiChildren)
-            {
-                if (f.GetType() == ftype)
-                {
-                    return f;
-                }
-            }
-            return null;
         }
 
         #region Print COMPort
@@ -422,6 +398,19 @@ namespace GPRO_QMS_Counter
 
 
         #endregion
+
+        private void barButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        { 
+            Form frm = IsActive(typeof(FrmCaiDangNhap_RHM));
+            if (frm == null)
+            {
+                var f = new FrmCaiDangNhap_RHM();
+                f.MdiParent = this;
+                f.Show();
+            }
+            else
+                frm.Activate();
+        }
 
         #region Sound
         private void TmerQuetComport_Tick(object sender, EventArgs e)
@@ -538,69 +527,6 @@ namespace GPRO_QMS_Counter
                 }
             }
         }
-        #endregion  
-
-        #region Display COM port
-        private void InitDisplayCOMPort()
-        {
-            try
-            {
-                barBtDisplayComStatus.Caption = "Display " + displaySerialCOM.PortName;
-                displaySerialCOM.BaudRate = 9600;
-                displaySerialCOM.DataBits = 8;
-                displaySerialCOM.Parity = Parity.None;
-                displaySerialCOM.StopBits = StopBits.One;
-                try
-                {
-                    displaySerialCOM.Open();
-                    barBtDisplayComStatus.Glyph = global::GPRO_QMS_Counter.Properties.Resources.com_port;
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Lỗi: không thể kết nối với cổng COM Keypad, Vui lòng thử cấu hình lại kết nối", "Lỗi kết nối", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lấy thông tin Com Keypad bị lỗi.\n" + ex.Message, "Lỗi Com Keypad");
-            }
-        }
-
-        public static void SendDisplay(string sResult)
-        {
-            try
-            {
-                if (IsUseMainDisplay)
-                {
-                    string text = sResult;
-                    if (text.Length < 4)
-                        text = string.Format("{0:0000}", int.Parse(text));
-
-                    byte[] array = new byte[3];
-                    array[0] = 170;
-                    byte[] array2 = array;
-                    array2[1] = byte.Parse((int.Parse(text.Substring(0, 1)) * 16 + int.Parse(text.Substring(1, 1))).ToString());
-                    array2[2] = byte.Parse((int.Parse(text.Substring(2, 1)) * 16 + int.Parse(text.Substring(3, 1))).ToString());
-                    if (!displaySerialCOM.IsOpen)
-                    {
-                        try
-                        {
-                            displaySerialCOM.Open();
-                            displaySerialCOM.DtrEnable = true;
-                            displaySerialCOM.RtsEnable = true;
-                        }
-                        catch
-                        {
-                        }
-                    }
-                    displaySerialCOM.Write(array2, 0, array2.Length);
-                }
-            }
-            catch (Exception)
-            { }
-        }
-
-        #endregion
-
+        #endregion 
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GPRO.Core.Hai;
+using System;
+using System.Configuration;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
@@ -155,7 +157,7 @@ namespace GPRO_QMS_Counter
         }
 
         private void FrmTicketTemplate_Load(object sender, EventArgs e)
-        { 
+        {
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(Application.StartupPath + "\\DATA.XML");
             foreach (XmlElement element in xmlDoc.DocumentElement)
@@ -182,31 +184,46 @@ namespace GPRO_QMS_Counter
 
         private void btTest_Click(object sender, EventArgs e)
         {
-            var now = DateTime.Now;
-            string content = txtContent.Text;
-            content = content.Replace("[canh-giua]", "\x1b\x61\x01|+|");
-            content = content.Replace("[canh-trai]", "\x1b\x61\x00|+|");
-            content = content.Replace("[1x1]", "\x1d\x21\x00|+|");
-            content = content.Replace("[2x1]", "\x1d\x21\x01|+|");
-            content = content.Replace("[3x1]", "\x1d\x21\x02|+|");
-            content = content.Replace("[2x2]", "\x1d\x21\x11|+|");
-            content = content.Replace("[3x3]", "\x1d\x21\x22|+|");
-
-            content = content.Replace("[STT]", "1001");
-            content = content.Replace("[ten-quay]", "quay 1");
-            content = content.Replace("[ten-dich-vu]", "dich vu 1");
-            content = content.Replace("[ngay]", ("ngay: " + now.ToString("dd/MM/yyyy")));
-            content = content.Replace("[gio]", (" gio: " + now.ToString("HH/mm")));
-            content = content.Replace("[dang-goi]", " dang goi 1000");
-            content = content.Replace("[cat-giay]", "\x1b\x69|+|");
-
-            var arr = content.Split(new string[] { "|+|" }, StringSplitOptions.RemoveEmptyEntries).ToArray();
-            for (int ii = 0; ii < txtsolien.Value; ii++)
+            try
             {
-                for (int i = 0; i < arr.Length; i++)
+                var now = DateTime.Now;
+                string content = txtContent.Text;
+                content = content.Replace("[canh-giua]", "\x1b\x61\x01|+|");
+                content = content.Replace("[canh-trai]", "\x1b\x61\x00|+|");
+                content = content.Replace("[1x1]", "\x1d\x21\x00|+|");
+                content = content.Replace("[2x1]", "\x1d\x21\x01|+|");
+                content = content.Replace("[3x1]", "\x1d\x21\x02|+|");
+                content = content.Replace("[2x2]", "\x1d\x21\x11|+|");
+                content = content.Replace("[3x3]", "\x1d\x21\x22|+|");
+
+                content = content.Replace("[STT]", "1001");
+                content = content.Replace("[ten-quay]", "quay 1");
+                content = content.Replace("[ten-dich-vu]", "dich vu 1");
+                content = content.Replace("[ngay]", ("ngày: " + now.ToString("dd/MM/yyyy")));
+                content = content.Replace("[gio]", ("giờ: " + now.ToString("HH:mm")));
+                content = content.Replace("[dang-goi]", " đang gọi 1000");
+                content = content.Replace("[cat-giay]", "\x1b\x69|+|");
+
+                var arr = content.Split(new string[] { "|+|" }, StringSplitOptions.RemoveEmptyEntries).ToArray();
+                for (int ii = 0; ii < txtsolien.Value; ii++)
                 {
-                    FrmMain2.printSerialCOM.Write(arr[i]);
+                    for (int i = 0; i < arr.Length; i++)
+                    {
+                        string apptype = (ConfigurationManager.AppSettings["AppType"] != null &&
+                           !string.IsNullOrEmpty(ConfigurationManager.AppSettings["AppType"].ToString()) ?
+                           ConfigurationManager.AppSettings["AppType"].ToString() : "1");
+                        switch (apptype)
+                        {
+                            case "2":
+                                BaseCore.Instance.PrintTicketTCVN3(FrmMain2.printSerialCOM, arr[i]);    break;
+                            case "7": //BV RHM
+                                BaseCore.Instance.PrintTicketTCVN3(FrmMainRHM.printSerialCOM, arr[i]);   break;
+                        }
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
             }
         }
 
@@ -214,6 +231,13 @@ namespace GPRO_QMS_Counter
         {
             string content = txtContent.Text;
             content += "[ten-dich-vu]";
+            txtContent.Text = content;
+        }
+
+        private void btKhungGio_Click(object sender, EventArgs e)
+        {
+            string content = txtContent.Text;
+            content += "[khung-gio]";
             txtContent.Text = content;
         }
     }

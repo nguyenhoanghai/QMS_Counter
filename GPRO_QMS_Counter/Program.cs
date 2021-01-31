@@ -32,6 +32,8 @@ namespace GPRO_QMS_Counter
                             Application.Run(new FrmMainPhongKham()); break;
                         case "6": //BV Hữu nghị
                             Application.Run(new FrmPhongKhamHuuNghi()); break;
+                        case "7": //BV RHM
+                            Application.Run(new FrmMainRHM()); break;
                         default: Application.Run(new FrmMain()); break;
                     }
                 }
