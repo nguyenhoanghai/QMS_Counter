@@ -169,7 +169,7 @@ namespace GPRO_QMS_Counter
             {
                 if (MessageBox.Show("Bạn có chắc muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    BLLCustomer.Instance.Delete(connect, Id);
+                    BLLTimeSchedule.Instance.Delete(connect, Id);
                     loadGrid();
                 }
             }

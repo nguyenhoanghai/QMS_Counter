@@ -88,13 +88,10 @@ C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Deb
 C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.Properties.Resources.resources
 C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.csproj.GenerateResource.Cache
 C:\Users\Admin\Desktop\Source from DoNguyen\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.exe.licenses
+E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\GPRO_QMS_Counter.exe.config
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\GPRO_QMS_Counter.exe
+E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\GPRO_QMS_Counter.pdb
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\AxInterop.WMPLib.DLL
-E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\GPRO.Core.Hai.dll
-E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\Newtonsoft.Json.dll
-E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\QMS_System.Data.dll
-E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\QMS_System.ThirdApp.dll
-E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\Lib_KetNoi.dll
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\DevExpress.Data.v18.1.dll
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\DevExpress.Images.v18.1.dll
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\DevExpress.Printing.v18.1.Core.dll
@@ -104,9 +101,14 @@ E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\DevExpress.XtraEditor
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\DevExpress.XtraGrid.v18.1.dll
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\EntityFramework.dll
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\EntityFramework.SqlServer.dll
+E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\GPRO.Core.Hai.dll
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\GPRO.Ultilities.dll
+E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\Lib_KetNoi.dll
+E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\Newtonsoft.Json.dll
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\Oracle.DataAccess.dll
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\Oracle.ManagedDataAccess.dll
+E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\QMS_System.Data.dll
+E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\QMS_System.ThirdApp.dll
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\DevExpress.Pdf.v18.1.Core.dll
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\DevExpress.Sparkline.v18.1.Core.dll
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\DevExpress.XtraLayout.v18.1.dll
@@ -182,6 +184,7 @@ E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\de\DevExpress.Office.
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\es\DevExpress.Office.v18.1.Core.resources.dll
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\ja\DevExpress.Office.v18.1.Core.resources.dll
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\ru\DevExpress.Office.v18.1.Core.resources.dll
+E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.csprojAssemblyReference.cache
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.Form1.resources
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmAbout.resources
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmBookService.resources
@@ -192,6 +195,7 @@ E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmC
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmConfig.resources
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.frmCustomer.resources
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmEditTicketInfo.resources
+E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmGoiSo_RHM.resources
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmGuide.resources
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmLogin.resources
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmMain.resources
@@ -217,10 +221,6 @@ E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.Serv
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.csproj.GenerateResource.cache
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.exe.licenses
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.csproj.CoreCompileInputs.cache
+E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.csproj.CopyComplete
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.exe
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.pdb
-E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\GPRO_QMS_Counter.exe.config
-E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\GPRO_QMS_Counter.pdb
-E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.csproj.CopyComplete
-E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.csprojAssemblyReference.cache
-E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmGoiSo_RHM.resources
