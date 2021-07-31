@@ -224,3 +224,4 @@ E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.cspr
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.csproj.CopyComplete
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.exe
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.pdb
+E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\GPRO.Core.dll
