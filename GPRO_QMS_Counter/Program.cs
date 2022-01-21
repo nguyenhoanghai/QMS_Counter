@@ -28,7 +28,7 @@ namespace GPRO_QMS_Counter
                                   //Application.Run(new FrmMain4());
                             Application.Run(new Form1());
                             break;
-                        case "5": //goi so co uu tien
+                        case "5": //goi so co uu tien  phong kham
                             Application.Run(new FrmMainPhongKham()); break;
                         case "6": //BV Hữu nghị
                             Application.Run(new FrmPhongKhamHuuNghi()); break;

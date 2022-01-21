@@ -2,7 +2,7 @@
 <SystemConfig>
   <SQLServer id="1">
     <Server_Name>QNd8Qi1YHVg6gBfOh9dXCw==</Server_Name>
-    <Database>VIsQQvnkXFTjW8Ft66GtCyOyZBqwLzYwW0UVzzUDu7w=</Database>
+    <Database>3sJZ+O5+2eJqbBTkD3o6+A==</Database>
     <User>ZXhwutftOGY2GQGN7xFCdA==</User>
     <Password>u83X0HO/seCu6CcDOMQghA==</Password>
     <Window_Authenticate>False</Window_Authenticate>
@@ -26,7 +26,7 @@
 
 [cat-giay]</Template>
     <SoLien>1</SoLien>
-    <CounterId>1</CounterId>
+    <CounterId>14</CounterId>
     <Display>False</Display>
     <COMDisplay>COM2</COMDisplay>
     <Print>True</Print>

@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using QMS_System.Data.BLL;
 using QMS_System.Data.Enum;
 using QMS_System.Data.Model;
+using Quobject.SocketIoClientDotNet.Client;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -31,7 +32,8 @@ namespace GPRO_QMS_Counter
               connectString,
               errorsms,
               SoundLockPrintTicket = "khoa.wav",
-              ticketTemplate;
+              ticketTemplate,
+            nodeServerIP = "";
         public static int
             so_lien = 1,
             printType = 1,
@@ -80,7 +82,7 @@ namespace GPRO_QMS_Counter
 
             if (bCheckValid)
             {
-                FrmLogin frmLogin = new FrmLogin( );
+                FrmLogin frmLogin = new FrmLogin();
                 frmLogin.ShowDialog();
                 InitializeComponent();
                 //  InitCOMPort();
@@ -136,6 +138,30 @@ namespace GPRO_QMS_Counter
             }
             return result;
         }
+
+        Socket socket;
+        private void ConnectSocketIO()
+        {
+            if (!string.IsNullOrEmpty(nodeServerIP))
+            {
+                string _nodeIP = @"http://" + nodeServerIP;
+                socket = IO.Socket(_nodeIP);
+                socket.Connect();
+                socket.On(Socket.EVENT_CONNECT, () =>
+                {
+                    btnSocketStatus.Text = ("Node Connected");
+                    btnSocketStatus.ForeColor = Color.Blue;
+
+                    socket.On(Socket.EVENT_DISCONNECT, () =>
+                    {
+                        // errorsms =("Disconnect");
+                        btnSocketStatus.Text = "Node Disconnect";
+                        btnSocketStatus.ForeColor = Color.Red;
+                    });
+                });
+            }
+        }
+
 
         #region Form event
         private void btnClose_Click(object sender, EventArgs e)
@@ -202,6 +228,9 @@ namespace GPRO_QMS_Counter
                 int.TryParse(GetConfigByCode(eConfigCode.PrintTicketReturnCurrentNumberOrServiceCode), out printTicketReturnCurrentNumberOrServiceCode);
                 int.TryParse(GetConfigByCode(eConfigCode.StartNumber), out startNumber);
                 int.TryParse(GetConfigByCode(eConfigCode.UseWithThirdPattern), out UseWithThirdPattern);
+
+                nodeServerIP = GetConfigByCode(eConfigCode.NodeServerIP);
+                ConnectSocketIO();
 
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(Application.StartupPath + "\\DATA.XML");
@@ -452,7 +481,7 @@ namespace GPRO_QMS_Counter
                                     model = new ServiceControlModel() { Id = obj.Id, Name = obj.Name, wait = 0, Time = (!string.IsNullOrEmpty(obj.Code) ? obj.Code : "00:00:00") };
                                     serviceControl = new ServiceControl(model);
                                     serviceControl.Location = new System.Drawing.Point(x, y);
-                                    serviceControl.Name = "ctr_" + obj.Id; 
+                                    serviceControl.Name = "ctr_" + obj.Id;
                                     serviceControl.printTicketEvent += new EventHandler<PrintTicketEventArgs>(PrintTicket);
                                     panel11.Controls.Add(serviceControl);
                                     x += 280;
@@ -486,9 +515,9 @@ namespace GPRO_QMS_Counter
                 serviceObjs = serviceObjs.Where(x => serviceIds.Contains(x.Id)).ToList();
                 foreach (Control c in panel11.Controls)
                 {
-                    string name =  c.Name  ;
+                    string name = c.Name;
                     int serId = Convert.ToInt32(name.Split('_')[1]);
-                    ((IServiceControl)c).updateWaiting(serviceObjs.FirstOrDefault(x=>x.Id==serId).Data);
+                    ((IServiceControl)c).updateWaiting(serviceObjs.FirstOrDefault(x => x.Id == serId).Data);
                     i++;
                 }
                 //Thread.Sleep(1000);
@@ -616,7 +645,7 @@ namespace GPRO_QMS_Counter
                                 errorsms = "Dịch vụ số " + e.Require.ServiceId + " đã ngưng cấp số. Xin quý khách vui lòng đến vào buổi giao dịch sau.";
                             else
                             {
-                                var rs = BLLDailyRequire.Instance.PrintNewTicket(connectString, e.Require.ServiceId, serObj.StartNumber, 0, now, printType, e.Require.ServeTime.TimeOfDay, txtname.Text, txtAdd.Text, ((int)txtDOB.Value), txtma.Text, "", "", "","","");
+                                var rs = BLLDailyRequire.Instance.PrintNewTicket(connectString, e.Require.ServiceId, serObj.StartNumber, 0, now, printType, e.Require.ServeTime.TimeOfDay, txtname.Text, txtAdd.Text, ((int)txtDOB.Value), txtma.Text, "", "", "", "", "");
                                 if (rs.IsSuccess)
                                 {
                                     lastTicket = (int)rs.Data;

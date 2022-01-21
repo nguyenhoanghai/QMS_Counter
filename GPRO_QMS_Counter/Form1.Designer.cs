@@ -80,6 +80,7 @@
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.timerDocAmThanh = new System.Windows.Forms.Timer(this.components);
+            this.btnSocketStatus = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnNormalSize)).BeginInit();
@@ -202,6 +203,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
+            this.panel2.Controls.Add(this.btnSocketStatus);
             this.panel2.Controls.Add(this.statusTotalDone);
             this.panel2.Controls.Add(this.statusTotalWaiting);
             this.panel2.Controls.Add(this.btPrintStatus);
@@ -218,7 +220,7 @@
             this.statusTotalDone.AutoSize = true;
             this.statusTotalDone.Font = new System.Drawing.Font("Arial", 10.2F);
             this.statusTotalDone.ForeColor = System.Drawing.Color.Yellow;
-            this.statusTotalDone.Location = new System.Drawing.Point(515, 10);
+            this.statusTotalDone.Location = new System.Drawing.Point(714, 10);
             this.statusTotalDone.Name = "statusTotalDone";
             this.statusTotalDone.Size = new System.Drawing.Size(126, 19);
             this.statusTotalDone.TabIndex = 29;
@@ -229,7 +231,7 @@
             this.statusTotalWaiting.AutoSize = true;
             this.statusTotalWaiting.Font = new System.Drawing.Font("Arial", 10.2F);
             this.statusTotalWaiting.ForeColor = System.Drawing.Color.Yellow;
-            this.statusTotalWaiting.Location = new System.Drawing.Point(379, 9);
+            this.statusTotalWaiting.Location = new System.Drawing.Point(578, 9);
             this.statusTotalWaiting.Name = "statusTotalWaiting";
             this.statusTotalWaiting.Size = new System.Drawing.Size(102, 19);
             this.statusTotalWaiting.TabIndex = 28;
@@ -808,6 +810,22 @@
             this.timerDocAmThanh.Interval = 1000;
             this.timerDocAmThanh.Tick += new System.EventHandler(this.TmerQuetComport_Tick);
             // 
+            // btnSocketStatus
+            // 
+            this.btnSocketStatus.FlatAppearance.BorderSize = 0;
+            this.btnSocketStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSocketStatus.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSocketStatus.ForeColor = System.Drawing.Color.Yellow;
+            this.btnSocketStatus.Image = global::GPRO_QMS_Counter.Properties.Resources.com_port_dis;
+            this.btnSocketStatus.Location = new System.Drawing.Point(384, 1);
+            this.btnSocketStatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSocketStatus.Name = "btnSocketStatus";
+            this.btnSocketStatus.Size = new System.Drawing.Size(181, 34);
+            this.btnSocketStatus.TabIndex = 30;
+            this.btnSocketStatus.Text = "Print COM";
+            this.btnSocketStatus.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSocketStatus.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -901,5 +919,6 @@
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.Timer timerDocAmThanh;
         private System.Windows.Forms.Button btActive;
+        private System.Windows.Forms.Button btnSocketStatus;
     }
 }

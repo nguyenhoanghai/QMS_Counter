@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using QMS_System.Data.BLL;
 using QMS_System.Data.Enum;
 using QMS_System.Data.Model;
+using Quobject.EngineIoClientDotNet.Client;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -34,7 +35,7 @@ namespace GPRO_QMS_Counter
         public static bool IsUseMainDisplay = false,
             bRegistered = false,
             bCheckValid = false;
-        public static string sComPort = "COM1";
+        public static string sComPort = "COM1", nodeServerIP="";
         public static int iBaudRate = 9600;
         public static int iDataBits = 8, printerId = 10;
         public static Parity sParity = Parity.None;
@@ -130,6 +131,31 @@ namespace GPRO_QMS_Counter
             }
             return result;
         }
+
+        #region SOCKET IO
+        //Socket socket;
+        //private void ConnectSocketIO()
+        //{
+        //    if (!string.IsNullOrEmpty(nodeServerIP))
+        //    {
+        //        string _nodeIP = @"http://" + nodeServerIP;
+        //        socket = IO.Socket(_nodeIP);
+        //        socket.Connect();
+        //        socket.On(Socket.EVENT_CONNECT, () =>
+        //        {
+        //            btnSocketStatus.Text = ("Node Connected");
+        //            btnSocketStatus.ForeColor = Color.Blue;
+
+        //            socket.On(Socket.EVENT_DISCONNECT, () =>
+        //            {
+        //                // errorsms =("Disconnect");
+        //                btnSocketStatus.Text = "Node Disconnect";
+        //                btnSocketStatus.ForeColor = Color.Red;
+        //            });
+        //        });
+        //    }
+        //}
+        #endregion
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
