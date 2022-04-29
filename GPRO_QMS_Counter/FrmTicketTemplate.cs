@@ -215,9 +215,11 @@ namespace GPRO_QMS_Counter
                         switch (apptype)
                         {
                             case "2":
-                                BaseCore.Instance.PrintTicketTCVN3(FrmMain2.printSerialCOM, arr[i]);    break;
-                            case "7": //BV RHM
-                                BaseCore.Instance.PrintTicketTCVN3(FrmMainRHM.printSerialCOM, arr[i]);   break;
+                                BaseCore.Instance.PrintTicketTCVN3(FrmMain2.printSerialCOM, arr[i]); break;
+                            case "7":
+                                BaseCore.Instance.PrintTicketTCVN3(FrmMainRHM.printSerialCOM, arr[i]); break;
+                            case "9":
+                                BaseCore.Instance.PrintTicketTCVN3(FrmMainPK_Socket_2.printSerialCOM, arr[i]); break;
                         }
                     }
                 }

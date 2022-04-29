@@ -97,7 +97,7 @@ namespace GPRO_QMS_Counter
             Form frm = IsActive(typeof(FrmConfig));
             if (frm == null)
             {
-                var forms = new FrmConfig();
+                var forms = new FrmConfig(connectString);
                 forms.MdiParent = this;
                 forms.Show();
             }

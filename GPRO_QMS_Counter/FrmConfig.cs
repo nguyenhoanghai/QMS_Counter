@@ -1,7 +1,11 @@
 ﻿using GPRO_QMS_Counter.Properties;
+using Microsoft.Win32;
+using QMS_System.Data.BLL;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO.Ports;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -10,23 +14,25 @@ namespace GPRO_QMS_Counter
     public partial class FrmConfig : Form
     {
         bool hasChange = false;
-        public FrmConfig()
+        string strConnect;
+        public FrmConfig(string connectionString)
         {
             InitializeComponent();
+            strConnect = connectionString;
         }
 
         private void FrmConfig_Load(object sender, EventArgs e)
         {
-            toggleSwitch1_Toggled(sender, e); 
+            toggleSwitch1_Toggled(sender, e);
             cbComPort.Items.Clear();
-            cbComPort.Items.AddRange(SerialPort.GetPortNames()); 
+            cbComPort.Items.AddRange(SerialPort.GetPortNames());
             cbBaudRate.Text = FrmMain.iBaudRate.ToString();
             cbDataBits.Text = FrmMain.iDataBits.ToString();
             cbParity.Text = FrmMain.sParity.ToString();
-            cbStopBits.Text = FrmMain.fStopBits.ToString();  
+            cbStopBits.Text = FrmMain.fStopBits.ToString();
 
             printCOM_cb.Items.Clear();
-            printCOM_cb.Items.AddRange(SerialPort.GetPortNames()); 
+            printCOM_cb.Items.AddRange(SerialPort.GetPortNames());
 
             swNext.IsOn = Settings.Default.actCallNext;
             swRecall.IsOn = Settings.Default.actRecall;
@@ -43,6 +49,7 @@ namespace GPRO_QMS_Counter
 
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(Application.StartupPath + "\\DATA.XML");
+            string strServices = "";
             foreach (XmlElement element in xmlDoc.DocumentElement)
             {
                 if (element.Name.Equals("AppConfig"))
@@ -60,7 +67,9 @@ namespace GPRO_QMS_Counter
                                 case "COMPrint": printCOM_cb.Text = node.InnerText; break;
                                 case "PrintCode": numPrinterId.Value = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); ; break;
                                 case "ReadSound": switchReadSound.IsOn = Convert.ToBoolean(node.InnerText); break;
+                                case "StartWithWindows": switchStartWin.IsOn = Convert.ToBoolean(node.InnerText); break;
                                 case "SoundPath": txtSoundPath.Text = node.InnerText; break;
+                                case "Services": strServices = node.InnerText.ToString(); break; 
                             }
                         }
                         catch (Exception ex)
@@ -69,6 +78,20 @@ namespace GPRO_QMS_Counter
                     }
                 }
             }
+
+            List<int> servicesIds = new List<int>();
+            servicesIds = strServices.Split(',').ToList().Select(x => Convert.ToInt32(x)).ToList();
+
+            var services = BLLService.Instance.GetLookUp(strConnect, false);
+            for (int i = 0; i < services.Count; i++)
+            {
+                var _found = servicesIds.FirstOrDefault(x => x == services[i].Id);
+                if ( _found != null && _found > 0)
+                    cbServices.Properties.Items.Add(services[i].Id, services[i].Name, CheckState.Checked, true);
+                else
+                    cbServices.Properties.Items.Add(services[i].Id, services[i].Name, CheckState.Unchecked, true);
+            }
+
         }
 
         private void toggleSwitch1_Toggled(object sender, EventArgs e)
@@ -89,7 +112,7 @@ namespace GPRO_QMS_Counter
         {
             DialogResult dialogResult = MessageBox.Show("Thông tin cấu hình sẽ được lưu lại và Chương trình sẽ khởi động lại. Bạn có chắc muốn lưu lại thông tin cấu hình không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
-            {  
+            {
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(Application.StartupPath + "\\DATA.XML");
                 foreach (XmlElement element in xmlDoc.DocumentElement)
@@ -110,6 +133,8 @@ namespace GPRO_QMS_Counter
                                     case "PrintCode": node.InnerText = numPrinterId.Value.ToString(); break;
                                     case "ReadSound": node.InnerText = switchReadSound.IsOn.ToString(); break;
                                     case "SoundPath": node.InnerText = txtSoundPath.Text.ToString(); break;
+                                    case "Services": node.InnerText = cbServices.EditValue.ToString(); break;
+                                    case "StartWithWindows": node.InnerText = switchStartWin.IsOn.ToString(); break;
                                 }
                             }
                             catch (Exception ex)
@@ -120,6 +145,24 @@ namespace GPRO_QMS_Counter
                 }
                 xmlDoc.Save(Application.StartupPath + "\\DATA.XML");
                 ConfigurationManager.RefreshSection("appSettings");
+              
+                //start with windows
+                try
+                {
+                    RegistryKey registryKey = Registry.CurrentUser.OpenSubKey
+                               ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                    if (switchStartWin.IsOn)
+                    {
+                        registryKey.SetValue("GPRO_QMS_Counter", Application.ExecutablePath);
+                    }
+                    else
+                    {
+                        registryKey.DeleteValue("GPRO_QMS_Counter");
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
                 Application.Restart();
                 Environment.Exit(0);
             }

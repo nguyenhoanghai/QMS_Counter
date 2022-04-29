@@ -55,6 +55,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cbServices = new DevExpress.XtraEditors.CheckedComboBoxEdit();
+            this.label30 = new System.Windows.Forms.Label();
             this.printCOM_cb = new System.Windows.Forms.ComboBox();
             this.label23 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
@@ -90,6 +92,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.switchStartWin = new DevExpress.XtraEditors.ToggleSwitch();
             ((System.ComponentModel.ISupportInitialize)(this.toggleSwitch1.Properties)).BeginInit();
             this.pnCOMSetting.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtSoundPath.Properties)).BeginInit();
@@ -98,6 +102,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numCounterId)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbServices.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.switchPrinter.Properties)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.swSmallScreen.Properties)).BeginInit();
@@ -112,6 +117,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.swUpdateInfo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.swCancel.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.swPrint.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.switchStartWin.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // toggleSwitch1
@@ -119,26 +125,26 @@
             this.toggleSwitch1.Location = new System.Drawing.Point(210, 12);
             this.toggleSwitch1.Margin = new System.Windows.Forms.Padding(4);
             this.toggleSwitch1.Name = "toggleSwitch1";
-            this.toggleSwitch1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toggleSwitch1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.toggleSwitch1.Properties.Appearance.ForeColor = System.Drawing.Color.Brown;
             this.toggleSwitch1.Properties.Appearance.Options.UseFont = true;
             this.toggleSwitch1.Properties.Appearance.Options.UseForeColor = true;
             this.toggleSwitch1.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             this.toggleSwitch1.Properties.OffText = "Không";
             this.toggleSwitch1.Properties.OnText = "Có";
-            this.toggleSwitch1.Size = new System.Drawing.Size(153, 29);
+            this.toggleSwitch1.Size = new System.Drawing.Size(153, 28);
             this.toggleSwitch1.TabIndex = 0;
             this.toggleSwitch1.Toggled += new System.EventHandler(this.toggleSwitch1_Toggled);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.Blue;
             this.label1.Location = new System.Drawing.Point(7, 15);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(199, 21);
+            this.label1.Size = new System.Drawing.Size(160, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "Sử dụng hiển thị quầy";
             // 
@@ -154,6 +160,7 @@
             this.pnCOMSetting.Controls.Add(this.label3);
             this.pnCOMSetting.Controls.Add(this.label2);
             this.pnCOMSetting.Controls.Add(this.label6);
+            this.pnCOMSetting.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.pnCOMSetting.Location = new System.Drawing.Point(11, 46);
             this.pnCOMSetting.Margin = new System.Windows.Forms.Padding(4);
             this.pnCOMSetting.Name = "pnCOMSetting";
@@ -162,7 +169,7 @@
             // 
             // cbStopBits
             // 
-            this.cbStopBits.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbStopBits.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.cbStopBits.FormattingEnabled = true;
             this.cbStopBits.Items.AddRange(new object[] {
             "None",
@@ -172,12 +179,12 @@
             this.cbStopBits.Location = new System.Drawing.Point(476, 55);
             this.cbStopBits.Margin = new System.Windows.Forms.Padding(4);
             this.cbStopBits.Name = "cbStopBits";
-            this.cbStopBits.Size = new System.Drawing.Size(165, 28);
+            this.cbStopBits.Size = new System.Drawing.Size(165, 24);
             this.cbStopBits.TabIndex = 13;
             // 
             // cbParity
             // 
-            this.cbParity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbParity.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.cbParity.FormattingEnabled = true;
             this.cbParity.Items.AddRange(new object[] {
             "None",
@@ -188,12 +195,12 @@
             this.cbParity.Location = new System.Drawing.Point(476, 18);
             this.cbParity.Margin = new System.Windows.Forms.Padding(4);
             this.cbParity.Name = "cbParity";
-            this.cbParity.Size = new System.Drawing.Size(165, 28);
+            this.cbParity.Size = new System.Drawing.Size(165, 24);
             this.cbParity.TabIndex = 12;
             // 
             // cbDataBits
             // 
-            this.cbDataBits.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbDataBits.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.cbDataBits.FormattingEnabled = true;
             this.cbDataBits.Items.AddRange(new object[] {
             "5",
@@ -203,12 +210,12 @@
             this.cbDataBits.Location = new System.Drawing.Point(124, 92);
             this.cbDataBits.Margin = new System.Windows.Forms.Padding(4);
             this.cbDataBits.Name = "cbDataBits";
-            this.cbDataBits.Size = new System.Drawing.Size(165, 28);
+            this.cbDataBits.Size = new System.Drawing.Size(165, 24);
             this.cbDataBits.TabIndex = 11;
             // 
             // cbBaudRate
             // 
-            this.cbBaudRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbBaudRate.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.cbBaudRate.FormattingEnabled = true;
             this.cbBaudRate.Items.AddRange(new object[] {
             "110",
@@ -229,95 +236,97 @@
             this.cbBaudRate.Location = new System.Drawing.Point(124, 55);
             this.cbBaudRate.Margin = new System.Windows.Forms.Padding(4);
             this.cbBaudRate.Name = "cbBaudRate";
-            this.cbBaudRate.Size = new System.Drawing.Size(165, 28);
+            this.cbBaudRate.Size = new System.Drawing.Size(165, 24);
             this.cbBaudRate.TabIndex = 10;
             // 
             // cbComPort
             // 
-            this.cbComPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbComPort.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.cbComPort.FormattingEnabled = true;
             this.cbComPort.Location = new System.Drawing.Point(124, 18);
             this.cbComPort.Margin = new System.Windows.Forms.Padding(4);
             this.cbComPort.Name = "cbComPort";
-            this.cbComPort.Size = new System.Drawing.Size(165, 28);
+            this.cbComPort.Size = new System.Drawing.Size(165, 24);
             this.cbComPort.TabIndex = 9;
             this.cbComPort.SelectedIndexChanged += new System.EventHandler(this.cbComPort_SelectedIndexChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.label5.ForeColor = System.Drawing.Color.Blue;
             this.label5.Location = new System.Drawing.Point(360, 59);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(88, 21);
+            this.label5.Size = new System.Drawing.Size(71, 17);
             this.label5.TabIndex = 17;
             this.label5.Text = "Stop Bits";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.label4.ForeColor = System.Drawing.Color.Blue;
             this.label4.Location = new System.Drawing.Point(360, 22);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 21);
+            this.label4.Size = new System.Drawing.Size(48, 17);
             this.label4.TabIndex = 18;
             this.label4.Text = "Parity";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.Blue;
             this.label3.Location = new System.Drawing.Point(8, 96);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 21);
+            this.label3.Size = new System.Drawing.Size(70, 17);
             this.label3.TabIndex = 16;
             this.label3.Text = "Data Bits";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.Blue;
             this.label2.Location = new System.Drawing.Point(8, 59);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 21);
+            this.label2.Size = new System.Drawing.Size(80, 17);
             this.label2.TabIndex = 14;
             this.label2.Text = "Baud Rate";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.label6.ForeColor = System.Drawing.Color.Blue;
             this.label6.Location = new System.Drawing.Point(8, 22);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(117, 21);
+            this.label6.Size = new System.Drawing.Size(93, 17);
             this.label6.TabIndex = 15;
             this.label6.Text = "Display COM";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.label7.ForeColor = System.Drawing.Color.Blue;
-            this.label7.Location = new System.Drawing.Point(7, 290);
+            this.label7.Location = new System.Drawing.Point(7, 265);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(267, 21);
+            this.label7.Size = new System.Drawing.Size(218, 17);
             this.label7.TabIndex = 16;
             this.label7.Text = "Đường dẫn thư mục âm thanh";
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(628, 346);
+            this.simpleButton1.Appearance.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.simpleButton1.Appearance.Options.UseFont = true;
+            this.simpleButton1.Location = new System.Drawing.Point(634, 289);
             this.simpleButton1.Margin = new System.Windows.Forms.Padding(4);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(43, 28);
@@ -329,7 +338,7 @@
             // 
             this.btnclose.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnclose.Image = global::GPRO_QMS_Counter.Properties.Resources.if_cancel_13487;
-            this.btnclose.Location = new System.Drawing.Point(499, 382);
+            this.btnclose.Location = new System.Drawing.Point(525, 450);
             this.btnclose.Margin = new System.Windows.Forms.Padding(4);
             this.btnclose.Name = "btnclose";
             this.btnclose.Size = new System.Drawing.Size(172, 39);
@@ -343,7 +352,7 @@
             // 
             this.btnsave.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnsave.Image = global::GPRO_QMS_Counter.Properties.Resources.if_save_173091;
-            this.btnsave.Location = new System.Drawing.Point(319, 382);
+            this.btnsave.Location = new System.Drawing.Point(345, 450);
             this.btnsave.Margin = new System.Windows.Forms.Padding(4);
             this.btnsave.Name = "btnsave";
             this.btnsave.Size = new System.Drawing.Size(172, 39);
@@ -355,64 +364,66 @@
             // 
             // txtSoundPath
             // 
-            this.txtSoundPath.Location = new System.Drawing.Point(11, 313);
+            this.txtSoundPath.Location = new System.Drawing.Point(11, 288);
             this.txtSoundPath.Margin = new System.Windows.Forms.Padding(4);
             this.txtSoundPath.Name = "txtSoundPath";
-            this.txtSoundPath.Size = new System.Drawing.Size(609, 62);
+            this.txtSoundPath.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.txtSoundPath.Properties.Appearance.Options.UseFont = true;
+            this.txtSoundPath.Size = new System.Drawing.Size(609, 29);
             this.txtSoundPath.TabIndex = 21;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.label8.ForeColor = System.Drawing.Color.Blue;
-            this.label8.Location = new System.Drawing.Point(7, 248);
+            this.label8.Location = new System.Drawing.Point(7, 233);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(166, 21);
+            this.label8.Size = new System.Drawing.Size(135, 17);
             this.label8.TabIndex = 23;
             this.label8.Text = "Đọc âm thanh báo";
             // 
             // switchReadSound
             // 
-            this.switchReadSound.Location = new System.Drawing.Point(210, 244);
+            this.switchReadSound.Location = new System.Drawing.Point(210, 229);
             this.switchReadSound.Margin = new System.Windows.Forms.Padding(4);
             this.switchReadSound.Name = "switchReadSound";
-            this.switchReadSound.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.switchReadSound.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.switchReadSound.Properties.Appearance.ForeColor = System.Drawing.Color.Brown;
             this.switchReadSound.Properties.Appearance.Options.UseFont = true;
             this.switchReadSound.Properties.Appearance.Options.UseForeColor = true;
             this.switchReadSound.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             this.switchReadSound.Properties.OffText = "Không";
             this.switchReadSound.Properties.OnText = "Có";
-            this.switchReadSound.Size = new System.Drawing.Size(153, 29);
+            this.switchReadSound.Size = new System.Drawing.Size(153, 28);
             this.switchReadSound.TabIndex = 22;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.label9.ForeColor = System.Drawing.Color.Blue;
-            this.label9.Location = new System.Drawing.Point(371, 248);
+            this.label9.Location = new System.Drawing.Point(371, 233);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(97, 21);
+            this.label9.Size = new System.Drawing.Size(77, 17);
             this.label9.TabIndex = 20;
             this.label9.Text = "Mã máy in";
             // 
             // numPrinterId
             // 
-            this.numPrinterId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numPrinterId.Location = new System.Drawing.Point(487, 248);
+            this.numPrinterId.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.numPrinterId.Location = new System.Drawing.Point(487, 233);
             this.numPrinterId.Margin = new System.Windows.Forms.Padding(4);
             this.numPrinterId.Name = "numPrinterId";
-            this.numPrinterId.Size = new System.Drawing.Size(93, 26);
+            this.numPrinterId.Size = new System.Drawing.Size(93, 23);
             this.numPrinterId.TabIndex = 24;
             this.numPrinterId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // numCounterId
             // 
-            this.numCounterId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numCounterId.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.numCounterId.Location = new System.Drawing.Point(486, 14);
             this.numCounterId.Margin = new System.Windows.Forms.Padding(4);
             this.numCounterId.Maximum = new decimal(new int[] {
@@ -421,19 +432,19 @@
             0,
             0});
             this.numCounterId.Name = "numCounterId";
-            this.numCounterId.Size = new System.Drawing.Size(93, 26);
+            this.numCounterId.Size = new System.Drawing.Size(93, 23);
             this.numCounterId.TabIndex = 26;
             this.numCounterId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.label10.ForeColor = System.Drawing.Color.Blue;
             this.label10.Location = new System.Drawing.Point(371, 15);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(108, 21);
+            this.label10.Size = new System.Drawing.Size(89, 17);
             this.label10.TabIndex = 25;
             this.label10.Text = "Mã Counter";
             // 
@@ -444,11 +455,15 @@
             this.tabControl1.Location = new System.Drawing.Point(9, 9);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(688, 504);
+            this.tabControl1.Size = new System.Drawing.Size(688, 434);
             this.tabControl1.TabIndex = 27;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.switchStartWin);
+            this.tabPage1.Controls.Add(this.label31);
+            this.tabPage1.Controls.Add(this.cbServices);
+            this.tabPage1.Controls.Add(this.label30);
             this.tabPage1.Controls.Add(this.printCOM_cb);
             this.tabPage1.Controls.Add(this.label23);
             this.tabPage1.Controls.Add(this.label29);
@@ -463,49 +478,69 @@
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.simpleButton1);
             this.tabPage1.Controls.Add(this.label8);
-            this.tabPage1.Controls.Add(this.btnsave);
             this.tabPage1.Controls.Add(this.switchReadSound);
-            this.tabPage1.Controls.Add(this.btnclose);
             this.tabPage1.Controls.Add(this.txtSoundPath);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(680, 475);
+            this.tabPage1.Size = new System.Drawing.Size(680, 405);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Cấu hình";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // cbServices
+            // 
+            this.cbServices.Location = new System.Drawing.Point(135, 327);
+            this.cbServices.Name = "cbServices";
+            this.cbServices.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.cbServices.Properties.Appearance.Options.UseFont = true;
+            this.cbServices.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbServices.Size = new System.Drawing.Size(536, 22);
+            this.cbServices.TabIndex = 65;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.label30.ForeColor = System.Drawing.Color.Blue;
+            this.label30.Location = new System.Drawing.Point(10, 330);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(106, 17);
+            this.label30.TabIndex = 64;
+            this.label30.Text = "Dịch vụ cấp số";
+            // 
             // printCOM_cb
             // 
-            this.printCOM_cb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.printCOM_cb.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.printCOM_cb.FormattingEnabled = true;
             this.printCOM_cb.Location = new System.Drawing.Point(487, 194);
             this.printCOM_cb.Margin = new System.Windows.Forms.Padding(4);
             this.printCOM_cb.Name = "printCOM_cb";
-            this.printCOM_cb.Size = new System.Drawing.Size(165, 28);
+            this.printCOM_cb.Size = new System.Drawing.Size(165, 24);
             this.printCOM_cb.TabIndex = 19;
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.label23.ForeColor = System.Drawing.Color.Blue;
             this.label23.Location = new System.Drawing.Point(371, 198);
             this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(110, 21);
+            this.label23.Size = new System.Drawing.Size(89, 17);
             this.label23.TabIndex = 20;
             this.label23.Text = "COM Máy in";
             // 
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.label29.ForeColor = System.Drawing.Color.Blue;
             this.label29.Location = new System.Drawing.Point(7, 196);
             this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(144, 21);
+            this.label29.Size = new System.Drawing.Size(116, 17);
             this.label29.TabIndex = 28;
             this.label29.Text = "Sử dụng máy in";
             // 
@@ -514,21 +549,20 @@
             this.switchPrinter.Location = new System.Drawing.Point(210, 193);
             this.switchPrinter.Margin = new System.Windows.Forms.Padding(4);
             this.switchPrinter.Name = "switchPrinter";
-            this.switchPrinter.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.switchPrinter.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.switchPrinter.Properties.Appearance.ForeColor = System.Drawing.Color.Brown;
             this.switchPrinter.Properties.Appearance.Options.UseFont = true;
             this.switchPrinter.Properties.Appearance.Options.UseForeColor = true;
             this.switchPrinter.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             this.switchPrinter.Properties.OffText = "Không";
             this.switchPrinter.Properties.OnText = "Có";
-            this.switchPrinter.Size = new System.Drawing.Size(153, 29);
+            this.switchPrinter.Size = new System.Drawing.Size(153, 28);
             this.switchPrinter.TabIndex = 27;
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.swSmallScreen);
             this.tabPage2.Controls.Add(this.label19);
-            this.tabPage2.Controls.Add(this.btSavePer);
             this.tabPage2.Controls.Add(this.swEvaluate);
             this.tabPage2.Controls.Add(this.swView);
             this.tabPage2.Controls.Add(this.swNext);
@@ -559,7 +593,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(680, 475);
+            this.tabPage2.Size = new System.Drawing.Size(680, 405);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Phân quyền";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -593,7 +627,7 @@
             // 
             this.btSavePer.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btSavePer.Image = global::GPRO_QMS_Counter.Properties.Resources.if_save_173091;
-            this.btSavePer.Location = new System.Drawing.Point(476, 341);
+            this.btSavePer.Location = new System.Drawing.Point(96, 481);
             this.btSavePer.Margin = new System.Windows.Forms.Padding(4);
             this.btSavePer.Name = "btSavePer";
             this.btSavePer.Size = new System.Drawing.Size(197, 39);
@@ -923,14 +957,43 @@
             this.label11.TabIndex = 0;
             this.label11.Text = "Gọi mới";
             // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.label31.ForeColor = System.Drawing.Color.Blue;
+            this.label31.Location = new System.Drawing.Point(10, 367);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(182, 17);
+            this.label31.TabIndex = 66;
+            this.label31.Text = "Khởi động cùng windows";
+            // 
+            // switchStartWin
+            // 
+            this.switchStartWin.Location = new System.Drawing.Point(210, 361);
+            this.switchStartWin.Margin = new System.Windows.Forms.Padding(4);
+            this.switchStartWin.Name = "switchStartWin";
+            this.switchStartWin.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.switchStartWin.Properties.Appearance.ForeColor = System.Drawing.Color.Brown;
+            this.switchStartWin.Properties.Appearance.Options.UseFont = true;
+            this.switchStartWin.Properties.Appearance.Options.UseForeColor = true;
+            this.switchStartWin.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
+            this.switchStartWin.Properties.OffText = "Không";
+            this.switchStartWin.Properties.OnText = "Có";
+            this.switchStartWin.Size = new System.Drawing.Size(153, 28);
+            this.switchStartWin.TabIndex = 67;
+            // 
             // FrmConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(703, 518);
+            this.ClientSize = new System.Drawing.Size(703, 533);
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.btnclose);
+            this.Controls.Add(this.btSavePer);
+            this.Controls.Add(this.btnsave);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(711, 427);
+            this.MinimumSize = new System.Drawing.Size(721, 524);
             this.Name = "FrmConfig";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cấu hình hệ thống";
@@ -946,6 +1009,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbServices.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.switchPrinter.Properties)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
@@ -961,6 +1025,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.swUpdateInfo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.swCancel.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.swPrint.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.switchStartWin.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1029,5 +1094,9 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label29;
         private DevExpress.XtraEditors.ToggleSwitch switchPrinter;
+        private DevExpress.XtraEditors.CheckedComboBoxEdit cbServices;
+        private System.Windows.Forms.Label label30;
+        private DevExpress.XtraEditors.ToggleSwitch switchStartWin;
+        private System.Windows.Forms.Label label31;
     }
 }

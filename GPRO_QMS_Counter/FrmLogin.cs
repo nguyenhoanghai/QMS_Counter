@@ -1,5 +1,4 @@
 ﻿using GPRO.Core.Hai;
-using Newtonsoft.Json;
 using QMS_System.Data.BLL;
 using QMS_System.Data.Model;
 using System;
@@ -88,8 +87,10 @@ namespace GPRO_QMS_Counter
                     FrmMainPhongKham.loginObj = login;
                     FrmPhongKhamHuuNghi.loginObj = login;
                     FrmMainRHM.loginObj = login;
+                    FrmMainPK_Socket.loginObj = login;
+                    FrmMainPK_Socket_2.loginObj = login;
                     FrmLogin.bCloseForm = true;
-                  //  MessageBox.Show(JsonConvert.SerializeObject(login));
+                    //  MessageBox.Show(JsonConvert.SerializeObject(login));
                     this.Close();
 
                 }
@@ -117,9 +118,10 @@ namespace GPRO_QMS_Counter
                             case 4:
                             case 5:
                             case 6:
+                            case 8:
+                            case 9:
                                 rs = BLLLoginHistory.Instance.Login(connectString, txtUsername.Text, txtPassword.Text, counterId); break;
                             default:
-
                                 rs = BLLLoginHistory.Instance.Login(connectString, txtUsername.Text, txtPassword.Text);
                                 break;
                         }
@@ -132,6 +134,8 @@ namespace GPRO_QMS_Counter
                             Form1.loginObj = rs.Data;
                             FrmMainPhongKham.loginObj = rs.Data;
                             FrmPhongKhamHuuNghi.loginObj = rs.Data;
+                            FrmMainPK_Socket.loginObj = rs.Data;
+                            FrmMainPK_Socket_2.loginObj = rs.Data;
                             FrmLogin.bCloseForm = true;
                             this.Close();
                         }

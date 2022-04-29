@@ -34,6 +34,12 @@ namespace GPRO_QMS_Counter
                             Application.Run(new FrmPhongKhamHuuNghi()); break;
                         case "7": //BV RHM
                             Application.Run(new FrmMainRHM()); break;
+                        case "8": //socket 1
+                            Application.Run(new FrmMainPK_Socket()); break;
+                        case "9": //socket 2
+                            Application.Run(new FrmMainPK_Socket_2()); break;
+                        case "10": //socket tra kq xet nghiem
+                            Application.Run(new FrmTraKetQua_Socket()); break;
                         default: Application.Run(new FrmMain()); break;
                     }
                 }

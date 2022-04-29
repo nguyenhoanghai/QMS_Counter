@@ -594,7 +594,7 @@ namespace GPRO_QMS_Counter
 
         private void btSetting_Click(object sender, EventArgs e)
         {
-            var f = new FrmConfig();
+            var f = new FrmConfig(connectString);
             f.ShowDialog();
         }
 

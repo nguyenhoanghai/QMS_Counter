@@ -10,7 +10,6 @@ using QMS_System.Data.Model;
 using Quobject.SocketIoClientDotNet.Client;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO.Ports;
@@ -166,7 +165,8 @@ namespace GPRO_QMS_Counter
         #region Form event
         private void btnClose_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (MessageBox.Show("Bạn có muốn đóng ứng dụng gọi số tự động?", "Đóng ứng dụng", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                Application.Exit();
         }
 
         private void btnMaximize_Click(object sender, EventArgs e)
@@ -231,7 +231,7 @@ namespace GPRO_QMS_Counter
 
                 nodeServerIP = GetConfigByCode(eConfigCode.NodeServerIP);
                 ConnectSocketIO();
-
+                string strServices = "";
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(Application.StartupPath + "\\DATA.XML");
                 foreach (XmlElement element in xmlDoc.DocumentElement)
@@ -255,6 +255,7 @@ namespace GPRO_QMS_Counter
                                     case "Template": ticketTemplate = node.InnerText; break;
                                     case "SoLien": so_lien = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); ; break;
                                     case "NumberOfButton": soNutDV1dong = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 3); ; break;
+                                    case "Services": strServices = node.InnerText.ToString(); break;
                                 }
                             }
                             catch (Exception ex)
@@ -276,7 +277,9 @@ namespace GPRO_QMS_Counter
                 if (IsUseMainDisplay)
                     InitDisplayCOMPort();
 
-                serviceIds = (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["ServiceIds"].ToString()) ? ConfigurationManager.AppSettings["ServiceIds"].ToString() : "1,2,3,4,5,6").Split(',').Select(x => Convert.ToInt32(x)).ToList();
+                // serviceIds = (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["ServiceIds"].ToString()) ? ConfigurationManager.AppSettings["ServiceIds"].ToString() : "1,2,3,4,5,6").Split(',').Select(x => Convert.ToInt32(x)).ToList();
+                serviceIds = (!string.IsNullOrEmpty(strServices) ? strServices : "1,2,3,4,5,6").Split(',').Select(x => Convert.ToInt32(x)).ToList();
+
                 serviceObjs = BLLService.Instance.GetLookUp(connectString, false);
                 serviceObjs = serviceObjs.Where(x => serviceIds.Contains(x.Id)).ToList();
                 CreateServicesButton();
@@ -451,7 +454,7 @@ namespace GPRO_QMS_Counter
 
         private void btSetting_Click(object sender, EventArgs e)
         {
-            var f = new FrmConfig();
+            var f = new FrmConfig(connectString);
             f.ShowDialog();
         }
         #endregion
@@ -865,7 +868,7 @@ namespace GPRO_QMS_Counter
                 DialogResult dialogResult = MessageBox.Show("Bạn muốn hủy vé " + text + " phải không?", "Thông báo hủy vé", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    if (BLLDailyRequire.Instance.DeleteTicket(connectString, int.Parse(text), today) > 0)
+                    if (!BLLDailyRequire.Instance.DeleteTicket(connectString, loginObj.UserId, int.Parse(text), today).IsSuccess)
                     {
                         this.txtParam.Text = "";
                         this.txtResult.Text = "Yêu cầu Hủy vé " + text;

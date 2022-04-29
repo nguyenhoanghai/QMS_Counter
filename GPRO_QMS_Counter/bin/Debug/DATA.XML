@@ -2,7 +2,7 @@
 <SystemConfig>
   <SQLServer id="1">
     <Server_Name>QNd8Qi1YHVg6gBfOh9dXCw==</Server_Name>
-    <Database>3sJZ+O5+2eJqbBTkD3o6+A==</Database>
+    <Database>XtzdgKvJiIPdENX6JH5Qq/n+4Doi1txTXYIHlLxSygsykwFqrpDIkT0B/hxCFzWl</Database>
     <User>ZXhwutftOGY2GQGN7xFCdA==</User>
     <Password>u83X0HO/seCu6CcDOMQghA==</Password>
     <Window_Authenticate>False</Window_Authenticate>
@@ -26,14 +26,16 @@
 
 [cat-giay]</Template>
     <SoLien>1</SoLien>
-    <CounterId>14</CounterId>
+    <CounterId>2</CounterId>
     <Display>False</Display>
-    <COMDisplay>COM2</COMDisplay>
+    <COMDisplay>COM0</COMDisplay>
     <Print>True</Print>
-    <COMPrint>COM8</COMPrint>
+    <COMPrint>COM2</COMPrint>
     <PrintCode>27</PrintCode>
     <ReadSound>False</ReadSound>
     <SoundPath>C:\Users\DoNguyen\Desktop\Audios\</SoundPath>
     <NumberOfButton>3</NumberOfButton>
+    <Services>11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 52, 53, 54, 55, 56, 57, 58, 65, 66, 67, 68, 69, 70, 71, 78, 79, 80, 81, 88, 89, 90, 97, 98, 99, 100, 101, 108, 109, 110, 111, 112, 113, 120, 121, 122, 123, 124, 125, 126, 133, 134, 135, 136, 137</Services>
+    <StartWithWindows>True</StartWithWindows>
   </AppConfig>
 </SystemConfig>

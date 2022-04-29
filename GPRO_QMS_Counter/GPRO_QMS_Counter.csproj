@@ -253,11 +253,23 @@
     <Compile Include="FrmMainPhongKham.Designer.cs">
       <DependentUpon>FrmMainPhongKham.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmMainPK_Socket.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMainPK_Socket.Designer.cs">
+      <DependentUpon>FrmMainPK_Socket.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmMainRHM.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmMainRHM.Designer.cs">
       <DependentUpon>FrmMainRHM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMainPK_Socket_2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMainPK_Socket_2.Designer.cs">
+      <DependentUpon>FrmMainPK_Socket_2.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmPermission.cs">
       <SubType>Form</SubType>
@@ -312,6 +324,12 @@
     </Compile>
     <Compile Include="FrmTicketTemplate.Designer.cs">
       <DependentUpon>FrmTicketTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTraKetQua_Socket.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTraKetQua_Socket.Designer.cs">
+      <DependentUpon>FrmTraKetQua_Socket.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmUser.cs">
       <SubType>Form</SubType>
@@ -397,8 +415,14 @@
     <EmbeddedResource Include="FrmMainPhongKham.resx">
       <DependentUpon>FrmMainPhongKham.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmMainPK_Socket.resx">
+      <DependentUpon>FrmMainPK_Socket.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmMainRHM.resx">
       <DependentUpon>FrmMainRHM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMainPK_Socket_2.resx">
+      <DependentUpon>FrmMainPK_Socket_2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPermission.resx">
       <DependentUpon>FrmPermission.cs</DependentUpon>
@@ -426,6 +450,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmTicketTemplate.resx">
       <DependentUpon>FrmTicketTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTraKetQua_Socket.resx">
+      <DependentUpon>FrmTraKetQua_Socket.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmUser.resx">
       <DependentUpon>FrmUser.cs</DependentUpon>
@@ -472,6 +499,7 @@
   <ItemGroup>
     <Content Include="1499069963_headphone.ico" />
     <Content Include="Resources\1496758275_key_go.ico" />
+    <None Include="Resources\x2.png" />
     <None Include="Resources\vspk-icon-256.png" />
     <None Include="Resources\callAny.png" />
     <None Include="Resources\add.png" />

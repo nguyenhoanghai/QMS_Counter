@@ -251,7 +251,7 @@ namespace GPRO_QMS_Counter
                 DialogResult dialogResult = MessageBox.Show("Bạn muốn hủy vé " + text + " phải không?", "Thông báo hủy vé", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    if (BLLDailyRequire.Instance.DeleteTicket(FrmMainRHM.connectString, int.Parse(text), FrmMainRHM.today) > 0)
+                    if (!BLLDailyRequire.Instance.DeleteTicket(FrmMainRHM.connectString,userId, int.Parse(text), FrmMainRHM.today).IsSuccess)
                     {
                         this.txtParam.Text = "";
                         this.txtResult.Text = "Yêu cầu Hủy vé " + text;
