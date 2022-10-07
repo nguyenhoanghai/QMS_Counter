@@ -65,8 +65,8 @@
             // barButtonItem2
             // 
             this.barButtonItem2.Id = 2;
-            this.barButtonItem2.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.False;
-            this.barButtonItem2.ImageOptions.Image = global::GPRO_QMS_Counter.Properties.Resources.com_port_dis;
+              this.barButtonItem2.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItem2.LargeGlyph = global::GPRO_QMS_Counter.Properties.Resources.com_port_dis;
             this.barButtonItem2.Name = "barButtonItem2";
             // 
             // xtraTabbedMdiManager1
@@ -89,15 +89,15 @@
             // 
             this.barBtDisplayComStatus.Caption = "Display ";
             this.barBtDisplayComStatus.Id = 9;
-            this.barBtDisplayComStatus.ImageOptions.Image = global::GPRO_QMS_Counter.Properties.Resources.com_port_dis;
+            //this.barBtDisplayComStatus.ImageOptions.Image = global::GPRO_QMS_Counter.Properties.Resources.com_port_dis;
             this.barBtDisplayComStatus.Name = "barBtDisplayComStatus";
             // 
             // barBtPrintComStatus
             // 
             this.barBtPrintComStatus.Caption = "Printer";
             this.barBtPrintComStatus.Id = 2;
-            this.barBtPrintComStatus.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.False;
-            this.barBtPrintComStatus.ImageOptions.Image = global::GPRO_QMS_Counter.Properties.Resources.com_port_dis;
+            //this.barBtPrintComStatus.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.False;
+            //this.barBtPrintComStatus.ImageOptions.Image = global::GPRO_QMS_Counter.Properties.Resources.com_port_dis;
             this.barBtPrintComStatus.Name = "barBtPrintComStatus";
             // 
             // lbErrorsms
@@ -138,8 +138,8 @@
             // 
             this.barBTPrint.Caption = "Cấp phiếu";
             this.barBTPrint.Id = 1;
-            this.barBTPrint.ImageOptions.Image = global::GPRO_QMS_Counter.Properties.Resources.if_Payment_3387295;
-            this.barBTPrint.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.if_Payment_3387295;
+            //this.barBTPrint.ImageOptions.Image = global::GPRO_QMS_Counter.Properties.Resources.if_Payment_3387295;
+            //this.barBTPrint.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.if_Payment_3387295;
             this.barBTPrint.Name = "barBTPrint";
             this.barBTPrint.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBTPrint_ItemClick);
             // 
@@ -147,7 +147,7 @@
             // 
             this.btnCauHinh.Caption = "Cấu hình";
             this.btnCauHinh.Id = 3;
-            this.btnCauHinh.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.if_our_process_2_45123;
+           // this.btnCauHinh.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.if_our_process_2_45123;
             this.btnCauHinh.Name = "btnCauHinh";
             this.btnCauHinh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCauHinh_ItemClick);
             // 
@@ -155,7 +155,7 @@
             // 
             this.barButtonItem1.Caption = "Kiểm thử";
             this.barButtonItem1.Id = 5;
-            this.barButtonItem1.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.user_guide;
+            //this.barButtonItem1.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.user_guide;
             this.barButtonItem1.Name = "barButtonItem1";
             this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
@@ -163,7 +163,7 @@
             // 
             this.btnTicketTemplate.Caption = "Mẫu phiếu";
             this.btnTicketTemplate.Id = 6;
-            this.btnTicketTemplate.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.tk;
+           // this.btnTicketTemplate.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.tk;
             this.btnTicketTemplate.Name = "btnTicketTemplate";
             this.btnTicketTemplate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTicketTemplate_ItemClick);
             // 
@@ -171,7 +171,7 @@
             // 
             this.btconnectsql.Caption = "Kết nối CSDL";
             this.btconnectsql.Id = 7;
-            this.btconnectsql.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.server_connect;
+            //this.btconnectsql.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.server_connect;
             this.btconnectsql.Name = "btconnectsql";
             this.btconnectsql.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btconnectsql_ItemClick);
             // 
@@ -179,7 +179,7 @@
             // 
             this.btOpenGoiSO.Caption = "Màn hình Gọi số";
             this.btOpenGoiSO.Id = 8;
-            this.btOpenGoiSO.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.deskSound;
+         //   this.btOpenGoiSO.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.deskSound;
             this.btOpenGoiSO.Name = "btOpenGoiSO";
             this.btOpenGoiSO.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btOpenGoiSO_ItemClick);
             // 
@@ -187,7 +187,7 @@
             // 
             this.btActive.Caption = "Đăng ký";
             this.btActive.Id = 10;
-            this.btActive.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.iconfinder_stock_keyring_21472;
+         //   this.btActive.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.iconfinder_stock_keyring_21472;
             this.btActive.Name = "btActive";
             this.btActive.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btActive_ItemClick);
             // 
@@ -195,8 +195,8 @@
             // 
             this.barButtonItem3.Caption = "Đăng nhập ghế";
             this.barButtonItem3.Id = 11;
-            this.barButtonItem3.ImageOptions.Image = global::GPRO_QMS_Counter.Properties.Resources.login;
-            this.barButtonItem3.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.login;
+           // this.barButtonItem3.ImageOptions.Image = global::GPRO_QMS_Counter.Properties.Resources.login;
+          //  this.barButtonItem3.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.login;
             this.barButtonItem3.Name = "barButtonItem3";
             this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem3_ItemClick);
             // 
@@ -212,7 +212,7 @@
             // 
             this.barButtonItem5.Caption = "Lịch hẹn";
             this.barButtonItem5.Id = 13;
-            this.barButtonItem5.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.checklist__1_;
+           // this.barButtonItem5.ImageOptions.LargeImage = global::GPRO_QMS_Counter.Properties.Resources.checklist__1_;
             this.barButtonItem5.Name = "barButtonItem5";
             this.barButtonItem5.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem5_ItemClick);
             // 

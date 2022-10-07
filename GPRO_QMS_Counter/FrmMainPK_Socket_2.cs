@@ -327,10 +327,15 @@ namespace GPRO_QMS_Counter
                 //}
                 //else
                 //{
-                this.lbWaiting.Text = obj.CounterWaitingTickets;
-                this.statusTotalWaiting.Text = "Đang đợi: " + obj.TotalWating;
-                this.statusTotalDone.Text = "Đã giao dịch: " + obj.TotalDone;
-                this.lbCurrentTicket.Text = obj.CurrentTicket.ToString();
+                //this.lbWaiting.Text = obj.CounterWaitingTickets;
+                //this.statusTotalWaiting.Text = "Đang đợi: " + obj.TotalWating;
+                //this.statusTotalDone.Text = "Đã giao dịch: " + obj.TotalDone;
+                //this.lbCurrentTicket.Text = obj.CurrentTicket.ToString();
+
+                SetText(obj.CounterWaitingTickets, 1);
+                SetText("Đang đợi: " + obj.TotalWating, 2);
+                SetText("Đã giao dịch: " + obj.TotalDone, 3);
+                SetText(obj.CurrentTicket.ToString(), 4);
                 //}
 
                 // MessageBox.Show("end ShowResult");
@@ -382,19 +387,17 @@ namespace GPRO_QMS_Counter
                     socket.Connect();
                     socket.On(Socket.EVENT_CONNECT, () =>
                     {
-                        SetText("Connected");
+                        SetText("Connected", 0);
 
                         socket.On(Socket.EVENT_DISCONNECT, () =>
                         {
-                            SetText("Disconnected");
+                            SetText("Disconnected", 0);
                         });
-
-
                     });
                     socket.On("server-send-socket-counter-soft", (socketId) =>
                     {
                         //MessageBox.Show(socketId.ToString());
-                        SetText(socketId.ToString());
+                        SetText(socketId.ToString(), 0);
                         socket.Emit("android-send-device-info", socketId + "|" + loginObj.CounterId + "||" + loginObj.UserId);
                     });
                     // socket.Emit("client-send-id", id);
@@ -408,26 +411,67 @@ namespace GPRO_QMS_Counter
             }
         }
 
-
-        delegate void SetTextCallback(string text);
-        private void SetText(string text)
+        delegate void SetTextCallback(string text, int type);
+        private void SetText(string text, int type)
         {
             // InvokeRequired required compares the thread ID of the
             // calling thread to the thread ID of the creating thread.
             // If these threads are different, it returns true.
-            if (this.lbSocketStatus.InvokeRequired)
+            switch (type)
             {
-                SetTextCallback d = new SetTextCallback(SetText);
-                this.Invoke(d, new object[] { text });
+                default:
+                    if (this.lbSocketStatus.InvokeRequired)
+                    {
+                        SetTextCallback d = new SetTextCallback(SetText);
+                        this.Invoke(d, new object[] { text, type });
+                    }
+                    else
+                    {
+                        lbSocketStatus.Text = text;
+                        if (text != "Disconnected")
+                            lbSocketStatus.ForeColor = Color.YellowGreen;
+                        else
+                            lbSocketStatus.ForeColor = Color.Red;
+                    }
+                    break;
+                case 1:
+                    if (this.lbWaiting.InvokeRequired)
+                    {
+                        SetTextCallback d = new SetTextCallback(SetText);
+                        this.Invoke(d, new object[] { text, type });
+                    }
+                    else
+                        this.lbWaiting.Text = text;
+                    break;
+                case 2:
+                    if (this.statusTotalWaiting.InvokeRequired)
+                    {
+                        SetTextCallback d = new SetTextCallback(SetText);
+                        this.Invoke(d, new object[] { text, type });
+                    }
+                    else
+                        this.statusTotalWaiting.Text = text;
+                    break;
+                case 3:
+                    if (this.statusTotalDone.InvokeRequired)
+                    {
+                        SetTextCallback d = new SetTextCallback(SetText);
+                        this.Invoke(d, new object[] { text, type });
+                    }
+                    else
+                        this.statusTotalDone.Text = text;
+                    break;
+                case 4:
+                    if (this.lbCurrentTicket.InvokeRequired)
+                    {
+                        SetTextCallback d = new SetTextCallback(SetText);
+                        this.Invoke(d, new object[] { text, type });
+                    }
+                    else
+                        this.lbCurrentTicket.Text = text;
+                    break;
             }
-            else
-            {
-                lbSocketStatus.Text = text;
-                if (text != "Disconnected")
-                    lbSocketStatus.ForeColor = Color.YellowGreen;
-                else
-                    lbSocketStatus.ForeColor = Color.Red;
-            }
+
         }
 
         #endregion
