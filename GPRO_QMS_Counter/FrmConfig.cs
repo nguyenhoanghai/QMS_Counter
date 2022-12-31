@@ -135,6 +135,7 @@ namespace GPRO_QMS_Counter
                                     case "SoundPath": node.InnerText = txtSoundPath.Text.ToString(); break;
                                     case "Services": node.InnerText = cbServices.EditValue.ToString(); break;
                                     case "StartWithWindows": node.InnerText = switchStartWin.IsOn.ToString(); break;
+                                    case "DisplayType": node.InnerText = cbDisplayType.Text.ToString(); break;
                                 }
                             }
                             catch (Exception ex)
@@ -163,6 +164,22 @@ namespace GPRO_QMS_Counter
                 catch (Exception ex)
                 {
                 }
+
+                Settings.Default.actCallNext = swNext.IsOn;
+                Settings.Default.actRecall = swRecall.IsOn;
+                Settings.Default.actFinish = swFinish.IsOn;
+                Settings.Default.actCancel = swCancel.IsOn;
+                Settings.Default.actCallTicket = swCallAny.IsOn;
+                Settings.Default.actPass = swStranfer.IsOn;
+                Settings.Default.actSave = swSave.IsOn;
+                Settings.Default.actView = swView.IsOn;
+                Settings.Default.actPrintTicket = swPrint.IsOn;
+                Settings.Default.actUpdateInfo = swUpdateInfo.IsOn;
+                Settings.Default.actEvaluate = swEvaluate.IsOn;
+                Settings.Default.actSmallScreen = swSmallScreen.IsOn;
+                Settings.Default.Save();
+                hasChange = true;
+
                 Application.Restart();
                 Environment.Exit(0);
             }

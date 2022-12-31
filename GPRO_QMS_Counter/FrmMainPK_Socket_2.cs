@@ -639,7 +639,8 @@ namespace GPRO_QMS_Counter
             }
         }
 
-        private void PrintTicket(object sender, PrintTicketEventArgs e)
+        private void PrintTicket(object sender, PrintTicketEventArgs e
+            )
         {
             try
             {

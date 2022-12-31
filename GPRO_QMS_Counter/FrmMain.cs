@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 using QMS_System.Data.BLL;
 using QMS_System.Data.Enum;
 using QMS_System.Data.Model;
-using Quobject.EngineIoClientDotNet.Client;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -35,13 +34,14 @@ namespace GPRO_QMS_Counter
         public static bool IsUseMainDisplay = false,
             bRegistered = false,
             bCheckValid = false;
-        public static string sComPort = "COM1", nodeServerIP="";
+        public static string sComPort = "COM1", nodeServerIP = "";
         public static int iBaudRate = 9600;
         public static int iDataBits = 8, printerId = 10;
         public static Parity sParity = Parity.None;
         public static StopBits fStopBits = StopBits.One;
         SerialPort serialPort1;
         List<ConfigModel> configs;
+        string displayType = "LED 7";
 
         bool bCallNext = true,
             bRecall = true,
@@ -75,7 +75,7 @@ namespace GPRO_QMS_Counter
             }
             if (bCheckValid)
             {
-                FrmLogin frmLogin = new FrmLogin( );
+                FrmLogin frmLogin = new FrmLogin();
                 frmLogin.ShowDialog();
                 InitializeComponent();
                 InitCOMPort();
@@ -172,10 +172,10 @@ namespace GPRO_QMS_Counter
                 lbCurrentTicket_s.Text = "0";
                 lbWaiting.Text = "0";
                 lbGeneralWaiting.Text = "0";
-               // if (!bRegistered)
-                    đăngKýSửDụngToolStripMenuItem.Enabled = true;
-               // else
-              //      đăngKýSửDụngToolStripMenuItem.Enabled = false;
+                // if (!bRegistered)
+                đăngKýSửDụngToolStripMenuItem.Enabled = true;
+                // else
+                //      đăngKýSửDụngToolStripMenuItem.Enabled = false;
 
 
                 playlist = new List<string>();
@@ -332,15 +332,6 @@ namespace GPRO_QMS_Counter
             {
                 if (FrmMain.IsUseMainDisplay)
                 {
-                    string text = sResult;
-                    if (text.Length < 4)
-                        text = string.Format("{0:0000}", int.Parse(text));
-
-                    byte[] array = new byte[3];
-                    array[0] = 170;
-                    byte[] array2 = array;
-                    array2[1] = byte.Parse((int.Parse(text.Substring(0, 1)) * 16 + int.Parse(text.Substring(1, 1))).ToString());
-                    array2[2] = byte.Parse((int.Parse(text.Substring(2, 1)) * 16 + int.Parse(text.Substring(3, 1))).ToString());
                     if (!this.serialPort1.IsOpen)
                     {
                         try
@@ -353,13 +344,54 @@ namespace GPRO_QMS_Counter
                         {
                         }
                     }
-                    this.serialPort1.Write(array2, 0, array2.Length);
+
+                    if (displayType == "LED 7")
+                    {
+                        string text = sResult;
+                        if (text.Length < 4)
+                            text = string.Format("{0:0000}", int.Parse(text));
+
+                        byte[] array = new byte[3];
+                        array[0] = 170;
+                        byte[] array2 = array;
+                        array2[1] = byte.Parse((int.Parse(text.Substring(0, 1)) * 16 + int.Parse(text.Substring(1, 1))).ToString());
+                        array2[2] = byte.Parse((int.Parse(text.Substring(2, 1)) * 16 + int.Parse(text.Substring(3, 1))).ToString());
+                        this.serialPort1.Write(array2, 0, array2.Length);
+                    }
+                    if (displayType == "Other")
+                    { 
+                        string value = ("0,7,4,D      STT:" + sResult + " ");
+                        string strCS = "";
+                        strCS = clsString.XOR(value);
+                        value = value + strCS;
+                        value = "02" + clsString.Ascii2HexStringNull(value) + "03";
+                        byte[] newMsg = HexStringToByteArray(value);
+                        this.serialPort1.Write(newMsg, 0, newMsg.Length);
+                    }
+
                 }
             }
             catch (Exception)
             { }
         }
 
+        private byte[] HexStringToByteArray(string s)
+        {
+            try
+            {
+                s = s.Replace(" ", "");
+                if (s.Length % 2 != 0)
+                    return new byte[] { 0x00 };
+                byte[] buffer = new byte[s.Length / 2];
+                for (int i = 0; i < s.Length; i += 2)
+                    buffer[i / 2] = (byte)Convert.ToByte(s.Substring(i, 2), 16);
+                return buffer;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
 
         #region btn Event
@@ -416,7 +448,7 @@ namespace GPRO_QMS_Counter
                 DialogResult dialogResult = MessageBox.Show("Bạn muốn hủy vé " + text + " phải không?", "Thông báo hủy vé", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    if (!BLLDailyRequire.Instance.DeleteTicket(connectString,loginObj.UserId, int.Parse(text), today).IsSuccess)
+                    if (!BLLDailyRequire.Instance.DeleteTicket(connectString, loginObj.UserId, int.Parse(text), today).IsSuccess)
                     {
                         this.txtParam.Text = "";
                         this.txtResult.Text = "Yêu cầu Hủy vé " + text;
@@ -1044,6 +1076,7 @@ namespace GPRO_QMS_Counter
                                 case "PrintCode": printerId = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); ; break;
                                 case "ReadSound": IsReadSound = Convert.ToBoolean(node.InnerText); break;
                                 case "SoundPath": soundPath = node.InnerText; break;
+                                case "DisplayType": displayType = node.InnerText; break;
                             }
                         }
                         catch (Exception ex)
@@ -1204,9 +1237,6 @@ namespace GPRO_QMS_Counter
                 break;
             }
         }
-
-
-
 
         private void âmThanhToolStripMenuItem_Click(object sender, EventArgs e)
         {

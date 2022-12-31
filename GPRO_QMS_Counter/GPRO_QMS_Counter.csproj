@@ -349,6 +349,7 @@
     <Compile Include="FrmViewWaitingList_N.Designer.cs">
       <DependentUpon>FrmViewWaitingList_N.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper\clsString.cs" />
     <Compile Include="Helper\SoundInfo.cs" />
     <Compile Include="Models\ServiceControlModel.cs" />
     <Compile Include="Models\WaitingModel.cs" />
@@ -472,6 +473,7 @@
     <EmbeddedResource Include="ServiceControl.resx">
       <DependentUpon>ServiceControl.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="bin\Debug\GPRO_QMS_Counter.exe.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -498,6 +500,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="1499069963_headphone.ico" />
+    <Content Include="bin\Debug\GPRO_QMS_Counter.exe" />
+    <Content Include="bin\Debug\GPRO_QMS_Counter.pdb" />
     <Content Include="Resources\1496758275_key_go.ico" />
     <None Include="Resources\x2.png" />
     <None Include="Resources\vspk-icon-256.png" />
