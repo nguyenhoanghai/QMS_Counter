@@ -143,7 +143,7 @@ namespace GPRO_QMS_Counter
                     // FrmMainRHM.SendDisplay(tk.ToString());
 
                     var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = equipCode, TicketNumber = tk });
-                    BLLCounterSoftRequire.Instance.Insert(FrmMainRHM.connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, counterId);
+                    BLLCounterSoftRequire.Instance.Insert(FrmMainRHM.connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, counterId, equipCode);
                     var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(FrmMainRHM.connectString, userId, eCodeHex.Next);
                     if (readTemplateIds.Count > 0)
                         FrmMainRHM.GetSound(readTemplateIds, tk.ToString(), counterId);
@@ -164,7 +164,7 @@ namespace GPRO_QMS_Counter
                 //  FrmMainRHM.SendDisplay(kq.ToString());
 
                 var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = equipCode, TicketNumber = kq });
-                BLLCounterSoftRequire.Instance.Insert(FrmMainRHM.connectString, requireJSON, (int)eCounterSoftRequireType.SendRecallToMainDisplay, counterId);
+                BLLCounterSoftRequire.Instance.Insert(FrmMainRHM.connectString, requireJSON, (int)eCounterSoftRequireType.SendRecallToMainDisplay, counterId, equipCode);
 
                 var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(FrmMainRHM.connectString, userId, eCodeHex.Recall);
                 if (readTemplateIds.Count > 0)
@@ -274,7 +274,7 @@ namespace GPRO_QMS_Counter
                     // FrmMainRHM.SendDisplay(tk.ToString());
 
                     var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = equipCode, TicketNumber = tk });
-                    BLLCounterSoftRequire.Instance.Insert(FrmMainRHM.connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, counterId);
+                    BLLCounterSoftRequire.Instance.Insert(FrmMainRHM.connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, counterId, equipCode);
                     var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(FrmMainRHM.connectString, userId, eCodeHex.Next);
                     if (readTemplateIds.Count > 0)
                         FrmMainRHM.GetSound(readTemplateIds, tk.ToString(), counterId);
@@ -295,7 +295,7 @@ namespace GPRO_QMS_Counter
                 //  FrmMainRHM.SendDisplay(kq.ToString());
 
                 var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = equipCode, TicketNumber = kq });
-                BLLCounterSoftRequire.Instance.Insert(FrmMainRHM.connectString, requireJSON, (int)eCounterSoftRequireType.SendRecallToMainDisplay, counterId);
+                BLLCounterSoftRequire.Instance.Insert(FrmMainRHM.connectString, requireJSON, (int)eCounterSoftRequireType.SendRecallToMainDisplay, counterId, equipCode);
 
                 var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(FrmMainRHM.connectString, userId, eCodeHex.Recall);
                 if (readTemplateIds.Count > 0)

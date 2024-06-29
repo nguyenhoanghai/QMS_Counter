@@ -31,6 +31,8 @@
             this.toggleSwitch1 = new DevExpress.XtraEditors.ToggleSwitch();
             this.label1 = new System.Windows.Forms.Label();
             this.pnCOMSetting = new System.Windows.Forms.Panel();
+            this.cbDisplayType = new System.Windows.Forms.ComboBox();
+            this.label32 = new System.Windows.Forms.Label();
             this.cbStopBits = new System.Windows.Forms.ComboBox();
             this.cbParity = new System.Windows.Forms.ComboBox();
             this.cbDataBits = new System.Windows.Forms.ComboBox();
@@ -94,8 +96,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.btSavePer = new System.Windows.Forms.Button();
-            this.label32 = new System.Windows.Forms.Label();
-            this.cbDisplayType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.toggleSwitch1.Properties)).BeginInit();
             this.pnCOMSetting.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtSoundPath.Properties)).BeginInit();
@@ -173,6 +173,32 @@
             this.pnCOMSetting.Name = "pnCOMSetting";
             this.pnCOMSetting.Size = new System.Drawing.Size(660, 138);
             this.pnCOMSetting.TabIndex = 15;
+            // 
+            // cbDisplayType
+            // 
+            this.cbDisplayType.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.cbDisplayType.FormattingEnabled = true;
+            this.cbDisplayType.Items.AddRange(new object[] {
+            "LED 7",
+            "Other",
+            "Matrix"});
+            this.cbDisplayType.Location = new System.Drawing.Point(475, 93);
+            this.cbDisplayType.Margin = new System.Windows.Forms.Padding(4);
+            this.cbDisplayType.Name = "cbDisplayType";
+            this.cbDisplayType.Size = new System.Drawing.Size(165, 24);
+            this.cbDisplayType.TabIndex = 20;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.label32.ForeColor = System.Drawing.Color.Blue;
+            this.label32.Location = new System.Drawing.Point(360, 92);
+            this.label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(91, 17);
+            this.label32.TabIndex = 19;
+            this.label32.Text = "Display type";
             // 
             // cbStopBits
             // 
@@ -1041,31 +1067,6 @@
             this.btSavePer.UseVisualStyleBackColor = true;
             this.btSavePer.Visible = false;
             this.btSavePer.Click += new System.EventHandler(this.btSavePer_Click);
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
-            this.label32.ForeColor = System.Drawing.Color.Blue;
-            this.label32.Location = new System.Drawing.Point(360, 92);
-            this.label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(91, 17);
-            this.label32.TabIndex = 19;
-            this.label32.Text = "Display type";
-            // 
-            // cbDisplayType
-            // 
-            this.cbDisplayType.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
-            this.cbDisplayType.FormattingEnabled = true;
-            this.cbDisplayType.Items.AddRange(new object[] {
-            "LED 7",
-            "Other"});
-            this.cbDisplayType.Location = new System.Drawing.Point(475, 93);
-            this.cbDisplayType.Margin = new System.Windows.Forms.Padding(4);
-            this.cbDisplayType.Name = "cbDisplayType";
-            this.cbDisplayType.Size = new System.Drawing.Size(165, 24);
-            this.cbDisplayType.TabIndex = 20;
             // 
             // FrmConfig
             // 

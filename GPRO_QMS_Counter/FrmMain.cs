@@ -41,7 +41,7 @@ namespace GPRO_QMS_Counter
         public static StopBits fStopBits = StopBits.One;
         SerialPort serialPort1;
         List<ConfigModel> configs;
-        string displayType = "LED 7";
+        string displayType = "LED 7", isSubZero = "0";
 
         bool bCallNext = true,
             bRecall = true,
@@ -304,7 +304,7 @@ namespace GPRO_QMS_Counter
                     if (!string.IsNullOrEmpty(soundStr))
                     {
                         soundStr = soundStr.Substring(0, soundStr.Length - 1);
-                        BLLCounterSoftRequire.Instance.Insert(connectString, soundStr, (int)eCounterSoftRequireType.ReadSound, FrmMain.loginObj.CounterId);
+                        BLLCounterSoftRequire.Instance.Insert(connectString, soundStr, (int)eCounterSoftRequireType.ReadSound, FrmMain.loginObj.CounterId, FrmMain.loginObj.EquipCode);
                     }
                 }
             }
@@ -326,7 +326,7 @@ namespace GPRO_QMS_Counter
             this.serialPort1.StopBits = fStopBits;
         }
 
-        private void SendDisplay(string sResult)
+        private void SendDisplay(int _number)
         {
             try
             {
@@ -347,7 +347,7 @@ namespace GPRO_QMS_Counter
 
                     if (displayType == "LED 7")
                     {
-                        string text = sResult;
+                        string text = _number.ToString();
                         if (text.Length < 4)
                             text = string.Format("{0:0000}", int.Parse(text));
 
@@ -359,8 +359,8 @@ namespace GPRO_QMS_Counter
                         this.serialPort1.Write(array2, 0, array2.Length);
                     }
                     if (displayType == "Other")
-                    { 
-                        string value = ("0,7,4,D      STT:" + sResult + " ");
+                    {
+                        string value = ("0,7,4,D      STT:" + _number.ToString() + " ");
                         string strCS = "";
                         strCS = clsString.XOR(value);
                         value = value + strCS;
@@ -368,11 +368,36 @@ namespace GPRO_QMS_Counter
                         byte[] newMsg = HexStringToByteArray(value);
                         this.serialPort1.Write(newMsg, 0, newMsg.Length);
                     }
-
+                    if (displayType == "Matrix") //ma tran
+                    {
+                        string _so = GetNumberStr(_number);
+                        string value = ("Q" + (loginObj.EquipCode < 10 ? "0" : "") + "" + loginObj.EquipCode + "" + (isSubZero == "0" ? 4 : _number.ToString().Length) + "" + _so);
+                        //MessageBox.Show(value);
+                        string strCS = "";
+                        strCS = clsString.XOR(value);
+                        value = value + strCS;
+                        value = clsString.Ascii2HexStringNull(value) + "03";
+                        byte[] newMsg = HexStringToByteArray(value);
+                        this.serialPort1.Write(newMsg, 0, newMsg.Length);
+                    }
                 }
             }
             catch (Exception)
             { }
+        }
+
+        private string GetNumberStr(int _number)
+        {
+            string _so = "";
+            if (_number < 10)
+                _so = ((isSubZero == "0" ? "000" : "AAA") + _number);
+            else if (_number > 10 && _number < 100)
+                _so = ((isSubZero == "0" ? "00" : "AA") + _number);
+            else if (_number > 100 && _number < 1000)
+                _so = ((isSubZero == "0" ? "0" : "A") + _number);
+            else if (_number > 1000 && _number < 10000)
+                _so = _number.ToString();
+            return _so;
         }
 
         private byte[] HexStringToByteArray(string s)
@@ -406,10 +431,10 @@ namespace GPRO_QMS_Counter
                 {
                     lbCurrentTicket.Text = tk.ToString();
                     lbCurrentTicket_s.Text = tk.ToString();
-                    SendDisplay(tk.ToString());
+                    SendDisplay(tk);
 
                     var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = loginObj.EquipCode, TicketNumber = tk });
-                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, FrmMain.loginObj.CounterId);
+                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, FrmMain.loginObj.CounterId, FrmMain.loginObj.EquipCode);
                     var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
                     if (readTemplateIds.Count > 0)
                         GetSound(readTemplateIds, tk.ToString(), loginObj.CounterId);
@@ -427,10 +452,10 @@ namespace GPRO_QMS_Counter
             {
                 lbCurrentTicket.Text = kq.ToString();
                 lbCurrentTicket_s.Text = kq.ToString();
-                SendDisplay(kq.ToString());
+                SendDisplay(kq);
 
-                var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = loginObj.EquipCode, TicketNumber = kq });
-                BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendRecallToMainDisplay, FrmMain.loginObj.CounterId);
+               var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = loginObj.EquipCode, TicketNumber = kq });
+               BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendRecallToMainDisplay, FrmMain.loginObj.CounterId, FrmMain.loginObj.EquipCode);
 
                 var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Recall);
                 if (readTemplateIds.Count > 0)
@@ -478,7 +503,7 @@ namespace GPRO_QMS_Counter
                             this.txtParam.Text = "";
                             this.txtResult.Text = "Yêu cầu Gọi số " + text;
                             lbCurrentTicket.Text = text;
-                            SendDisplay(text);
+                            SendDisplay(Convert.ToInt32(text));
 
                             var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
                             if (readTemplateIds.Count > 0)
@@ -999,10 +1024,10 @@ namespace GPRO_QMS_Counter
                 {
                     lbCurrentTicket.Text = tk.ToString();
                     lbCurrentTicket_s.Text = tk.ToString();
-                    SendDisplay(tk.ToString());
+                    SendDisplay(tk);
 
                     var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = loginObj.EquipCode, TicketNumber = tk });
-                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, FrmMain.loginObj.CounterId);
+                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, FrmMain.loginObj.CounterId, FrmMain.loginObj.EquipCode);
                     var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
                     if (readTemplateIds.Count > 0)
                         GetSound(readTemplateIds, tk.ToString(), loginObj.CounterId);
@@ -1077,6 +1102,7 @@ namespace GPRO_QMS_Counter
                                 case "ReadSound": IsReadSound = Convert.ToBoolean(node.InnerText); break;
                                 case "SoundPath": soundPath = node.InnerText; break;
                                 case "DisplayType": displayType = node.InnerText; break;
+                                case "SubZero": isSubZero = node.InnerText; break;
                             }
                         }
                         catch (Exception ex)
@@ -1341,7 +1367,7 @@ namespace GPRO_QMS_Counter
                     ServeTime = timeServeAllow.Value,
                     ServiceId = (int)selectedService.Value
                 };
-                if (BLLCounterSoftRequire.Instance.Insert(connectString, JsonConvert.SerializeObject(require), (int)eCounterSoftRequireType.PrintTicket))
+                if (BLLCounterSoftRequire.Instance.Insert(connectString, JsonConvert.SerializeObject(require), (int)eCounterSoftRequireType.PrintTicket, loginObj.EquipCode))
                 {
                     lbPrintStatus.Text = "Gửi yêu cầu cấp phiếu thành công.";
                     lbPrintStatus.ForeColor = Color.Blue;

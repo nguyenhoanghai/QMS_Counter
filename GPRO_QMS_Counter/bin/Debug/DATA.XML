@@ -2,7 +2,7 @@
 <SystemConfig>
   <SQLServer id="1">
     <Server_Name>jIgU6t1Ct83XcxG49UfoEC/2nLFyRhDrgdV4693CWmQEfb2tORmKJgB4K+miTWkv7IBI6IzkLN1PDZ0vWvKRUw==</Server_Name>
-    <Database>VIsQQvnkXFTjW8Ft66GtCyOyZBqwLzYwW0UVzzUDu7w=</Database>
+    <Database>uLdQjrUfIeByG3aYKH9ZBxxVV0Q9mrGa0wwOFXTxbiI=</Database>
     <User>ZXhwutftOGY2GQGN7xFCdA==</User>
     <Password>u83X0HO/seCu6CcDOMQghA==</Password>
     <Window_Authenticate>False</Window_Authenticate>
@@ -37,6 +37,7 @@
     <NumberOfButton>3</NumberOfButton>
     <Services>11</Services>
     <StartWithWindows>True</StartWithWindows>
- <DisplayType>LED 7</DisplayType>
+    <DisplayType>LED 7</DisplayType>
+    <SubZero>0</SubZero>
   </AppConfig>
 </SystemConfig>

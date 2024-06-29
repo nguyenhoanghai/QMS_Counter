@@ -69,6 +69,7 @@ namespace GPRO_QMS_Counter
             bCheckValid = false,
             UsePrintMachine = false,
             FirstLoad = true;
+        string displayType = "LED 7", isSubZero = "0";
 
         public SqlConnection sqlCon = new SqlConnection();
         static List<string> temp, playlist;
@@ -249,6 +250,8 @@ namespace GPRO_QMS_Counter
                                     case "Services": strServices = node.InnerText.ToString(); break;
                                     case "SoLien": so_lien = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 1); ; break;
                                     case "NumberOfButton": soNutDV1dong = (!string.IsNullOrEmpty(node.InnerText) ? Convert.ToInt32(node.InnerText) : 3); ; break;
+                                    case "DisplayType": displayType = node.InnerText; break;
+                                    case "SubZero": isSubZero = node.InnerText; break;
                                 }
                             }
                             catch (Exception ex)
@@ -575,21 +578,36 @@ namespace GPRO_QMS_Counter
             }
         }
 
-        public static void SendDisplay(string sResult)
+        public void SendDisplay(int _number)
         {
             try
             {
                 if (IsUseMainDisplay)
                 {
-                    string text = sResult;
-                    if (text.Length < 4)
-                        text = string.Format("{0:0000}", int.Parse(text));
+                    //string text = sResult;
+                    //if (text.Length < 4)
+                    //    text = string.Format("{0:0000}", int.Parse(text));
 
-                    byte[] array = new byte[3];
-                    array[0] = 170;
-                    byte[] array2 = array;
-                    array2[1] = byte.Parse((int.Parse(text.Substring(0, 1)) * 16 + int.Parse(text.Substring(1, 1))).ToString());
-                    array2[2] = byte.Parse((int.Parse(text.Substring(2, 1)) * 16 + int.Parse(text.Substring(3, 1))).ToString());
+                    //byte[] array = new byte[3];
+                    //array[0] = 170;
+                    //byte[] array2 = array;
+                    //array2[1] = byte.Parse((int.Parse(text.Substring(0, 1)) * 16 + int.Parse(text.Substring(1, 1))).ToString());
+                    //array2[2] = byte.Parse((int.Parse(text.Substring(2, 1)) * 16 + int.Parse(text.Substring(3, 1))).ToString());
+                    //if (!displaySerialCOM.IsOpen)
+                    //{
+                    //    try
+                    //    {
+                    //        displaySerialCOM.Open();
+                    //        displaySerialCOM.DtrEnable = true;
+                    //        displaySerialCOM.RtsEnable = true;
+                    //    }
+                    //    catch
+                    //    {
+                    //    }
+                    //}
+                    //displaySerialCOM.Write(array2, 0, array2.Length);
+
+
                     if (!displaySerialCOM.IsOpen)
                     {
                         try
@@ -602,13 +620,78 @@ namespace GPRO_QMS_Counter
                         {
                         }
                     }
-                    displaySerialCOM.Write(array2, 0, array2.Length);
+                    if (displayType == "LED 7")
+                    {
+                        string text = _number.ToString();
+                        if (text.Length < 4)
+                            text = string.Format("{0:0000}", int.Parse(text));
+
+                        byte[] array = new byte[3];
+                        array[0] = 170;
+                        byte[] array2 = array;
+                        array2[1] = byte.Parse((int.Parse(text.Substring(0, 1)) * 16 + int.Parse(text.Substring(1, 1))).ToString());
+                        array2[2] = byte.Parse((int.Parse(text.Substring(2, 1)) * 16 + int.Parse(text.Substring(3, 1))).ToString());
+                        displaySerialCOM.Write(array2, 0, array2.Length);
+                    }
+                    if (displayType == "Other")
+                    {
+                        string value = ("0,7,4,D      STT:" + _number.ToString() + " ");
+                        string strCS = "";
+                        strCS = clsString.XOR(value);
+                        value = value + strCS;
+                        value = "02" + clsString.Ascii2HexStringNull(value) + "03";
+                        byte[] newMsg = HexStringToByteArray(value);
+                        displaySerialCOM.Write(newMsg, 0, newMsg.Length);
+                    }
+                    if (displayType == "Matrix") //ma tran
+                    {
+                        string _so = GetNumberStr(_number);
+                        string value = ("Q" + (loginObj.EquipCode < 10 ? "0" : "") + "" + loginObj.EquipCode + "" + (isSubZero == "0" ? 4 : _number.ToString().Length) + "" + _so);
+                        //MessageBox.Show(value);
+                        string strCS = "";
+                        strCS = clsString.XOR(value);
+                        value = value + strCS;
+                        value = clsString.Ascii2HexStringNull(value) + "03";
+                        byte[] newMsg = HexStringToByteArray(value);
+                        displaySerialCOM.Write(newMsg, 0, newMsg.Length);
+                    }
                 }
             }
             catch (Exception)
             { }
         }
 
+        private string GetNumberStr(int _number)
+        {
+            string _so = "";
+            if (_number < 10)
+                _so = ((isSubZero == "0" ? "000" : "AAA") + _number);
+            else if (_number > 10 && _number < 100)
+                _so = ((isSubZero == "0" ? "00" : "AA") + _number);
+            else if (_number > 100 && _number < 1000)
+                _so = ((isSubZero == "0" ? "0" : "A") + _number);
+            else if (_number > 1000 && _number < 10000)
+                _so = _number.ToString();
+            return _so;
+        }
+
+        private byte[] HexStringToByteArray(string s)
+        {
+            try
+            {
+                s = s.Replace(" ", "");
+                if (s.Length % 2 != 0)
+                    return new byte[] { 0x00 };
+                byte[] buffer = new byte[s.Length / 2];
+                for (int i = 0; i < s.Length; i += 2)
+                    buffer[i / 2] = (byte)Convert.ToByte(s.Substring(i, 2), 16);
+                return buffer;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
 
         #region Print COMPort
@@ -838,10 +921,10 @@ namespace GPRO_QMS_Counter
                     else
                     {
                         lbCurrentTicket.Text = tk.TicketNumber.ToString();
-                        SendDisplay(tk.TicketNumber.ToString());
+                        SendDisplay(tk.TicketNumber);
 
                         var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = equipCode, TicketNumber = tk.TicketNumber });
-                        BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, counterId);
+                        BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, counterId, loginObj.EquipCode);
                         var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
                         if (readTemplateIds.Count > 0)
                             GetSound(readTemplateIds, tk.TicketNumber.ToString(), counterId, TVReadsound);
@@ -880,10 +963,10 @@ namespace GPRO_QMS_Counter
                 else
                 {
                     lbCurrentTicket.Text = tk.TicketNumber.ToString();
-                    SendDisplay(tk.TicketNumber.ToString());
+                    SendDisplay(tk.TicketNumber );
 
                     var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = equipCode, TicketNumber = tk.TicketNumber });
-                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendRecallToMainDisplay, counterId);
+                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendRecallToMainDisplay, counterId, loginObj.EquipCode);
 
                     var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Recall);
                     if (readTemplateIds.Count > 0)
@@ -957,7 +1040,13 @@ namespace GPRO_QMS_Counter
                         this.txtParam.Text = "";
                         this.txtResult.Text = "Yêu cầu Gọi số " + text;
                         lbCurrentTicket.Text = text;
-                        SendDisplay(text);
+                        try
+                        {
+                            SendDisplay(Convert.ToInt32(text));
+                        }
+                        catch (Exception)
+                        {
+                        }
 
                         var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
                         if (readTemplateIds.Count > 0)
@@ -1164,11 +1253,11 @@ namespace GPRO_QMS_Counter
                     if (!string.IsNullOrEmpty(soundStr))
                     {
                         soundStr = soundStr.Substring(0, soundStr.Length - 1);
-                        BLLCounterSoftRequire.Instance.Insert(connectString, soundStr, (int)eCounterSoftRequireType.ReadSound, counterId);
+                        BLLCounterSoftRequire.Instance.Insert(connectString, soundStr, (int)eCounterSoftRequireType.ReadSound, counterId, loginObj.EquipCode);
 
                         if (!string.IsNullOrEmpty(soundStr) && !string.IsNullOrEmpty(tvReadSound) && tvReadSound == "1")
                         {
-                            BLLCounterSoftRequire.Instance.Insert(connectString, soundStr, (int)eCounterSoftRequireType.TVReadSound, counterId);
+                            BLLCounterSoftRequire.Instance.Insert(connectString, soundStr, (int)eCounterSoftRequireType.TVReadSound, counterId, loginObj.EquipCode);
                         }
                     }
                 }

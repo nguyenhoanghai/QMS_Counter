@@ -533,7 +533,7 @@ namespace GPRO_QMS_Counter
                     if (!string.IsNullOrEmpty(soundStr))
                     {
                         soundStr = soundStr.Substring(0, soundStr.Length - 1);
-                        BLLCounterSoftRequire.Instance.Insert(connectString, soundStr, (int)eCounterSoftRequireType.ReadSound, counterId);
+                        BLLCounterSoftRequire.Instance.Insert(connectString, soundStr, (int)eCounterSoftRequireType.ReadSound, counterId, loginObj.EquipCode);
                     }
                 }
             }

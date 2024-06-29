@@ -177,7 +177,6 @@ E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\de\DevExpress.Office.
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\es\DevExpress.Office.v18.1.Core.resources.dll
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\ja\DevExpress.Office.v18.1.Core.resources.dll
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\ru\DevExpress.Office.v18.1.Core.resources.dll
-E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.csprojAssemblyReference.cache
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.Form1.resources
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmAbout.resources
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmBookService.resources
@@ -224,3 +223,4 @@ E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\bin\Debug\WebSocket4Net.dll
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmMainPK_Socket.resources
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmMainPK_Socket_2.resources
 E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.FrmTraKetQua_Socket.resources
+E:\Hai_GPRO\Git QMS\QMS_Counter\GPRO_QMS_Counter\obj\Debug\GPRO_QMS_Counter.csproj.AssemblyReference.cache

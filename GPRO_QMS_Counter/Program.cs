@@ -40,7 +40,9 @@ namespace GPRO_QMS_Counter
                             Application.Run(new FrmMainPK_Socket_2()); break;
                         case "10": //socket tra kq xet nghiem
                             Application.Run(new FrmTraKetQua_Socket()); break;
-                        default: Application.Run(new FrmMain()); break;
+                        default: 
+                            Application.Run(new FrmMain());        
+                            break;
                     }
                 }
                 else

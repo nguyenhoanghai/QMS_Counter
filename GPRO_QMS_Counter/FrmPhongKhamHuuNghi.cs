@@ -406,7 +406,7 @@ namespace GPRO_QMS_Counter
                         SendDisplay(tk.Data_3.TicketNumber.ToString());
 
                         var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = equipCode, TicketNumber = tk.Data_3.TicketNumber });
-                        BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, counterId);
+                        BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, counterId, loginObj.EquipCode);
                         var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
                         if (readTemplateIds.Count > 0)
                             GetSound(readTemplateIds, tk.Data_3.TicketNumber.ToString(), counterId);
@@ -439,7 +439,7 @@ namespace GPRO_QMS_Counter
                     SendDisplay(tk.ToString());
 
                     var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = equipCode, TicketNumber = tk });
-                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, counterId);
+                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, counterId, loginObj.EquipCode);
                     var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
                     if (readTemplateIds.Count > 0)
                         GetSound(readTemplateIds, tk.ToString(), counterId);
@@ -528,7 +528,7 @@ namespace GPRO_QMS_Counter
                     SendDisplay(tk.Data_3.TicketNumber.ToString());
 
                     var requireJSON = JsonConvert.SerializeObject(new RequireMainDisplay() { EquipCode = equipCode, TicketNumber = tk.Data_3.TicketNumber });
-                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, counterId);
+                    BLLCounterSoftRequire.Instance.Insert(connectString, requireJSON, (int)eCounterSoftRequireType.SendNextToMainDisplay, counterId, loginObj.EquipCode);
                     var readTemplateIds = BLLUserCmdReadSound.Instance.GetReadTemplateIds(connectString, loginObj.UserId, eCodeHex.Next);
                     if (readTemplateIds.Count > 0)
                         GetSound(readTemplateIds, tk.Data_3.TicketNumber.ToString(), counterId);
@@ -722,7 +722,7 @@ namespace GPRO_QMS_Counter
                     if (!string.IsNullOrEmpty(soundStr))
                     {
                         soundStr = soundStr.Substring(0, soundStr.Length - 1);
-                        BLLCounterSoftRequire.Instance.Insert(connectString, soundStr, (int)eCounterSoftRequireType.ReadSound, counterId);
+                        BLLCounterSoftRequire.Instance.Insert(connectString, soundStr, (int)eCounterSoftRequireType.ReadSound, counterId, loginObj.EquipCode);
                     }
                 }
             }
